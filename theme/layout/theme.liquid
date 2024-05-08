@@ -46,6 +46,8 @@
     <noscript><link rel="stylesheet" href="{{ 'swatches.css' | asset_url }}"></noscript>
   {%- endif -%}
 
+  {{ 'base.scss' | asset_url | stylesheet_tag }}
+
   {%- unless base_font.system? -%}
     <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
   {%- endunless -%}
