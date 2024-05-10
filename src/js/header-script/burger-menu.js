@@ -10,13 +10,13 @@ const burgerMenuItemsElements = burgerMenuListWrapperElement.querySelectorAll('[
 const showBurgerMenu = () => {
   burgerMenuButtonElement.dataset.isBurgerMenuOpen = 'true';
   document.body.classList.add('scr-dis-on-mbl');
-  burgerMenuElement.classList.add('brgr-actv');
+  burgerMenuElement.classList.add('brgr_actv');
 }
 
 const hideBurgerMenu = () => {
   burgerMenuButtonElement.dataset.isBurgerMenuOpen = 'false';
   document.body.classList.remove('scr-dis-on-mbl');
-  burgerMenuElement.classList.remove('brgr-actv');
+  burgerMenuElement.classList.remove('brgr_actv');
 }
 
 burgerMenuButtonElement.addEventListener('click', () => {
@@ -31,7 +31,7 @@ burgerMenuItemsElements.forEach((itemElement) => {
 
   if (!!hasItemDropdown) {
     itemElement.addEventListener('click', (event) => {
-      const isDropdownItemClicked = checkParentsForClass(event.target, 'brgr-drpd-item');
+      const isDropdownItemClicked = checkParentsForClass(event.target, 'brgr-drpd__item');
       const stateIndicatorPlus = itemElement.querySelector('[data-dropdown-state-plus]');
       const stateIndicatorMinus = itemElement.querySelector('[data-dropdown-state-minus]');
       const dropdownElement = itemElement.querySelector('[data-burger-menu-item-dropdown]');
@@ -40,14 +40,14 @@ burgerMenuItemsElements.forEach((itemElement) => {
       if (!isDropdownItemClicked) {
         if (shouldShowDropdown) {
           dropdownElement.dataset.isDropdownOpen = 'true';
-          itemElement.classList.remove('brgr-list-item-hid-drpd');
-          stateIndicatorPlus.classList.add('brgr-list-state-hide');
-          stateIndicatorMinus.classList.remove('brgr-list-state-hide');
+          itemElement.classList.remove('brgr-list__item_hid-drpd');
+          stateIndicatorPlus.classList.add('brgr-list__state_hide');
+          stateIndicatorMinus.classList.remove('brgr-list__state_hide');
         } else {
           dropdownElement.dataset.isDropdownOpen = 'false';
-          itemElement.classList.add('brgr-list-item-hid-drpd');
-          stateIndicatorPlus.classList.remove('brgr-list-state-hide');
-          stateIndicatorMinus.classList.add('brgr-list-state-hide');
+          itemElement.classList.add('brgr-list__item_hid-drpd');
+          stateIndicatorPlus.classList.remove('brgr-list__state_hide');
+          stateIndicatorMinus.classList.add('brgr-list__state_hide');
         }
       }
     });
