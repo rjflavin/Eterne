@@ -491,6 +491,29 @@
     "cart_type": "drawer",
     "after_add_to_cart": "drawer",
     "free_shipping_bar_col_under": "#171717",
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "customer_menu": "footer-customer-menu",
+          "customer_column_text": "Customer",
+          "about_us_menu": "footer-about-us-menu",
+          "about_us_column_text": "About us",
+          "follow_column_text": "Follow",
+          "subscribe_text": "Sign up to get special offers and news",
+          "subscribe_placeholder_text": "Email Address",
+          "subscribe_btn_text": "Subscribe",
+          "subscribe_error_empty_email": "Please enter your email",
+          "subscribe_error_invalid_email": "Invalid email",
+          "subscribe_success": "You have successfully subscribed!",
+          "terms_and_conditions_link_text": "Terms & conditions",
+          "terms_and_conditions_page": "contact",
+          "year_title": "© éterne 2024. All Rights Reserved",
+          "privacy_policy_link_text": "Privacy policy",
+          "privacy_policy_page": "contact"
+        }
+      }
+    },
     "content_for_index": [
 
     ]
