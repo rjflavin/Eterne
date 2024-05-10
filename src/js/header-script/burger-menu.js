@@ -1,4 +1,4 @@
-import { checkParentsForClass } from "../check-parents-for-class/check-parents-for-class";
+import { checkParentsForClass } from "../utils/check-parents-for-class/check-parents-for-class";
 
 const burgerMenuElement = document.getElementById('BurgerMenu');
 const burgerMenuButtonElement = document.getElementById('BurgerMenuButton');
@@ -9,14 +9,14 @@ const burgerMenuItemsElements = burgerMenuListWrapperElement.querySelectorAll('[
 
 const showBurgerMenu = () => {
   burgerMenuButtonElement.dataset.isBurgerMenuOpen = 'true';
-  document.body.classList.add('scrollDisableOnMobile');
-  burgerMenuElement.classList.add('header__burgerMenu_active');
+  document.body.classList.add('scr-dis-on-mbl');
+  burgerMenuElement.classList.add('brgr-actv');
 }
 
 const hideBurgerMenu = () => {
   burgerMenuButtonElement.dataset.isBurgerMenuOpen = 'false';
-  document.body.classList.remove('scrollDisableOnMobile');
-  burgerMenuElement.classList.remove('header__burgerMenu_active');
+  document.body.classList.remove('scr-dis-on-mbl');
+  burgerMenuElement.classList.remove('brgr-actv');
 }
 
 burgerMenuButtonElement.addEventListener('click', () => {
@@ -31,7 +31,7 @@ burgerMenuItemsElements.forEach((itemElement) => {
 
   if (!!hasItemDropdown) {
     itemElement.addEventListener('click', (event) => {
-      const isDropdownItemClicked = checkParentsForClass(event.target, 'header__burgerMenu__list__item__dropdown__item');
+      const isDropdownItemClicked = checkParentsForClass(event.target, 'brgr-drpd-item');
       const stateIndicatorPlus = itemElement.querySelector('[data-dropdown-state-plus]');
       const stateIndicatorMinus = itemElement.querySelector('[data-dropdown-state-minus]');
       const dropdownElement = itemElement.querySelector('[data-burger-menu-item-dropdown]');
@@ -40,14 +40,14 @@ burgerMenuItemsElements.forEach((itemElement) => {
       if (!isDropdownItemClicked) {
         if (shouldShowDropdown) {
           dropdownElement.dataset.isDropdownOpen = 'true';
-          itemElement.classList.remove('header__burgerMenu__list__item_hideDropdown');
-          stateIndicatorPlus.classList.add('header__burgerMenu__list__item__stateIndicator_hide');
-          stateIndicatorMinus.classList.remove('header__burgerMenu__list__item__stateIndicator_hide');
+          itemElement.classList.remove('brgr-list-item-hid-drpd');
+          stateIndicatorPlus.classList.add('brgr-list-state-hide');
+          stateIndicatorMinus.classList.remove('brgr-list-state-hide');
         } else {
           dropdownElement.dataset.isDropdownOpen = 'false';
-          itemElement.classList.add('header__burgerMenu__list__item_hideDropdown');
-          stateIndicatorPlus.classList.remove('header__burgerMenu__list__item__stateIndicator_hide');
-          stateIndicatorMinus.classList.add('header__burgerMenu__list__item__stateIndicator_hide');
+          itemElement.classList.add('brgr-list-item-hid-drpd');
+          stateIndicatorPlus.classList.remove('brgr-list-state-hide');
+          stateIndicatorMinus.classList.add('brgr-list-state-hide');
         }
       }
     });
