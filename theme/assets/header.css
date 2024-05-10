@@ -93,6 +93,9 @@
   display: block;
   cursor: pointer;
 }
+.desk-nav-list-item:hover .list-item-link {
+  color: var(--red1);
+}
 
 .list-item-link {
   display: block;
