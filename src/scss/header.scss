@@ -10,15 +10,15 @@
   text-align: center;
 }
 
-.logo-link {
+.logo__link {
   position: relative;
 }
 
-.logo-img {
+.logo__img {
   transition: opacity 175ms ease-in;
 }
 
-.logo-link img {
+.logo__link img {
   width: 163px;
   max-width: 100%;
   display: inline-block;
@@ -27,7 +27,7 @@
   object-fit: cover;
 }
 
-.logo-h1 {
+.logo__h1 {
   margin: 0;
   padding: 0;
   font-size: inherit;
@@ -51,7 +51,7 @@
   background-color: var(--black2);
 }
 
-.top-bar-text {
+.top-bar__text {
   padding: 9px 20px;
   font-size: 10px;
   line-height: 16px;
@@ -61,14 +61,14 @@
   text-align: center;
 }
 
-.top-bar-btns {
+.top-bar__btns {
   position: absolute;
   top: 3px;
   right: 24px;
   display: flex;
 }
 
-.top-bar-icon {
+.top-bar__icon {
   display: block;
   padding: 0 8px;
   cursor: pointer;
@@ -83,7 +83,7 @@
   width: 100%;
 }
 
-.desk-nav-list {
+.desk-nav__list {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,19 +91,19 @@
   padding-bottom: 37px;
 }
 
-.desk-nav-list-item {
+.desk-nav-list__item {
   position: relative;
   display: block;
   cursor: pointer;
 
   &:hover {
-    .list-item-link {
+    .list-item__link {
       color: var(--red1);
     }
   }
 }
 
-.list-item-link {
+.list-item__link {
   display: block;
   font-size: 11.5px;
   line-height: 11.5px;
@@ -111,7 +111,7 @@
   text-transform: uppercase;
 }
 
-.list-item-drpd {
+.list-item__drpd {
   position: absolute;
   top: 16px;
   left: 20px;
@@ -121,7 +121,7 @@
   background-color: var(--white);
 }
 
-.hide-drpd .list-item-drpd {
+.hide-drpd .list-item__drpd {
   display: none;
 }
 
@@ -133,7 +133,7 @@
   margin-bottom: 0;
 }
 
-.drpd-item-link {
+.drpd-item__link {
   display: block;
   font-size: 11.5px;
   line-height: 17.1px;
@@ -155,11 +155,11 @@
     align-items: center;
   }
 
-  .top-bar-btns, .desk-nav {
+  .top-bar__btns, .desk-nav {
     display: none;
   }
 
-  .logo-link img {
+  .logo__link img {
     width: 114px;
   }
 
@@ -172,7 +172,7 @@
     display: flex;
   }
 
-  .mob-nav-btn-icon {
+  .mob-nav-btn__icon {
     display: block;
     width: auto;
     height: auto;
@@ -184,7 +184,7 @@
     }
   }
 
-  .mob-nav-btn-icon svg {
+  .mob-nav-btn__icon svg {
     width: 20px;
     height: 20px;
   }
@@ -197,7 +197,7 @@
 }
 
 @media (max-width: 320px) {
-  .logo-link img {
+  .logo__link img {
     width: 80px;
   }
 }
@@ -208,7 +208,7 @@
   display: none;
 }
 
-.brgr-actv {
+.brgr_actv {
   width: 100%;
   overflow: auto;
   height: calc(var(--app-height) - 85px);
@@ -231,7 +231,7 @@
   padding: 12.5px 0;
 }
 
-.brgr-list-item {
+.brgr-list__item {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -239,7 +239,7 @@
   padding: 7.5px 0;
 }
 
-.brgr-item-link {
+.brgr-item__link {
   width: 100%;
   display: flex;
   align-items: center;
@@ -249,21 +249,21 @@
   text-transform: uppercase;
 }
 
-.brgr-item-link:last-child {
+.brgr-item__link:last-child {
   margin-bottom: 0;
 }
 
-.brgr-item-text {
+.brgr-item__text {
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
 }
 
-.brgr-list-state {
+.brgr-list__state {
   display: flex;
 }
 
-.brgr-list-state-hide {
+.brgr-list__state_hide {
   display: none;
 }
 
@@ -272,16 +272,16 @@
   margin-top: 7px;
 }
 
-.brgr-list-item-hid-drpd .brgr-drpd {
+.brgr-list__item_hid-drpd .brgr-drpd {
   display: none;
 }
 
-.brgr-drpd-item {
+.brgr-drpd__item {
   display: flex;
   padding: 7px 0;
 }
 
-.brgr-drpd-link {
+.brgr-drpd__link {
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
@@ -293,19 +293,19 @@
   flex-direction: column;
 }
 
-.brgr-link-wrp {
+.brgr-link__wrp {
   display: flex;
   align-items: center;
   padding: 21px 0;
 }
 
-.brgr-link-text {
+.brgr-link__text {
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
 }
 
-.brgr-link-icon {
+.brgr-link__icon {
   width: 13px;
   height: 13px;
   display: flex;
@@ -313,13 +313,13 @@
 }
 
 @media (min-width: 1160px) {
-  .brgr-actv {
+  .brgr_actv {
     display: none;
   }
 }
 
 @media (max-width: 350px) {
-  .brgr-actv {
+  .brgr_actv {
     height: calc(var(--app-height) - 90px);
     top: 90px;
   }

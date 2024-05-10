@@ -36,13 +36,13 @@
   >
     <div id="HeaderTopBar" class="top-bar">
       {% if section.settings.announcement_bar_text.size > 0 %}
-        <span class="top-bar-text">{{ section.settings.announcement_bar_text }}</span>
+        <span class="top-bar__text">{{ section.settings.announcement_bar_text }}</span>
       {% endif %}
-      <div class="top-bar-btns">
-        <div class="show-search-link top-bar-icon">{% render 'icon-search' %}</div>
-        <a href="#" class="top-bar-icon">{% render 'icon-wish-list' %}</a>
-        <a href="/account" class="top-bar-icon">{% render 'icon-account' %}</a>
-        <div class="cart-link top-bar-icon">{% render 'icon-cart' %}</div>
+      <div class="top-bar__btns">
+        <div class="show-search-link top-bar__icon">{% render 'icon-search' %}</div>
+        <a href="#" class="top-bar__icon">{% render 'icon-wish-list' %}</a>
+        <a href="/account" class="top-bar__icon">{% render 'icon-account' %}</a>
+        <div class="cart-link top-bar__icon">{% render 'icon-cart' %}</div>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
       {% comment %}mobile left buttons{% endcomment %}
       <div class="mob-left">
         <div
-          class="mob-nav-btn-icon"
+          class="mob-nav-btn__icon"
           id="BurgerMenuButton"
           data-is-burger-menu-open="false"
         >
@@ -76,7 +76,7 @@
         </div>
         <a
           href="#"
-          class="mob-nav-btn-icon"
+          class="mob-nav-btn__icon"
         >
           {% render 'icon-wish-list', fill: '#2B2B2B', stroke: '#2B2B2B' %}
         </a>
@@ -84,30 +84,30 @@
 
       <div class="logo">
         {% if request.page_type == 'index' and section.settings.logo_h1 %}
-          <h1 class="logo-h1">
-            {% endif %}
+          <h1 class="logo__h1">
+        {% endif %}
 
-            <a class="logo-link" href="{{ routes.root_url }}" title="{{ shop.name }}">
-              <img
-                class="logo-img"
-                src="{{ section.settings.logo | img_url: 'master' }}"
-                alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
-                itemprop="logo"
-                loading="eager"
-              />
-            </a>
+        <a class="logo__link" href="{{ routes.root_url }}" title="{{ shop.name }}">
+          <img
+            class="logo__img"
+            src="{{ section.settings.logo | img_url: 'master' }}"
+            alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            itemprop="logo"
+            loading="eager"
+          />
+        </a>
 
-            {% if request.page_type == 'index' and section.settings.logo_h1 %}
+        {% if request.page_type == 'index' and section.settings.logo_h1 %}
           </h1>
         {% endif %}
       </div>
 
       {% comment %}mobile right buttons{% endcomment %}
       <div class="mob-rght">
-        <div class="show-search-link mob-nav-btn-icon">
+        <div class="show-search-link mob-nav-btn__icon">
           {% render 'icon-search', fill: '#2B2B2B' %}
         </div>
-        <div class="cart-link mob-nav-btn-icon">
+        <div class="cart-link mob-nav-btn__icon">
           {% render 'icon-cart', fill: '#2B2B2B', stroke: '#2B2B2B' %}
         </div>
       </div>
@@ -155,7 +155,7 @@
     {%- endif -%}
 
     <div id="DesktopMenu" class="desk-nav">
-      <ul class="desk-nav-list">
+      <ul class="desk-nav__list">
         {% for link in linklists[section.settings.header_menu].links %}
           {% liquid
             assign has_dropdown = false
@@ -165,26 +165,26 @@
           %}
 
           <li
-            class="desk-nav-list-item {% if has_dropdown %}hide-drpd{% endif %}"
+            class="desk-nav-list__item {% if has_dropdown %}hide-drpd{% endif %}"
             data-desktop-menu-item
           >
             {% if has_dropdown %}
-              <span class="list-item-link"
+              <span class="list-item__link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
               >{{ link.title | escape }}</span>
-              <ul class="list-item-drpd" data-desktop-menu-item-dropdown>
+              <ul class="list-item__drpd" data-desktop-menu-item-dropdown>
                 {% for dropdownLink in link.links %}
                   <li class="drpd-item">
-                    <a href="{{ dropdownLink.url }}" class="drpd-item-link">{{ dropdownLink.title }}</a>
+                    <a href="{{ dropdownLink.url }}" class="drpd-item__link">{{ dropdownLink.title }}</a>
                   </li>
                 {% endfor %}
               </ul>
             {% else %}
               <a
                 href="{{ link.url }}"
-                class="list-item-link"
+                class="list-item__link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
@@ -214,35 +214,35 @@
           %}
 
           <li
-            class="brgr-list-item
-              {% if has_dropdown %}brgr-list-item-hid-drpd{% endif %}"
+            class="brgr-list__item
+              {% if has_dropdown %}brgr-list__item_hid-drpd{% endif %}"
             data-burger-menu-item
           >
             {% if has_dropdown %}
-              <span class="brgr-item-link"
+              <span class="brgr-item__link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
               >
-                <span class="brgr-item-text">{{ link.title | escape }}</span>
-                <div data-dropdown-state-plus class="brgr-list-state">
+                <span class="brgr-item__text">{{ link.title | escape }}</span>
+                <div data-dropdown-state-plus class="brgr-list__state">
                   {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
                 </div>
-                <div data-dropdown-state-minus class="brgr-list-state brgr-list-state-hide">
+                <div data-dropdown-state-minus class="brgr-list__state brgr-list__state_hide">
                   {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
                 </div>
               </span>
               <ul class="brgr-drpd" data-burger-menu-item-dropdown data-is-dropdown-open="false">
                 {% for dropdownLink in link.links %}
-                  <li class="brgr-drpd-item" data-burger-menu-dropdown-list-item>
-                    <a href="{{ dropdownLink.url }}" class="brgr-drpd-link">{{ dropdownLink.title }}</a>
+                  <li class="brgr-drpd__item" data-burger-menu-dropdown-list-item>
+                    <a href="{{ dropdownLink.url }}" class="brgr-drpd__link">{{ dropdownLink.title }}</a>
                   </li>
                 {% endfor %}
               </ul>
             {% else %}
               <a
                 href="{{ link.url }}"
-                class="brgr-item-link"
+                class="brgr-item__link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
@@ -256,11 +256,11 @@
     </div>
 
     <div class="brgr-lnks">
-      <a class="brgr-link-wrp" href="/account">
-        <div class="brgr-link-icon">
+      <a class="brgr-link__wrp" href="/account">
+        <div class="brgr-link__icon">
           {% render 'icon-account', fill: '#2B2B2B', stroke: '#2B2B2B' %}
         </div>
-        <span class="brgr-link-text">My account</span>
+        <span class="brgr-link__text">My account</span>
       </a>
     </div>
   </div>
