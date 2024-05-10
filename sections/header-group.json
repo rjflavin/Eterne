@@ -1,0 +1,20 @@
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "announcement_bar_text": "Free Domestic Shipping on orders over $100",
+        "logo": "shopify:\/\/shop_images\/eterne-logo.png",
+        "logo_h1": true,
+        "enable_sticky": true,
+        "header_menu": "header-menu",
+        "enable_search": true
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

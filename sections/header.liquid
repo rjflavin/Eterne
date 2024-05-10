@@ -1,0 +1,323 @@
+{% style %}
+  {%- if section.settings.enable_sticky -%}
+    .section-header {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+  {%- endif -%}
+{% endstyle %}
+
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+{%- if template == 'gift_card' -%}
+  {% comment %} Gift card template logo {% endcomment %}
+  <div id="shoplogo">
+    <meta itemprop="url" content="{{ shop.url }}">
+    <meta itemprop="name" content="{{ shop.name }}">
+    {%- if section.settings.logo != blank -%}
+      <h1 class="logo" itemscope itemtype="http://schema.org/Organization">
+        <img
+          src="{{ section.settings.logo | img_url: 'master' }}"
+          alt="{{ section.settings.logo.alt | escape }}"
+          itemprop="logo"
+          loading="eager"
+        />
+      </h1>
+    {%- else -%}
+      <h1 class="logotext">{{ shop.name }}</h1>
+    {%- endif -%}
+  </div>
+{%- else -%}
+
+<page-header data-section-id="{{ section.id }}" data-cc-animate>
+  <div
+    id="pageheader"
+    class="pageheader pageheader--layout-underneath{% if section.settings.enable_sticky %} pageheader--sticky{% endif %}"
+  >
+    <div id="HeaderTopBar" class="top-bar">
+      {% if section.settings.announcement_bar_text.size > 0 %}
+        <span class="top-bar__text">{{ section.settings.announcement_bar_text }}</span>
+      {% endif %}
+      <div class="top-bar__btns">
+        <div class="show-search-link top-bar__icon">{% render 'icon-search' %}</div>
+        <a href="#" class="top-bar__icon">{% render 'icon-wish-list' %}</a>
+        <a href="/account" class="top-bar__icon">{% render 'icon-account' %}</a>
+        <div class="cart-link top-bar__icon">{% render 'icon-cart' %}</div>
+      </div>
+    </div>
+
+    {% comment %}class="logo-area container container--no-max"{% endcomment %}
+    <div class="h-logo-area">
+
+      {% comment %}just for working search button{% endcomment %}
+      <div class="logo-area__left disp-none-imp">
+        <div class="logo-area__left__inner">
+          <button class="mobile-nav-toggle" aria-label="{{ 'general.navigation.menu' | t }}" aria-controls="main-nav">
+            {% render 'icon-menu' %}
+          </button>
+          {% if section.settings.enable_search %}
+            <a {% comment %}class="show-search-link"{% endcomment %} href="{{ routes.search_url }}" aria-label="{{ 'sections.header.search' | t }}">
+              <span class="show-search-link__icon">
+                {% render 'icon-search', fill: '#FFFFFF', stroke: '#FFFFFF' %}
+              </span>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      {% comment %}mobile left buttons{% endcomment %}
+      <div class="mob-left">
+        <div
+          class="mob-nav-btn__icon"
+          id="BurgerMenuButton"
+          data-is-burger-menu-open="false"
+        >
+          {% render 'icon-burger' %}
+        </div>
+        <a
+          href="#"
+          class="mob-nav-btn__icon"
+        >
+          {% render 'icon-wish-list', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+        </a>
+      </div>
+
+      <div class="logo">
+        {% if request.page_type == 'index' and section.settings.logo_h1 %}
+          <h1 class="logo__h1">
+        {% endif %}
+
+        <a class="logo__link" href="{{ routes.root_url }}" title="{{ shop.name }}">
+          <img
+            class="logo__img"
+            src="{{ section.settings.logo | img_url: 'master' }}"
+            alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            itemprop="logo"
+            loading="eager"
+          />
+        </a>
+
+        {% if request.page_type == 'index' and section.settings.logo_h1 %}
+          </h1>
+        {% endif %}
+      </div>
+
+      {% comment %}mobile right buttons{% endcomment %}
+      <div class="mob-rght">
+        <div class="show-search-link mob-nav-btn__icon">
+          {% render 'icon-search', fill: '#2B2B2B' %}
+        </div>
+        <div class="cart-link mob-nav-btn__icon">
+          {% render 'icon-cart', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+        </div>
+      </div>
+
+      {% comment %}just for working cart button{% endcomment %}
+      <div class="logo-area__right disp-none-imp">
+        <div class="logo-area__right__inner">
+          <a href="{{ routes.cart_url }}" {% comment %}class="cart-link"{% endcomment %}>
+            <span class="cart-link__icon">
+              {% render 'icon-cart' %}
+              {% if cart.item_count > 0 %}
+                <span class="cart-link__count">{{ cart.item_count }}</span>
+              {% endif %}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {%- if section.settings.enable_search -%}
+      <script src="{{ 'main-search.js' | asset_url }}" defer></script>
+      <main-search class="main-search"
+          data-quick-search="{{ settings.enable_quick_header_search }}"
+          data-quick-search-meta="{{ settings.quick_search_search_meta }}">
+
+        <div class="main-search__container container">
+          <button class="main-search__close" aria-label="{{ 'general.search.close' | t | escape }}">{% render 'icon-close', stroke_width: 1 %}</button>
+
+          <form class="main-search__form" action="{{ routes.search_url }}" method="get" autocomplete="off">
+            <div class="main-search__input-container">
+              <input class="main-search__input" type="text" name="q" autocomplete="off" placeholder="{{ 'general.search.placeholder' | t | escape }}" aria-label="{{ 'general.search.title' | t | escape }}" />
+              <button class="main-search__button" type="submit" aria-label="{{ 'general.search.submit' | t }}">
+                {% render 'icon-search', fill: '#2b2b2b' %}
+              </button>
+            </div>
+            {%- if settings.show_search_suggestions -%}
+              <script src="{{ 'search-suggestions.js' | asset_url }}" defer></script>
+              <search-suggestions></search-suggestions>
+            {%- endif -%}
+          </form>
+
+          <div class="main-search__results"></div>
+        </div>
+      </main-search>
+    {%- endif -%}
+
+    <div id="DesktopMenu" class="desk-nav">
+      <ul class="desk-nav__list">
+        {% for link in linklists[section.settings.header_menu].links %}
+          {% liquid
+            assign has_dropdown = false
+            if link.links != blank
+              assign has_dropdown = true
+            endif
+          %}
+
+          <li
+            class="desk-nav-list__item {% if has_dropdown %}hide-drpd{% endif %}"
+            data-desktop-menu-item
+          >
+            {% if has_dropdown %}
+              <span class="list-item__link"
+                {% if has_dropdown %}
+                  aria-haspopup="true" aria-expanded="false"
+                {% endif %}
+              >{{ link.title | escape }}</span>
+              <ul class="list-item__drpd" data-desktop-menu-item-dropdown>
+                {% for dropdownLink in link.links %}
+                  <li class="drpd-item">
+                    <a href="{{ dropdownLink.url }}" class="drpd-item__link">{{ dropdownLink.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a
+                href="{{ link.url }}"
+                class="list-item__link"
+                {% if has_dropdown %}
+                  aria-haspopup="true" aria-expanded="false"
+                {% endif %}
+              >
+                {{ link.title | escape }}
+              </a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <a href="#" class="header-shade mobile-nav-toggle" aria-label="{{ 'general.navigation.close' | t }}"></a>
+</page-header>
+
+<div class="brgr-menu" id="BurgerMenu">
+  <div class="brgr-cntnt">
+    <div id="BurgerMenuListWrapper" class="brgr-list">
+      <ul>
+        {% for link in linklists[section.settings.header_menu].links %}
+          {% liquid
+            assign has_dropdown = false
+            if link.links != blank
+              assign has_dropdown = true
+            endif
+          %}
+
+          <li
+            class="brgr-list__item
+              {% if has_dropdown %}brgr-list__item_hid-drpd{% endif %}"
+            data-burger-menu-item
+          >
+            {% if has_dropdown %}
+              <span class="brgr-item__link"
+                {% if has_dropdown %}
+                  aria-haspopup="true" aria-expanded="false"
+                {% endif %}
+              >
+                <span class="brgr-item__text">{{ link.title | escape }}</span>
+                <div data-dropdown-state-plus class="brgr-list__state">
+                  {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+                </div>
+                <div data-dropdown-state-minus class="brgr-list__state brgr-list__state_hide">
+                  {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+                </div>
+              </span>
+              <ul class="brgr-drpd" data-burger-menu-item-dropdown data-is-dropdown-open="false">
+                {% for dropdownLink in link.links %}
+                  <li class="brgr-drpd__item" data-burger-menu-dropdown-list-item>
+                    <a href="{{ dropdownLink.url }}" class="brgr-drpd__link">{{ dropdownLink.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a
+                href="{{ link.url }}"
+                class="brgr-item__link"
+                {% if has_dropdown %}
+                  aria-haspopup="true" aria-expanded="false"
+                {% endif %}
+              >
+                {{ link.title | escape }}
+              </a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="brgr-lnks">
+      <a class="brgr-link__wrp" href="/account">
+        <div class="brgr-link__icon">
+          {% render 'icon-account', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+        </div>
+        <span class="brgr-link__text">My account</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  theme.inlineNavigationCheck();
+  setTimeout(theme.setInitialHeaderHeightProperty, 0);
+</script>
+
+{{ 'header-script.js' | asset_url | script_tag }}
+
+{%- endif -%}
+
+{% render 'structured-data-header' %}
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_bar_text",
+      "label": "Announcement bar text",
+      "default": "Announcement bar text"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_h1",
+      "label": "Enable logo <h1> on home page",
+      "info": "For SEO. Deselect only if another section on the home page contains a primary page heading. [Learn more](https://cleancanvas.co.uk/support/symmetry/section-h1-setting)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Enable sticky header",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_search",
+      "label": "Enable search",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "header_menu",
+      "label": "Header menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}
