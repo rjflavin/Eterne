@@ -1,24 +1,24 @@
 @import "mixins";
 
-.header__logo-area {
+.h-logo-area {
   width: 100%;
 }
 
-.header__logo {
+.logo {
   padding-top: 31px;
   padding-bottom: 19px;
   text-align: center;
 }
 
-.header__logo__link {
+.logo-link {
   position: relative;
 }
 
-.header__logo__image {
+.logo-img {
   transition: opacity 175ms ease-in;
 }
 
-.header__logo__link img {
+.logo-link img {
   width: 163px;
   max-width: 100%;
   display: inline-block;
@@ -27,7 +27,7 @@
   object-fit: cover;
 }
 
-.header__logo__h1 {
+.logo-h1 {
   margin: 0;
   padding: 0;
   font-size: inherit;
@@ -43,7 +43,7 @@
   padding: 0 20px;
 }
 
-.header__topBar {
+.top-bar {
   position: relative;
   display: flex;
   justify-content: center;
@@ -51,7 +51,7 @@
   background-color: var(--black2);
 }
 
-.header__topBar__text {
+.top-bar-text {
   padding: 9px 20px;
   font-size: 10px;
   line-height: 16px;
@@ -61,14 +61,14 @@
   text-align: center;
 }
 
-.header__topBar__buttons {
+.top-bar-btns {
   position: absolute;
   top: 3px;
   right: 24px;
   display: flex;
 }
 
-.header__topBar__button__icon {
+.top-bar-icon {
   display: block;
   padding: 0 8px;
   cursor: pointer;
@@ -79,11 +79,11 @@
   }
 }
 
-.header__desktopMenu {
+.desk-nav {
   width: 100%;
 }
 
-.header__desktopMenu__list {
+.desk-nav-list {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,13 +91,13 @@
   padding-bottom: 37px;
 }
 
-.header__desktopMenu__list__item {
+.desk-nav-list-item {
   position: relative;
   display: block;
   cursor: pointer;
 }
 
-.header__desktopMenu__list__item__link {
+.list-item-link {
   display: block;
   font-size: 11.5px;
   line-height: 11.5px;
@@ -105,7 +105,7 @@
   text-transform: uppercase;
 }
 
-.header__desktopMenu__list__item__dropdown {
+.list-item-drpd {
   position: absolute;
   top: 16px;
   left: 20px;
@@ -115,31 +115,31 @@
   background-color: var(--white);
 }
 
-.header__desktopMenu__list__item_hideDropdown .header__desktopMenu__list__item__dropdown {
+.hide-drpd .list-item-drpd {
   display: none;
 }
 
-.header__desktopMenu__list__item__dropdown__item {
+.drpd-item {
   margin-bottom: 10px;
 }
 
-.header__desktopMenu__list__item__dropdown__item:last-child {
+.drpd-item:last-child {
   margin-bottom: 0;
 }
 
-.header__desktopMenu__list__item__dropdown__item__link {
+.drpd-item-link {
   display: block;
   font-size: 11.5px;
   line-height: 17.1px;
   text-transform: uppercase;
 }
 
-.header__mobileLeftContainer, .header__mobileRightContainer {
+.mob-left, .mob-rght {
   display: none;
 }
 
 @media (max-width: 1160px) {
-  .header__logo-area {
+  .h-logo-area {
     max-width: 1080px;
     width: 100%;
     margin: 0 auto;
@@ -149,24 +149,24 @@
     align-items: center;
   }
 
-  .header__topBar__buttons, .header__desktopMenu {
+  .top-bar-btns, .desk-nav {
     display: none;
   }
 
-  .header__logo__link img {
+  .logo-link img {
     width: 114px;
   }
 
-  .header__logo {
+  .logo {
     padding-top: 20px;
     padding-bottom: 22px;
   }
 
-  .header__mobileLeftContainer, .header__mobileRightContainer {
+  .mob-left, .mob-rght {
     display: flex;
   }
 
-  .header__mobileContainer__button__icon {
+  .mob-nav-btn-icon {
     display: block;
     width: auto;
     height: auto;
@@ -178,54 +178,54 @@
     }
   }
 
-  .header__mobileContainer__button__icon svg {
+  .mob-nav-btn-icon svg {
     width: 20px;
     height: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .header__logo-area {
+  .h-logo-area {
     padding: 0 14px;
   }
 }
 
 @media (max-width: 320px) {
-  .header__logo__link img {
+  .logo-link img {
     width: 80px;
   }
 }
 
 // burger menu
 
-.header__burgerMenu {
+.brgr-menu {
   display: none;
 }
 
-.header__burgerMenu_active {
+.brgr-actv {
   width: 100%;
   overflow: auto;
-  height: calc(var(--app-height) - 107px);
+  height: calc(var(--app-height) - 85px);
   position: fixed;
-  top: 107px;
+  top: 85px;
   z-index: 300;
   display: block;
   padding: 0 20px;
   background-color: var(--white);
 }
 
-.header__burgerMenu__contentContainer {
+.brgr-cntnt {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.header__burgerMenu__listWrapper {}
+.brgr-list {
+  padding: 12.5px 0;
+}
 
-.header__burgerMenu__list {}
-
-.header__burgerMenu__list__item {
+.brgr-list-item {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -233,7 +233,7 @@
   padding: 7.5px 0;
 }
 
-.header__burgerMenu__list__item__link {
+.brgr-item-link {
   width: 100%;
   display: flex;
   align-items: center;
@@ -243,63 +243,63 @@
   text-transform: uppercase;
 }
 
-.header__burgerMenu__list__item__link:last-child {
+.brgr-item-link:last-child {
   margin-bottom: 0;
 }
 
-.header__burgerMenu__list__item__link__text {
+.brgr-item-text {
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
 }
 
-.header__burgerMenu__list__item__stateIndicator {
+.brgr-list-state {
   display: flex;
 }
 
-.header__burgerMenu__list__item__stateIndicator_hide {
+.brgr-list-state-hide {
   display: none;
 }
 
-.header__burgerMenu__list__item__dropdown {
+.brgr-drpd {
   margin-left: 20px;
   margin-top: 7px;
 }
 
-.header__burgerMenu__list__item_hideDropdown .header__burgerMenu__list__item__dropdown {
+.brgr-list-item-hid-drpd .brgr-drpd {
   display: none;
 }
 
-.header__burgerMenu__list__item__dropdown__item {
+.brgr-drpd-item {
   display: flex;
   padding: 7px 0;
 }
 
-.header__burgerMenu__list__item__dropdown__item__link {
+.brgr-drpd-link {
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
 }
 
-.header__burgerMenu__linksContainer {
+.brgr-lnks {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.header__burgerMenu__linksContainer__link {
+.brgr-link-wrp {
   display: flex;
   align-items: center;
   padding: 21px 0;
 }
 
-.header__burgerMenu__linksContainer__link__text {
+.brgr-link-text {
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
 }
 
-.header__burgerMenu__linksContainer__link__icon {
+.brgr-link-icon {
   width: 13px;
   height: 13px;
   display: flex;
@@ -307,13 +307,13 @@
 }
 
 @media (min-width: 1160px) {
-  .header__burgerMenu_active {
+  .brgr-actv {
     display: none;
   }
 }
 
 @media (max-width: 350px) {
-  .header__burgerMenu_active {
+  .brgr-actv {
     height: calc(var(--app-height) - 90px);
     top: 90px;
   }

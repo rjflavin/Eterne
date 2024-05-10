@@ -34,42 +34,23 @@
     id="pageheader"
     class="pageheader pageheader--layout-underneath{% if section.settings.enable_sticky %} pageheader--sticky{% endif %}"
   >
-    <div
-      id="HeaderTopBar"
-      class="header__topBar"
-    >
+    <div id="HeaderTopBar" class="top-bar">
       {% if section.settings.announcement_bar_text.size > 0 %}
-        <span class="header__topBar__text">
-          {{ section.settings.announcement_bar_text }}
-        </span>
+        <span class="top-bar-text">{{ section.settings.announcement_bar_text }}</span>
       {% endif %}
-      <div class="header__topBar__buttons">
-        <div class="show-search-link header__topBar__button__icon">
-          {% render 'icon-search' %}
-        </div>
-        <a
-          href="#"
-          class="header__topBar__button__icon"
-        >
-          {% render 'icon-wish-list' %}
-        </a>
-        <a
-          href="/account"
-          class="header__topBar__button__icon"
-        >
-          {% render 'icon-account' %}
-        </a>
-        <div class="cart-link header__topBar__button__icon">
-          {% render 'icon-cart' %}
-        </div>
+      <div class="top-bar-btns">
+        <div class="show-search-link top-bar-icon">{% render 'icon-search' %}</div>
+        <a href="#" class="top-bar-icon">{% render 'icon-wish-list' %}</a>
+        <a href="/account" class="top-bar-icon">{% render 'icon-account' %}</a>
+        <div class="cart-link top-bar-icon">{% render 'icon-cart' %}</div>
       </div>
     </div>
 
     {% comment %}class="logo-area container container--no-max"{% endcomment %}
-    <div class="header__logo-area">
+    <div class="h-logo-area">
 
       {% comment %}just for working search button{% endcomment %}
-      <div class="logo-area__left displayNoneImportant">
+      <div class="logo-area__left disp-none-imp">
         <div class="logo-area__left__inner">
           <button class="mobile-nav-toggle" aria-label="{{ 'general.navigation.menu' | t }}" aria-controls="main-nav">
             {% render 'icon-menu' %}
@@ -85,9 +66,9 @@
       </div>
 
       {% comment %}mobile left buttons{% endcomment %}
-      <div class="header__mobileLeftContainer">
+      <div class="mob-left">
         <div
-          class="header__mobileContainer__button__icon"
+          class="mob-nav-btn-icon"
           id="BurgerMenuButton"
           data-is-burger-menu-open="false"
         >
@@ -95,20 +76,20 @@
         </div>
         <a
           href="#"
-          class="header__mobileContainer__button__icon"
+          class="mob-nav-btn-icon"
         >
           {% render 'icon-wish-list', fill: '#2B2B2B', stroke: '#2B2B2B' %}
         </a>
       </div>
 
-      <div class="header__logo">
+      <div class="logo">
         {% if request.page_type == 'index' and section.settings.logo_h1 %}
-          <h1 class="header__logo__h1">
+          <h1 class="logo-h1">
             {% endif %}
 
-            <a class="header__logo__link" href="{{ routes.root_url }}" title="{{ shop.name }}">
+            <a class="logo-link" href="{{ routes.root_url }}" title="{{ shop.name }}">
               <img
-                class="header__logo__image"
+                class="logo-img"
                 src="{{ section.settings.logo | img_url: 'master' }}"
                 alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
                 itemprop="logo"
@@ -122,17 +103,17 @@
       </div>
 
       {% comment %}mobile right buttons{% endcomment %}
-      <div class="header__mobileRightContainer">
-        <div class="show-search-link header__mobileContainer__button__icon">
+      <div class="mob-rght">
+        <div class="show-search-link mob-nav-btn-icon">
           {% render 'icon-search', fill: '#2B2B2B' %}
         </div>
-        <div class="cart-link header__mobileContainer__button__icon">
+        <div class="cart-link mob-nav-btn-icon">
           {% render 'icon-cart', fill: '#2B2B2B', stroke: '#2B2B2B' %}
         </div>
       </div>
 
       {% comment %}just for working cart button{% endcomment %}
-      <div class="logo-area__right displayNoneImportant">
+      <div class="logo-area__right disp-none-imp">
         <div class="logo-area__right__inner">
           <a href="{{ routes.cart_url }}" {% comment %}class="cart-link"{% endcomment %}>
             <span class="cart-link__icon">
@@ -173,8 +154,8 @@
       </main-search>
     {%- endif -%}
 
-    <div id="DesktopMenu" class="header__desktopMenu">
-      <ul class="header__desktopMenu__list">
+    <div id="DesktopMenu" class="desk-nav">
+      <ul class="desk-nav-list">
         {% for link in linklists[section.settings.header_menu].links %}
           {% liquid
             assign has_dropdown = false
@@ -184,34 +165,26 @@
           %}
 
           <li
-            class="header__desktopMenu__list__item
-              {% if has_dropdown %}header__desktopMenu__list__item_hideDropdown{% endif %}"
+            class="desk-nav-list-item {% if has_dropdown %}hide-drpd{% endif %}"
             data-desktop-menu-item
           >
             {% if has_dropdown %}
-              <span class="header__desktopMenu__list__item__link"
+              <span class="list-item-link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
-              >
-                {{ link.title | escape }}
-              </span>
-              <ul class="header__desktopMenu__list__item__dropdown" data-desktop-menu-item-dropdown>
+              >{{ link.title | escape }}</span>
+              <ul class="list-item-drpd" data-desktop-menu-item-dropdown>
                 {% for dropdownLink in link.links %}
-                  <li class="header__desktopMenu__list__item__dropdown__item">
-                    <a
-                      href="{{ dropdownLink.url }}"
-                      class="header__desktopMenu__list__item__dropdown__item__link"
-                    >
-                      {{ dropdownLink.title }}
-                    </a>
+                  <li class="drpd-item">
+                    <a href="{{ dropdownLink.url }}" class="drpd-item-link">{{ dropdownLink.title }}</a>
                   </li>
                 {% endfor %}
               </ul>
             {% else %}
               <a
                 href="{{ link.url }}"
-                class="header__desktopMenu__list__item__link"
+                class="list-item-link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
@@ -228,11 +201,10 @@
   <a href="#" class="header-shade mobile-nav-toggle" aria-label="{{ 'general.navigation.close' | t }}"></a>
 </page-header>
 
-<div class="header__burgerMenu" id="BurgerMenu">
-  <div class="header__burgerMenu__contentContainer">
-
-    <div id="BurgerMenuListWrapper" class="header__burgerMenu__listWrapper">
-      <ul class="header__burgerMenu__list">
+<div class="brgr-menu" id="BurgerMenu">
+  <div class="brgr-cntnt">
+    <div id="BurgerMenuListWrapper" class="brgr-list">
+      <ul>
         {% for link in linklists[section.settings.header_menu].links %}
           {% liquid
             assign has_dropdown = false
@@ -242,45 +214,35 @@
           %}
 
           <li
-            class="header__burgerMenu__list__item
-              {% if has_dropdown %}header__burgerMenu__list__item_hideDropdown{% endif %}"
+            class="brgr-list-item
+              {% if has_dropdown %}brgr-list-item-hid-drpd{% endif %}"
             data-burger-menu-item
           >
             {% if has_dropdown %}
-              <span class="header__burgerMenu__list__item__link"
+              <span class="brgr-item-link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
               >
-                <span class="header__burgerMenu__list__item__link__text">{{ link.title | escape }}</span>
-                <div data-dropdown-state-plus class="header__burgerMenu__list__item__stateIndicator">
+                <span class="brgr-item-text">{{ link.title | escape }}</span>
+                <div data-dropdown-state-plus class="brgr-list-state">
                   {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
                 </div>
-                <div data-dropdown-state-minus class="
-                  header__burgerMenu__list__item__stateIndicator header__burgerMenu__list__item__stateIndicator_hide"
-                >
+                <div data-dropdown-state-minus class="brgr-list-state brgr-list-state-hide">
                   {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
                 </div>
               </span>
-              <ul
-                class="header__burgerMenu__list__item__dropdown"
-                data-burger-menu-item-dropdown data-is-dropdown-open="false"
-              >
+              <ul class="brgr-drpd" data-burger-menu-item-dropdown data-is-dropdown-open="false">
                 {% for dropdownLink in link.links %}
-                  <li class="header__burgerMenu__list__item__dropdown__item" data-burger-menu-dropdown-list-item>
-                    <a
-                      href="{{ dropdownLink.url }}"
-                      class="header__burgerMenu__list__item__dropdown__item__link"
-                    >
-                      {{ dropdownLink.title }}
-                    </a>
+                  <li class="brgr-drpd-item" data-burger-menu-dropdown-list-item>
+                    <a href="{{ dropdownLink.url }}" class="brgr-drpd-link">{{ dropdownLink.title }}</a>
                   </li>
                 {% endfor %}
               </ul>
             {% else %}
               <a
                 href="{{ link.url }}"
-                class="header__burgerMenu__list__item__link"
+                class="brgr-item-link"
                 {% if has_dropdown %}
                   aria-haspopup="true" aria-expanded="false"
                 {% endif %}
@@ -293,12 +255,12 @@
       </ul>
     </div>
 
-    <div class="header__burgerMenu__linksContainer">
-      <a class="header__burgerMenu__linksContainer__link" href="/account">
-        <div class="header__burgerMenu__linksContainer__link__icon">
+    <div class="brgr-lnks">
+      <a class="brgr-link-wrp" href="/account">
+        <div class="brgr-link-icon">
           {% render 'icon-account', fill: '#2B2B2B', stroke: '#2B2B2B' %}
         </div>
-        <span class="header__burgerMenu__linksContainer__link__text">My account</span>
+        <span class="brgr-link-text">My account</span>
       </a>
     </div>
   </div>

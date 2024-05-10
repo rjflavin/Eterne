@@ -6,11 +6,11 @@ desktopMenuItemsElements.forEach((itemElement) => {
 
   if (hasItemDropdown) {
     itemElement.addEventListener('mouseenter', () => {
-      itemElement.classList.remove('header__desktopMenu__list__item_hideDropdown');
+      itemElement.classList.remove('hide-drpd');
     });
 
     itemElement.addEventListener('mouseleave', () => {
-      itemElement.classList.add('header__desktopMenu__list__item_hideDropdown');
+      itemElement.classList.add('hide-drpd');
     });
   }
 });
