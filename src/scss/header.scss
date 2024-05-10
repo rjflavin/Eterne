@@ -95,6 +95,12 @@
   position: relative;
   display: block;
   cursor: pointer;
+
+  &:hover {
+    .list-item-link {
+      color: var(--red1);
+    }
+  }
 }
 
 .list-item-link {
