@@ -1460,7 +1460,6 @@ hr {
 
 a,
 .link {
-  transition: color 100ms, border-color 100ms, opacity 100ms, text-decoration-color 100ms;
   color: rgb(var(--link-color));
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
