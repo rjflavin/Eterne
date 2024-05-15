@@ -93,9 +93,8 @@
     border: 1px solid var(--black1);
 
     &:hover {
-      background: var(--white);
-      border: 1px solid var(--black1);
-      color: var(--black1);
+      color: var(--white);
+      background: var(--black1);
       transition: all 0.3s ease-in-out;
     }
   }
