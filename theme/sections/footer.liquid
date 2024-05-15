@@ -96,7 +96,7 @@
     </div>
   </div>
   <div class="ftr-bottom-desk">
-    <a href="{{ section.settings.terms_and_conditions_page.url }}" class="ftr-desk__link">
+    <a href="policies/terms-of-service" class="ftr-desk__link">
       {{ section.settings.terms_and_conditions_link_text }}
     </a>
     <a href="{{ shop.url }}" class="ftr-desk__year">
@@ -106,7 +106,7 @@
         {{ shop.name | link_to: routes.root_url }}
       {% endif %}
     </a>
-    <a href="{{ section.settings.privacy_policy_page.url }}" class="ftr-desk__link">
+    <a href="policies/privacy-policy" class="ftr-desk__link">
       {{ section.settings.privacy_policy_link_text }}
     </a>
   </div>
@@ -218,10 +218,10 @@
   </div>
   <div class="ftr-bottom-mobile">
     <div class="ftr-mobile__links">
-      <a href="{{ section.settings.terms_and_conditions_page.url }}" class="ftr-mobile__link">
+      <a href="policies/terms-of-service" class="ftr-mobile__link">
         {{ section.settings.terms_and_conditions_link_text }}
       </a>
-      <a href="{{ section.settings.privacy_policy_page.url }}" class="ftr-mobile__link">
+      <a href="policies/privacy-policy" class="ftr-mobile__link">
         {{ section.settings.privacy_policy_link_text }}
       </a>
     </div>
@@ -344,11 +344,6 @@
       "default": "Terms & conditions"
     },
     {
-      "type": "page",
-      "id": "terms_and_conditions_page",
-      "label": "Terms & conditions page"
-    },
-    {
       "type": "text",
       "id": "footer_year_left_text",
       "label": "Year title",
@@ -365,11 +360,6 @@
       "id": "privacy_policy_link_text",
       "label": "Privacy policy link text",
       "default": "Privacy policy"
-    },
-    {
-      "type": "page",
-      "id": "privacy_policy_page",
-      "label": "Privacy policy page"
     }
   ]
 }
