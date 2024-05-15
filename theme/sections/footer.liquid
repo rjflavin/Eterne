@@ -2,51 +2,89 @@
 {{ 'validation.css' | asset_url | stylesheet_tag }}
 
 <div class="footer container">
-  <div class="footer__wrap-desk">
-    <div class="footer__desk-cols">
-      <div class="footer__desk-col">
+  <div class="footer-inner">
+    <div class="footer-desk-cols">
+      <div class="footer-desk-col">
         <span class="desk-col__title">{{ section.settings.customer_column_text }}</span>
         <ul class="desk-col__list">
           {% for link in linklists[section.settings.customer_menu].links %}
-            <li class="footer__desktopColumn__list__item">
-              <a href="{{ link.url }}" class="desc-col__text">{{ link.title }}</a>
-            </li>
+            <li><a href="{{ link.url }}" class="desc-col__text">{{ link.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
-      <div class="footer__desk-col">
+      <div class="footer-desk-col">
         <span class="desk-col__title">{{ section.settings.about_us_column_text }}</span>
         <ul class="desk-col__list">
           {% for link in linklists[section.settings.about_us_menu].links %}
-            <li class="footer__desktopColumn__list__item">
-              <a href="{{ link.url }}" class="desc-col__text">{{ link.title }}</a>
-            </li>
+            <li><a href="{{ link.url }}" class="desc-col__text">{{ link.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
-      <div class="footer__desk-col">
+      <div class="footer-desk-col">
         <span class="desk-col__title">{{ section.settings.follow_column_text }}</span>
         <ul class="desk-col__list">
           {% for link in linklists[section.settings.follow_menu].links %}
-            <li class="footer__desktopColumn__list__item">
-              <a href="{{ link.url }}" class="desc-col__text">{{ link.title }}</a>
-            </li>
+            <li><a href="{{ link.url }}" class="desc-col__text">{{ link.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
     </div>
-    <div class="newsletter newsletter_desk">
+    <div class="footer-mobile">
+      <div class="footer-mobile-drpds">
+        <div class="ftr-mobile-drpd">
+          <div class="mobile-drpd-top">
+            <span class="mobile-drpd-text">{{ section.settings.about_us_column_text }}</span>
+            <div class="ftr-mobile-state">
+              {% render 'icon-tick', stroke: '#000000' %}
+            </div>
+          </div>
+          <ul class="ftr-mobile-drpd-items">
+            {% for link in linklists[section.settings.about_us_menu].links %}
+              <li class="ftr-mobile-drpd__item">
+                <a href="{{ link.url }}" class="ftr-mobile-drpd-item__text">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="ftr-mobile-drpd">
+          <div class="mobile-drpd-top">
+            <span class="mobile-drpd-text">{{ section.settings.customer_column_text }}</span>
+            <div class="ftr-mobile-state">
+              {% render 'icon-tick', stroke: '#000000' %}
+            </div>
+          </div>
+          <ul class="ftr-mobile-drpd-items">
+            {% for link in linklists[section.settings.customer_menu].links %}
+              <li class="ftr-mobile-drpd__item">
+                <a href="{{ link.url }}" class="ftr-mobile-drpd-item__text">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="footer-mobile-soc">
+        {% for link in linklists[section.settings.follow_menu].links %}
+          <li class="footer-mobile-soc__item">
+            <a href="{{ link.url }}" class="footer-mobile-soc__link">
+              {% render 'icon-instagram' %}
+            </a>
+          </li>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="newsletter">
       <p class="newsletter__text">{{ section.settings.subscribe_text }}</p>
 
-      {%- form 'customer', id: 'ContactFooterDesktop', class: 'newsletter' -%}
+      {%- form 'customer', id: 'ContactFooter', class: 'newsletter' -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="newsletter__wrapper">
           <div class="newsletter__field">
             <input
-              id="NewsletterFormDesktop"
+              id="NewsletterForm"
               type="email"
               name="contact[email]"
-              class="newsletter__input newsletter__input_desktop"
+              class="newsletter__input"
               value="{{ form.email }}"
               aria-required="true"
               autocorrect="off"
@@ -66,12 +104,12 @@
               type="submit"
               class="newsletter__btn"
               name="commit"
-              id="SubscribeDesktop"
+              id="Subscribe"
             >
               {{ section.settings.subscribe_btn_text }}
             </button>
           </div>
-          <div id="FooterErrorMessageContainerDesktop" class="ftr-msg-cont">
+          <div id="FooterErrorMessageContainer" class="ftr-msg-cont">
             {% if section.settings.subscribe_error_empty_email.size > 0 %}
               <div data-error-type="empty" class="ftr-message ftr-message_error disp-none-imp">
                 {{ section.settings.subscribe_error_empty_email }}
@@ -95,7 +133,8 @@
 
     </div>
   </div>
-  <div class="ftr-bottom-desk">
+
+  <div class="footer-bottom-desk">
     <a href="policies/terms-of-service" class="ftr-desk__link">
       {{ section.settings.terms_and_conditions_link_text }}
     </a>
@@ -110,113 +149,7 @@
       {{ section.settings.privacy_policy_link_text }}
     </a>
   </div>
-
-  <div class="footer__wrap-mobile">
-    <div class="newsletter newsletter_mobile">
-      <p class="newsletter__text">{{ section.settings.subscribe_text }}</p>
-
-      {%- form 'customer', id: 'ContactFooterMobile', class: 'newsletter' -%}
-        <input type="hidden" name="contact[tags]" value="newsletter">
-        <div class="newsletter__wrapper">
-          <div class="newsletter__field">
-            <input
-              id="NewsletterFormMobile"
-              type="email"
-              name="contact[email]"
-              class="newsletter__input newsletter__input_mobile"
-              value="{{ form.email }}"
-              aria-required="true"
-              autocorrect="off"
-              autocapitalize="off"
-              autocomplete="email"
-              {% if form.errors %}
-                autofocus
-                aria-invalid="true"
-                aria-describedby="ContactFooter-error"
-              {% elsif form.posted_successfully? %}
-                aria-describedby="ContactFooter-success"
-              {% endif %}
-              placeholder="{{ section.settings.subscribe_placeholder_text }}"
-              data-empty
-            >
-            <button
-              type="submit"
-              class="newsletter__btn newsletter-form__button field__button footerFormSideBtn"
-              name="commit"
-              id="SubscribeMobile"
-            >
-              {{ section.settings.subscribe_btn_text }}
-            </button>
-          </div>
-          <div id="FooterErrorMessageContainerMobile" class="ftr-msg-cont">
-            {% if section.settings.subscribe_error_empty_email.size > 0 %}
-              <div data-error-type="empty" class="ftr-message ftr-message_error disp-none-imp">
-                {{ section.settings.subscribe_error_empty_email }}
-              </div>
-            {% endif %}
-            {% if section.settings.subscribe_error_invalid_email.size > 0 %}
-              <div data-error-type="invalid" class="ftr-message ftr-message_error disp-none-imp">
-                {{ section.settings.subscribe_error_invalid_email }}
-              </div>
-            {% endif %}
-          </div>
-          {% if form.posted_successfully? and section.settings.subscribe_success.size > 0 %}
-            <div class="ftr-msg-cont">
-              <div class="ftr-message ftr-message_success">
-                {{ section.settings.subscribe_success }}
-              </div>
-            </div>
-          {% endif %}
-        </div>
-      {%- endform -%}
-
-    </div>
-
-    <div class="ftr-mobile-drpds">
-      <div class="ftr-mobile-drpd">
-        <div class="mobile-drpd-top">
-          <span class="mobile-drpd-text">{{ section.settings.about_us_column_text }}</span>
-          <div class="ftr-mobile-state">
-            {% render 'icon-tick', stroke: '#000000' %}
-          </div>
-        </div>
-        <ul class="ftr-mobile-drpd-items">
-          {% for link in linklists[section.settings.about_us_menu].links %}
-            <li class="ftr-mobile-drpd__item">
-              <a href="{{ link.url }}" class="ftr-mobile-drpd-item__text">{{ link.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="ftr-mobile-drpd">
-        <div class="mobile-drpd-top">
-          <span class="mobile-drpd-text">{{ section.settings.customer_column_text }}</span>
-          <div class="ftr-mobile-state">
-            {% render 'icon-tick', stroke: '#000000' %}
-          </div>
-        </div>
-        <ul class="ftr-mobile-drpd-items">
-          {% for link in linklists[section.settings.customer_menu].links %}
-            <li class="ftr-mobile-drpd__item">
-              <a href="{{ link.url }}" class="ftr-mobile-drpd-item__text">{{ link.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-
-    <div class="ftr-mobile-soc">
-      {% for link in linklists[section.settings.follow_menu].links %}
-        <li class="ftr-mobile-soc__item">
-          <a href="{{ link.url }}" class="ftr-mobile-soc__link">
-            {% render 'icon-instagram' %}
-          </a>
-        </li>
-      {% endfor %}
-    </div>
-
-  </div>
-  <div class="ftr-bottom-mobile">
+  <div class="footer-bottom-mobile">
     <div class="ftr-mobile__links">
       <a href="policies/terms-of-service" class="ftr-mobile__link">
         {{ section.settings.terms_and_conditions_link_text }}
