@@ -166,6 +166,10 @@
   font-size: 12px;
   line-height: 18px;
   text-transform: uppercase;
+
+  &:hover {
+    color: var(--red1);
+  }
 }
 
 .ftr-mobile-drpds {
@@ -353,6 +357,10 @@
     line-height: 18px;
     color: var(--black1);
     text-transform: uppercase;
+
+    &:hover {
+      color: var(--red1);
+    }
   }
 
   .ftr-mobile-year__wrap {
@@ -366,6 +374,10 @@
     font-size: 12px;
     line-height: 18px;
     text-transform: uppercase;
+
+    &:hover {
+      color: var(--red1);
+    }
   }
 
   .ftr-msg-cont {
