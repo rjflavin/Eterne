@@ -99,7 +99,13 @@
     <a href="{{ section.settings.terms_and_conditions_page.url }}" class="ftr-desk__link">
       {{ section.settings.terms_and_conditions_link_text }}
     </a>
-    <span class="ftr-desk__year">{{ section.settings.year_title }}</span>
+    <span class="ftr-desk__year">
+      {% if section.settings.footer_year_left_text.size > 0 and section.settings.footer_year_right_text.size > 0 %}
+        {{ section.settings.footer_year_left_text }} {{ 'now' | date: '%Y' }}{{ section.settings.footer_year_right_text }}
+      {% else %}
+        {{ shop.name | link_to: routes.root_url }}
+      {% endif %}
+    </span>
     <a href="{{ section.settings.privacy_policy_page.url }}" class="ftr-desk__link">
       {{ section.settings.privacy_policy_link_text }}
     </a>
@@ -220,7 +226,13 @@
       </a>
     </div>
     <div class="ftr-mobile-year__wrap">
-      <span class="ftr-mobile-year">{{ section.settings.year_title }}</span>
+      <span class="ftr-mobile-year">
+        {% if section.settings.footer_year_left_text.size > 0 and section.settings.footer_year_right_text.size > 0 %}
+          {{ section.settings.footer_year_left_text }} {{ 'now' | date: '%Y' }}{{ section.settings.footer_year_right_text }}
+        {% else %}
+          {{ shop.name | link_to: routes.root_url }}
+        {% endif %}
+      </span>
     </div>
   </div>
 </div>
@@ -338,9 +350,15 @@
     },
     {
       "type": "text",
-      "id": "year_title",
+      "id": "footer_year_left_text",
       "label": "Year title",
-      "default": "© éterne 2024. All Rights Reserved"
+      "default": "© éterne"
+    },
+    {
+      "type": "text",
+      "id": "footer_year_right_text",
+      "label": "Year title",
+      "default": ". All Rights Reserved"
     },
     {
       "type": "text",
