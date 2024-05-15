@@ -192,9 +192,11 @@
   </main>
 
   {%- if request.path != '/challenge' -%}
-    <div id="pagefooter">
+    {% comment %}<div id="pagefooter">
       {%- sections 'footer-group' -%}
-    </div>
+    </div>{% endcomment %}
+
+    {% section 'footer' %}
 
     {%- sections 'overlay-group' -%}
   {%- endif -%}

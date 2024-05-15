@@ -127,6 +127,12 @@
 
 .drpd-item {
   margin-bottom: 10px;
+
+  &:hover {
+    .drpd-item__link {
+      color: var(--red1);
+    }
+  }
 }
 
 .drpd-item:last-child {
@@ -185,8 +191,8 @@
   }
 
   .mob-nav-btn__icon svg {
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
   }
 }
 
