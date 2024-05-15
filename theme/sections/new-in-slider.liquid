@@ -1,0 +1,70 @@
+{{ 'new-in-slider.css' | asset_url | stylesheet_tag }}
+
+{% assign collection_handle = section.settings.selected_collection.handle %}
+
+<div class="new-in">
+  <div class="new-in__title-wrap">
+    <span class="new-in__title">{{ section.settings.section_title }}</span>
+  </div>
+  <div class="new-in__swiper swiper">
+    <div class="new-in__swiper-wrapper swiper-wrapper">
+      {% for product in collections[collection_handle].products %}
+        {% assign product_url = "/collections/" | append: collection_handle | append: "/products/" | append: product.handle %}
+        <a href="{{ product_url }}" class="new-in__item swiper-slide">
+          <div class="new-in__item-inner">
+            <div class="new-in__img-wrap">
+              <img
+                class="new-in__item-img"
+                src="{{ product.featured_image | img_url: 'large' }}"
+                alt="{{ product.featured_image.alt }}"
+              />
+            </div>
+            <div class="new-in__item-title">{{ product.title }}</div>
+            <div class="new-in__item-price">{{ product.price | money_without_trailing_zeros }}</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-prev new-in__arrow-item new-in__arrow-prev">
+      {% render 'icon-tick' %}
+    </div>
+    <div class="swiper-button-next new-in__arrow-item new-in__arrow-next">
+      {% render 'icon-tick' %}
+    </div>
+  </div>
+</div>
+
+{{ 'new-in-slider-script.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "New in slider",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Bottom"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "New in"
+    },
+    {
+      "type": "collection",
+      "id": "selected_collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New in slider"
+    }
+  ]
+}
+{% endschema %}

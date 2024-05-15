@@ -447,6 +447,13 @@
         "crop_ratio": "1.78",
         "color_scheme": "default"
       }
+    },
+    "new_in_slider_QYPKPp": {
+      "type": "new-in-slider",
+      "settings": {
+        "section_title": "New in",
+        "selected_collection": "new-in"
+      }
     }
   },
   "order": [
@@ -460,6 +467,7 @@
     "163592857728b8bdc2",
     "1635928580d75f81bf",
     "1635928697c562053a",
-    "163592870141219e2f"
+    "163592870141219e2f",
+    "new_in_slider_QYPKPp"
   ]
 }
