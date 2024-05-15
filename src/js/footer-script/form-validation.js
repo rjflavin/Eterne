@@ -1,9 +1,9 @@
 import { validateEmail } from '../utils/form-validation';
 
-const formElement = document.getElementById('ContactFooterDesktop');
-const inputElement = formElement.querySelector('input.newsletter__input_desktop');
-const sendFormButtonElement = formElement.querySelector('#SubscribeDesktop');
-const footerErrorMessageContainerElement = document.getElementById('FooterErrorMessageContainerDesktop');
+const formElement = document.getElementById('ContactFooter');
+const inputElement = formElement.querySelector('input.newsletter__input');
+const sendFormButtonElement = formElement.querySelector('#Subscribe');
+const footerErrorMessageContainerElement = document.getElementById('FooterErrorMessageContainer');
 const errorInputClassName = 'footerFormSideInput_error';
 
 const updateValidationMessage = (status) => {
