@@ -1,9 +1,5 @@
-.ftr {
-  max-width: 1920px;
-  width: 100%;
-  display: flex;
-  padding: 64px 54px 62px 40px;
-  flex-direction: column;
+.footer {
+  margin-top: 70px;
 }
 
 .footer__wrap-desk {
@@ -220,7 +216,7 @@
   .footer__wrap-mobile {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 70px;
   }
 
   .newsletter_desk {
@@ -257,7 +253,7 @@
   .ftr-mobile-drpd {
     display: flex;
     flex-direction: column;
-    margin-top: 34px;
+    margin-top: 70px;
 
     &:first-child {
       margin-top: 0;
