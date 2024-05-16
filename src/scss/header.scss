@@ -253,6 +253,18 @@
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    span.brgr-item__text {
+      color: var(--red1);
+    }
+
+    svg path {
+      fill: var(--red1) !important;
+      stroke: var(--red1) !important;
+    }
+  }
 }
 
 .brgr-item__link:last-child {
@@ -263,6 +275,10 @@
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
+
+  &:hover {
+    color: var(--red1);
+  }
 }
 
 .brgr-list__state {
@@ -291,6 +307,10 @@
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
+
+  &:hover {
+    color: var(--red1);
+  }
 }
 
 .brgr-lnks {
