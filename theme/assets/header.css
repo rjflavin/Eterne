@@ -234,6 +234,9 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+.brgr-item__link:hover {
+  color: var(--red1);
+}
 .brgr-item__link:hover span.brgr-item__text {
   color: var(--red1);
 }
