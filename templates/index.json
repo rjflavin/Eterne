@@ -86,9 +86,17 @@
       ],
       "settings": {
       }
+    },
+    "new_in_slider_QYPKPp": {
+      "type": "new-in-slider",
+      "settings": {
+        "section_title": "New in",
+        "selected_collection": "new-in"
+      }
     }
   },
   "order": [
-    "collage_grid_YqLqzV"
+    "collage_grid_YqLqzV",
+    "new_in_slider_QYPKPp"
   ]
 }

@@ -507,9 +507,7 @@
           "subscribe_error_invalid_email": "Invalid email",
           "subscribe_success": "You have successfully subscribed!",
           "terms_and_conditions_link_text": "Terms & conditions",
-          "terms_and_conditions_page": "contact",
-          "privacy_policy_link_text": "Privacy policy",
-          "privacy_policy_page": "contact"
+          "privacy_policy_link_text": "Privacy policy"
         }
       }
     },
