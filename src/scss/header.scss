@@ -256,6 +256,8 @@
   cursor: pointer;
 
   &:hover {
+    color: var(--red1);
+
     span.brgr-item__text {
       color: var(--red1);
     }
