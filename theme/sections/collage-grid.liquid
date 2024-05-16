@@ -1,0 +1,308 @@
+{{ 'collage-grid.css' | asset_url | stylesheet_tag }}
+
+<div class="collage">
+    {% for block in section.blocks %}
+        {% case block.type %}
+                {% when 'one_image_row' %}
+                    <div class="collage__one_image_row">
+                        {% if block.settings.media_type == "image" %}
+                            {% if block.settings.image_mobile != blank %}
+                                {% assign image_mobile = block.settings.image_mobile %}
+                            {% else %}
+                                {% assign image_mobile = block.settings.image %}
+                            {% endif %}
+
+                            <img
+                                    class="collage__image only-desk"
+                                    src="{{ block.settings.image | img_url: "master" }}"
+                                    alt="{{ block.settings.image.alt }}"
+                            >
+                            <img
+                                    class="collage__image only-mob"
+                                    src="{{ image_mobile | img_url: "master" }}"
+                                    alt="{{ image_mobile.alt }}"
+                            >
+
+                        {% elsif block.settings.media_type == "video" %}
+                            {% if block.settings.video_mobile != blank %}
+                                {% assign video_class = "only-desk" %}
+                                {{ block.settings.video_mobile | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                            {% else %}
+                                {% assign video_class = "" %}
+                            {% endif %}
+                            {{ block.settings.video | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                        {% endif %}
+                        {% if block.settings.caption or block.settings.product_link %}
+                            <div class="caption">
+                                {% if block.settings.caption %}
+                                    <div class="caption__text">{{ block.settings.caption }}</div>
+                                {% endif %}
+                                {% if block.settings.product_link %}
+                                    <a href="{{ block.settings.product_link }}" class="caption__link">{{ block.settings.product_link_text }}</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                {% when 'two_images_row' %}
+                    <div class="collage__two_images_row">
+                        <div class="collage__first-image-wrapper">
+                            {% if block.settings.first_image != blank %}
+                                {% if block.settings.first_image_mobile != blank %}
+                                    {% assign first_image_mobile = block.settings.first_image_mobile %}
+                                {% else %}
+                                    {% assign first_image_mobile = block.settings.first_image %}
+                                {% endif %}
+
+                                <img
+                                        class="collage__image only-desk"
+                                        src="{{ block.settings.first_image | img_url: "master" }}"
+                                        alt="{{ block.settings.first_image.alt }}"
+                                >
+                                <img
+                                        class="collage__image only-mob"
+                                        src="{{ first_image_mobile | img_url: "master" }}"
+                                        alt="{{ first_image_mobile.alt }}"
+                                >
+                            {% elsif block.settings.video_first != blank %}
+                                {% if block.settings.video_first_mob != blank %}
+                                    {% assign video_class = "only-desk" %}
+                                    {{ block.settings.video_first_mob | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                {% else %}
+                                    {% assign video_class = "" %}
+                                {% endif %}
+                                {{ block.settings.video_first | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                            {% endif %}
+                        </div>
+                        <div class="collage__second-image-wrapper">
+                            {% if block.settings.second_image != blank %}
+                                {% if block.settings.second_image_mobile != blank %}
+                                    {% assign second_image_mobile = block.settings.second_image_mobile %}
+                                {% else %}
+                                    {% assign second_image_mobile = block.settings.second_image %}
+                                {% endif %}
+
+                                <img
+                                        class="collage__image only-desk"
+                                        src="{{ block.settings.second_image | img_url: "master" }}"
+                                        alt="{{ block.settings.second_image.alt }}"
+                                >
+                                <img
+                                        class="collage__image only-mob"
+                                        src="{{ second_image_mobile | img_url: "master" }}"
+                                        alt="{{ second_image_mobile.alt }}"
+                                >
+                            {% elsif block.settings.video_second != blank %}
+                                {% if block.settings.video_second_mob != blank %}
+                                    {% assign video_class = "only-desk" %}
+                                    {{ block.settings.video_second_mob | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                {% else %}
+                                    {% assign video_class = "" %}
+                                {% endif %}
+                                {{ block.settings.video_second | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                {% when 'three_images_row' %}
+                    <div class="collage__three_images_row">
+                        <div class="collage__first-image-wrapper">
+                            {% if block.settings.first_image != blank %}
+                                {% if block.settings.first_image_mobile != blank %}
+                                    {% assign first_image_mobile = block.settings.first_image_mobile %}
+                                {% else %}
+                                    {% assign first_image_mobile = block.settings.first_image %}
+                                {% endif %}
+
+                                <img
+                                        class="collage__image only-desk"
+                                        src="{{ block.settings.first_image | img_url: "master" }}"
+                                        alt="{{ block.settings.first_image.alt }}"
+                                >
+                                <img
+                                        class="collage__image only-mob"
+                                        src="{{ first_image_mobile | img_url: "master" }}"
+                                        alt="{{ first_image_mobile.alt }}"
+                                >
+                            {% elsif block.settings.video_first != blank %}
+                                {% if block.settings.video_first_mob != blank %}
+                                    {% assign video_class = "only-desk" %}
+                                    {{ block.settings.video_first_mob | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                {% else %}
+                                    {% assign video_class = "" %}
+                                {% endif %}
+                                {{ block.settings.video_first | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                            {% endif %}
+                        </div>
+                        <div class="collage__second-image-wrapper">
+                            {% if block.settings.second_image != blank %}
+                                {% if block.settings.second_image_mobile != blank %}
+                                    {% assign second_image_mobile = block.settings.second_image_mobile %}
+                                {% else %}
+                                    {% assign second_image_mobile = block.settings.second_image %}
+                                {% endif %}
+
+                                <img
+                                        class="collage__image only-desk"
+                                        src="{{ block.settings.second_image | img_url: "master" }}"
+                                        alt="{{ block.settings.second_image.alt }}"
+                                >
+                                <img
+                                        class="collage__image only-mob"
+                                        src="{{ second_image_mobile | img_url: "master" }}"
+                                        alt="{{ second_image_mobile.alt }}"
+                                >
+                            {% elsif block.settings.video_second != blank %}
+                                {% if block.settings.video_second_mob != blank %}
+                                    {% assign video_class = "only-desk" %}
+                                    {{ block.settings.video_second_mob | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                {% else %}
+                                    {% assign video_class = "" %}
+                                {% endif %}
+                                {{ block.settings.video_second | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                            {% endif %}
+                        </div>
+                    </div>
+            {% endcase %}
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Collage grid",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "one_image_row",
+      "name": "One image row",
+      "settings": [
+        {
+          "type": "radio",
+          "id": "media_type",
+          "label": "Media type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Image or video caption"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product link"
+        },
+        {
+          "type": "text",
+          "id": "product_color",
+          "label": "Product selected color"
+        },
+        {
+          "type": "text",
+          "id": "product_link_text",
+          "label": "Button text",
+          "default": "shop cashmere"
+        },
+        {
+          "type": "header",
+          "content": "Desktop settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "id": "video",
+          "type": "video",
+          "label": "Or video"
+        },
+        {
+          "type": "header",
+          "content": "Mobile settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image"
+        },
+        {
+          "id": "video_mobile",
+          "type": "video",
+          "label": "Or video"
+        }
+      ]
+    },
+    {
+      "type": "two_images_row",
+      "name": "Two images row",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Desktop settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "first_image",
+          "label": "The first image"
+        },
+        {
+          "id": "video_first",
+          "type": "video",
+          "label": "Or video"
+        },
+        {
+          "type": "image_picker",
+          "id": "second_image",
+          "label": "The second image"
+        },
+        {
+          "id": "video_second",
+          "type": "video",
+          "label": "Or video"
+        },
+        {
+          "type": "header",
+          "content": "Mobile settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "first_image_mobile",
+          "label": "The first image"
+        },
+        {
+          "id": "video_first_mob",
+          "type": "video",
+          "label": "Or video"
+        },
+        {
+          "type": "image_picker",
+          "id": "second_image_mobile",
+          "label": "The second image"
+        },
+        {
+          "id": "video_second_mob",
+          "type": "video",
+          "label": "Or video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collage grid"
+    }
+  ]
+}
+{% endschema %}

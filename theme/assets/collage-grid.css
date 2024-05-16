@@ -1,0 +1,64 @@
+.collage .only-desk {
+  display: flex;
+}
+@media (max-width: 767px) {
+  .collage .only-desk {
+    display: none;
+  }
+}
+.collage .only-mob {
+  display: none;
+}
+@media (max-width: 767px) {
+  .collage .only-mob {
+    display: flex;
+  }
+}
+.collage__one_image_row .caption, .collage__two_images_row .caption {
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+}
+.collage__one_image_row {
+  height: 97vh;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .collage__one_image_row {
+    height: 50vh;
+  }
+}
+.collage__one_image_row img, .collage__one_image_row video {
+  object-fit: cover;
+  width: 100%;
+  min-height: 100%;
+}
+.collage__two_images_row {
+  height: 100%;
+  z-index: 1;
+  position: relative;
+}
+@media screen and (min-width: 1024px) {
+  .collage__two_images_row {
+    height: 110vh;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+  }
+}
+.collage__two_images_row > div {
+  display: flex;
+  height: 100vh;
+}
+@media screen and (min-width: 1024px) {
+  .collage__two_images_row > div {
+    height: 110vh;
+    width: 50%;
+  }
+}
+.collage__two_images_row img, .collage__two_images_row video {
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+}

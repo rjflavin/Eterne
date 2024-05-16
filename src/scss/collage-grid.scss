@@ -1,0 +1,73 @@
+@import "mixins";
+
+.collage {
+  .only-desk {
+    display: flex;
+
+    @include for-mobile {
+      display: none;
+    }
+  }
+
+  .only-mob {
+    display: none;
+
+    @include for-mobile {
+      display: flex;
+    }
+  }
+
+  &__one_image_row, &__two_images_row {
+    .caption {
+      position: absolute;
+      left: 40px;
+      bottom: 40px;
+
+    }
+  }
+
+  &__one_image_row {
+    height: 97vh;
+    position: relative;
+    overflow: hidden;
+
+    @include for-mobile {
+      height: 50vh;
+    }
+
+    img, video {
+      object-fit: cover;
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+
+  &__two_images_row {
+    height: 100%;
+    z-index: 1;
+    position: relative;
+
+    @media screen and (min-width: 1024px) {
+      height: 110vh;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+    }
+
+    & > div {
+      display: flex;
+      height: 100vh;
+
+      @media screen and (min-width: 1024px) {
+        height: 110vh;
+        width: 50%;
+      }
+    }
+
+    img, video {
+      object-fit: cover;
+      min-width: 100%;
+      min-height: 100%;
+    }
+  }
+}
