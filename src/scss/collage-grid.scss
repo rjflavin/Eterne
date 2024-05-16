@@ -1,0 +1,280 @@
+@import "mixins";
+
+.collage {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1920px;
+
+  .only-desk {
+    display: flex;
+
+    @include for-mobile {
+      display: none;
+    }
+  }
+
+  .only-mob {
+    display: none;
+
+    @include for-mobile {
+      display: flex;
+    }
+  }
+
+  &__one-image-row,
+  &__two-images-row {
+    .caption {
+      position: absolute;
+      left: 40px;
+      bottom: 40px;
+
+      &__text {
+        margin-bottom: 15px;
+
+        &, p {
+          color: var(--white);
+          font-weight: 500;
+          font-size: 22px;
+          line-height: 26px;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+
+          @include for-mobile {
+            font-size: 20px;
+            line-height: 23px;
+          }
+        }
+      }
+
+      &__link {
+        color: var(--white);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-align: center;
+        border: 1px solid var(--white);
+        padding: 10px 22px;
+
+        @include for-mobile {
+          font-size: 12px;
+          line-height: 16px;
+          padding: 8px 20px;
+        }
+      }
+    }
+  }
+
+  &__one-image-row, .media__video-wrapper {
+    &.play {
+      .play-icon, .caption, .collage__cover-video-image {
+        display: none;
+      }
+    }
+  }
+
+  &__cover-video-image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  .play-icon {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    @include for-mobile {
+      width: 50px;
+      height: 50px;
+    }
+
+    .icon-play-video {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__one-image-row {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    &.portrait {
+      height: 200vh;
+      @include for-mobile {
+        height: 60vh;
+      }
+    }
+
+    &.landscape {
+      height: 97vh;
+
+      @include for-mobile {
+        height: 50vh;
+      }
+    }
+
+    img, video {
+      object-fit: cover;
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+
+  &__two-images-row {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &-inner {
+      display: flex;
+      height: 100%;
+
+      @include for-tablet {
+        min-width: max-content;
+      }
+    }
+
+    &.portrait {
+      height: 125vh;
+
+      @include for-mobile {
+        height: 75vh;
+      }
+    }
+
+    &.landscape {
+      height: 100vh;
+
+      @include for-mobile {
+        height: 50vh;
+      }
+    }
+
+    .media {
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+
+      @include for-tablet {
+        display: block;
+        width: 80vw;
+      }
+
+      &__video-wrapper {
+        display: flex;
+        position: relative;
+        height: 100%;
+      }
+    }
+
+    img, video {
+      object-fit: cover;
+      min-width: 100%;
+      min-height: 100%;
+    }
+  }
+
+  &__three-images-row {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+
+    &-inner {
+      display: flex;
+      width: 100%;
+
+      @include for-tablet {
+        min-width: max-content;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .image-item {
+      height: 90vh;
+      position: relative;
+      overflow: hidden;
+      width: calc(100% / 3);
+
+      @include for-tablet {
+        height: 75vh;
+      }
+
+      .image-wrapper {
+        height: 100%;
+
+        @include for-tablet {
+          display: block;
+          width: 80vw;
+        }
+
+        img {
+          object-fit: cover;
+          min-width: 100%;
+          min-height: 100%;
+        }
+      }
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 29px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      @include for-tablet {
+        left: 20px;
+        align-items: start;
+        transform: none;
+      }
+
+      &__text p {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 26px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--white);
+
+        @include for-tablet {
+          font-size: 20px;
+        }
+      }
+
+      &__link {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 162%;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-decoration: underline;
+        text-decoration-skip-ink: none;
+        text-align: center;
+        color: var(--white);
+        width: max-content;
+
+        @include for-tablet {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
