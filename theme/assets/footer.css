@@ -271,6 +271,9 @@
     color: var(--black1);
     text-transform: uppercase;
   }
+  .ftr-mobile-drpd-item__text:hover {
+    color: var(--red1);
+  }
   .footer-mobile-soc {
     width: 100%;
     display: flex;
