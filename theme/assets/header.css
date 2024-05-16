@@ -232,6 +232,14 @@
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
+  cursor: pointer;
+}
+.brgr-item__link:hover span.brgr-item__text {
+  color: var(--red1);
+}
+.brgr-item__link:hover svg path {
+  fill: var(--red1) !important;
+  stroke: var(--red1) !important;
 }
 
 .brgr-item__link:last-child {
@@ -242,6 +250,9 @@
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
+}
+.brgr-item__text:hover {
+  color: var(--red1);
 }
 
 .brgr-list__state {
@@ -270,6 +281,9 @@
   font-size: 14px;
   line-height: 16.8px;
   text-transform: uppercase;
+}
+.brgr-drpd__link:hover {
+  color: var(--red1);
 }
 
 .brgr-lnks {
