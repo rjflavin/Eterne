@@ -624,9 +624,9 @@ eval("\n\nvar forEach = __webpack_require__(/*! for-each */ \"./node_modules/for
 /*!**********************************************!*\
   !*** ./src/js/new-in-slider-script/hover.js ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (() => {
 
-eval("/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ \"./node_modules/console-browserify/index.js\");\nconst slideElements = document.querySelectorAll('.new-in__item-inner');\nslideElements.forEach(slideElement => {\n  slideElement.addEventListener('mouseenter', () => {\n    console.log('slideElement -', slideElement);\n    console.log('2 -', slideElement.querySelector('[data-hover-image]'));\n    slideElement.querySelector('[data-hover-image]').classList.add('disp-flx-imp');\n  });\n  slideElement.addEventListener('mouseout', () => {\n    slideElement.querySelector('[data-hover-image]').classList.remove('disp-flx-imp');\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/hover.js?");
+eval("const slideElements = document.querySelectorAll('.new-in__item-inner');\nslideElements.forEach(slideElement => {\n  slideElement.addEventListener('mouseenter', () => {\n    slideElement.querySelector('[data-hover-image]').classList.add('disp-flx-imp');\n  });\n  slideElement.addEventListener('mouseout', () => {\n    slideElement.querySelector('[data-hover-image]').classList.remove('disp-flx-imp');\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/hover.js?");
 
 /***/ }),
 

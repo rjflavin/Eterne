@@ -1,6 +1,6 @@
-const slideElements = document.querySelectorAll('.new-in__item-inner');
+const productElements = document.querySelectorAll('.collection__item-inner');
 
-slideElements.forEach((slideElement) => {
+productElements.forEach((slideElement) => {
   slideElement.addEventListener('mouseenter', () => {
     slideElement.querySelector('[data-hover-image]').classList.add('disp-flx-imp');
   });
