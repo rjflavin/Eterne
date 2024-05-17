@@ -18,7 +18,7 @@
           "type": "two_images_row",
           "settings": {
             "orientation": "portrait",
-            "media_type_1": "video",
+            "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/Frame_17_82ace3bb-2e22-4d79-af25-4f3fa5a0d96d.jpg",
             "caption_1": "<p>day to night<br\/>essentials<\/p>",
             "product_link_1": "shopify:\/\/collections",
@@ -33,7 +33,7 @@
         "one_image_row_Jc6jjR": {
           "type": "one_image_row",
           "settings": {
-            "media_type": "video",
+            "media_type": "image",
             "orientation": "landscape",
             "caption": "<p>Elevated<br\/>Essentials<\/p>",
             "product_link": "shopify:\/\/collections",
