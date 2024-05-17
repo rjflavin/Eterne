@@ -1,5 +1,12 @@
 .footer {
-  margin-top: 70px;
+  max-width: 1920px;
+  width: 100%;
+  margin-top: 60px;
+}
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 30px;
+  }
 }
 
 .footer-inner {
@@ -117,7 +124,7 @@
 .newsletter__input::placeholder {
   font-size: 12px;
   line-height: 18px;
-  color: var(--grey1);
+  color: var(--gray2);
 }
 .newsletter__input:focus, .newsletter__input:focus-visible {
   padding: 17px 0 17px 24px;
