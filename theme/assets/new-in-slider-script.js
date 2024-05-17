@@ -620,6 +620,16 @@ eval("\n\nvar forEach = __webpack_require__(/*! for-each */ \"./node_modules/for
 
 /***/ }),
 
+/***/ "./src/js/new-in-slider-script/hover.js":
+/*!**********************************************!*\
+  !*** ./src/js/new-in-slider-script/hover.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ \"./node_modules/console-browserify/index.js\");\nconst slideElements = document.querySelectorAll('.new-in__item-inner');\nslideElements.forEach(slideElement => {\n  slideElement.addEventListener('mouseenter', () => {\n    console.log('slideElement -', slideElement);\n    console.log('2 -', slideElement.querySelector('[data-hover-image]'));\n    slideElement.querySelector('[data-hover-image]').classList.add('disp-flx-imp');\n  });\n  slideElement.addEventListener('mouseout', () => {\n    slideElement.querySelector('[data-hover-image]').classList.remove('disp-flx-imp');\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/hover.js?");
+
+/***/ }),
+
 /***/ "./src/js/new-in-slider-script/index.js":
 /*!**********************************************!*\
   !*** ./src/js/new-in-slider-script/index.js ***!
@@ -627,7 +637,7 @@ eval("\n\nvar forEach = __webpack_require__(/*! for-each */ \"./node_modules/for
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ \"./src/js/new-in-slider-script/slider.js\");\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ \"./src/js/new-in-slider-script/slider.js\");\n/* harmony import */ var _hover__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hover */ \"./src/js/new-in-slider-script/hover.js\");\n/* harmony import */ var _hover__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_hover__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/index.js?");
 
 /***/ }),
 
@@ -638,7 +648,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sli
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ \"./node_modules/swiper/swiper.mjs\");\n/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/modules */ \"./node_modules/swiper/modules/index.mjs\");\n/* harmony import */ var swiper_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/css */ \"./node_modules/swiper/swiper.css\");\n\n\n\nswiper__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use([swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation]);\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const slider = new swiper__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('.new-in__swiper', {\n    breakpoints: {\n      768: {\n        slidesPerView: 5,\n        slidesPerGroup: 1\n      }\n    },\n    direction: \"horizontal\",\n    keyboard: {\n      enabled: true\n    },\n    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation],\n    navigation: {\n      nextEl: \".swiper-button-next\",\n      prevEl: \".swiper-button-prev\"\n    },\n    slidesPerView: 2.6,\n    slidesPerGroup: 1,\n    spaceBetween: 0,\n    watchOverflow: true\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/slider.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ \"./node_modules/swiper/swiper.mjs\");\n/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/modules */ \"./node_modules/swiper/modules/index.mjs\");\n/* harmony import */ var swiper_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/css */ \"./node_modules/swiper/swiper.css\");\n\n\n\nswiper__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use([swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation]);\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const slider = new swiper__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('.new-in__swiper', {\n    allowTouchMove: true,\n    loop: true,\n    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation],\n    navigation: {\n      nextEl: \".new-in__arrow-next\",\n      prevEl: \".new-in__arrow-prev\"\n    },\n    slidesPerView: 1,\n    spaceBetween: 0,\n    watchSlidesVisibility: true,\n    breakpoints: {\n      // when window width is >= 320\n      320: {\n        slidesPerView: 1.65\n      },\n      // when window width is >= 480\n      480: {\n        slidesPerView: 2.65\n      },\n      // when window width is >= 576\n      576: {\n        slidesPerView: 3.5\n      },\n      // when window width is >= 768px\n      768: {\n        slidesPerView: 4,\n        allowTouchMove: false\n      },\n      // when window width is >= 1024px\n      1024: {\n        slidesPerView: 5\n      }\n    }\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/slider.js?");
 
 /***/ }),
 

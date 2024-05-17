@@ -6,24 +6,42 @@ Swiper.use([Navigation]);
 
 document.addEventListener("DOMContentLoaded", () => {
   const slider = new Swiper('.new-in__swiper', {
-    breakpoints: {
-      768: {
-        slidesPerView: 5,
-        slidesPerGroup: 1,
-      }
-    },
-    direction: "horizontal",
-    keyboard: {
-      enabled: true,
-    },
+    allowTouchMove: true,
+    loop: true,
     modules: [Navigation],
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      nextEl: ".new-in__arrow-next",
+      prevEl: ".new-in__arrow-prev"
     },
-    slidesPerView: 2.6,
-    slidesPerGroup: 1,
+    slidesPerView: 1,
     spaceBetween: 0,
-    watchOverflow: true,
+    watchSlidesVisibility: true,
+    breakpoints: {
+      // when window width is >= 320
+      320: {
+        slidesPerView: 1.65,
+      },
+
+      // when window width is >= 480
+      480: {
+        slidesPerView: 2.65,
+      },
+
+      // when window width is >= 576
+      576: {
+        slidesPerView: 3.5,
+      },
+
+      // when window width is >= 768px
+      768: {
+        slidesPerView: 4,
+        allowTouchMove: false
+      },
+
+      // when window width is >= 1024px
+      1024: {
+        slidesPerView: 5,
+      }
+    },
   });
 });
