@@ -51,14 +51,14 @@
       "settings": {
       }
     },
-    "related-products": {
-      "type": "related-products",
+    "recent-products-slider": {
+      "type": "recent-products-slider",
       "settings": {
       }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "recent-products-slider"
   ]
 }

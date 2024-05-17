@@ -1,0 +1,32 @@
+<div>
+  {{ section.settings.title }}
+
+  <script>
+    const getProductsFromLocalStorage = () => {
+      if (localStorage.getItem('recently_viewed_products')) {
+        const productsString = localStorage.getItem('recently_viewed_products');
+        const products = JSON.parse(productsString);
+
+        return products;
+      }
+
+      return [];
+    };
+    console.log(getProductsFromLocalStorage());
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Recently viewed products",
+  "class": "section-recent-products-slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "RECENTLY VIEWED:"
+    }
+  ]
+}
+{% endschema %}
