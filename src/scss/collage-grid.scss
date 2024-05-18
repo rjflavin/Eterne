@@ -25,7 +25,14 @@
     .caption {
       position: absolute;
       left: 40px;
-      bottom: 48px;
+      bottom: 40px;
+      display: flex;
+      flex-direction: column;
+
+      @include for-mobile {
+        left: 20px;
+        bottom: 20px;
+      }
 
       &__text {
         margin-bottom: 15px;
