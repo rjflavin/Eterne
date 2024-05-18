@@ -10,11 +10,14 @@
       {% endif %}
     </span>
   </div>
-  <div class="collection__filter-wrap">
+  <div class="collection__filter-open-btn-wrap">
     <span class="collection__filter-block-title">Sort & filter</span>
+    <div class="collection__filter-closed-drpd-btn">
+      {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+    </div>
   </div>
 
-  <div class="collection__products">
+  <div class="collection__products" data-products-container>
     {% for product in collections[collection.handle].products %}
       {% assign loop_color = "" %}
 
@@ -46,22 +49,23 @@
 
           <div class="collection__item">
             <div class="collection__item-inner">
+
               <div class="collection__img-wrap">
                 <a href="{{ variant_url }}" class="collection__item-link"></a>
-                <img
-                  class="collection__item-img"
-                  src="{{ first_image | img_url: 'master' }}"
-                  alt="{{ product.title }} {{ first_image.alt }}"
-                >
-                {% if second_image != blank %}
-                  <img
-                    class="collection__item-hover-img"
-                    src="{{ second_image | img_url: 'master' }}"
-                    alt="{{ product.title }} {{ second_image.alt }}"
-                    data-hover-image
-                  >
-                {% endif %}
+                <div class="collection__item-bg-imgs-wrap">
+                  <div
+                    class="collection__item-bg-img"
+                    style="background-image: url('{{ first_image | img_url: 'master' }}')"
+                  ></div>
+                  {% if second_image != blank %}
+                    <div
+                      class="collection__item-bg-img-hover"
+                      style="background-image: url('{{ second_image | img_url: 'master' }}')"
+                    ></div>
+                  {% endif %}
+                </div>
               </div>
+
               <div class="collection__item-text-wrap">
                 <div class="collection__item-title">{{ product.title }} {{ color_value }}</div>
                 <div class="collection__item-fabric-title">Fabric type</div>
@@ -87,9 +91,15 @@
       {% endfor %}
     {% endfor %}
   </div>
-</div>
 
-{{ 'collection-script.js' | asset_url | script_tag }}
+  <div class="collection__see-more-btn-wrap">
+    <div class="collection__see-more-btn">
+      <span class="collection__see-more-text">
+        See more
+      </span>
+    </div>
+  </div>
+</div>
 
 {% schema %}
 {
