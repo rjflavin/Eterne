@@ -3,7 +3,6 @@
 .collage {
   width: 100%;
   margin: 0 auto;
-  max-width: 1920px;
 
   .only-desk {
     display: flex;
@@ -26,7 +25,7 @@
     .caption {
       position: absolute;
       left: 40px;
-      bottom: 40px;
+      bottom: 48px;
 
       &__text {
         margin-bottom: 15px;
@@ -241,6 +240,7 @@
 
       @include for-tablet {
         left: 20px;
+        bottom: 20px;
         align-items: start;
         transform: none;
       }
@@ -272,7 +272,8 @@
         width: max-content;
 
         @include for-tablet {
-          font-size: 20px;
+          font-size: 14px;
+          line-height: 14px;
         }
       }
     }
