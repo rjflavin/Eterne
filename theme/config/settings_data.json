@@ -505,7 +505,7 @@
           "subscribe_btn_text": "Subscribe",
           "subscribe_error_empty_email": "Please enter your email",
           "subscribe_error_invalid_email": "Invalid email",
-          "subscribe_success": "You have successfully subscribed!",
+          "subscribe_success": "Thank you for joining our mailing list!",
           "terms_and_conditions_link_text": "Terms & conditions",
           "privacy_policy_link_text": "Privacy policy"
         }
