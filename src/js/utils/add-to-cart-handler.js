@@ -26,8 +26,7 @@ const addToCart = async (productId, quantity) => {
 const addToCartSetup = (element, productId, quantity) => {
     if (element) {
         element.addEventListener("click", async (event) => {
-            event.stopPropagation()
-            //console.log(productId, quantity)
+            event.preventDefault()
             element.disabled = true
             const response = await addToCart(productId, quantity)
             console.log(response)
