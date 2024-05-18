@@ -1,7 +1,6 @@
 .collage {
   width: 100%;
   margin: 0 auto;
-  max-width: 1920px;
 }
 .collage .only-desk {
   display: flex;
@@ -23,6 +22,14 @@
   position: absolute;
   left: 40px;
   bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 767px) {
+  .collage__one-image-row .caption, .collage__two-images-row .caption {
+    left: 20px;
+    bottom: 20px;
+  }
 }
 .collage__one-image-row .caption__text, .collage__two-images-row .caption__text {
   margin-bottom: 15px;
@@ -220,6 +227,7 @@
 @media (max-width: 1063px) {
   .collage__three-images-row .caption {
     left: 20px;
+    bottom: 20px;
     align-items: start;
     transform: none;
   }
@@ -252,6 +260,7 @@
 }
 @media (max-width: 1063px) {
   .collage__three-images-row .caption__link {
-    font-size: 20px;
+    font-size: 14px;
+    line-height: 14px;
   }
 }
