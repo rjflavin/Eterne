@@ -24,11 +24,11 @@
   max-width: 1440px;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 75px;
 }
 @media (max-width: 768px) {
   .new-in__swiper {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 }
 .new-in__swiper-wrapper {
