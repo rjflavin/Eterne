@@ -907,10 +907,10 @@
     const MAX_PRODUCT_AMOUNT = 7
 
     const addProductToLocalStorage = (product, productArray, maxProductAmount) => {
-      while (productArray.length >= maxProductAmount) {
-        productArray.pop()
-      }
       const filteredArray = productArray.filter(el => (el.productId !== product.productId) || (el.variantId !== product.variantId))
+      while (filteredArray.length >= maxProductAmount) {
+        filteredArray.pop()
+      }
       filteredArray.splice(0, 0, product);
 
       const products = JSON.stringify(filteredArray)
@@ -954,13 +954,16 @@
         "url": "",
         "color": "",
         "size": "",
-        "images": []
+        "price": "",
+        "images": [],
+        "variantSizes": [],
       }
 
       {% assign productTitle = product.title %}
       productObject.title = `{{ productTitle }}`
       {% assign productId = product.id %}
       productObject.productId = `{{ productId }}`
+      
       let currentVariantId = getCurrentVariantId()
       if (!currentVariantId) {
         currentVariantId = `{{ product.first_available_variant.id }}`
@@ -970,6 +973,7 @@
         if (currentVariantId === `{{ variant.id }}`) {
           productObject.variantId = `{{ variant.id }}`
           productObject.url = `{{ variant.url }}`
+          productObject.price = `{{ variant.price | money_without_trailing_zeros }}`
           {% for option in variant.options %}
             {% if forloop.index0 == 0 %}
               productObject.color = `{{ option }}`
@@ -978,13 +982,20 @@
             {% endif %}
           {% endfor %}
         }
+        {% for option in variant.options %}
+          {% if forloop.index0 == 1 %}
+            if (!productObject.variantSizes.includes(`{{ option }}`)) {
+              productObject.variantSizes.push(`{{ option }}`)
+            }
+          {% endif %}
+        {% endfor %}
       {% endfor %}
 
       let imageLimit = 2
       {% for image in product.images %}
         if (imageLimit > 0 && productObject.color === `{{ image.alt }}`) {
           const imageObject = {
-            "src": `{{ image.src }}`,
+            "src": `{{ image.src | image_url }}`,
             "alt": `{{ image.alt }}`,
             "mediaType": `{{ image.media_type }}`,
             "productId": `{{ image.product_id }}`
@@ -997,9 +1008,31 @@
       return productObject
     }
 
-    const productObject = initializeProductObject()
-    const recentProducts = getProductsFromLocalStorage()
-    addProductToLocalStorage(productObject, recentProducts, MAX_PRODUCT_AMOUNT)
+    const updateProductsInStorage = () => {
+      const productObject = initializeProductObject()
+      const recentProducts = getProductsFromLocalStorage()
+      addProductToLocalStorage(productObject, recentProducts, MAX_PRODUCT_AMOUNT)
+    }
+
+    updateProductsInStorage()
+
+    const colorSwatchButtons = document.querySelectorAll('.opt-label.opt-label--swatch')
+    for (const button of colorSwatchButtons) {
+      button.addEventListener("click", () => {
+        setTimeout(() => {
+          updateProductsInStorage()
+        }, 500)
+      })
+    }
+
+    const sizeSwatchButtons = document.querySelectorAll('.opt-label.opt-label--btn')
+    for (const button of sizeSwatchButtons) {
+      button.addEventListener("click", () => {
+        setTimeout(() => {
+          updateProductsInStorage()
+        }, 500)
+      })
+    }
   })
 </script>
 

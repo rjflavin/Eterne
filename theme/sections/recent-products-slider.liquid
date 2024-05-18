@@ -1,5 +1,21 @@
-<div>
-  {{ section.settings.title }}
+{{ 'recent-products-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="recent-products-slider">
+  <div class="recent-products-slider-title">
+    {{ section.settings.title }}
+  </div>
+
+  <div class="recent-products-swiper">
+    <div class="swiper-wrapper">
+
+    </div>
+    <div class="recent-products-swiper-button-prev">
+      <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}">
+    </div>
+    <div class="recent-products-swiper-button-next">
+      <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}">
+    </div>
+  </div>
 
   <script>
     const getProductsFromLocalStorage = () => {
@@ -12,9 +28,59 @@
 
       return [];
     };
-    console.log(getProductsFromLocalStorage());
+
+    const setUpSlides = (products) => {
+      let wrapperCode = ''
+      for (const product of products) {
+        wrapperCode = `
+          <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
+            <div class="swiper-slide-container">
+              <div class="swiper-slide-image-container">
+                <img src="${product.images[0]?.src}" class="swiper-slide-image">
+                <div class="swiper-slide-image-info">
+                  <div class="swiper-slide-image-info-sizes">
+                    ${product && product.variantSizes && 
+                      product.variantSizes.map(size => {
+                        return `<div class="swiper-slide-image-info-sizes-item ${product.size === size && 'selected-size'}">${size}</div>`
+                      }).join("")
+                    }
+                  </div>
+                  <button class="swiper-slide-image-info-cart-button">Add to bag</button>
+                </div>
+              </div>
+              <div class="swiper-slide-text-container">
+                <div class="swiper-slide-title">${product.title}</div>
+                <div class="swiper-slide-title">${product.color}</div>
+                <div class="swiper-slide-title">${product.price ? product.price : ''}</div>
+              </div>
+            </div>
+          </a>
+        ` + wrapperCode
+      }
+
+      const wrapper = document.querySelector('.swiper-wrapper')
+      if (wrapper) {
+        wrapper.innerHTML = wrapperCode
+
+          /*const itemInfo = document.querySelectorAll('.swiper-slide-image-info')
+          for (const item of itemInfo) {
+            console.log(item)
+            item.addEventListener("click", (event) => {
+                event.stopPropagation()
+                console.log('stopped')
+            })
+          }*/
+      }
+    }
+
+    const products = getProductsFromLocalStorage()
+    console.log(products);
+
+    setUpSlides(products)
   </script>
 </div>
+
+{{ 'recent-products-swiper.js' | asset_url | script_tag }}
 
 {% schema %}
 {
