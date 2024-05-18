@@ -5,8 +5,7 @@
 }
 
 .logo {
-  padding-top: 31px;
-  padding-bottom: 19px;
+  padding: 30px 0 18px 0 !important;
   text-align: center;
 }
 
@@ -19,7 +18,7 @@
 }
 
 .logo__link img {
-  width: 163px;
+  width: 171px;
   max-width: 100%;
   display: inline-block;
   height: auto;
@@ -88,7 +87,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding-bottom: 37px;
+  padding-bottom: 45px;
 }
 
 .desk-nav-list__item {
@@ -170,8 +169,7 @@
   }
 
   .logo {
-    padding-top: 20px;
-    padding-bottom: 22px;
+    padding: 20px 0 22px 0 !important;
   }
 
   .mob-left, .mob-rght {
