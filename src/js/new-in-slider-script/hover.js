@@ -2,8 +2,6 @@ const slideElements = document.querySelectorAll('.new-in__item-inner');
 
 slideElements.forEach((slideElement) => {
   slideElement.addEventListener('mouseenter', () => {
-    console.log('slideElement -', slideElement);
-    console.log('2 -', slideElement.querySelector('[data-hover-image]'));
     slideElement.querySelector('[data-hover-image]').classList.add('disp-flx-imp');
   });
 

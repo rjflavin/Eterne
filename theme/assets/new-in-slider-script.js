@@ -624,9 +624,9 @@ eval("\n\nvar forEach = __webpack_require__(/*! for-each */ \"./node_modules/for
 /*!**********************************************!*\
   !*** ./src/js/new-in-slider-script/hover.js ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (() => {
 
-eval("/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ \"./node_modules/console-browserify/index.js\");\nconst slideElements = document.querySelectorAll('.new-in__item-inner');\nslideElements.forEach(slideElement => {\n  slideElement.addEventListener('mouseenter', () => {\n    console.log('slideElement -', slideElement);\n    console.log('2 -', slideElement.querySelector('[data-hover-image]'));\n    slideElement.querySelector('[data-hover-image]').classList.add('disp-flx-imp');\n  });\n  slideElement.addEventListener('mouseout', () => {\n    slideElement.querySelector('[data-hover-image]').classList.remove('disp-flx-imp');\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/hover.js?");
+eval("const slideElements = document.querySelectorAll('.new-in__item-inner');\nslideElements.forEach(slideElement => {\n  slideElement.addEventListener('mouseenter', () => {\n    slideElement.querySelector('[data-hover-image]').classList.add('disp-flx-imp');\n  });\n  slideElement.addEventListener('mouseout', () => {\n    slideElement.querySelector('[data-hover-image]').classList.remove('disp-flx-imp');\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/hover.js?");
 
 /***/ }),
 
@@ -637,7 +637,7 @@ eval("/* provided dependency */ var console = __webpack_require__(/*! ./node_mod
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ \"./src/js/new-in-slider-script/slider.js\");\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ \"./src/js/new-in-slider-script/slider.js\");\n/* harmony import */ var _hover__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hover */ \"./src/js/new-in-slider-script/hover.js\");\n/* harmony import */ var _hover__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_hover__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/new-in-slider-script/index.js?");
 
 /***/ }),
 
