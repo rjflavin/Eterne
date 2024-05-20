@@ -23,15 +23,25 @@ const addToCart = async (productId, quantity) => {
     return result
 }
 
-const addToCartSetup = (element, productId, quantity) => {
+const addToCartSetup = (element, productId, quantity, loaderElement) => {
     if (element) {
         element.addEventListener("click", async (event) => {
             event.preventDefault()
             element.disabled = true
+
+            if (loaderElement) {
+                element.classList.add('hide')
+                loaderElement.classList.add('show')
+            }
+
             const response = await addToCart(productId, quantity)
-            console.log(response)
+
             if (response) {
                 element.disabled = false
+                if (loaderElement) {
+                    element.classList.remove('hide')
+                    loaderElement.classList.remove('show')
+                }
             }
         })
     }

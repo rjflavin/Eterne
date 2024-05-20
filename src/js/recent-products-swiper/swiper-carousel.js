@@ -16,30 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
     spaceBetween: 0,
     watchSlidesVisibility: true,
     breakpoints: {
-      // when window width is >= 320
       320: {
         slidesPerView: 1.65,
       },
-
-      // when window width is >= 480
-      480: {
-        slidesPerView: 2.65,
+      460: {
+        slidesPerView: 2,
       },
-
-      // when window width is >= 576
       576: {
-        slidesPerView: 3.5,
+        slidesPerView: 2.6,
       },
-
-      // when window width is >= 768px
       768: {
-        slidesPerView: 4,
-        allowTouchMove: false
+        slidesPerView: 3        
       },
-
-      // when window width is >= 1024px
+      900: {
+        slidesPerView: 3.6        
+      },
       1024: {
-        slidesPerView: 4,
+        slidesPerView: 4
       }
     },
   });
