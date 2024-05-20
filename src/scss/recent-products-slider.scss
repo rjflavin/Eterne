@@ -1,0 +1,251 @@
+@import "mixins";
+
+.recent-products {
+    &-slider {
+        padding: 93px 50px 57px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1142px;
+        width: 100%;
+        position: relative;
+
+        @include for-tablet {
+            padding: 93px 30px 57px;
+        }
+
+        @include for-mobile {
+            padding: 30px 0 0;
+        }
+
+        &.hide {
+            display: none;
+        }
+
+        &-title {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 19.2px;
+            letter-spacing: 0.02em;
+            text-align: left;
+            margin-bottom: 12px;
+            color: var(--black2);
+
+            @include for-mobile {
+                font-weight: 400;
+                text-align: center;
+                margin-bottom: 35px;
+            }
+        }
+    }
+
+    &-swiper {
+        overflow: hidden;
+
+        .swiper-wrapper {
+            .swiper-slide {
+                &-container {
+                    margin-right: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    @include for-mobile {
+                        margin-right: 17px;
+                    }
+                }
+
+                &-image {
+                    height: 100%;
+
+                    &-container {
+                        height: 413px;
+                        position: relative;
+
+                        @include for-mobile {
+                            height: 346px;
+                            width: 231px;
+                        }
+                    }
+
+                    &-info {
+                        width: 100%;
+                        position: absolute;
+                        bottom: 0;
+                        background-color: var(--transparent-white);
+                        padding: 13px;
+                        display: none;
+
+                        &.show {
+                            display: block;
+                        }
+
+                        &-button {
+                            display: none;
+                            width: 27px;
+                            height: 27px;
+                            position: absolute;
+                            right: 5px;
+                            bottom: 5px;
+                            background-color: var(--gray3);
+                            border-radius: 50%;
+                            padding: 4px;
+                            align-items: center;
+                            justify-content: center;
+
+                            @include for-tablet {
+                                display: flex;
+                            }
+
+                            &.hide {
+                                display: none;
+                            }
+                        }
+
+                        &-sizes {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: center;
+                            flex-wrap: wrap;
+
+                            &-item {
+                                margin-right: 15px;
+                                font-family: "Helvetica Neue", sans-serif;
+                                font-size: 12px;
+                                font-weight: 400;
+                                line-height: 16.8px;
+                                letter-spacing: 0.02em;
+                                text-align: left;
+                                color: var(--black2);
+
+                                &:last-child {
+                                    margin-right: 0;
+                                }
+
+                                &.selected-size {
+                                    font-weight: 500;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+
+                        &-cart {
+                            &-button {
+                                font-family: "Helvetica Neue", sans-serif;
+                                font-size: 11px;
+                                font-weight: 400;
+                                line-height: 15.4px;
+                                letter-spacing: 0.02em;
+                                text-align: center;
+                                color: var(--black2);
+                                text-transform: uppercase;
+                                text-decoration: underline;
+                                cursor: pointer;
+                                margin-top: 7px;
+                                width: 100%;
+
+                                &.hide {
+                                    display: none;
+                                }
+                            }
+
+                            &-loader {
+                                width: 100%;
+                                display: none;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: center;
+                                margin-top: 7px;
+
+                                &.show {
+                                    display: flex;
+                                }
+
+                                &-circle {
+                                    width: 7px;
+                                    height: 7px;
+                                    background-color: var(--black2);
+                                    border-radius: 50%;
+                                    margin-right: 10px;
+
+                                    &:last-child {
+                                        margin-right: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &-text-container {
+                    margin-top: 9px;
+                    width: 158px;
+
+                    @include for-mobile {
+                        margin-top: 13px;
+                        width: 150px;
+                    }
+                }
+
+                &-title {
+                    font-family: "Helvetica Neue", sans-serif;
+                    font-size: 11px;
+                    font-weight: 400;
+                    line-height: 15.4px;
+                    letter-spacing: 0.02em;
+                    text-align: center;
+                    text-transform: uppercase;
+
+                    @include for-mobile {
+                        font-size: 10px;
+                        line-height: 18px;
+                        color: var(--black1);
+                    }
+
+                    &-price {
+                        @include for-mobile {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-button-prev {
+            height: 18px;
+            width: 10px;
+            z-index: 99;
+            position: absolute;
+            top: 50%;
+            left: 25px;
+            cursor: pointer;
+
+            @include for-tablet {
+                display: none;
+            }
+
+            &.hide {
+                display: none;
+            }
+        }
+
+        &-button-next {
+            height: 18px;
+            width: 10px;
+            z-index: 99;
+            position: absolute;
+            top: 50%;
+            right: 25px;
+            cursor: pointer;
+
+            @include for-tablet {
+                display: none;
+            }
+
+            &.hide {
+                display: none;
+            }
+        }
+    }
+}
