@@ -6,7 +6,7 @@
   position: relative;
   margin: 0 auto;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection {
     padding: 0 10px;
   }
@@ -17,7 +17,7 @@
   align-items: center;
   margin: 0 19px;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__title-wrap {
     margin: 18px 19px 18px;
   }
@@ -30,7 +30,7 @@
   text-transform: uppercase;
   text-align: center;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__title {
     font-size: 16px;
     line-height: 19.2px;
@@ -43,7 +43,7 @@
   margin: 0 19px 18px 19px;
   cursor: pointer;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__filter-open-btn-wrap {
     margin: 0 0 24px 0;
   }
@@ -55,7 +55,7 @@
   text-transform: uppercase;
   color: var(--black2);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__filter-block-title {
     font-size: 12px;
     line-height: 12px;
@@ -65,7 +65,7 @@
   display: flex;
   margin-left: 10px;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__filter-closed-drpd-btn {
     width: 10px;
     height: 10px;
@@ -80,7 +80,7 @@
   grid-template: 1fr/1fr 1fr 1fr;
   gap: 3.505291vw 1.3227513vw;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__products {
     grid-template: 1fr/1fr 1fr;
     gap: 30px 10px;
@@ -125,7 +125,7 @@
   display: block;
   height: 0;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__item-bg-imgs-wrap {
     padding-top: 149.21%;
   }
@@ -164,7 +164,7 @@
   letter-spacing: 0.4px;
   color: var(--black1);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__item-title {
     font-size: 11px;
   }
@@ -180,7 +180,7 @@
   letter-spacing: 0.4px;
   color: var(--black1);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__item-fabric-title {
     font-size: 11px;
   }
@@ -195,7 +195,7 @@
   letter-spacing: 0.4px;
   color: var(--black1);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__item-price {
     font-size: 11px;
     margin: 0 10px;
@@ -210,7 +210,7 @@
   align-items: center;
   margin: 106px 10px 57px;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__see-more-btn-wrap {
     margin: 78px 10px 25px;
   }
@@ -241,7 +241,7 @@
   color: var(--black2);
   transition: all 0.3s ease-in-out;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .collection__see-more-text {
     padding: 8px 16px;
     font-size: 12px;
