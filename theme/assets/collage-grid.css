@@ -18,6 +18,11 @@
     display: flex;
   }
 }
+.collage__one-image-row:hover .caption__link, .collage__two-images-row:hover .caption__link {
+  background-color: var(--white);
+  color: var(--black2);
+  transition: all 0.2s;
+}
 .collage__one-image-row .caption, .collage__two-images-row .caption {
   position: absolute;
   left: 40px;
@@ -58,6 +63,7 @@
   text-align: center;
   border: 1px solid var(--white);
   padding: 10px 22px;
+  transition: all 0.2s;
 }
 @media (max-width: 767px) {
   .collage__one-image-row .caption__link, .collage__two-images-row .caption__link {

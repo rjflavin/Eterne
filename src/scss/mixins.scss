@@ -36,3 +36,11 @@ $desktop-mockup: 1440;
     @content;
   }
 }
+
+@mixin button-hover {
+  .caption__link {
+    background-color: var(--white);
+    color: var(--black2);
+    transition: all 0.2s;
+  }
+}

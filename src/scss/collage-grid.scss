@@ -22,6 +22,10 @@
 
   &__one-image-row,
   &__two-images-row {
+    &:hover {
+      @include button-hover;
+    }
+
     .caption {
       position: absolute;
       left: 40px;
@@ -62,6 +66,7 @@
         text-align: center;
         border: 1px solid var(--white);
         padding: 10px 22px;
+        transition: all 0.2s;
 
         @include for-mobile {
           font-size: 12px;
