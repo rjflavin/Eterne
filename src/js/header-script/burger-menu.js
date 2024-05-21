@@ -1,4 +1,4 @@
-import { checkParentsForClass } from "../utils/check-parents-for-class/check-parents-for-class";
+import { checkParentsForClass } from "../utils/check-parents-for-class";
 
 const burgerMenuElement = document.getElementById('BurgerMenu');
 const burgerMenuButtonElement = document.getElementById('BurgerMenuButton');
