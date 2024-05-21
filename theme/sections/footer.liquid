@@ -76,12 +76,21 @@
     <div class="newsletter">
       <p class="newsletter__text">{{ section.settings.subscribe_text }}</p>
 
-      {%- form 'customer', id: 'ContactFooter', class: 'newsletter' -%}
+      <form
+        method="post"
+        action="/contact#NewsletterForm"
+        id="NewsletterForm"
+        accept-charset="UTF-8"
+        class="newsletter"
+        data-empty
+      >
+        <input type="hidden" name="form_type" value="customer">
+        <input type="hidden" name="utf8" value="✓">
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="newsletter__wrapper">
           <div class="newsletter__field">
             <input
-              id="NewsletterForm"
+              id="NewsletterInput"
               type="email"
               name="contact[email]"
               class="newsletter__input"
@@ -100,16 +109,11 @@
               placeholder="{{ section.settings.subscribe_placeholder_text }}"
               data-empty
             >
-            <button
-              type="submit"
-              class="newsletter__btn"
-              name="commit"
-              id="Subscribe"
-            >
+            <div id="NewsletterButton" class="newsletter__btn">
               {{ section.settings.subscribe_btn_text }}
-            </button>
+            </div>
           </div>
-          <div id="FooterErrorMessageContainer" class="ftr-msg-cont">
+          <div id="FooterErrorMessageContainer" class="ftr-error-msg-cont">
             {% if section.settings.subscribe_error_empty_email.size > 0 %}
               <div data-error-type="empty" class="ftr-message ftr-message_error disp-none-imp">
                 {{ section.settings.subscribe_error_empty_email }}
@@ -121,16 +125,13 @@
               </div>
             {% endif %}
           </div>
-          {% if form.posted_successfully? and section.settings.subscribe_success.size > 0 %}
-            <div class="ftr-msg-cont">
-              <div class="ftr-message ftr-message_success">
-                {{ section.settings.subscribe_success }}
-              </div>
+          <div class="ftr-success-msg-cont" id="NewsletterSuccess">
+            <div class="ftr-message ftr-message_success">
+              {{ section.settings.subscribe_success }}
             </div>
-          {% endif %}
+          </div>
         </div>
-      {%- endform -%}
-
+      </form>
     </div>
   </div>
 
