@@ -98,6 +98,8 @@ sendRequestButtonElement.addEventListener('click', (event) => {
       }
     }).then(() => {
       successMessageContainerElement.classList.add('disp-flx-imp');
+      inputElement.value = '';
+      sendRequestButtonElement.dataset.clicked = 'false';
     })
   }
 });
