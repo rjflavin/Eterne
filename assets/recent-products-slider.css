@@ -2,7 +2,6 @@
   padding: 93px 50px 57px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1242px;
   width: 100%;
   position: relative;
 }
@@ -54,7 +53,6 @@
   height: 100%;
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-container {
-  height: 413px;
   position: relative;
 }
 @media (max-width: 767px) {
