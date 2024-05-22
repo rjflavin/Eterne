@@ -20,7 +20,7 @@
       <div class="cart-flyover-item-description-info__options">{{ item.variant.options | join: ' / ' }}</div>
       <div class="cart-flyover-item-description-info-cart-buttons">
         <div name="remove-button" class="cart-flyover-item-description-info-cart-buttons__button"></div>
-        <div name="item-quantity" class="cart-flyover-item-description-info-cart-buttons__quantity">{{ item.quantity }}</div>
+        <div name="item-quantity" item-quantity="{{ item.quantity }}" class="cart-flyover-item-description-info-cart-buttons__quantity">{{ item.quantity }}</div>
         <div name="add-button" class="cart-flyover-item-description-info-cart-buttons__button"></div>
       </div>
     </div>

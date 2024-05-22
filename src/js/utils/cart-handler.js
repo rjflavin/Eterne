@@ -1,4 +1,4 @@
-const addToCart = async (productId, quantity) => {
+export const addToCart = async (productId, quantity) => {
     const formData = {
         'items': [{
             'id': productId,
@@ -23,7 +23,7 @@ const addToCart = async (productId, quantity) => {
     return result
 }
 
-const updateCartItemQuantity = async (productId, quantity) => {
+export const updateCartItemQuantity = async (productId, quantity) => {
     const updates = {
         productId: quantity
     }
