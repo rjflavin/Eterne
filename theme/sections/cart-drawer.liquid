@@ -85,7 +85,7 @@
                   {%- if item.line_level_discount_allocations == empty -%}
                   data-merge-cache="{{ item.key }}|{{ item.quantity }}|{{ item.final_line_price }}|{% if item.selling_plan_allocation %}{{ item.selling_plan_allocation.selling_plan.id }}{% endif %}"
                   {%- endif -%}>
-                {%- render 'cart-item', item: item, forloop: forloop, drawer: true -%}
+                {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
               </div>
             {% endfor %}
           </div>
