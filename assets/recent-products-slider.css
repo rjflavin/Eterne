@@ -64,7 +64,7 @@
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info {
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   background-color: var(--transparent-white);
   padding: 13px;
   display: none;
