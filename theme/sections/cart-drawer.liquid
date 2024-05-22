@@ -1,4 +1,4 @@
-{%- unless template.name == 'cart' or settings.cart_type == 'page' -%}
+{% comment %} {%- unless template.name == 'cart' or settings.cart_type == 'page' -%}
 {%- capture announcement -%}
   {% if section.settings.show_announcement %}
     {%- liquid
@@ -40,16 +40,18 @@
       {%- endif -%}
     </div>
   {% endif %}
-{%- endcapture -%}
+{%- endcapture -%} {% endcomment %}
 
 <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
 {%- if section.settings.show_order_note -%}
   <script src="{{ 'cart-note.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
+<script src="{{ 'cart-flyover-element.js' | asset_url }}" defer></script>
+{{ 'cart-flyover.css' | asset_url | stylesheet_tag }}
 
 <cart-drawer class="drawer fixed top-0 right-0 flex flex-col w-full has-motion js-cart-drawer" role="dialog" tabindex="-1" aria-labelledby="CartDrawerModal-Title" aria-modal="true" aria-hidden="true" data-name="cart-drawer" data-section-id="{{ section.id }}">
   <cart-form data-section-id="{{ section.id }}" class="cart-drawer" data-ajax-update="true">
-    <div class="cart-drawer__content{% if cart.items == empty %} cart-drawer__content--hidden{% endif %}" data-merge-attributes="content-container">
+    {% comment %} <div class="cart-drawer__content{% if cart.items == empty %} cart-drawer__content--hidden{% endif %}" data-merge-attributes="content-container">
       <div class="cart-drawer__content-upper">
         <header class="cart-drawer__header cart-drawer__content-item">
           <div id="CartDrawerModal-Title" class="cart-drawer__title h4 heading-font" data-merge="header-title">
@@ -75,22 +77,17 @@
           <div class="cart-drawer__content-item">
             <div class="cart-info-block cart-info-block--lmtb">{{- announcement -}}</div>
           </div>
-        {%- endif -%}
+        {%- endif -%} {% endcomment %}
 
         <div class="cart-item-list cart-drawer__content-item">
           <div class="cart-item-list__body" data-merge-list="cart-items">
             {% for item in cart.items %}
-              <div data-merge-list-item="item-key:{{ item.key }}|{{ item.final_price }}{% for discount_allocation in item.line_level_discount_allocations %}|{{ discount_allocation.discount_application.title | escape }}{% endfor %}"
-                  {% comment %} Discount items are difficult to predict - BOGOFs appear as a separate item with the same key as an existing item - simpler to always refresh {% endcomment %}
-                  {%- if item.line_level_discount_allocations == empty -%}
-                  data-merge-cache="{{ item.key }}|{{ item.quantity }}|{{ item.final_line_price }}|{% if item.selling_plan_allocation %}{{ item.selling_plan_allocation.selling_plan.id }}{% endif %}"
-                  {%- endif -%}>
-                {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
-              </div>
+              {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
             {% endfor %}
           </div>
         </div>
 
+{% comment %} 
         {%- if section.settings.announcement_position == 'below-items' -%}
           <div class="cart-drawer__content-item">
             <div class="cart-info-block cart-info-block--lmtb">{{- announcement -}}</div>
@@ -284,10 +281,10 @@
           </div>
         {%- endif -%}
       </div>
-    </div>
+    </div> {% endcomment %}
   </cart-form>
 </side-drawer>
-{%- endunless -%}
+{% comment %} {%- endunless -%} {% endcomment %}
 
 
 {% schema %}
