@@ -333,8 +333,10 @@
     padding: 6px 5px;
   }
 }
-.collection__item-color-wrap_hide-mobile {
-  display: none;
+@media (max-width: 1023px) {
+  .collection__item-color-wrap_hide-mobile {
+    display: none;
+  }
 }
 .collection__item-color-cont {
   width: 25px;

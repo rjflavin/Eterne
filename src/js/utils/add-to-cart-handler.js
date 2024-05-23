@@ -1,4 +1,4 @@
-const addToCart = async (productId, quantity) => {
+export const addToCart = async (productId, quantity) => {
     let formData = {
         'items': [{
             'id': productId,

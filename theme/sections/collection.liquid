@@ -1,14 +1,12 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
-<div class="collection" id="ProductsCollection">
+<eterne-collection class="collection">
   <div class="collection__title-wrap">
-    <span class="collection__title">
-      {% if section.settings.collection_title.size > 0 %}
-        {{ section.settings.collection_title }}
-      {% else %}
-        {{ collection.title }}
-      {% endif %}
-    </span>
+    {% if collection.title == 'Products' %}
+      <span class="collection__title">Shop all</span>
+    {% else %}
+      <span class="collection__title">{{ collection.title }}</span>
+    {% endif %}
   </div>
   <div class="collection__filter-open-btn-wrap">
     <span class="collection__filter-block-title">Sort & filter</span>
@@ -18,7 +16,7 @@
   </div>
 
   {% paginate collection.products by section.settings.products_per_page %}
-    <div class="collection__products" data-products-container data-next-url="{{ paginate.next.url }}">
+    <div class="collection__products" data-next-url="{{ paginate.next.url }}">
       {% for product in collections[collection.handle].products %}
         {% assign loop_color = "" %}
 
@@ -225,26 +223,19 @@
       </div>
     {% endif %}
   {% endpaginate %}
-</div>
+</eterne-collection>
 
 {{ 'collection-script.js' | asset_url | script_tag }}
 
 {% schema %}
 {
-  "name": "Collection",
+  "name": "EterneCollection",
   "tag": "section",
   "class": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
   "settings": [
-    {
-      "type": "text",
-      "id": "collection_title",
-      "label": "Custom collection title",
-      "default": "Collection name",
-      "info": "Make it blank to use collection name"
-    },
     {
       "type": "range",
       "id": "products_per_page",
@@ -257,7 +248,7 @@
   ],
   "presets": [
     {
-      "name": "Collection"
+      "name": "EterneCollection"
     }
   ]
 }

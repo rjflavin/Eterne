@@ -358,7 +358,9 @@
     }
 
     &_hide-mobile {
-      display: none;
+      @include for-tablet {
+        display: none;
+      }
     }
   }
 

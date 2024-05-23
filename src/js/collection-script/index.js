@@ -1,2 +1,3 @@
-import './see-more';
-import './card-clicks';
+import { EterneCollection } from "./eterneCollection";
+
+if (!customElements.get('eterne-collection')) customElements.define('eterne-collection', EterneCollection);
