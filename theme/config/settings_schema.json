@@ -1578,7 +1578,7 @@
         "type": "checkbox",
         "id": "show_free_shipping_bar",
         "label": "Show free shipping bar",
-        "default": false
+        "default": true
       },
       {
         "type": "paragraph",
@@ -1601,6 +1601,7 @@
         "id": "free_shipping_amounts",
         "label": "Amounts",
         "placeholder": "USD:4500",
+        "default": "USD:45000",
         "info": "One price per line. [Read more](https:\/\/cleancanvas.co.uk\/support\/symmetry\/shipping-bar)"
       },
       {
@@ -1611,13 +1612,13 @@
         "type": "color",
         "id": "free_shipping_bar_col_under",
         "label": "Bar color - under",
-        "default": "#00800a"
+        "default": "#41872F"
       },
       {
         "type": "color",
         "id": "free_shipping_bar_col_met",
         "label": "Bar color - success",
-        "default": "#00800a"
+        "default": "#41872F"
       }
     ]
   },

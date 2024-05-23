@@ -50,11 +50,11 @@
 {{ 'cart-flyover.css' | asset_url | stylesheet_tag }}
 
 <cart-drawer class="drawer fixed top-0 right-0 flex flex-col w-full has-motion js-cart-drawer" role="dialog" tabindex="-1" aria-labelledby="CartDrawerModal-Title" aria-modal="true" aria-hidden="true" data-name="cart-drawer" data-section-id="{{ section.id }}">
-  <cart-form data-section-id="{{ section.id }}" class="cart-drawer" data-ajax-update="true">
+  <div data-section-id="{{ section.id }}" class="cart-drawer" data-ajax-update="true">
     {% comment %} <div class="cart-drawer__content{% if cart.items == empty %} cart-drawer__content--hidden{% endif %}" data-merge-attributes="content-container">
-      <div class="cart-drawer__content-upper">
+      <div class="cart-drawer__content-upper"> {% endcomment %}
         <header class="cart-drawer__header cart-drawer__content-item">
-          <div id="CartDrawerModal-Title" class="cart-drawer__title h4 heading-font" data-merge="header-title">
+          <div id="CartDrawerModal-Title" class="cart-drawer__title h4 heading-font cart-flyover__title" data-merge="header-title">
             {{ 'cart.general.title' | t }}
             {% if cart.items != empty %}
               <span class="cart-drawer__title-count">({{ cart.item_count }})</span>
@@ -73,20 +73,29 @@
           </div>
         {%- endif -%}
 
-        {%- if section.settings.announcement_position == 'above-items' -%}
+        {% comment %} {%- if section.settings.announcement_position == 'above-items' -%}
           <div class="cart-drawer__content-item">
             <div class="cart-info-block cart-info-block--lmtb">{{- announcement -}}</div>
           </div>
         {%- endif -%} {% endcomment %}
 
-        <div class="cart-item-list cart-drawer__content-item">
-          <div class="cart-item-list__body" data-merge-list="cart-items">
+          <div class="cart-item-list__body cart-flyover-list cart-item-list__body" data-merge-list="cart-items">
             {% for item in cart.items %}
               {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
             {% endfor %}
           </div>
-        </div>
 
+
+          <div class="cart-flyover-footer">
+            <div class="cart-flyover-footer-info">
+              <button class="cart-flyover-footer-info__note">add a note to your order</button>
+              <div class="cart-flyover-footer-info-price">
+                <div class="cart-flyover-footer-info__text">Subtotal</div>
+                <div class="cart-flyover-footer-info-price__text">{{ cart.total_price | money_without_trailing_zeros }}</div>
+              </div>
+            </div>
+            <a href="/checkout" class="cart-flyover-footer__checkout-button">checkout</a>
+          </div>
 {% comment %} 
         {%- if section.settings.announcement_position == 'below-items' -%}
           <div class="cart-drawer__content-item">
@@ -282,8 +291,8 @@
         {%- endif -%}
       </div>
     </div> {% endcomment %}
-  </cart-form>
-</side-drawer>
+  </div>
+</cart-drawer>
 {% comment %} {%- endunless -%} {% endcomment %}
 
 

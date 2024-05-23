@@ -1,5 +1,55 @@
 .cart-flyover {
+    &-list {
+        padding: 0 18px;
+        margin: 0 !important;
+        height: 100%;
+        overflow-y: scroll;
+        max-height: calc(100vh - 238px);
+    }
+
+    &__title {
+        font-family: Helvetica Neue;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18.2px;
+        letter-spacing: 0.02em;
+        text-align: left;
+        color: #2B2B2B;
+    }
+
+    &-shipping-bar {
+        margin: 0 0 23px;
+
+        &__border {
+            border: 0.5px solid #2B2B2B;
+            height: 8px;
+            background-color: transparent;
+
+            &:after {
+                width: 378px;
+                height: 6px;
+                top: 0.5px;
+            }
+        }
+
+        &__text {
+            font-family: Helvetica Neue;
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 12px;
+            letter-spacing: 0.02em;
+            text-align: left;
+            color: #A8A8A8;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+    }
+
     &-item {
+        margin: 0;
+        padding: 10px 0;
+        display: flex;
+
         &__image {
             height: 225px;
             width: 157px;
@@ -13,7 +63,8 @@
         }
 
         &-description {
-            padding: 53px 15px 54px 19.6px;
+            width: 100%;
+            padding: 53px 0 54px 19.6px;
             display: flex;
             flex-direction: row;
             gap: 38px;
@@ -44,6 +95,7 @@
                     text-align: left;
                     color: var(--gray4);
                     margin-top: 5px;
+                    text-transform: uppercase;
                 }
 
                 &-cart-buttons {
@@ -67,9 +119,113 @@
                         width: 9px;
                         height: 12px;
                         cursor: pointer;
+                        font-family: Helvetica Neue;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 12px;
+                        letter-spacing: 0.02em;
+                        text-align: left;
+                    }
+                }
+
+                &-extra {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 7px;
+                    margin-top: 15px;
+
+                    &__text {
+                        font-family: Helvetica Neue;
+                        font-size: 10px;
+                        font-weight: 400;
+                        line-height: 12px;
+                        letter-spacing: 0.02em;
+                        text-align: left;
+                        text-transform: uppercase;
+                        color: #A8A8A8;
                     }
                 }
             }
+
+            &__price {
+                font-family: Helvetica Neue;
+                font-size: 12px;
+                font-weight: 300;
+                line-height: 12px;
+                letter-spacing: 0.02em;
+                text-align: right;
+                color: #8B8B8B;
+            }
+        }
+    }
+
+    &-footer {
+        padding: 40px 16px 20px 18px;
+        width: 100%;
+
+        &-info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+
+            &__note {
+                font-family: Helvetica Neue;
+                font-size: 11px;
+                font-weight: 400;
+                line-height: 15.4px;
+                letter-spacing: 0.02em;
+                text-align: right;
+                color: #2B2B2B;
+                text-decoration: underline;
+                text-transform: uppercase;
+            }
+    
+            &-price {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+
+                &__text {
+                    font-family: Helvetica Neue;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 19.2px;
+                    letter-spacing: 0.02em;
+                    text-align: right;
+                    color: #2B2B2B;
+                }
+            }
+    
+            &__text {
+                font-family: Helvetica Neue;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 12px;
+                letter-spacing: 0.02em;
+                text-align: right;
+                color: #8F8F8F;
+                text-transform: uppercase;
+            }
+        }
+
+        &__checkout-button {
+            display: block;
+            padding: 14px;
+            width: 100%;
+            background-color: #2B2B2B;
+            font-family: Helvetica Neue;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 12px;
+            letter-spacing: 0.02em;
+            text-align: center;
+            color: #FFFFFF;
+            text-transform: uppercase;
         }
     }
 }

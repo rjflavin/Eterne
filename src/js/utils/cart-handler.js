@@ -25,10 +25,10 @@ export const addToCart = async (productId, quantity) => {
 
 export const updateCartItemQuantity = async (productId, quantity) => {
     const updates = {
-        productId: quantity
+        [productId]: quantity
     }
 
-    fetch(window.Shopify.routes.root + 'cart/update.js', {
+    const result = fetch(window.Shopify.routes.root + 'cart/update.js', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -41,6 +41,8 @@ export const updateCartItemQuantity = async (productId, quantity) => {
     .catch((error) => {
         console.error('Update cart item error:', error)
     })
+
+    return result
 }
 
 export const addToCartSetup = (element, productId, quantity, loaderElement) => {
