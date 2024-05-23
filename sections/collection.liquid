@@ -1,14 +1,12 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
-<div class="collection" id="ProductsCollection">
+<eterne-collection class="collection">
   <div class="collection__title-wrap">
-    <span class="collection__title">
-      {% if section.settings.collection_title.size > 0 %}
-        {{ section.settings.collection_title }}
-      {% else %}
-        {{ collection.title }}
-      {% endif %}
-    </span>
+    {% if collection.title == 'Products' %}
+      <span class="collection__title">Shop all</span>
+    {% else %}
+      <span class="collection__title">{{ collection.title }}</span>
+    {% endif %}
   </div>
   <div class="collection__filter-open-btn-wrap">
     <span class="collection__filter-block-title">Sort & filter</span>
@@ -18,7 +16,7 @@
   </div>
 
   {% paginate collection.products by section.settings.products_per_page %}
-    <div class="collection__products" data-products-container data-next-url="{{ paginate.next.url }}">
+    <div class="collection__products" data-next-url="{{ paginate.next.url }}">
       {% for product in collections[collection.handle].products %}
         {% assign loop_color = "" %}
 
@@ -48,10 +46,94 @@
             {% assign loop_color = color_value %}
             {% assign variant_url = "/collections/" | append: collection.handle | append: "/products/" | append: product.handle | append: "?variant=" | append: variant.id %}
 
-            <div class="collection__item" data-collection-item>
+            {% assign shouldStop = false %}
+            {% assign variantId = "" %}
+            {% assign isVariantInStock = false %}
+            {% for option in product.options_with_values %}
+              {% if shouldStop %}
+                {% break %}
+              {% endif %}
+
+              {% assign option_name = option.name | downcase %}
+
+              {% if option_name == 'color' %}
+                {% assign productColorOptions = option.values %}
+                {% for variantOption in variant.options %}
+                  {% for productColorOption in productColorOptions %}
+                    {% if variantOption == productColorOption %}
+                      {% assign colorOption = variantOption %}
+                      {% assign variantColorOptionDowncase = variantOption | downcase %}
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              {% elsif option_name == 'size' %}
+                {% assign productSizeOptions = option.values %}
+
+                {% for productSizeOptionTemp in productSizeOptions %}
+                  {% if shouldStop == false %}
+                    {% assign productSizeOptionTempDowncase = productSizeOptionTemp | downcase %}
+                    {% for variant in product.variants %}
+                      {% assign optionsArr = variant.title | split: ' / ' %}
+                      {% assign option1 = optionsArr[0] | downcase %}
+                      {% assign option2 = optionsArr[1] | downcase %}
+                      {% if variant.inventory_quantity > 0 and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
+                        {% assign sizeOption = optionsArr[1] %}
+                        {% assign variantId = variant.id %}
+                        {% assign isVariantInStock = true %}
+                        {% assign shouldStop = true %}
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+
+              {% endif %}
+            {% endfor %}
+
+            <div
+              class="collection__item"
+              data-collection-item
+              data-is-variant-ready-to-fetch="false"
+              data-is-variant-in-stock="{{ isVariantInStock }}"
+              data-product-handle="{{ product.handle }}"
+              data-variant-id="{{ variantId }}"
+              data-selected-size="{{ sizeOption }}"
+              data-selected-color="{{ colorOption }}"
+              data-product-title="{{ product.title }}"
+              data-default-color="{{ colorOption }}"
+              data-first-image="{{ first_image | img_url: 'master' }}"
+              data-second-image="{{ second_image | img_url: 'master' }}"
+            >
               <div class="collection__item-inner">
 
                 <div class="collection__img-wrap">
+                  <div class="collection__quick-add-panel" data-quick-add-panel>
+                    <div class="collection__size-variants">
+                      {% for option in product.options_with_values %}
+                        {% assign option_name = option.name | downcase %}
+
+                        {% if option_name == 'size' %}
+                          {% for value in option.values %}
+                            <div
+                              data-variant-size="{{ value }}"
+                              class="collection__size-variant-text no-select
+                                {% if sizeOption == value %}collection__size-variant-text_selected{% endif %}
+                              "
+                            >
+                              {{ value }}
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                    <div class="collection__add-to-cart no-select">Add to bag</div>
+                    <div class="collection__add-to-cart-loader">...</div>
+                  </div>
+                  <div data-quick-add-button class="collection__item-quick-add-btn-wrap">
+                    <div class="collection__item-quick-add-btn">
+                      {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                    </div>
+                  </div>
                   <a href="{{ variant_url }}" class="collection__item-link"></a>
                   <div class="collection__item-bg-imgs-wrap">
                     <div
@@ -68,25 +150,62 @@
                 </div>
 
                 <div class="collection__item-text-wrap">
-                  <div class="collection__item-title">{{ product.title }} {{ color_value }}</div>
-                  <div class="collection__item-fabric-title">Fabric type</div>
+                  <div class="collection__item-title">{{ product.title }} {{ colorOption }}</div>
                   <div class="collection__item-price">{{ product.price | money_without_trailing_zeros }}</div>
                 </div>
               </div>
-            </div>
-          {% else %}
-            <div class="collection__item-hidden-photos">
-              <img
-                src="{{ first_image | img_url: 'master' }}"
-                alt="{{ product.title }} {{ first_image.alt }}"
-              >
-              {% if second_image != blank %}
-                <img
-                  src="{{ second_image | img_url: 'master' }}"
-                  alt="{{ product.title }} {{ second_image.alt }}"
-                  data-hover-image
-                >
-              {% endif %}
+              <div class="collection__item-colors-wrap">
+                {% assign colorsQty = 0 %}
+                {% assign colorsQtyToShowOnMobile = 3 %}
+
+                {% for option in product.options_with_values %}
+                  {% assign option_name = option.name | downcase %}
+                  {% if option_name == 'color' %}
+                    {% assign colorsQty = option.values.size %}
+
+                    {% for colorOptionValue in option.values %}
+                      {% assign colorOptionValueDowncase = colorOptionValue | downcase | replace: ' ', '_' %}
+
+                      <div
+                        data-color-name="{{ colorOptionValue }}"
+                        class="collection__item-color-wrap
+                          {% if forloop.index > colorsQtyToShowOnMobile %}
+                            collection__item-color-wrap_hide-mobile
+                          {% endif %}
+                        "
+                        title="{{ colorOptionValue | upcase }}"
+                      >
+                        <div class="collection__item-color-cont">
+                          {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
+                            {% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}
+                            {% if colorEntryNameDowncase == colorOptionValueDowncase %}
+                              {% assign variantColor = colorEntry.color.value %}
+                            {% endif %}
+                          {% endfor %}
+                          <div
+                            class="collection__item-color"
+                            style="background-color: {{ variantColor }}"
+                          ></div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if colorsQty > colorsQtyToShowOnMobile %}
+                  {% assign showMoreColorsQty = colorsQty | minus: colorsQtyToShowOnMobile %}
+                  <div class="collection__show-more-colors-btn">
+                      <span class="collection__show-more-colors-btn-text">
+                        + {{ showMoreColorsQty }} more
+                      </span>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="collection__preorder-wrap {% if isVariantInStock == false %}disp-flx-imp{% endif %}">
+                <div class="collection__preorder">
+                  <div class="collection__preorder-text">Preorder</div>
+                </div>
+              </div>
             </div>
           {% endif %}
         {% endfor %}
@@ -104,26 +223,19 @@
       </div>
     {% endif %}
   {% endpaginate %}
-</div>
+</eterne-collection>
 
 {{ 'collection-script.js' | asset_url | script_tag }}
 
 {% schema %}
 {
-  "name": "Collection",
+  "name": "EterneCollection",
   "tag": "section",
   "class": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
   "settings": [
-    {
-      "type": "text",
-      "id": "collection_title",
-      "label": "Custom collection title",
-      "default": "Collection name",
-      "info": "Make it blank to use collection name"
-    },
     {
       "type": "range",
       "id": "products_per_page",
@@ -136,7 +248,7 @@
   ],
   "presets": [
     {
-      "name": "Collection"
+      "name": "EterneCollection"
     }
   ]
 }

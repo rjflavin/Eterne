@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _uti
   \***************************************************/
 /***/ (() => {
 
-eval("const desktopMenuElement = document.getElementById('DesktopMenu');\nconst desktopMenuItemsElements = desktopMenuElement.querySelectorAll('[data-desktop-menu-item]');\ndesktopMenuItemsElements.forEach(itemElement => {\n  const hasItemDropdown = itemElement.querySelector('[data-desktop-menu-item-dropdown]');\n  if (hasItemDropdown) {\n    itemElement.addEventListener('mouseenter', () => {\n      itemElement.classList.remove('hide-drpd');\n    });\n    itemElement.addEventListener('mouseleave', () => {\n      itemElement.classList.add('hide-drpd');\n    });\n  }\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/header-script/desktop-dropdowns.js?");
+eval("const desktopMenuElement = document.getElementById('DesktopMenu');\nconst desktopMenuItemsElements = desktopMenuElement.querySelectorAll('[data-desktop-menu-item]');\ndesktopMenuItemsElements.forEach(itemElement => {\n  itemElement.addEventListener('click', () => {\n    window.location.href = itemElement.dataset.url;\n  });\n  const hasItemDropdown = itemElement.querySelector('[data-desktop-menu-item-dropdown]');\n  if (hasItemDropdown) {\n    itemElement.addEventListener('mouseenter', () => {\n      itemElement.classList.remove('hide-drpd');\n    });\n    itemElement.addEventListener('mouseleave', () => {\n      itemElement.classList.add('hide-drpd');\n    });\n  }\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/header-script/desktop-dropdowns.js?");
 
 /***/ }),
 
