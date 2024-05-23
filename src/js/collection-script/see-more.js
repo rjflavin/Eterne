@@ -36,14 +36,13 @@ seeMoreButtonElement.addEventListener('click', (event) => {
 
 const infiniteScrollProducts = () => {
   // insert page 2 products
-  const tempElement = document.createDocumentFragment();
-  const node = new DOMParser().parseFromString(sessionStorage.getItem('productsPage2'), "text/html").body;
-  sessionStorage.removeItem('productsPage2');
-  node.childNodes.forEach((childElement) => {
-    childElement.removeAttribute('xmlns');
-    tempElement.append(childElement);
+  const textHtml = sessionStorage.getItem('productsPage2');
+  productsContainerElement.insertAdjacentHTML("beforeend", textHtml);
+  const newProductCardElements = productsContainerElement.querySelectorAll('[data-collection-item]');
+  newProductCardElements.forEach((newProductCardElement) => {
+    newProductCardElement.removeAttribute('xmlns');
   });
-  productsContainerElement.appendChild(tempElement);
+
   seeMoreButtonElement.classList.add('disp-none-imp');
   seeMoreLoaderElement.classList.add('disp-none-imp');
 

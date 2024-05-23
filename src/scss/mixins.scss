@@ -37,6 +37,12 @@ $desktop-mockup: 1440;
   }
 }
 
+@mixin min-mobile {
+  @media (max-width: #{$mobile-mockup}px) {
+    @content;
+  }
+}
+
 @mixin button-hover {
   .caption__link {
     background-color: var(--white);
