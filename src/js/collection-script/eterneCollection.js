@@ -1,11 +1,14 @@
-import { addToCart } from "../utils/add-to-cart-handler";
-import { checkParentsForClass } from "../utils/check-parents-for-class";
+import {addToCart} from "../utils/add-to-cart-handler";
+import {checkParentsForClass} from "../utils/check-parents-for-class";
 
 export class EterneCollection extends HTMLElement {
   constructor() {
     super();
 
-    this.watchClickTarget();
+    this._page2Content = "";
+    this.watchProductsClickTarget();
+    this.filterToggle();
+    this.watchFiltersClickTarget();
     this.seeMore();
   }
 
@@ -28,13 +31,13 @@ export class EterneCollection extends HTMLElement {
   }
 
   getProductsContainerScrollHeight () {
-    const productsContainerElements = document.querySelector('.collection__products');
+    const productsContainerElements = this.querySelector('.collection__products');
 
     return productsContainerElements.scrollHeight;
   }
 
   getProductCardHeight () {
-    const productElement = document.querySelector('[data-collection-item]');
+    const productElement = this.querySelector('[data-collection-item]');
 
     return productElement.scrollHeight;
   }
@@ -47,8 +50,8 @@ export class EterneCollection extends HTMLElement {
     };
   }
 
-  watchClickTarget () {
-    const productsContainerElement = document.querySelector('.collection__products');
+  watchProductsClickTarget () {
+    const productsContainerElement = this.querySelector('.collection__products');
 
     productsContainerElement.addEventListener('click', (event) => {
       const variantCardElement = event.target.closest('[data-collection-item]');
@@ -229,7 +232,7 @@ export class EterneCollection extends HTMLElement {
     seeMoreButtonElement.addEventListener('click', (event) => {
       event.preventDefault();
 
-      if (sessionStorage.getItem('productsPage2')) {
+      if (this._page2Content) {
         infiniteScrollProducts();
       } else {
         seeMoreButtonElement.classList.add('disp-none-imp');
@@ -239,19 +242,20 @@ export class EterneCollection extends HTMLElement {
 
     const infiniteScrollProducts = () => {
       // insert page 2 products
-      const textHtml = sessionStorage.getItem('productsPage2');
+      const textHtml = this._page2Content;
       productsContainerElement.insertAdjacentHTML("beforeend", textHtml);
       const newProductCardElements = productsContainerElement.querySelectorAll('[data-collection-item]');
       newProductCardElements.forEach((newProductCardElement) => {
         newProductCardElement.removeAttribute('xmlns');
       });
+      this._page2Content = "";
 
       seeMoreButtonElement.classList.add('disp-none-imp');
       seeMoreLoaderElement.classList.add('disp-none-imp');
 
       const loadMoreProducts = () => {
         if (window.scrollY + window.innerHeight >= this.getProductsContainerScrollHeight() - this.getProductCardHeight() * 2) {
-          const nextPageUrl = document.querySelector('[data-next-url]').dataset.nextUrl;
+          const nextPageUrl = this.querySelector('[data-next-url]').dataset.nextUrl;
 
           if (nextPageUrl) {
             fetch(nextPageUrl, {
@@ -272,10 +276,10 @@ export class EterneCollection extends HTMLElement {
                 productsContainerElement.appendChild(newProductsDocumentFragment);
 
                 if (newNextUrl) {
-                  const productsContainerElement = document.querySelector('.collection__products');
+                  const productsContainerElement = this.querySelector('.collection__products');
                   productsContainerElement.dataset.nextUrl = newNextUrl;
                 } else {
-                  const productsContainerElement = document.querySelector('.collection__products');
+                  const productsContainerElement = this.querySelector('.collection__products');
                   productsContainerElement.dataset.nextUrl = '';
                 }
               });
@@ -293,7 +297,7 @@ export class EterneCollection extends HTMLElement {
     }
 
     const loadProductsPage2 = () => {
-      const nextPageUrl = document.querySelector('[data-next-url]').dataset.nextUrl;
+      const nextPageUrl = this.querySelector('[data-next-url]').dataset.nextUrl;
 
       fetch(nextPageUrl, {
         method: 'GET',
@@ -312,11 +316,10 @@ export class EterneCollection extends HTMLElement {
           });
 
           const serializer = new XMLSerializer();
-          const newProductsDocumentFragmentAsString = serializer.serializeToString(newProductsDocumentFragment);
-          sessionStorage.setItem('productsPage2', newProductsDocumentFragmentAsString);
+          this._page2Content = serializer.serializeToString(newProductsDocumentFragment);
 
           if (newNextUrl) {
-            const productsContainerElement = document.querySelector('.collection__products');
+            const productsContainerElement = this.querySelector('.collection__products');
             productsContainerElement.dataset.nextUrl = newNextUrl;
           }
 
@@ -327,5 +330,45 @@ export class EterneCollection extends HTMLElement {
     }
 
     loadProductsPage2();
+  }
+
+  filterToggle () {
+    const filtersButtonElement = this.querySelector('.collection__filter-open-btn-wrap');
+
+    filtersButtonElement.addEventListener('click', () => {
+      const isFilterOpen = this.dataset.isFilterOpen === 'true';
+
+      if (isFilterOpen) {
+        this.dataset.isFilterOpen = 'false';
+      } else {
+        this.dataset.isFilterOpen = 'true';
+      }
+    });
+  }
+
+  watchFiltersClickTarget () {
+    const filtersContainerElement = this.querySelector('.collection__filters');
+
+    filtersContainerElement.addEventListener('click', (event) => {
+      const isClickOnFilterCategoryTitle = checkParentsForClass(event.target, 'collection__sort-category-title');
+
+      if (isClickOnFilterCategoryTitle) {
+        const clickOnSortCategoryTitleElement = event.target.closest('.collection__sort-category-title');
+        const hasCategoryTitleStatus = clickOnSortCategoryTitleElement.querySelector('[data-filter-category-status]');
+
+        if (hasCategoryTitleStatus) {
+          const filterCategoryElement = event.target.closest('[data-is-filter-category-open]');
+          const isFilterCategoryOpen = filterCategoryElement.dataset.isFilterCategoryOpen === "true";
+
+          if (isFilterCategoryOpen) {
+            filterCategoryElement.dataset.isFilterCategoryOpen = "false";
+          } else {
+            filterCategoryElement.dataset.isFilterCategoryOpen = "true";
+          }
+        }
+      }
+
+
+    });
   }
 }

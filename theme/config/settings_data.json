@@ -488,6 +488,7 @@
     "coll_grid_image_shape": "portrait-45",
     "coll_grid_image_position": "center center",
     "coll_grid_show_count": true,
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
     "cart_type": "drawer",
     "after_add_to_cart": "drawer",
     "free_shipping_bar_col_under": "#171717",
@@ -499,6 +500,7 @@
           "customer_column_text": "Customer",
           "about_us_menu": "footer-about-us-menu",
           "about_us_column_text": "About us",
+          "follow_menu": "footer-follow-menu",
           "follow_column_text": "Follow",
           "subscribe_text": "Sign up to get special offers and news",
           "subscribe_placeholder_text": "Email Address",
@@ -507,6 +509,8 @@
           "subscribe_error_invalid_email": "Invalid email",
           "subscribe_success": "Thank you for joining our mailing list!",
           "terms_and_conditions_link_text": "Terms & conditions",
+          "footer_year_left_text": "© éterne",
+          "footer_year_right_text": ". All Rights Reserved",
           "privacy_policy_link_text": "Privacy policy"
         }
       }
