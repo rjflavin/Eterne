@@ -23,7 +23,7 @@
   endif
 -%}
 {%- if current_amount -%}
-  <div class="free-shipping-bar cart-flyover-shipping-bar{% if cart.items == empty %} free-shipping-bar--no-cart{% endif %}"
+  <div class="free-shipping-bar cart-flyover-shipping-bar-container{% if cart.items == empty %} free-shipping-bar--no-cart{% endif %}"
       style="--free-shipping-progress: {{ free_shipping_progress }}; --free-shipping-bar-color: {{ bar_col }}"
       data-free-shipping-progress="{{ free_shipping_progress | replace: '1.0', '1' }}"
       data-free-shipping-current-cart="{{ cart.total_price }}"

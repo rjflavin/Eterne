@@ -9,8 +9,8 @@
   {% render 'cart-item', item: line_item, forloop: forloop, drawer: true, animate: true %}
 {%- endcomment -%}
 
-<cart-flyover-item class="product-{{ item.product.handle }} cart-flyover-item" variant-id="{{ item.variant.id }}">
-  <div class="cart-flyover-item__image-container">
+<div class="product-{{ item.product.handle }} cart-flyover-item" variant-id="{{ item.variant.id }}">
+  <div>
     <a href="{{ item.url }}" style="background-image: url({{ item.image | image_url }});" class="cart-flyover-item__image"></a>
   </div>
 
@@ -18,12 +18,12 @@
     <div class="cart-flyover-item-description-info">
       <div class="cart-flyover-item-description-info__title">{{ item.product.title | escape_once }}</div>
       <div class="cart-flyover-item-description-info__options">{{ item.variant.options | join: ' / ' }}</div>
-      <div class="cart-flyover-item-description-info-cart-buttons">
-        <div name="remove-button" class="cart-flyover-item-description-info-cart-buttons__button">–</div>
+      <div data-variant-id="{{ item.variant.id }}" class="cart-flyover-item-description-info-cart-buttons">
+        <button name="remove-button" class="cart-flyover-item-description-info-cart-buttons__button">–</button>
         <div name="item-quantity" item-quantity="{{ item.quantity }}" class="cart-flyover-item-description-info-cart-buttons__quantity">{{ item.quantity }}</div>
-        <div name="add-button" class="cart-flyover-item-description-info-cart-buttons__button">+</div>
+        <button name="add-button" class="cart-flyover-item-description-info-cart-buttons__button">+</button>
       </div>
-      <div class="cart-flyover-item-description-info-extra">
+      <div data-variant-id="{{ item.variant.id }}" class="cart-flyover-item-description-info-extra">
         <button name="delete-button" class="cart-flyover-item-description-info-extra__text">Remove</button>
         <div class="cart-flyover-item-description-info-extra__text"> | </div>
         <button name="wishlist-button" class="cart-flyover-item-description-info-extra__text">Add to Wish List</button>
@@ -31,4 +31,4 @@
     </div>
     <div class="cart-flyover-item-description__price">{{ item.variant.price | money_without_trailing_zeros }}</div>
   </div>
-</cart-flyover-item>
+</div>
