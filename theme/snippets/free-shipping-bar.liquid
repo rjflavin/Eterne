@@ -23,14 +23,14 @@
   endif
 -%}
 {%- if current_amount -%}
-  <div class="free-shipping-bar{% if cart.items == empty %} free-shipping-bar--no-cart{% endif %}"
+  <div class="free-shipping-bar cart-flyover-shipping-bar-container{% if cart.items == empty %} free-shipping-bar--no-cart{% endif %}"
       style="--free-shipping-progress: {{ free_shipping_progress }}; --free-shipping-bar-color: {{ bar_col }}"
       data-free-shipping-progress="{{ free_shipping_progress | replace: '1.0', '1' }}"
       data-free-shipping-current-cart="{{ cart.total_price }}"
       data-free-shipping-amount="{{ current_amount.last }}"
       data-merge-attributes="free-shipping">
-    <div class="free-shipping-bar__message free-shipping-bar__message--no" data-merge="free-shipping-not-met-text">{{ 'cart.general.free_shipping_deficit_html' | t: amount: free_shipping_difference }}</div>
-    <div class="free-shipping-bar__message free-shipping-bar__message--yes">{{ 'cart.general.free_shipping' | t }}</div>
-    <div class="free-shipping-bar__bar"></div>
+    <div class="free-shipping-bar__message free-shipping-bar__message--no cart-flyover-shipping-bar__text" data-merge="free-shipping-not-met-text">{{ 'cart.general.free_shipping_deficit_html' | t }}</div>
+    <div class="free-shipping-bar__message free-shipping-bar__message--yes cart-flyover-shipping-bar__text">{{ 'cart.general.free_shipping' | t }}</div>
+    <div class="free-shipping-bar__bar cart-flyover-shipping-bar__border"></div>
   </div>
 {%- endif -%}

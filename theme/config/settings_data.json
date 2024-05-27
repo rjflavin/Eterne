@@ -491,7 +491,7 @@
     "favicon": "shopify:\/\/shop_images\/favicon.png",
     "cart_type": "drawer",
     "after_add_to_cart": "drawer",
-    "free_shipping_bar_col_under": "#171717",
+    "free_shipping_bar_col_under": "#41872F",
     "sections": {
       "footer": {
         "type": "footer",

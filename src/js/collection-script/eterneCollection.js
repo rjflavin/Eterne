@@ -1,4 +1,4 @@
-import { addToCart } from "../utils/add-to-cart-handler";
+import { addToCart } from "../utils/cart-handler";
 import { checkParentsForClass } from "../utils/check-parents-for-class";
 import { debounce } from "../utils/debounce";
 
@@ -302,12 +302,17 @@ export class EterneCollection extends HTMLElement {
         const addToCartAndDisableLoader = async () => {
           const response = await addToCart(variantId, 1);
 
-          if (response) {
-            if (addToCartLoaderElement) {
-              addToCartButtonElement.classList.remove('disp-none-imp');
-              addToCartLoaderElement.classList.remove('disp-flx-imp');
+            if (response) {
+              const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+                bubbles: true
+              })
+              document.dispatchEvent(e)
+
+              if (addToCartLoaderElement) {
+                addToCartButtonElement.classList.remove('disp-none-imp');
+                addToCartLoaderElement.classList.remove('disp-flx-imp');
+              }
             }
-          }
 
           variantCardElement.dataset.isVariantReadyToFetch = 'false';
         }
