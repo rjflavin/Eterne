@@ -305,8 +305,13 @@ export class EterneCollection extends HTMLElement {
             if (response) {
               const customEvent = new CustomEvent("dispatch:cart-flyover:refresh", {
                 bubbles: true
-              });
-              document.dispatchEvent(customEvent);
+              })
+              document.dispatchEvent(e)
+
+              const event = new CustomEvent("dispatch:cart-drawer:open", {
+                bubbles: true
+              })
+              document.dispatchEvent(event)
 
               if (addToCartLoaderElement) {
                 addToCartButtonElement.classList.remove('disp-none-imp');
