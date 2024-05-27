@@ -1,6 +1,20 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
+{% assign visibleFiltersBeforeSeeMoreQuantity = 8 %}
+
+{% liquid
+  assign total_active_values = 0
+  if collection.url
+    assign results_url = collection.url
+  else
+    assign terms = collection.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by='
+  endif
+  assign filtersToDisplay = section.settings.filters_value | split: ',' | downcase
+%}
+
 <eterne-collection class="collection" data-is-filter-open="true">
+  {% paginate collection.products by section.settings.products_per_page %}
   <div class="collection__title-wrap">
     {% if collection.title == 'Products' %}
       <span class="collection__title">Shop all</span>
@@ -15,166 +29,42 @@
     </div>
   </div>
 
-  <div class="collection__content">
-    <div class="collection__filters">
-      <div class="collection__sort-category no-select">
-        <div class="collection__sort-category-title">
-          <span class="collection__sort-category-title-text">Sort by</span>
-        </div>
-        <div class="collection__sort-category-options">
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-radio"></div>
-            <div class="collection__sort-category-option-text">bestsellers</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-radio"></div>
-            <div class="collection__sort-category-option-text">new in</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-radio"></div>
-            <div class="collection__sort-category-option-text">price, low to high</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-radio"></div>
-            <div class="collection__sort-category-option-text">price, high to low</div>
-          </div>
-        </div>
-      </div>
+  <div class="collection__content" data-id="{{ section.id }}">
+    <collection-filters-form class="collection__filters" data-id="{{ section.id }}">
+      <form id="CollectionFiltersForm" class="filtersForm">
+        <div class="filtersItemsContainer">
+          {% if collection.terms %}
+            <input type="hidden" name="q" value="{{ results.terms | escape }}">
+            <input name="options[prefix]" type="hidden" value="last">
+          {% endif %}
+          <div id="FacetsWrapperDesktop" class="filtersWrapper">
+            {% render 'filter-category-sorting',
+              visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
+            %}
 
-      <div class="collection__sort-category no-select" data-is-filter-category-open="true">
-        <div class="collection__sort-category-title">
-          <span class="collection__sort-category-title-text">Category</span>
-          <div data-filter-category-status="minus" class="collection__sort-category-title-status">
-            {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-          <div data-filter-category-status="plus" class="collection__sort-category-title-status">
-            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-        </div>
-        <div class="collection__sort-category-options-grid">
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">tops</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">bottoms</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">cashmere</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">thermals</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">tops</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">bottoms</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">cashmere</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">thermals</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">tops</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">bottoms</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">cashmere</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">thermals</div>
-          </div>
-        </div>
-        <div class="collection__sort-category-see-more">see more</div>
-      </div>
+            {% for filter in collection.filters %}
+              {% assign filterLabel = filter.label %}
+              {% assign filterName = filter.label | downcase %}
+              {% assign filtersType = 'checkbox' %}
 
-      <div class="collection__sort-category no-select" data-is-filter-category-open="false">
-        <div class="collection__sort-category-title">
-          <span class="collection__sort-category-title-text">Color</span>
-          <div data-filter-category-status="minus" class="collection__sort-category-title-status">
-            {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-          <div data-filter-category-status="plus" class="collection__sort-category-title-status">
-            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-        </div>
-        <div class="collection__sort-category-options-grid">
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">red</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">green</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">blue</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">yellow</div>
+              {% if filter.type == 'list' and filtersToDisplay contains filterName %}
+                {% render 'filter-category',
+                  filter: filter,
+                  filterLabel: filterLabel,
+                  index: forloop.index,
+                  filtersType: filtersType,
+                  visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
+                %}
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
-        <div class="collection__sort-category-see-more">see more</div>
-      </div>
-
-      <div class="collection__sort-category no-select" data-is-filter-category-open="false">
-        <div class="collection__sort-category-title">
-          <span class="collection__sort-category-title-text">Size</span>
-          <div data-filter-category-status="minus" class="collection__sort-category-title-status">
-            {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-          <div data-filter-category-status="plus" class="collection__sort-category-title-status">
-            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-        </div>
-        <div class="collection__sort-category-options-grid">
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">XS</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="true" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">S</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">M</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">L</div>
-          </div>
-          <div class="collection__sort-category-option">
-            <div data-checked="false" class="collection__sort-category-option-checkbox"></div>
-            <div class="collection__sort-category-option-text">XL</div>
-          </div>
-        </div>
-        <div class="collection__sort-category-see-more">see more</div>
-      </div>
-    </div>
+      </form>
+    </collection-filters-form>
 
     <div class="collection__products-wrap">
-      {% paginate collection.products by section.settings.products_per_page %}
-        <div class="collection__products" data-next-url="{{ paginate.next.url }}">
-          {% for product in collections[collection.handle].products %}
+      <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
+          {% for product in collection.products %}
             {% assign loop_color = "" %}
 
             {% for variant in product.variants %}
@@ -352,9 +242,9 @@
                     {% if colorsQty > colorsQtyToShowOnMobile %}
                       {% assign showMoreColorsQty = colorsQty | minus: colorsQtyToShowOnMobile %}
                       <div class="collection__show-more-colors-btn">
-                      <span class="collection__show-more-colors-btn-text">
-                        + {{ showMoreColorsQty }} more
-                      </span>
+                        <span class="collection__show-more-colors-btn-text">
+                          + {{ showMoreColorsQty }} more
+                        </span>
                       </div>
                     {% endif %}
                   </div>
@@ -379,9 +269,9 @@
             <div data-see-more-loader class="collection__see-more-loader disp-none-imp"></div>
           </div>
         {% endif %}
-      {% endpaginate %}
     </div>
   </div>
+  {% endpaginate %}
 </eterne-collection>
 
 {{ 'collection-script.js' | asset_url | script_tag }}
@@ -403,6 +293,13 @@
       "step": 1,
       "default": 3,
       "label": "Products per page"
+    },
+    {
+      "type": "text",
+      "id": "filters_value",
+      "label": "Filters labels from Search & Discovery",
+      "default": "category,color,size",
+      "info": "Divide every new filter label with comma (e.g. category,color,size)"
     }
   ],
   "presets": [
