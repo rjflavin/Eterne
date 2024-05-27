@@ -191,6 +191,11 @@ export class EterneCollection extends HTMLElement {
               })
               document.dispatchEvent(e)
 
+              const event = new CustomEvent("dispatch:cart-drawer:open", {
+                bubbles: true
+              })
+              document.dispatchEvent(event)
+
               if (addToCartLoaderElement) {
                 addToCartButtonElement.classList.remove('disp-none-imp');
                 addToCartLoaderElement.classList.remove('disp-flx-imp');
