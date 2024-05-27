@@ -5,15 +5,12 @@ export default class SingleProduct extends HTMLElement {
             "variants": window.productData.variants,
             "options": window.productData.options
         };
-        console.log("SingleProduct initialized with product data:", this.product);
         this.productId = window.productData.productId;
-        console.log("Product id:", this.product);
     }
 
     connectedCallback() {
         document.addEventListener('DOMContentLoaded', () => {
             this.initializeOptionSelectors();
-            console.log("SingleProduct connected to DOM.");
             this.showDefaultColorImages();
             this.initializeColorSwatchHover();
             this.initializeProductMediaHover();
@@ -24,41 +21,32 @@ export default class SingleProduct extends HTMLElement {
     }
 
     initializeOptionSelectors() {
-        const optionSelectors = document.querySelectorAll('.js-option');
-        console.log("Main document option selectors:", optionSelectors);
+        const optionSelectors = this.querySelectorAll('.js-option');
 
         optionSelectors.forEach(selector => {
             selector.addEventListener('change', this.handleOptionChange.bind(this));
         });
-
-        console.log("Option selectors initialized.");
     }
 
     handleOptionChange() {
-        const selectedOptions = Array.from(document.querySelectorAll('.js-option:checked')).map(input => {
+        const selectedOptions = Array.from(this.querySelectorAll('.js-option:checked')).map(input => {
             const name = input.name.split('-option')[0].split('-').slice(-1)[0];
             return {
                 name: name.charAt(0).toUpperCase() + name.slice(1),
                 value: input.value
             };
         });
-        console.log("Selected options changed:", selectedOptions);
 
         const variant = this.findVariant(selectedOptions);
         const selectedColor = selectedOptions.find(option => option.name.toLowerCase() === 'color').value;
-        console.log("Selected color:", selectedColor);
 
         if (variant) {
-            console.log("Found variant:", variant);
             this.updateProductDetails(variant, selectedColor);
-        } else {
-            console.log("No matching variant found for selected options:", selectedOptions);
         }
     }
 
     handleVariantChange(event) {
         const variant = event.detail.variant;
-        console.log("Variant change event triggered:", variant);
         const selectedColor = variant.options.find(option => option.toLowerCase() === 'color');
         this.updateProductDetails(variant, selectedColor);
     }
@@ -70,7 +58,6 @@ export default class SingleProduct extends HTMLElement {
                 return variant.options[optionIndex] === option.value;
             });
         });
-        console.log("Variant search result:", variant);
         return variant;
     }
 
@@ -81,51 +68,41 @@ export default class SingleProduct extends HTMLElement {
     }
 
     updateProductImage(selectedColor) {
-        const productMediaItems = document.querySelectorAll('.product-media-collage__item');
-        console.log("Updating product image for color:", selectedColor);
+        const productMediaItems = this.querySelectorAll('.product-media-collage__item');
 
         productMediaItems.forEach(item => {
             const img = item.querySelector('img');
             if (img && img.alt.toLowerCase() === selectedColor.toLowerCase()) {
                 item.style.display = 'block';
                 item.classList.add('is-active');
-                console.log("Displaying block for color:", selectedColor);
             } else {
                 item.style.display = 'none';
                 item.classList.remove('is-active');
-                console.log("Hiding block with alt:", img ? img.alt : 'no image found');
             }
         });
     }
 
     updateProductPrice(price) {
-        const productPriceCurrentElement = document.querySelector('.price__current');
-        console.log("Updating product price to:", price);
+        const productPriceCurrentElement = this.querySelector('.price__current');
 
         if (productPriceCurrentElement) {
             productPriceCurrentElement.textContent = `$${(price / 100).toFixed(2)}`;
-            console.log("Updated current price to:", productPriceCurrentElement.textContent);
         }
     }
 
     updateProductAvailability(available) {
-        const productAvailabilityElement = document.querySelector('.product-availability');
-        console.log("Updating product availability to:", available);
+        const productAvailabilityElement = this.querySelector('.product-availability');
 
         if (productAvailabilityElement) {
             productAvailabilityElement.textContent = available ? 'In Stock' : 'Out of Stock';
-            console.log("Updated availability to:", productAvailabilityElement.textContent);
         }
     }
 
     showDefaultColorImages() {
-        const defaultColorInput = document.querySelector('.js-option[checked]');
+        const defaultColorInput = this.querySelector('.js-option[checked]');
         if (defaultColorInput) {
             const defaultColor = defaultColorInput.value;
-            console.log("Default selected color on page load:", defaultColor);
             this.updateProductImage(defaultColor);
-        } else {
-            console.log("No default selected color found.");
         }
     }
 
@@ -159,7 +136,7 @@ export default class SingleProduct extends HTMLElement {
     }
 
     initializeProductMediaHover() {
-        const productMediaItems = document.querySelectorAll('.product-media--image');
+        const productMediaItems = this.querySelectorAll('.product-media--image');
         productMediaItems.forEach(item => {
             item.addEventListener('mouseenter', this.handleMediaHover.bind(this));
             item.addEventListener('mouseleave', this.handleMediaMouseLeave.bind(this));
@@ -191,7 +168,7 @@ export default class SingleProduct extends HTMLElement {
     }
 
     swapImage(item, newAlt) {
-        const productMediaItems = document.querySelectorAll('.product-media-collage__item');
+        const productMediaItems = this.querySelectorAll('.product-media-collage__item');
         productMediaItems.forEach(mediaItem => {
             const img = mediaItem.querySelector('img');
             if (img && img.alt.toLowerCase() === newAlt.toLowerCase()) {
@@ -202,7 +179,6 @@ export default class SingleProduct extends HTMLElement {
                     currentImg.alt = img.alt;
                     currentImg.srcset = img.srcset; // Update srcset
                 }
-                console.log(`Swapped image to alt: ${newAlt}`);
             }
         });
     }

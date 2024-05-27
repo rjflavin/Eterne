@@ -43,7 +43,7 @@
   margin-right: 19px;
   text-transform: uppercase;
   letter-spacing: 2%;
-  color: var(--gray3);
+  color: var(--gray4);
 }
 .product-form fieldset.option-selector.single-product-options .opt-label {
   border: none;
