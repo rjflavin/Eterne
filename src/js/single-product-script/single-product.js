@@ -6,6 +6,7 @@ export default class SingleProduct extends HTMLElement {
             "options": window.productData.options
         };
         this.productId = window.productData.productId;
+        this.availableColors = this.getAvailableColors();
     }
 
     connectedCallback() {
@@ -18,6 +19,11 @@ export default class SingleProduct extends HTMLElement {
 
         // Listen for the variant change event
         document.addEventListener('variant:change', this.handleVariantChange.bind(this));
+    }
+
+    getAvailableColors() {
+        const colorLabels = document.querySelectorAll('.opt-label--swatch .js-value');
+        return Array.from(colorLabels).map(label => label.textContent.toLowerCase());
     }
 
     initializeOptionSelectors() {
@@ -148,7 +154,7 @@ export default class SingleProduct extends HTMLElement {
         const img = item.querySelector('img');
         if (img) {
             const currentAlt = img.alt.toLowerCase();
-            const newAlt = currentAlt === 'black' ? 'ivory' : 'black'; // Example alt switch
+            const newAlt = this.getNewAlt(currentAlt);
 
             img.dataset.originalSrc = img.src;
             img.dataset.originalAlt = currentAlt;
@@ -172,7 +178,6 @@ export default class SingleProduct extends HTMLElement {
         productMediaItems.forEach(mediaItem => {
             const img = mediaItem.querySelector('img');
             if (img && img.alt.toLowerCase() === newAlt.toLowerCase()) {
-                // Clone the target item and swap it with the current one
                 const currentImg = item.querySelector('img');
                 if (currentImg) {
                     currentImg.src = img.src;
@@ -181,5 +186,11 @@ export default class SingleProduct extends HTMLElement {
                 }
             }
         });
+    }
+
+    getNewAlt(currentAlt) {
+        const currentIndex = this.availableColors.indexOf(currentAlt);
+        const nextIndex = (currentIndex + 1) % this.availableColors.length;
+        return this.availableColors[nextIndex];
     }
 }
