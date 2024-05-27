@@ -1,2 +1,2 @@
 import './mobile-dropdowns';
-import './form-validation';
+import './form';

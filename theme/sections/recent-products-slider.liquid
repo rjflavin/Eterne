@@ -1,0 +1,126 @@
+{{ 'recent-products-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="recent-products-slider">
+  {% if section.settings.title %}
+    <div class="recent-products-slider-title">
+      {{ section.settings.title }}
+    </div>
+  {% endif %}
+
+  <div class="recent-products-swiper">
+    <div class="swiper-wrapper">
+
+    </div>
+    <div class="recent-products-swiper-button-prev">
+      <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}">
+    </div>
+    <div class="recent-products-swiper-button-next">
+      <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}">
+    </div>
+  </div>
+
+  <script>
+    const getProductsFromLocalStorage = () => {
+      if (localStorage.getItem('recently_viewed_products')) {
+        const productsString = localStorage.getItem('recently_viewed_products');
+        const products = JSON.parse(productsString);
+
+        return products;
+      }
+
+      return [];
+    };
+
+    const setUpSlides = (products) => {
+      const slider = document.querySelector('.recent-products-slider')
+      if (slider && products.length === 0) {
+        slider.classList.add('hide')
+      } else {
+        const MAX_PRODUCT_AMOUNT = 4
+        if (products.length <= MAX_PRODUCT_AMOUNT) {
+          const leftArrow = document.querySelector('.recent-products-swiper-button-prev')
+          const rightArrow = document.querySelector('.recent-products-swiper-button-next')
+          if (leftArrow && rightArrow) {
+            leftArrow.classList.add('hide')
+            rightArrow.classList.add('hide')
+          }
+        }
+      }
+
+      let wrapperCode = ''
+      for (const product of products) {
+        wrapperCode = wrapperCode + `
+          <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
+            <div class="swiper-slide-container">
+              <div class="swiper-slide-image-container">
+                <img src="${product.images[0]?.src}" class="swiper-slide-image">
+                <div class="swiper-slide-image-info">
+                  <div class="swiper-slide-image-info-sizes">
+                    ${product && product.variantSizes && 
+                      product.variantSizes.map(size => {
+                        return `<div class="swiper-slide-image-info-sizes-item ${product.size === size && 'selected-size'}">${size}</div>`
+                      }).join("")
+                    }
+                  </div>
+                  {% if section.settings.add_to_cart_text %}
+                    <button class="swiper-slide-image-info-cart-button">{{ section.settings.add_to_cart_text }}</button>
+                    <div class="swiper-slide-image-info-cart-loader">
+                      <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                      <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                      <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="swiper-slide-image-info-button">
+                  <img src="{{ 'plus-icon.png' | asset_img_url }}">
+                </div>
+                <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]?.src}" />
+                <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]?.src}" />
+              </div>
+              <div class="swiper-slide-text-container">
+                <div class="swiper-slide-title">${product.title}</div>
+                <div class="swiper-slide-title">${product.color}</div>
+                <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
+              </div>
+            </div>
+          </a>
+        `
+      }
+      const wrapper = document.querySelector('.swiper-wrapper')
+      if (wrapper) {
+        wrapper.innerHTML = wrapperCode
+      }
+    }
+
+    const products = getProductsFromLocalStorage()
+    setUpSlides(products)
+  </script>
+</div>
+
+{{ 'recent-products-swiper.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Recently viewed products",
+  "class": "section-recent-products-slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "RECENTLY VIEWED"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add item to cart text",
+      "default": "Add to bag"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent products"
+    }
+  ]
+}
+{% endschema %}

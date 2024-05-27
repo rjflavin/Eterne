@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 1440px;
   position: relative;
   margin: 0 auto;
 
@@ -23,13 +22,12 @@
   }
 
   &__swiper {
-    max-width: 1440px;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 30px;
+    margin-bottom: 75px;
 
-    @media (max-width: 768px) {
-      margin-bottom: 20px;
+    @media (max-width: 1024px) {
+      margin-bottom: 22px;
     }
   }
 
@@ -48,13 +46,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media (min-width: 1025px) {
+      &:hover {
+        .new-in__item-bg-img-hover {
+          visibility: visible !important;
+        }
+      }
+    }
   }
 
   &__item-link {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 500;
+    z-index: 100;
   }
 
   &__img-wrap {
@@ -64,29 +70,29 @@
     display: flex;
   }
 
-  &__item-img, &__item-hover-img {
-    max-width: 288px;
-    max-height: 432px;
-    width: 100%;
-    height: 432px;
-
-    @media (max-width: 768px) {
-      max-width: 231px;
-      max-height: 346px;
-      height: 346px;
-    }
-
-    @media (max-width: 480px) {
-      max-width: unset;
-    }
+  &__item-bg-imgs-wrap {
+    padding-top: 140%;
+    overflow: visible;
+    display: block;
+    height: 0;
   }
 
-  &__item-hover-img {
+  &__item-bg-img, &__item-bg-img-hover {
     position: absolute;
+    display: block;
     top: 0;
-    left: 0;
-    display: none;
-    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    font-size: 0;
+    line-height: 1;
+    background-color: var(--gray2);
+  }
+
+  &__item-bg-img-hover {
+    visibility: hidden;
   }
 
   &__item-text-wrap {
@@ -106,7 +112,7 @@
     letter-spacing: 0.4px;
     color: var(--black1);
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       font-size: 10px;
     }
   }
@@ -120,7 +126,7 @@
     letter-spacing: 0.4px;
     color: var(--gray1);
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       display: none;
     }
   }
@@ -129,15 +135,24 @@
     position: absolute;
     z-index: 1000;
     display: flex;
-    padding: 8px;
+    padding: 0.5555556vw;
     cursor: pointer;
 
-    svg {
-      height: 19px;
-      width: 19px;
+    @media (max-width: 1440px) {
+      padding: 8px;
     }
 
-    @media (max-width: 768px) {
+    svg {
+      height: 1.3194444vw;
+      width: 1.3194444vw;
+
+      @media (max-width: 1440px) {
+        height: 19px;
+        width: 19px;
+      }
+    }
+
+    @media (max-width: 1024px) {
       display: none;
     }
   }

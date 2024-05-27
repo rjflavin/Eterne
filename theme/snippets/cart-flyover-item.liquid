@@ -1,0 +1,34 @@
+{%- comment -%}
+  Parameters:
+  - item {LineItem} - Cart line item.
+  - forloop {forloop} - Cart line item for-loop iterator object.
+  - drawer {boolean} [optional] - Is this line item in a drawer? (Default is false)
+  - animate {boolean} [optional] - Apply page load animation to this item. (Default is false)
+
+  Example usage:
+  {% render 'cart-item', item: line_item, forloop: forloop, drawer: true, animate: true %}
+{%- endcomment -%}
+
+<div class="product-{{ item.product.handle }} cart-flyover-item" variant-id="{{ item.variant.id }}">
+  <div>
+    <a href="{{ item.url }}" style="background-image: url({{ item.image | image_url }});" class="cart-flyover-item__image"></a>
+  </div>
+
+  <div class="cart-flyover-item-description">
+    <div class="cart-flyover-item-description-info">
+      <div class="cart-flyover-item-description-info__title">{{ item.product.title | escape_once }}</div>
+      <div class="cart-flyover-item-description-info__options">{{ item.variant.options | join: ' / ' }}</div>
+      <div data-variant-id="{{ item.variant.id }}" class="cart-flyover-item-description-info-cart-buttons">
+        <button name="remove-button" class="cart-flyover-item-description-info-cart-buttons__button">–</button>
+        <div name="item-quantity" item-quantity="{{ item.quantity }}" class="cart-flyover-item-description-info-cart-buttons__quantity">{{ item.quantity }}</div>
+        <button name="add-button" class="cart-flyover-item-description-info-cart-buttons__button">+</button>
+      </div>
+      <div data-variant-id="{{ item.variant.id }}" class="cart-flyover-item-description-info-extra">
+        <button name="delete-button" class="cart-flyover-item-description-info-extra__text">Remove</button>
+        <div class="cart-flyover-item-description-info-extra__text"> | </div>
+        <button name="wishlist-button" class="cart-flyover-item-description-info-extra__text">Add to Wish List</button>
+      </div>
+    </div>
+    <div class="cart-flyover-item-description__price">{{ item.variant.price | money_without_trailing_zeros }}</div>
+  </div>
+</div>

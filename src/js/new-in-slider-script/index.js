@@ -1,2 +1,1 @@
 import './slider';
-import './hover';
