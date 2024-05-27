@@ -1,6 +1,83 @@
 @import "mixins";
 
 .cart-flyover {
+    &-you-may-also-like {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: #F6F6F6;
+        position: relative;
+        margin-top: 43px;
+
+        &__title {
+            font-family: Helvetica Neue;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 18.2px;
+            letter-spacing: 0.02em;
+            text-align: left;
+            padding: 25px 68px 15px 18px;
+            text-transform: uppercase;
+        }
+
+        &-swiper {
+            overflow: hidden;
+            margin: 0 0 26px 18px;
+
+            &__button {
+                width: 7.5px;
+                height: 14px;
+                position: absolute;
+                cursor: pointer;
+
+                @include for-tablet {
+                    display: none;
+                }
+
+                &-prev {
+                    top: 28px;
+                    right: 42.5px;
+                }
+
+                &-next {
+                    top: 28px;
+                    right: 14px;
+                }
+            }
+
+            &-item {
+                &-container {
+                    width: fit-content;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding-right: 10px;
+                }
+
+                &__image {
+                    height: auto;
+                    width: 100%;
+
+                    &-container {
+                        width: fit-content;
+                    }
+                }
+
+                &__text {
+                    width: 131px;
+                    font-family: Helvetica Neue;
+                    font-size: 10px;
+                    font-weight: 400;
+                    line-height: 18px;
+                    letter-spacing: 0.02em;
+                    text-align: center;
+                    color: var(--black1);
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
     &-header {
         margin: 0;
         padding: 21px 16px 15px 18px;
@@ -11,14 +88,14 @@
     }
 
     &-list {
-        padding: 0 18px;
+        padding: 0;
         margin: 0 !important;
         height: 100%;
         overflow-y: scroll;
         max-height: calc(100vh - 238px);
 
         @include for-mobile {
-            padding: 0 12.5px 0 14px;
+            padding: 0;
         }
     }
 
@@ -71,8 +148,12 @@
 
     &-item {
         margin: 0;
-        padding: 10px 0;
+        padding: 10px 18px;
         display: flex;
+
+        @include for-mobile {
+            padding: 10px 12.5px 10px 14px;
+        }
 
         &:first-child {
             padding-top: 0;

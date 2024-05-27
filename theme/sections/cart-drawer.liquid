@@ -41,6 +41,7 @@
       {% for item in cart.items %}
         {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
       {% endfor %}
+      {%- render 'cart-flyover-you-may-also-like' -%}
     </div>
 
     <div class="cart-flyover-footer">
