@@ -55,7 +55,7 @@
                 }
 
                 &-image {
-                    height: 100%;
+                    height: auto;
 
                     &-container {
                         position: relative;
@@ -69,10 +69,11 @@
                     &-info {
                         width: 100%;
                         position: absolute;
-                        bottom: 0;
+                        bottom: -1px;
                         background-color: var(--transparent-white);
                         padding: 13px;
                         display: none;
+                        z-index: 2;
 
                         &.show {
                             display: block;
@@ -89,6 +90,7 @@
                             border-radius: 50%;
                             align-items: center;
                             justify-content: center;
+                            z-index: 1;
 
                             @include for-tablet {
                                 display: flex;
