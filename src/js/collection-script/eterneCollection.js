@@ -303,10 +303,10 @@ export class EterneCollection extends HTMLElement {
           const response = await addToCart(variantId, 1);
 
             if (response) {
-              const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+              const customEvent = new CustomEvent("dispatch:cart-flyover:refresh", {
                 bubbles: true
-              })
-              document.dispatchEvent(e)
+              });
+              document.dispatchEvent(customEvent);
 
               if (addToCartLoaderElement) {
                 addToCartButtonElement.classList.remove('disp-none-imp');
