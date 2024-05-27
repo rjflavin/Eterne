@@ -30,10 +30,8 @@
           "
           role="list"
         >
-          {% assign positiveFiltersQuantity = 0 %}
           {% for value in filter.values %}
             {% if value.count > 0 %}
-              {% assign positiveFiltersQuantity = positiveFiltersQuantity | plus: 1 %}
               <li
                 id="filter-{{ index }}--{{ forloop.index }}"
                 class="filterWrapperListItem collection__sort-category-option
