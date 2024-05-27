@@ -1,4 +1,4 @@
-import { addToCart } from "../utils/add-to-cart-handler";
+import { addToCart } from "../utils/cart-handler";
 import { checkParentsForClass } from "../utils/check-parents-for-class";
 
 export class EterneCollection extends HTMLElement {
@@ -186,6 +186,11 @@ export class EterneCollection extends HTMLElement {
             const response = await addToCart(variantId, 1);
 
             if (response) {
+              const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+                bubbles: true
+              })
+              document.dispatchEvent(e)
+
               if (addToCartLoaderElement) {
                 addToCartButtonElement.classList.remove('disp-none-imp');
                 addToCartLoaderElement.classList.remove('disp-flx-imp');

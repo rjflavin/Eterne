@@ -1,4 +1,4 @@
-import addToCartSetup from "../utils/add-to-cart-handler";
+import { addToCartSetup } from "../utils/cart-handler";
 
 document.addEventListener("DOMContentLoaded", () => {
     const recentProductsItems = document.querySelectorAll('.recent-products-slider-item')
