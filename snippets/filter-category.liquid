@@ -1,107 +1,97 @@
 <div class="filterWrapper collection__sort-category" data-is-filter-category-open="true">
-  <div
-    id="Details-{{ index }}-{{ section.id }}"
-    class="js-filter filterItemContainer"
-    data-index="{{ index }}"
-  >
-    <div
-      id="Facet-{{ index }}-{{ section.id }}"
-      class="parent-display filterWrapperList"
-    >
-      <fieldset class="filterWrapperFieldset collection__sort-category-wrap">
-        <div class="collection__sort-category-title-wrap no-select">
-          <span class="collection__sort-category-title-text">{{ filterLabel | escape }}</span>
-
-          <div data-filter-category-status="minus" class="collection__sort-category-title-status">
-            {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-          <div data-filter-category-status="plus" class="collection__sort-category-title-status">
-            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-          </div>
-        </div>
-
-        <ul
-          class="filterWrapperFieldsetList
-            {% if filtersType == 'checkbox' %}
-              collection__sort-category-options-grid
-            {% else %}
-              collection__sort-category-options
-            {% endif %}
-          "
-          role="list"
-        >
-          {% for value in filter.values %}
-            {% if value.count > 0 %}
-              <li
-                id="filter-{{ index }}--{{ forloop.index }}"
-                class="filterWrapperListItem collection__sort-category-option
-                  {% if value.active %}activeFilterValue{% endif %}
-                  {% if forloop.index > visibleFiltersQuantity %}collection__sort-category-option_hidden{% endif %}
-                "
-                {% if forloop.index > visibleFiltersQuantity %}data-option-to-hide="true"{% endif %}
-              >
-                {% if filtersType == "checkbox" %}
-                  <input
-                    class="filterWrapperCheckboxDefault collection__sort-category-option-checkbox"
-                    type="checkbox"
-                    name="{{ value.param_name }}"
-                    value="{{ value.value }}"
-                    id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-                    {% if value.active %}checked{% endif %}
-                  >
-                  <label
-                    for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-                    class="filterWrapperItemLabel no-select
-                      {% if forloop.index > visibleFiltersQuantity %}
-                        disp-none-imp
-                      {% endif %}
-                    "
-                    {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
-                  >
-                  <span
-                    class="filterWrapperListItemText collection__sort-category-option-text"
-                    aria-hidden="true"
-                  >
-                    {{ value.label }} ({{ value.count }})
-                  </span>
-                  </label>
-                {% else %}
-                  <input
-                    class="filterWrapperCheckboxDefault collection__sort-category-option-radio"
-                    type="radio"
-                    name="{{ value.param_name }}"
-                    value="{{ value.value }}"
-                    id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-                  >
-                  <label
-                    for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-                      class="filterWrapperItemLabel no-select
-                      {% if forloop.index > visibleFiltersQuantity %}
-                        disp-none-imp
-                      {% endif %}
-                    "
-                    {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
-                    data-checked="true"
-                  >
-                    <span
-                      class="filterWrapperListItemText collection__sort-category-option-text"
-                      aria-hidden="true"
-                    >
-                      {{ value.label }}
-                    </span>
-                  </label>
-                {% endif %}
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-        {% if filter.values.size > visibleFiltersQuantity %}
-          <div class="collection__sort-category-see-more no-select" data-is-see-more-open="false">
-            <span class="collection__sort-category-see-more-text">see more</span>
-            <span class="collection__sort-category-see-less-text disp-none-imp">see less</span>
-          </div>
-        {% endif %}
-      </fieldset>
+  <fieldset class="filterWrapperFieldset collection__sort-category-fieldset">
+    <div class="collection__sort-category-title-wrap no-select">
+      <span class="collection__sort-category-title-text">{{ filterLabel | escape }}</span>
+      <div data-filter-category-status="minus" class="collection__sort-category-title-status">
+        {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+      </div>
+      <div data-filter-category-status="plus" class="collection__sort-category-title-status">
+        {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+      </div>
     </div>
-  </div>
+
+    <ul
+      class="filterWrapperFieldsetList
+        {% if filtersType == 'checkbox' %}
+          collection__sort-category-options-grid
+        {% else %}
+          collection__sort-category-options
+        {% endif %}
+      "
+      role="list"
+    >
+      {% assign renderedFiltersQuantity = 0 %}
+      {% for value in filter.values %}
+        {% if value.count > 0 %}
+          {% assign renderedFiltersQuantity = renderedFiltersQuantity | plus: 1 %}
+          <li
+            id="filter-{{ index }}--{{ forloop.index }}"
+            class="filterWrapperListItem collection__sort-category-option
+              {% if value.active %}activeFilterValue{% endif %}
+              {% if forloop.index > visibleFiltersQuantity %}collection__sort-category-option_hidden{% endif %}
+            "
+            {% if forloop.index > visibleFiltersQuantity %}data-option-to-hide="true"{% endif %}
+          >
+            {% if filtersType == "checkbox" %}
+              <input
+                class="filterWrapperCheckboxDefault collection__sort-category-option-checkbox"
+                type="checkbox"
+                name="{{ value.param_name }}"
+                value="{{ value.value }}"
+                id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+                {% if value.active %}checked{% endif %}
+              >
+              <label
+                for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+                class="filterWrapperItemLabel no-select
+                  {% if forloop.index > visibleFiltersQuantity %}
+                    disp-none-imp
+                  {% endif %}
+                "
+                {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
+              >
+                <span
+                  class="filterWrapperListItemText collection__sort-category-option-text"
+                  aria-hidden="true"
+                >
+                  {{ value.label }} ({{ value.count }})
+                </span>
+              </label>
+            {% else %}
+              <input
+                class="filterWrapperCheckboxDefault collection__sort-category-option-radio"
+                type="radio"
+                name="{{ value.param_name }}"
+                value="{{ value.value }}"
+                id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+              >
+              <label
+                for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+                class="filterWrapperItemLabel no-select
+                  {% if forloop.index > visibleFiltersQuantity %}
+                    disp-none-imp
+                  {% endif %}
+                "
+                {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
+                data-checked="true"
+              >
+                <span
+                  class="filterWrapperListItemText collection__sort-category-option-text"
+                  aria-hidden="true"
+                >
+                  {{ value.label }}
+                </span>
+              </label>
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% if renderedFiltersQuantity > visibleFiltersQuantity %}
+      <div class="collection__sort-category-see-more no-select" data-is-see-more-open="false">
+        <span class="collection__sort-category-see-more-text">see more</span>
+        <span class="collection__sort-category-see-less-text disp-none-imp">see less</span>
+      </div>
+    {% endif %}
+  </fieldset>
 </div>
