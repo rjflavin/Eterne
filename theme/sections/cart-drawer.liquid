@@ -41,7 +41,7 @@
       {% for item in cart.items %}
         {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
       {% endfor %}
-      {%- render 'cart-flyover-you-may-also-like' -%}
+      {%- render 'cart-flyover-you-may-also-like', product_list_you_may_like: section.settings.product_list_you_may_like -%}
     </div>
 
     <div class="cart-flyover-footer">
@@ -62,7 +62,11 @@
   "name": "Cart drawer",
   "class": "section-cart-drawer",
   "settings": [
-
+    {
+      "type": "product_list",
+      "id": "product_list_you_may_like",
+      "label": "Products for you may like section"
+    }
   ]
 }
 {% endschema %}

@@ -2,61 +2,21 @@
   <div class="cart-flyover-you-may-also-like__title">You May Also like</div>
   <div class="cart-flyover-you-may-also-like-swiper">
     <div class="swiper-wrapper">
-      <a href="" class="swiper-slide cart-flyover-you-may-also-like-swiper-item">
-        <div class="cart-flyover-you-may-also-like-swiper-item-container">
-          <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0699/9159/6253/files/the-cropped-long-sleeve-thermal-white-shirts-eterne-793597.jpg?v=1716807878"
-              width="master"
-              height="master"
-              class="cart-flyover-you-may-also-like-swiper-item__image"
-            >
+      {% for item in product_list_you_may_like %}
+        <a {% if item.url %}href="{{ item.url }}"{% endif %} class="swiper-slide cart-flyover-you-may-also-like-swiper-item">
+          <div class="cart-flyover-you-may-also-like-swiper-item-container">
+            <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
+              {% assign image = item.images | first %}
+              <img
+                src="{{ image | image_url }}"
+                class="cart-flyover-you-may-also-like-swiper-item__image"
+              >
+            </div>
+            {% assign color = item.first_available_variant.options | first %}
+            <div class="cart-flyover-you-may-also-like-swiper-item__text">{{ item.title }} {{ color }}</div>
           </div>
-          <div class="cart-flyover-you-may-also-like-swiper-item__text">Long Sleeve crewneck Maxi Dress Clay</div>
-        </div>
-      </a>
-
-      <a href="" class="swiper-slide cart-flyover-you-may-also-like-swiper-item">
-        <div class="cart-flyover-you-may-also-like-swiper-item-container">
-          <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0699/9159/6253/files/the-cropped-long-sleeve-thermal-white-shirts-eterne-793597.jpg?v=1716807878"
-              width="master"
-              height="master"
-              class="cart-flyover-you-may-also-like-swiper-item__image"
-            >
-          </div>
-          <div class="cart-flyover-you-may-also-like-swiper-item__text">Long Sleeve crewneck Maxi Dress Clay</div>
-        </div>
-      </a>
-
-      <a href="" class="swiper-slide cart-flyover-you-may-also-like-swiper-item">
-        <div class="cart-flyover-you-may-also-like-swiper-item-container">
-          <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0699/9159/6253/files/the-cropped-long-sleeve-thermal-white-shirts-eterne-793597.jpg?v=1716807878"
-              width="master"
-              height="master"
-              class="cart-flyover-you-may-also-like-swiper-item__image"
-            >
-          </div>
-          <div class="cart-flyover-you-may-also-like-swiper-item__text">Long Sleeve crewneck Maxi Dress Clay</div>
-        </div>
-      </a>
-
-      <a href="" class="swiper-slide cart-flyover-you-may-also-like-swiper-item">
-        <div class="cart-flyover-you-may-also-like-swiper-item-container">
-          <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0699/9159/6253/files/the-cropped-long-sleeve-thermal-white-shirts-eterne-793597.jpg?v=1716807878"
-              width="master"
-              height="master"
-              class="cart-flyover-you-may-also-like-swiper-item__image"
-            >
-          </div>
-          <div class="cart-flyover-you-may-also-like-swiper-item__text">Long Sleeve crewneck Maxi Dress Clay</div>
-        </div>
-      </a>
+        </a>
+      {% endfor %}
     </div>
     <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-prev">
       <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}">
