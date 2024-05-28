@@ -2729,6 +2729,10 @@ const ProductForm = class extends HTMLElement {
           bubbles: true
         })
         document.dispatchEvent(e)
+        const event = new CustomEvent("dispatch:cart-drawer:open", {
+          bubbles: true
+        })
+        document.dispatchEvent(event)
       } else if (theme.settings.afterAddToCart === 'page') {
         // Allow the tick animation to complete
         setTimeout(() => {

@@ -61,9 +61,14 @@ export const addToCartSetup = (element, productId, quantity, loaderElement) => {
             if (response) {
                 element.disabled = false
                 const e = new CustomEvent("dispatch:cart-flyover:refresh", {
-                bubbles: true
+                    bubbles: true
                 })
                 document.dispatchEvent(e)
+
+                const event = new CustomEvent("dispatch:cart-drawer:open", {
+                    bubbles: true
+                })
+                document.dispatchEvent(event)
 
                 if (loaderElement) {
                     element.classList.remove('hide')
