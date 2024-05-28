@@ -31,6 +31,8 @@
       data-merge-attributes="free-shipping">
     <div class="free-shipping-bar__message free-shipping-bar__message--no cart-flyover-shipping-bar__text" data-merge="free-shipping-not-met-text">{{ 'cart.general.free_shipping_deficit_html' | t }}</div>
     <div class="free-shipping-bar__message free-shipping-bar__message--yes cart-flyover-shipping-bar__text">{{ 'cart.general.free_shipping' | t }}</div>
-    <div class="free-shipping-bar__bar cart-flyover-shipping-bar__border"></div>
+    <div class="free-shipping-bar__bar cart-flyover-shipping-bar__border">
+      <div class="cart-flyover-shipping-bar__border-background"></div>
+    </div>
   </div>
 {%- endif -%}

@@ -2450,7 +2450,7 @@ main-navigation {
   min-width: 15px;
   padding: 3px;
   border-radius: 12px;
-  background: var(--header-text-col);
+  background: #dc0202;
   color: var(--header-bg-col);
   font-size: 9px;
   font-weight: 500;
@@ -8622,12 +8622,17 @@ carousel-slider[inactive] .slider-nav__btn {
   --gutter-content: 20px;
   visibility: hidden;
   z-index: 8001;
-  width: min(88%, 540px);
+  width: 448px;
   height: var(--viewport-height, 100vh);
   transition: transform 0.34s ease, visibility 0.34s ease;
   transform: translate3d(100%, 0, 0);
   outline: 0;
   background-color: rgb(var(--body-bg-color));
+}
+@media (max-width: 768px) {
+  .drawer {
+    width: min(88.5%, 348px);
+  }
 }
 .drawer[open] {
   visibility: visible;
