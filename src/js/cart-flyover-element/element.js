@@ -37,12 +37,14 @@ class CartFlyover extends HTMLElement {
         this.addToCartMethod = this.addToCartHandler.bind(this);
         this.removeFromCartMethod = this.removeFromCartHandler.bind(this);
         this.deleteFromCartMethod = this.deleteFromCartHandler.bind(this);
+        this.toggleCartNoteVisibilityHandler = this.toggleCartNoteVisibilityHandler.bind(this);
 
         document.addEventListener('dispatch:cart-flyover:refresh', this.refreshCartHandler)
     }
 
     setEventListeners = () => {
         const items = this.querySelectorAll('.cart-flyover-item')
+        const cartNoteShowButtonElement = this.querySelector('.cart-flyover-footer-info__note')
         for (const item of items) {
             const addButton = item.querySelector('[name="add-button"]')
             if (addButton) {
@@ -59,6 +61,8 @@ class CartFlyover extends HTMLElement {
                 deleteButton.addEventListener("click", this.deleteFromCartMethod)
             }
         }
+
+        cartNoteShowButtonElement.addEventListener('click', this.toggleCartNoteVisibilityHandler)
     }
 
     refreshCartHandler = async (includeItems = true) => {
@@ -112,7 +116,7 @@ class CartFlyover extends HTMLElement {
 
             return response.text();
         })
-        
+
         return result
     }
 
@@ -200,6 +204,17 @@ class CartFlyover extends HTMLElement {
         const currentItem = document.querySelector(`.cart-flyover-item[variant-id="${variantId}"]`)
         if (currentItem) {
             currentItem.remove()
+        }
+    }
+
+    toggleCartNoteVisibilityHandler = () => {
+        const cartNoteElement = this.querySelector('cart-note')
+        const isCartNoteElementHidden = cartNoteElement.classList.contains('disp-none-imp')
+
+        if (isCartNoteElementHidden) {
+            cartNoteElement.classList.remove('disp-none-imp')
+        } else {
+            cartNoteElement.classList.add('disp-none-imp')
         }
     }
 }

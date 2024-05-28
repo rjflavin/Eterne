@@ -1,3 +1,5 @@
+{{ 'cart-page.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   if section.settings.show_continue_shopping and cart.items != empty
     if section.settings.continue_shopping_url != blank
@@ -101,8 +103,8 @@
           <div class="flexible-layout">
             <div class="checkout-subtotal-container__left column column--half">
               {% if section.settings.show_order_note %}
-                <cart-note class="cart-note block lightly-spaced-row">
-                  <label class="block" for="note">{{ 'cart.note.label' | t }}</label>
+                <cart-note class="cart-page__note">
+                  <label class="block" for="note">Add a note to your order</label>
                   <textarea id="note" name="note">{{ cart.note }}</textarea>
                 </cart-note>
               {% endif %}

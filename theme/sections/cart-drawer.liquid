@@ -51,10 +51,16 @@
           <div class="cart-flyover-footer-info-price__text">{{ cart.total_price | money_without_trailing_zeros }}</div>
         </div>
       </div>
+      <cart-note class="cart-flyover-footer-note disp-none-imp">
+        <label for="note">Add a note to your order</label>
+        <textarea id="note" name="note">{{ cart.note }}</textarea>
+      </cart-note>
       <a href="/checkout" class="cart-flyover-footer__checkout-button">checkout</a>
     </div>
   </cart-flyover>
 </cart-drawer>
+
+<script src="{{ 'cart-note.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
