@@ -4,7 +4,7 @@ class CartFlyover extends HTMLElement {
     constructor() {
         super();
 
-        this.sectionId = this.dataset.sectionId;
+        this.sectionId = this.dataset.sectionId
     }
 
     connectedCallback() {
@@ -37,12 +37,14 @@ class CartFlyover extends HTMLElement {
         this.addToCartMethod = this.addToCartHandler.bind(this);
         this.removeFromCartMethod = this.removeFromCartHandler.bind(this);
         this.deleteFromCartMethod = this.deleteFromCartHandler.bind(this);
+        this.toggleCartNoteVisibilityHandler = this.toggleCartNoteVisibilityHandler.bind(this);
 
         document.addEventListener('dispatch:cart-flyover:refresh', this.refreshCartHandler)
     }
 
     setEventListeners = () => {
         const items = this.querySelectorAll('.cart-flyover-item')
+        const cartNoteShowButtonElement = this.querySelector('.cart-flyover-footer-info__note')
         for (const item of items) {
             const addButton = item.querySelector('[name="add-button"]')
             if (addButton) {
@@ -59,6 +61,8 @@ class CartFlyover extends HTMLElement {
                 deleteButton.addEventListener("click", this.deleteFromCartMethod)
             }
         }
+
+        cartNoteShowButtonElement.addEventListener('click', this.toggleCartNoteVisibilityHandler)
     }
 
     refreshCartHandler = async (includeItems = true) => {
@@ -69,12 +73,37 @@ class CartFlyover extends HTMLElement {
         frag.appendChild(newContent);
         newContent.innerHTML = newHTML;
 
+        this.updateNavBar(newContent)
         this.updateCartHeader(newContent)
         this.updateCartShippingBar(newContent)
+        this.updateItemsContainer(newContent)
         if (includeItems) {
             this.updateCartItems(newContent)
         }
         this.updateCartFooter(newContent)
+    }
+
+    updateNavBar = (newContent) => {
+        const cartIcon = document.querySelector('.cart-link__icon')
+        const newQuantityElement = newContent.querySelector('.cart-drawer__title-count')
+        if (cartIcon && newQuantityElement) {
+            const cartQuantity = cartIcon.querySelector('.cart-link__count')
+            const newQuantityText = newQuantityElement.innerText.substring(1, newQuantityElement.innerText.length - 1)
+
+            if (cartQuantity && newQuantityText) {
+                cartQuantity.innerText = newQuantityText
+                const newQuantity = +newQuantityText
+                if (newQuantity && newQuantity === 1) {
+                    cartQuantity.style.visibility = 'visible'
+                }
+            }
+        } else if (cartIcon && !newQuantityElement) {
+            const cartQuantity = cartIcon.querySelector('.cart-link__count')
+            if (cartQuantity) {
+                cartQuantity.innerText = 0
+                cartQuantity.style.visibility = 'hidden'
+            }
+        }
     }
 
     updateCartItems = (newContent) => {
@@ -83,6 +112,27 @@ class CartFlyover extends HTMLElement {
         oldList.innerHTML = newList.innerHTML
 
         this.setEventListeners()
+    }
+
+    updateItemsContainer = (newContent) => {
+        const newQuantityElement = newContent.querySelector('.cart-drawer__title-count')
+        if (newQuantityElement) {
+            const newQuantityText = newQuantityElement.innerText.substring(1, newQuantityElement.innerText.length - 1)
+            if (newQuantityText) {
+                const newQuantity = +newQuantityText
+                if (newQuantity && newQuantity === 1) {
+                    const itemsContainer = document.querySelector('.cart-flyover-list')
+                    if (itemsContainer) {
+                        itemsContainer.classList.remove('cart-flyover-list__full-height')
+                    }
+                }
+            }
+        } else {
+            const itemsContainer = document.querySelector('.cart-flyover-list')
+            if (itemsContainer) {
+                itemsContainer.classList.add('cart-flyover-list__full-height')
+            }
+        }
     }
 
     updateCartHeader = (newContent) => {
@@ -112,7 +162,7 @@ class CartFlyover extends HTMLElement {
 
             return response.text();
         })
-        
+
         return result
     }
 
@@ -200,6 +250,17 @@ class CartFlyover extends HTMLElement {
         const currentItem = document.querySelector(`.cart-flyover-item[variant-id="${variantId}"]`)
         if (currentItem) {
             currentItem.remove()
+        }
+    }
+
+    toggleCartNoteVisibilityHandler = () => {
+        const cartNoteElement = this.querySelector('cart-note')
+        const isCartNoteElementHidden = cartNoteElement.classList.contains('disp-none-imp')
+
+        if (isCartNoteElementHidden) {
+            cartNoteElement.classList.remove('disp-none-imp')
+        } else {
+            cartNoteElement.classList.add('disp-none-imp')
         }
     }
 }

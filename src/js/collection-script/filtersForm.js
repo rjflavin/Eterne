@@ -79,8 +79,6 @@ export class FiltersForm extends HTMLElement {
 
   createSearchParams(form) {
     const formData = new FormData(form);
-    console.log('formData -', formData);
-    console.log('formData to string -', new URLSearchParams(formData).toString());
 
     return new URLSearchParams(formData).toString();
   }

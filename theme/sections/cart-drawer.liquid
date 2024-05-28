@@ -25,9 +25,9 @@
         {% endif %}
       </div>
 
-      <button type="button" class="drawer__close-btn js-close-drawer">
+      <button type="button" class="drawer__close-btn js-close-drawer cart-flyover__close-button">
         <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
-        {% render 'icon-close' %}
+        {% render 'icon-close-cart-flyover' %}
       </button>
     </header>
 
@@ -37,7 +37,7 @@
       </div>
     {%- endif -%}
 
-    <div class="cart-item-list__body cart-flyover-list cart-item-list__body">
+    <div class="cart-item-list__body cart-flyover-list cart-item-list__body{% if cart.item_count == 0 %} cart-flyover-list__full-height {% endif %}">
       {% for item in cart.items %}
         {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
       {% endfor %}
@@ -52,10 +52,16 @@
           <div class="cart-flyover-footer-info-price__text">{{ cart.total_price | money_without_trailing_zeros }}</div>
         </div>
       </div>
+      <cart-note class="cart-flyover-footer-note disp-none-imp">
+        <label for="note">{{ settings.cart_note_text }}</label>
+        <textarea id="note" name="note">{{ cart.note }}</textarea>
+      </cart-note>
       <a href="/checkout" class="cart-flyover-footer__checkout-button">checkout</a>
     </div>
   </cart-flyover>
 </cart-drawer>
+
+<script src="{{ 'cart-note.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
