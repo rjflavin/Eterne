@@ -1612,7 +1612,7 @@
         "id": "free_shipping_amounts",
         "label": "Amounts",
         "placeholder": "USD:4500",
-        "default": "USD:4500",
+        "default": "USD:45000",
         "info": "One price per line. [Read more](https:\/\/cleancanvas.co.uk\/support\/symmetry\/shipping-bar)"
       },
       {

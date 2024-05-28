@@ -84,24 +84,28 @@ class CartFlyover extends HTMLElement {
     }
 
     updateNavBar = (newContent) => {
-        const cartIcon = document.querySelector('.cart-link__icon')
+        //const cartIcon = document.querySelector('.cart-link__icon')
         const newQuantityElement = newContent.querySelector('.cart-drawer__title-count')
-        if (cartIcon && newQuantityElement) {
-            const cartQuantity = cartIcon.querySelector('.cart-link__count')
+        if (newQuantityElement) {
+            const cartQuantities = document.querySelectorAll('.cart-link__count')
             const newQuantityText = newQuantityElement.innerText.substring(1, newQuantityElement.innerText.length - 1)
 
-            if (cartQuantity && newQuantityText) {
-                cartQuantity.innerText = newQuantityText
-                const newQuantity = +newQuantityText
-                if (newQuantity && newQuantity === 1) {
-                    cartQuantity.style.visibility = 'visible'
+            if (cartQuantities.length > 0 && newQuantityText) {
+                for (const quantity of cartQuantities) {
+                    quantity.innerText = newQuantityText
+                    const newQuantity = +newQuantityText
+                    if (newQuantity && newQuantity === 1) {
+                        quantity.style.visibility = 'visible'
+                    }
                 }
             }
-        } else if (cartIcon && !newQuantityElement) {
-            const cartQuantity = cartIcon.querySelector('.cart-link__count')
-            if (cartQuantity) {
-                cartQuantity.innerText = 0
-                cartQuantity.style.visibility = 'hidden'
+        } else {
+            const cartQuantities = document.querySelectorAll('.cart-link__count')
+            for (const quantity of cartQuantities) {
+                //if (cartQuantity) {
+                    quantity.innerText = 0
+                    quantity.style.visibility = 'hidden'
+                //}
             }
         }
     }

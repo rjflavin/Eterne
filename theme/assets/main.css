@@ -2458,6 +2458,9 @@ main-navigation {
   text-align: center;
   white-space: nowrap;
 }
+.m-r-10 {
+  right: -10px;
+}
 [dir=rtl] .cart-link__count {
   right: auto;
   left: -5px;
