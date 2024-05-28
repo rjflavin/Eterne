@@ -5,6 +5,13 @@
     "cart-drawer": {
       "type": "cart-drawer",
       "settings": {
+        "product_list_you_may_like": [
+          "90s-brief-black",
+          "amina",
+          "dress",
+          "bandeau-bra-1",
+          "bella-tank-one-piece-1"
+        ]
       }
     },
     "pop-up": {
