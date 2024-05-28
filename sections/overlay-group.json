@@ -4,7 +4,6 @@
   "sections": {
     "cart-drawer": {
       "type": "cart-drawer",
-      "disabled": true,
       "settings": {
         "title_you_may_like": "You May Also like",
         "product_list_you_may_like": [
