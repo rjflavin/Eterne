@@ -141,7 +141,7 @@
     min-width: 100%;
   }
 }
-.collection__sort-category-wrap {
+.collection__sort-category-fieldset {
   display: flex;
   flex-direction: column;
   margin-bottom: 0;
@@ -166,9 +166,6 @@
   .collection__sort-category:nth-child(2) {
     margin-bottom: 19px;
   }
-}
-.collection__sort-category:last-child {
-  margin-bottom: 0;
 }
 .collection__sort-category[data-is-filter-category-open=true] [data-filter-category-status=plus] {
   display: none;

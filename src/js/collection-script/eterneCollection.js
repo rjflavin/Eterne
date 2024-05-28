@@ -370,7 +370,7 @@ export class EterneCollection extends HTMLElement {
     }
 
     if (isClickOnSeeMore) {
-      const sortCategoryWrapperElement = event.target.closest('.collection__sort-category-wrap');
+      const sortCategoryWrapperElement = event.target.closest('.collection__sort-category-fieldset');
       const optionsElements = sortCategoryWrapperElement.querySelectorAll('li');
       const seeMoreElement = sortCategoryWrapperElement.querySelector('.collection__sort-category-see-more');
       const seeMoreTextElement = sortCategoryWrapperElement.querySelector('.collection__sort-category-see-more-text');
