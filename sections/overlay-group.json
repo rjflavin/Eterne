@@ -4,7 +4,9 @@
   "sections": {
     "cart-drawer": {
       "type": "cart-drawer",
+      "disabled": true,
       "settings": {
+        "title_you_may_like": "You May Also like",
         "product_list_you_may_like": [
           "90s-brief-black",
           "amina",
@@ -20,16 +22,21 @@
         "heading": {
           "type": "heading",
           "settings": {
+            "heading": "Sign up and save",
+            "heading_size": "h4"
           }
         },
         "text": {
           "type": "text",
           "settings": {
+            "text": "<p>Entice customers to sign up for your mailing list with discounts or exclusive offers.<\/p>",
+            "text_size": ""
           }
         },
         "newsletter-signup": {
           "type": "newsletter-signup",
           "settings": {
+            "button_style": "primary"
           }
         }
       },
@@ -39,6 +46,18 @@
         "newsletter-signup"
       ],
       "settings": {
+        "trigger": "delay",
+        "delay": 5,
+        "show_to_guests_only": true,
+        "show_on_mobile": true,
+        "dismiss_days": 30,
+        "position": "justify-center items-center",
+        "text_align": "text-center",
+        "heading_color": "#070707",
+        "text_color": "#070707",
+        "bg_color": "#ffffff",
+        "bg_grad": "",
+        "tint_opacity": 0
       }
     }
   },
