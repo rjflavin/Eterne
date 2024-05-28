@@ -84,7 +84,6 @@ class CartFlyover extends HTMLElement {
     }
 
     updateNavBar = (newContent) => {
-        //const cartIcon = document.querySelector('.cart-link__icon')
         const newQuantityElement = newContent.querySelector('.cart-drawer__title-count')
         if (newQuantityElement) {
             const cartQuantities = document.querySelectorAll('.cart-link__count')
@@ -102,10 +101,8 @@ class CartFlyover extends HTMLElement {
         } else {
             const cartQuantities = document.querySelectorAll('.cart-link__count')
             for (const quantity of cartQuantities) {
-                //if (cartQuantity) {
-                    quantity.innerText = 0
-                    quantity.style.visibility = 'hidden'
-                //}
+                quantity.innerText = 0
+                quantity.style.visibility = 'hidden'
             }
         }
     }
