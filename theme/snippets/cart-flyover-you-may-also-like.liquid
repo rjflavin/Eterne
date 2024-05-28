@@ -5,12 +5,12 @@
       {% for item in product_list_you_may_like %}
         <a {% if item.url %}href="{{ item.url }}"{% endif %} class="swiper-slide cart-flyover-you-may-also-like-swiper-item">
           <div class="cart-flyover-you-may-also-like-swiper-item-container">
+            {% assign image = item.images | first %}
             <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
-              {% assign image = item.images | first %}
-              <img
-                src="{{ image | image_url }}"
+              <div
+                style="background-image: url({{ image | image_url }});"
                 class="cart-flyover-you-may-also-like-swiper-item__image"
-              >
+              ></div>
             </div>
             {% assign color = item.first_available_variant.options | first %}
             <div class="cart-flyover-you-may-also-like-swiper-item__text">{{ item.title }} {{ color }}</div>
