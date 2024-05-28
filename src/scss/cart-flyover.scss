@@ -102,7 +102,7 @@
         max-height: calc(100vh - 238px);
 
         @include for-mobile {
-            padding: 0 12.5px 0 14px;
+            padding: 0;
         }
 
         &__full-height {

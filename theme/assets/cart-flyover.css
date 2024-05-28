@@ -88,7 +88,7 @@
 }
 @media (max-width: 767px) {
   .cart-flyover-list {
-    padding: 0 12.5px 0 14px;
+    padding: 0;
   }
 }
 .cart-flyover-list__full-height {
