@@ -8,6 +8,17 @@
     "theme_support_url": "http:\/\/cleancanvas.co.uk\/support\/symmetry\/"
   },
   {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cart_note_text",
+        "label": "Cart note text",
+        "default": "Add a note to your order"
+      }
+    ]
+  },
+  {
     "name": "Layout",
     "settings": [
       {

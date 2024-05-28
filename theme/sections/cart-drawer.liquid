@@ -52,7 +52,7 @@
         </div>
       </div>
       <cart-note class="cart-flyover-footer-note disp-none-imp">
-        <label for="note">Add a note to your order</label>
+        <label for="note">{{ settings.cart_note_text }}</label>
         <textarea id="note" name="note">{{ cart.note }}</textarea>
       </cart-note>
       <a href="/checkout" class="cart-flyover-footer__checkout-button">checkout</a>
