@@ -1,5 +1,11 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
+{% if collection.handle == 'all' %}
+  <script>
+    window.location.href = '/collections/shop';
+  </script>
+{% endif %}
+
 {% assign visibleFiltersBeforeSeeMoreQuantity = 8 %}
 
 {% liquid
@@ -15,55 +21,68 @@
 
 <eterne-collection class="collection" data-is-filter-open="true">
   {% paginate collection.products by section.settings.products_per_page %}
-  <div class="collection__title-wrap">
-    {% if collection.title == 'Products' %}
-      <span class="collection__title">Shop all</span>
-    {% else %}
-      <span class="collection__title">{{ collection.title }}</span>
-    {% endif %}
-  </div>
-  <div class="collection__filter-open-btn-wrap">
-    <span class="collection__filter-block-title no-select">Sort & filter</span>
-    <div data-filter-status="plus" class="collection__filter-closed-drpd-btn">
-      {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+    <div class="collection__title-wrap">
+      {% if collection.title == 'Products' or collection.title == 'all' %}
+        <span class="collection__title">Shop all</span>
+      {% else %}
+        <span class="collection__title">{{ collection.title }}</span>
+      {% endif %}
     </div>
-  </div>
+    <div class="collection__filter-open-btn-wrap">
+      <span class="collection__filter-block-title no-select">Sort & filter</span>
+      <div data-filter-status="plus" class="collection__filter-closed-drpd-btn">
+        {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+      </div>
+    </div>
 
-  <div class="collection__content" data-id="{{ section.id }}">
-    <collection-filters-form class="collection__filters" data-id="{{ section.id }}">
-      <form id="CollectionFiltersForm" class="filtersForm">
-        <div class="filtersItemsContainer">
-          {% if collection.terms %}
-            <input type="hidden" name="q" value="{{ results.terms | escape }}">
-            <input name="options[prefix]" type="hidden" value="last">
-          {% endif %}
-          <div id="FacetsWrapperDesktop" class="filtersWrapper">
-            {% render 'filter-category-sorting',
-              visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
-            %}
-
-            {% for filter in collection.filters %}
-              {% assign filterLabel = filter.label %}
-              {% assign filterName = filter.label | downcase %}
-              {% assign filtersType = 'checkbox' %}
-
-              {% if filter.type == 'list' and filtersToDisplay contains filterName %}
-                {% render 'filter-category',
-                  filter: filter,
-                  filterLabel: filterLabel,
-                  index: forloop.index,
-                  filtersType: filtersType,
+    <div class="collection__content" data-id="{{ section.id }}">
+      <collection-filters-form class="collection__filters" data-id="{{ section.id }}">
+        <form id="CollectionFiltersForm" class="collection__filters-form">
+          <div class="collection__filters-content-wrap">
+            {% if collection.terms %}
+              <input type="hidden" name="q" value="{{ results.terms | escape }}">
+              <input name="options[prefix]" type="hidden" value="last">
+            {% endif %}
+            <div id="FacetsWrapperDesktop" class="collection__filters-content">
+              <div class="collection__radio-filters">
+                {% render 'filter-category-sorting',
                   visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
                 %}
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      </form>
-    </collection-filters-form>
+              </div>
 
-    <div class="collection__products-wrap">
-      <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
+              <div class="collection__checkbox-filters">
+                {% for filter in collection.filters %}
+                  {% assign filterLabel = filter.label %}
+                  {% assign filterName = filter.label | downcase %}
+                  {% assign filtersType = 'checkbox' %}
+                  {% assign visibleFiltresQuantity = 0 %}
+
+                  {% for value in filter.values %}
+                    {% if value.count > 0 %}
+                      {% assign visibleFiltresQuantity = visibleFiltresQuantity | plus: 1 %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if filter.type == 'list' and filtersToDisplay contains filterName %}
+                    {% if visibleFiltresQuantity > 0 %}
+                      {% render 'filter-category',
+                        filter: filter,
+                        filterLabel: filterLabel,
+                        index: forloop.index,
+                        filtersType: filtersType,
+                        visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
+                      %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </form>
+      </collection-filters-form>
+
+      <div class="collection__products-wrap">
+        <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
           {% for product in collection.products %}
             {% assign loop_color = "" %}
 
@@ -269,8 +288,8 @@
             <div data-see-more-loader class="collection__see-more-loader disp-none-imp"></div>
           </div>
         {% endif %}
+      </div>
     </div>
-  </div>
   {% endpaginate %}
 </eterne-collection>
 
