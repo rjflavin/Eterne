@@ -8,7 +8,7 @@ export class FiltersForm extends HTMLElement {
       this.onSubmitHandler(event);
     }, 100);
 
-    const facetForm = this.querySelector('form');
+    const facetForm = this.querySelector('form#CollectionFiltersForm');
     facetForm.addEventListener('input', this.debouncedOnFiltersFormSubmit.bind(this));
   }
 
@@ -51,9 +51,15 @@ export class FiltersForm extends HTMLElement {
   static renderProductGridContainer(html) {
     const newDocument = new DOMParser().parseFromString(html, 'text/html');
     const collectionContentContainerElement = newDocument.querySelector('.collection__content') || null;
+    const productsWrapperElement = newDocument.querySelector('.collection__products-wrap') || null;
+    const collectionCheckboxFiltersElement = newDocument.querySelector('.collection__checkbox-filters') || null;
 
     if (collectionContentContainerElement) {
-      document.querySelector('.collection__content').innerHTML = collectionContentContainerElement.innerHTML;
+      document.querySelector('.collection__products-wrap').innerHTML = productsWrapperElement.innerHTML;
+
+      if (collectionCheckboxFiltersElement) {
+        document.querySelector('.collection__checkbox-filters').innerHTML = collectionCheckboxFiltersElement.innerHTML;
+      }
 
       document.dispatchEvent(new CustomEvent('collection-items-updated', {
         bubbles: true,
@@ -73,6 +79,8 @@ export class FiltersForm extends HTMLElement {
 
   createSearchParams(form) {
     const formData = new FormData(form);
+    console.log('formData -', formData);
+    console.log('formData to string -', new URLSearchParams(formData).toString());
 
     return new URLSearchParams(formData).toString();
   }

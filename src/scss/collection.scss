@@ -149,7 +149,17 @@
     }
   }
 
-  &__sort-category-wrap {
+  &__filters-form {}
+
+  &__filters-content-wrap {}
+
+  &__filters-content {}
+
+  &__radio-filters {}
+
+  &__checkbox-filters {}
+
+  &__sort-category-fieldset {
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
@@ -176,10 +186,6 @@
       &:nth-child(2) {
         margin-bottom: 19px;
       }
-    }
-
-    &:last-child {
-      margin-bottom: 0;
     }
 
     &[data-is-filter-category-open="true"] {
