@@ -42,7 +42,10 @@
         <div class="show-search-link top-bar__icon">{% render 'icon-search' %}</div>
         <a href="#" class="top-bar__icon">{% render 'icon-wish-list' %}</a>
         <a href="/account" class="top-bar__icon">{% render 'icon-account' %}</a>
-        <div class="cart-link top-bar__icon">{% render 'icon-cart' %}</div>
+        <span class="cart-link top-bar__icon">
+          {% render 'icon-cart' %}
+          <span style="{% if cart.item_count <= 0 %}visibility: hidden;{% endif %}" class="cart-link__count m-r-10">{{ cart.item_count }}</span>
+        </span>
       </div>
     </div>
 
@@ -121,9 +124,7 @@
           <a href="{{ routes.cart_url }}" {% comment %}class="cart-link"{% endcomment %}>
             <span class="cart-link__icon">
               {% render 'icon-cart' %}
-              {% if cart.item_count > 0 %}
               <span style="{% if cart.item_count <= 0 %}visibility: hidden;{% endif %}" class="cart-link__count">{{ cart.item_count }}</span>
-              {% endif %}
             </span>
           </a>
         </div>
