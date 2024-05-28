@@ -1,6 +1,8 @@
 @import "mixins";
 
 .cart-flyover {
+    height: 100%;
+
     &__close-button {
         padding: 0 10px 0 0;
     }
@@ -99,9 +101,10 @@
         margin: 0 !important;
         height: 100%;
         overflow-y: auto;
-        max-height: calc(100vh - 238px);
+        max-height: calc(100vh - 234px);
 
         @include for-mobile {
+            max-height: 100%;
             padding: 0;
         }
 
