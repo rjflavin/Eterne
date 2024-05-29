@@ -12,10 +12,10 @@
 
     </div>
     <div class="recent-products-swiper-button-prev">
-      <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}">
+      <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}" loading="lazy">
     </div>
     <div class="recent-products-swiper-button-next">
-      <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}">
+      <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}" loading="lazy">
     </div>
   </div>
 
@@ -54,7 +54,7 @@
             <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
               <div class="swiper-slide-container">
                 <div class="swiper-slide-image-container">
-                  <img src="${product.images[0]?.src}" class="swiper-slide-image">
+                  <img src="${product.images[0]?.src}" class="swiper-slide-image" loading="lazy">
                   <div class="swiper-slide-image-info">
                     <div class="swiper-slide-image-info-sizes">
                       ${product && product.variantSizes &&
@@ -73,7 +73,7 @@
                     {% endif %}
                   </div>
                   <div class="swiper-slide-image-info-button">
-                    <img src="{{ 'plus-icon.png' | asset_img_url }}">
+                    <img src="{{ 'plus-icon.png' | asset_img_url }}" loading="lazy">
                   </div>
                   <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]?.src}" />
                   <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]?.src}" />

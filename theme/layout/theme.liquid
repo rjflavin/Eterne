@@ -164,6 +164,8 @@
     {{ 'animate-on-scroll.css' | asset_url | stylesheet_tag: preload: true }}
   {% endif %}
 
+  <script src="{{ 'lazy-load-handlers.js' | asset_url }}" defer></script>
+
   {{ content_for_header }}
 
   {%- if settings.custom_html_head -%}

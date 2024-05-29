@@ -50,13 +50,13 @@
                     <div class="new-in__img-wrap">
                       <div class="new-in__item-bg-imgs-wrap">
                         <div
-                          class="new-in__item-bg-img"
-                          style="background-image: url('{{ first_image | img_url: 'master' }}')"
+                          class="new-in__item-bg-img lazyLoad"
+                          data-bgimage="{{ first_image | img_url: 'master' }}"
                         ></div>
                         {% if second_image != blank %}
                           <div
-                            class="new-in__item-bg-img-hover"
-                            style="background-image: url('{{ second_image | img_url: 'master' }}')"
+                            class="new-in__item-bg-img-hover lazyLoad"
+                            data-bgimage="{{ second_image | img_url: 'master' }}"
                           ></div>
                         {% endif %}
                       </div>

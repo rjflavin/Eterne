@@ -108,11 +108,21 @@ class CartFlyover extends HTMLElement {
     }
 
     updateCartItems = (newContent) => {
-        const oldList = this.querySelector('.cart-flyover-list')
-        const newList = newContent.querySelector('.cart-flyover-list')
+        const oldList = this.querySelector('[name="cart-flyover-item-list"]')
+        const newList = newContent.querySelector('[name="cart-flyover-item-list"]')
         oldList.innerHTML = newList.innerHTML
 
+        this.updateLazyImages()
         this.setEventListeners()
+    }
+
+    updateLazyImages = () => {
+        const items = this.querySelectorAll('.cart-flyover-item__image.lazyLoad')
+        for (const item of items) {
+            if (item.dataset.bgimage) {
+                item.style.backgroundImage = "url('" + item.dataset.bgimage + "')"
+            }
+        }
     }
 
     updateItemsContainer = (newContent) => {

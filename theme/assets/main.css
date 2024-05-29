@@ -8632,7 +8632,7 @@ carousel-slider[inactive] .slider-nav__btn {
   outline: 0;
   background-color: rgb(var(--body-bg-color));
 }
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .drawer {
     width: min(88.5%, 348px);
   }
