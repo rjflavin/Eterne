@@ -19,7 +19,7 @@
   assign filtersToDisplay = section.settings.filters_value | split: ',' | downcase
 %}
 
-<eterne-collection class="collection" data-is-filter-open="true">
+<eterne-collection class="collection" data-is-filter-open="false">
   {% paginate collection.products by section.settings.products_per_page %}
     <div class="collection__title-wrap">
       {% if collection.title == 'Products' or collection.title == 'all' %}
