@@ -425,6 +425,19 @@
   font-size: 11px;
   line-height: 15.4px;
 }
+.collection__item-quick-add-btn-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 150;
+  padding: 1.2722646vw;
+  cursor: pointer;
+}
+@media (max-width: 767px) {
+  .collection__item-quick-add-btn-wrap {
+    padding: 20px 5px 5px 20px;
+  }
+}
 .collection__item-quick-add-btn {
   display: none;
 }
@@ -451,19 +464,6 @@
   .collection__item-quick-add-btn svg {
     width: 7px;
     height: 7px;
-  }
-}
-.collection__item-quick-add-btn-wrap {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 150;
-  padding: 1.2722646vw;
-  cursor: pointer;
-}
-@media (max-width: 393px) {
-  .collection__item-quick-add-btn-wrap {
-    padding: 5px;
   }
 }
 .collection__item-link {
