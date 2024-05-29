@@ -1,17 +1,6 @@
-{%- comment -%}
-  Parameters:
-  - item {LineItem} - Cart line item.
-  - forloop {forloop} - Cart line item for-loop iterator object.
-  - drawer {boolean} [optional] - Is this line item in a drawer? (Default is false)
-  - animate {boolean} [optional] - Apply page load animation to this item. (Default is false)
-
-  Example usage:
-  {% render 'cart-item', item: line_item, forloop: forloop, drawer: true, animate: true %}
-{%- endcomment -%}
-
 <div class="product-{{ item.product.handle }} cart-flyover-item" variant-id="{{ item.variant.id }}">
   <div>
-    <a href="{{ item.url }}" style="background-image: url({{ item.image | image_url }});" class="cart-flyover-item__image"></a>
+    <a href="{{ item.url }}" data-bgimage="{{ item.image | image_url }}" class="cart-flyover-item__image lazyLoad"></a>
   </div>
 
   <div class="cart-flyover-item-description">

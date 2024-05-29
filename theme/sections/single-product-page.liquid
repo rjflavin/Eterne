@@ -890,7 +890,7 @@
             {%- for product in recommendations.products -%}
               <li class="product">
                 <a href="{{ product.url }}">
-                  <img class="product__img" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.featured_image.alt }}">
+                  <img class="product__img" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.featured_image.alt }}" loading="lazy">
                   <p class="product__title">{{ product.title }}</p>
                   <p class="product__price">{{ product.price | money}}</p>
                 </a>

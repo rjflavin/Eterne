@@ -17,8 +17,8 @@
               <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
                 {% if image %}
                   <div
-                    style="background-image: url({{ image | image_url }});"
-                    class="cart-flyover-you-may-also-like-swiper-item__image"
+                    data-bgimage="{{ image | image_url }}"
+                    class="cart-flyover-you-may-also-like-swiper-item__image lazyLoad"
                   ></div>
                 {% endif %}
               </div>
@@ -32,10 +32,10 @@
         {% endfor %}
       </div>
       <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-prev">
-        <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}">
+        <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}" loading="lazy">
       </div>
       <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-next">
-        <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}">
+        <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}" loading="lazy">
       </div>
     </div>
   </div>
