@@ -1,6 +1,7 @@
 {{ 'new-in-slider.css' | asset_url | stylesheet_tag }}
 
 {% assign collection_handle = section.settings.selected_collection.handle %}
+{% assign now = "now" | date: "%s" %}
 
 <div class="new-in">
   <div class="new-in__title-wrap">
@@ -15,6 +16,7 @@
           {% assign loop_color = "" %}
 
           {% for variant in product.variants %}
+            {% assign variant_available_from = variant.metafields.custom.available_from | date: "%s" %}
             {% assign color_value = "" %}
             {% for option in variant.options %}
               {% if forloop.first %}
@@ -40,31 +42,33 @@
                 {% endif %}
               {% endfor %}
 
-              <div class="new-in__item swiper-slide">
-                <div class="new-in__item-inner">
-                  <a href="{{ variant_url }}" class="new-in__item-link"></a>
+              {% if variant_available_from < now or variant_available_from == blank %}
+                <div class="new-in__item swiper-slide">
+                  <div class="new-in__item-inner">
+                    <a href="{{ variant_url }}" class="new-in__item-link"></a>
 
-                  <div class="new-in__img-wrap">
-                    <div class="new-in__item-bg-imgs-wrap">
-                      <div
-                        class="new-in__item-bg-img lazyLoad"
-                        data-bgimage="{{ first_image | img_url: 'master' }}"
-                      ></div>
-                      {% if second_image != blank %}
+                    <div class="new-in__img-wrap">
+                      <div class="new-in__item-bg-imgs-wrap">
                         <div
-                          class="new-in__item-bg-img-hover lazyLoad"
-                          data-bgimage="{{ second_image | img_url: 'master' }}"
+                          class="new-in__item-bg-img lazyLoad"
+                          data-bgimage="{{ first_image | img_url: 'master' }}"
                         ></div>
-                      {% endif %}
+                        {% if second_image != blank %}
+                          <div
+                            class="new-in__item-bg-img-hover lazyLoad"
+                            data-bgimage="{{ second_image | img_url: 'master' }}"
+                          ></div>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="new-in__item-text-wrap">
+                      <div class="new-in__item-title">{{ product.title }} {{ color_value }}</div>
+                      <div class="new-in__item-price">{{ product.price | money_without_trailing_zeros }}</div>
                     </div>
                   </div>
-
-                  <div class="new-in__item-text-wrap">
-                    <div class="new-in__item-title">{{ product.title }} {{ color_value }}</div>
-                    <div class="new-in__item-price">{{ product.price | money_without_trailing_zeros }}</div>
-                  </div>
                 </div>
-              </div>
+              {% endif %}
             {% else %}
               {% continue %}
             {% endif %}
