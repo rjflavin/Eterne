@@ -30,6 +30,16 @@ eval("const desktopMenuElement = document.getElementById('DesktopMenu');\nconst 
 
 /***/ }),
 
+/***/ "./src/js/header-script/hide-on-scroll.js":
+/*!************************************************!*\
+  !*** ./src/js/header-script/hide-on-scroll.js ***!
+  \************************************************/
+/***/ (() => {
+
+eval("let oldValue = window.pageYOffset || document.documentElement.scrollTop;\nlet newValue = window.pageYOffset || document.documentElement.scrollTop;\nconst headerElement = document.querySelector('page-header');\nwindow.addEventListener('scroll', () => {\n  // Get the new Value\n  newValue = window.pageYOffset;\n\n  //Subtract the two and conclude\n  if (oldValue - newValue < 0 && newValue > headerElement.offsetHeight) {\n    headerElement.style.opacity = 0;\n    headerElement.style.visibility = 'hidden';\n    headerElement.style.zIndex = '-1';\n  } else if (oldValue - newValue > 0) {\n    headerElement.style.opacity = 1;\n    headerElement.style.visibility = 'visible';\n    headerElement.style.zIndex = '999';\n  }\n\n  // Update the old value\n  oldValue = newValue <= 0 ? 0 : newValue;\n}, false);\n\n//# sourceURL=webpack://my-webpack-project/./src/js/header-script/hide-on-scroll.js?");
+
+/***/ }),
+
 /***/ "./src/js/header-script/index.js":
 /*!***************************************!*\
   !*** ./src/js/header-script/index.js ***!
@@ -37,7 +47,7 @@ eval("const desktopMenuElement = document.getElementById('DesktopMenu');\nconst 
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _burger_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./burger-menu */ \"./src/js/header-script/burger-menu.js\");\n/* harmony import */ var _desktop_dropdowns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./desktop-dropdowns */ \"./src/js/header-script/desktop-dropdowns.js\");\n/* harmony import */ var _desktop_dropdowns__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_desktop_dropdowns__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/header-script/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _burger_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./burger-menu */ \"./src/js/header-script/burger-menu.js\");\n/* harmony import */ var _desktop_dropdowns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./desktop-dropdowns */ \"./src/js/header-script/desktop-dropdowns.js\");\n/* harmony import */ var _desktop_dropdowns__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_desktop_dropdowns__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _hide_on_scroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hide-on-scroll */ \"./src/js/header-script/hide-on-scroll.js\");\n/* harmony import */ var _hide_on_scroll__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_hide_on_scroll__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/header-script/index.js?");
 
 /***/ }),
 
