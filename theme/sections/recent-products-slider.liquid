@@ -48,42 +48,44 @@
       const noImage = `{{ 'no-image.webp' | asset_url }}`
       let wrapperCode = ''
       for (const product of products) {
-        wrapperCode = wrapperCode + `
-          <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
-            <div class="swiper-slide-container">
-              <div class="swiper-slide-image-container">
-                <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
-                <div class="swiper-slide-image-info">
-                  <div class="swiper-slide-image-info-sizes">
-                    ${product && product.variantSizes && 
-                      product.variantSizes.map(size => {
-                        return `<div class="swiper-slide-image-info-sizes-item ${product.size === size && 'selected-size'}">${size}</div>`
-                      }).join("")
-                    }
-                  </div>
-                  {% if section.settings.add_to_cart_text %}
-                    <button class="swiper-slide-image-info-cart-button">{{ section.settings.add_to_cart_text }}</button>
-                    <div class="swiper-slide-image-info-cart-loader">
-                      <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                      <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                      <div class="swiper-slide-image-info-cart-loader-circle"></div>
+        if (product.variantAvailableFrom === '' || +product.variantAvailableFrom < Date.now()) {
+          wrapperCode = wrapperCode + `
+            <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
+              <div class="swiper-slide-container">
+                <div class="swiper-slide-image-container">
+                  <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
+                  <div class="swiper-slide-image-info">
+                    <div class="swiper-slide-image-info-sizes">
+                      ${product && product.variantSizes &&
+                        product.variantSizes.map(size => {
+                          return `<div class="swiper-slide-image-info-sizes-item ${product.size === size && 'selected-size'}">${size}</div>`
+                        }).join("")
+                      }
                     </div>
-                  {% endif %}
+                    {% if section.settings.add_to_cart_text %}
+                      <button class="swiper-slide-image-info-cart-button">{{ section.settings.add_to_cart_text }}</button>
+                      <div class="swiper-slide-image-info-cart-loader">
+                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="swiper-slide-image-info-button">
+                    <img src="{{ 'plus-icon.png' | asset_img_url }}" loading="lazy">
+                  </div>
+                  <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]?.src}" />
+                  <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]?.src}" />
                 </div>
-                <div class="swiper-slide-image-info-button">
-                  <img src="{{ 'plus-icon.png' | asset_img_url }}" loading="lazy">
+                <div class="swiper-slide-text-container">
+                  <div class="swiper-slide-title">${product.title}</div>
+                  <div class="swiper-slide-title">${product.color}</div>
+                  <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
                 </div>
-                <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]?.src}" />
-                <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]?.src}" />
               </div>
-              <div class="swiper-slide-text-container">
-                <div class="swiper-slide-title">${product.title}</div>
-                <div class="swiper-slide-title">${product.color}</div>
-                <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
-              </div>
-            </div>
-          </a>
-        `
+            </a>
+          `
+        }
       }
       const wrapper = document.querySelector('.swiper-wrapper')
       if (wrapper) {

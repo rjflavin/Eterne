@@ -83,17 +83,14 @@
         "media_grouping_option": "Color,Colour,Couleur,Farbe"
       }
     },
-    "related-products": {
-      "type": "related-products",
+    "recent-products-slider": {
+      "type": "recent-products-slider",
       "settings": {
-        "title": "You may also like",
-        "show_vendor": false,
-        "grid": 4
       }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "recent-products-slider"
   ]
 }
