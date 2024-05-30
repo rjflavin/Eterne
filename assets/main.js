@@ -2724,6 +2724,15 @@ const ProductForm = class extends HTMLElement {
         if (cartForm && cartForm.enableAjaxUpdate) {
           cartForm.refresh();
         }
+      } else if (document.querySelector('cart-flyover')) {
+        const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+          bubbles: true
+        })
+        document.dispatchEvent(e)
+        const event = new CustomEvent("dispatch:cart-drawer:open", {
+          bubbles: true
+        })
+        document.dispatchEvent(event)
       } else if (theme.settings.afterAddToCart === 'page') {
         // Allow the tick animation to complete
         setTimeout(() => {

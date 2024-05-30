@@ -1,16 +1,43 @@
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'HelveticaNeueLight.otf' | asset_url }}");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'helvetica-neue-roman.ttf' | asset_url }}");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'helvetica-neue-medium.ttf' | asset_url }}");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'helvetica-neue-bold.ttf' | asset_url }}");
+  font-weight: 700;
+}
+
 html {
   --black1: #000000;
   --black2: #2B2B2B;
   --gray1: #585858;
   --gray2: #8B8B8B;
+  --gray3: #D9D9D9;
+  --gray4: #8F8F8F;
+  --gray5: #A8A8A8;
   --white: #FFFFFF;
+  --transparent-white: #FFFFFFCC;
   --red1: #dc0202;
   --red2: #FF6F5B;
-  --green: #3DA63D;
-  --green: #3DA63D;
   scroll-behavior: smooth;
   --app-width: 100%;
   --app-height: 100%;
+  padding-bottom: 0 !important;
 }
 
 button {
@@ -22,7 +49,7 @@ div, span, button, input, label, li, p, a, u, h1, h2, h3, h4, h5, h6, blockquote
   font-family: "Helvetica Neue", sans-serif;
   font-weight: 400;
   color: var(--black2);
-  word-wrap: break-word;
+  word-break: break-word;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -53,7 +80,7 @@ input[type="number"]:focus {
   -moz-appearance: textfield;
 }
 
-.no-slct {
+.no-select {
   -ms-user-select: none;
   -webkit-touch-callout: none;
   -moz-user-select: none;

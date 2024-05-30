@@ -1,7 +1,6 @@
 .collage {
   width: 100%;
   margin: 0 auto;
-  max-width: 1920px;
 }
 .collage .only-desk {
   display: flex;
@@ -19,10 +18,24 @@
     display: flex;
   }
 }
+.collage__one-image-row:hover .caption__link, .collage__two-images-row:hover .caption__link {
+  background-color: var(--white);
+  color: var(--black2);
+  transition: all 0.2s;
+}
 .collage__one-image-row .caption, .collage__two-images-row .caption {
   position: absolute;
   left: 40px;
   bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}
+@media (max-width: 767px) {
+  .collage__one-image-row .caption, .collage__two-images-row .caption {
+    left: 20px;
+    bottom: 20px;
+  }
 }
 .collage__one-image-row .caption__text, .collage__two-images-row .caption__text {
   margin-bottom: 15px;
@@ -51,6 +64,8 @@
   text-align: center;
   border: 1px solid var(--white);
   padding: 10px 22px;
+  transition: all 0.2s;
+  width: fit-content;
 }
 @media (max-width: 767px) {
   .collage__one-image-row .caption__link, .collage__two-images-row .caption__link {
@@ -124,7 +139,7 @@
   display: flex;
   height: 100%;
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__two-images-row-inner {
     min-width: max-content;
   }
@@ -151,7 +166,7 @@
   overflow: hidden;
   position: relative;
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__two-images-row .media {
     display: block;
     width: 80vw;
@@ -175,7 +190,7 @@
   display: flex;
   width: 100%;
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__three-images-row-inner {
     min-width: max-content;
   }
@@ -189,7 +204,7 @@
   overflow: hidden;
   width: 33.3333333333%;
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__three-images-row .image-item {
     height: 75vh;
   }
@@ -197,7 +212,7 @@
 .collage__three-images-row .image-item .image-wrapper {
   height: 100%;
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__three-images-row .image-item .image-wrapper {
     display: block;
     width: 80vw;
@@ -217,9 +232,10 @@
   align-items: center;
   flex-direction: column;
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__three-images-row .caption {
     left: 20px;
+    bottom: 20px;
     align-items: start;
     transform: none;
   }
@@ -233,7 +249,7 @@
   text-align: center;
   color: var(--white);
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__three-images-row .caption__text p {
     font-size: 20px;
   }
@@ -250,8 +266,9 @@
   color: var(--white);
   width: max-content;
 }
-@media (max-width: 1063px) {
+@media (max-width: 1023px) {
   .collage__three-images-row .caption__link {
-    font-size: 20px;
+    font-size: 14px;
+    line-height: 14px;
   }
 }

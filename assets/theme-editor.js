@@ -164,7 +164,8 @@ const customEvents = [
   'dispatch:cart-drawer:refresh',
   'dispatch:cart-drawer:close',
   'on:debounced-resize',
-  'on:breakpoint-change'
+  'on:breakpoint-change',
+  'dispatch:cart-flyover:refresh'
 ];
 customEvents.forEach((event) => {
   document.addEventListener(event, (evt) => {
