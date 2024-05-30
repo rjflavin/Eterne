@@ -367,7 +367,7 @@
                 <h5 class="product-title">{{ product.title | escape }}</h5>
           {% when 'price' %}
                 {% render 'price', product: product, show_currency_code: settings.product_currency_code_enabled, for_variant_picker: true, current_variant: current_variant %}
-              </div>
+            </div>
             </div>
 
           {% when 'product-variant-picker' %}
@@ -894,7 +894,7 @@
       {%- endif -%}
     </div>
 
-    <hr {% unless block.settings.show_in_quickbuy %}class="not-in-quickbuy"{% endunless %} {{ block.shopify_attributes }}>
+    <hr {% unless block.settings.show_in_quickbuy %}class="not-in-quickbuy recommendations-devider"{% endunless %} {{ block.shopify_attributes }}>
     {%- if product.description != blank -%}
       <h4 class="product-details">Details  –</h4>
       <div class="{% unless block.settings.show_in_quickbuy %}not-in-quickbuy{% endunless %}{% if block.settings.show_in_tab %} product-info-accordion{% endif %}" {{ block.shopify_attributes }}>
