@@ -50,15 +50,23 @@
   }
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-image {
-  height: auto;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-container {
   position: relative;
+  padding-top: 140%;
+  width: 100%;
 }
 @media (max-width: 767px) {
   .recent-products-swiper .swiper-wrapper .swiper-slide-image-container {
     height: 346px;
     width: 231px;
+    padding-top: 0;
   }
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info {
