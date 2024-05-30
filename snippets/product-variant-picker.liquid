@@ -134,7 +134,13 @@
                       {{ size_chart_link }}
                     </div>
                   {%- else -%}
-                    <div class="label">{{- option.name -}}{% if is_color_selector %}:
+                    <div class="label">
+                    {% if option.name == 'Material' %}
+                      Available in
+                    {% else %}
+                      {{ option.name }}
+                    {% endif %}
+                    {% if is_color_selector %}:
                     {% endif %}</div>
                   {%- endif -%}
                   <div class="option-selector__btns flex flex-wrap">
