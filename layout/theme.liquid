@@ -173,6 +173,8 @@
     {{- settings.custom_html_head -}}
     <!-- CC Custom Head End -->
   {%- endif -%}
+
+ {% render 'giftship' %} 
 </head>
 
 <body class="template-{{ template | split: '.' | first | handle }}
