@@ -32,28 +32,27 @@
     };
 
     const setUpSlides = (products) => {
-      const slider = document.querySelector('.recent-products-slider')
-      if (slider && products.length === 0) {
-        slider.classList.add('hide')
-      } else {
-        const MAX_PRODUCT_AMOUNT = 4
-        if (products.length <= MAX_PRODUCT_AMOUNT) {
-          const leftArrow = document.querySelector('.recent-products-swiper-button-prev')
-          const rightArrow = document.querySelector('.recent-products-swiper-button-next')
-          if (leftArrow && rightArrow) {
-            leftArrow.classList.add('hide')
-            rightArrow.classList.add('hide')
-          }
+      const MAX_PRODUCT_AMOUNT = 4
+      const slider = document.querySelector('.section-recent-products-slider')
+      if (slider && products.length <= MAX_PRODUCT_AMOUNT) {
+        const leftArrow = document.querySelector('.recent-products-swiper-button-prev')
+        const rightArrow = document.querySelector('.recent-products-swiper-button-next')
+        if (leftArrow && rightArrow) {
+          leftArrow.classList.add('hide')
+          rightArrow.classList.add('hide')
         }
+      } else if (!slider || products.length === 0) {
+        slider.classList.add('hide')
       }
 
+      const noImage = `{{ 'no-image.webp' | asset_url }}`
       let wrapperCode = ''
       for (const product of products) {
         wrapperCode = wrapperCode + `
           <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
             <div class="swiper-slide-container">
               <div class="swiper-slide-image-container">
-                <img src="${product.images[0]?.src}" class="swiper-slide-image" loading="lazy">
+                <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
                 <div class="swiper-slide-image-info">
                   <div class="swiper-slide-image-info-sizes">
                     ${product && product.variantSizes && 

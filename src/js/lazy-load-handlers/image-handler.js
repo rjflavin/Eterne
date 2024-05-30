@@ -19,8 +19,8 @@ if ('IntersectionObserver' in window) {
     });
 } else {
     // No interaction support? Load all background images automatically
-    const headers = document.querySelectorAll('.header-container');
-    headers.forEach(header => {
-        header.style.backgroundImage = "url('" + header.dataset.bgimage + "')";
+    const items = document.querySelectorAll('.lazyLoad');
+    items.forEach(item => {
+        item.style.backgroundImage = "url('" + item.dataset.bgimage + "')";
     });
 }

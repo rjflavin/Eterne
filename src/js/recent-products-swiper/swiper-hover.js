@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const itemImage = item.querySelector('.swiper-slide-image')
             const secondImage = item.querySelector('.recent-products-swiper-second-image')
             if (itemImage && secondImage && secondImage.value && secondImage.value !== 'undefined') {
-                itemImage.src = secondImage.value
+                itemImage.style.backgroundImage = "url('" + secondImage.value + "')"
             }
 
             const itemInfoButton = item.querySelector('.swiper-slide-image-info-button')
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const itemImage = item.querySelector('.swiper-slide-image')
             const firstImage = item.querySelector('.recent-products-swiper-first-image')
             if (itemImage && firstImage && firstImage.value && firstImage.value !== 'undefined') {
-                itemImage.src = firstImage.value
+                itemImage.style.backgroundImage = "url('" + firstImage.value + "')"
             }
         });
 

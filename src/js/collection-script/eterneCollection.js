@@ -42,6 +42,10 @@ export class EterneCollection extends HTMLElement {
               } else {
                 this.productsContainerElement.dataset.nextUrl = '';
               }
+              const items = document.querySelectorAll('.lazyLoad');
+              items.forEach(item => {
+                  item.style.backgroundImage = "url('" + item.dataset.bgimage + "')";
+              });
             });
         }
       }
@@ -63,6 +67,11 @@ export class EterneCollection extends HTMLElement {
 
       this.seeMoreButtonElement.classList.add('disp-none-imp');
       this.seeMoreLoaderElement.classList.add('disp-none-imp');
+
+      const items = document.querySelectorAll('.lazyLoad');
+      items.forEach(item => {
+        item.style.backgroundImage = "url('" + item.dataset.bgimage + "')";
+      });
 
       window.addEventListener('scroll', this.scrollDebounceHandler);
     };
