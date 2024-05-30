@@ -42,7 +42,7 @@
           "type": "buy-buttons",
           "settings": {
             "show_quantity_selector": false,
-            "enable_payment_button": true,
+            "enable_payment_button": false,
             "show_backorder_text": false,
             "show_pickup_availability": true,
             "show_gift_card_recipient": false
@@ -86,6 +86,8 @@
     "recent-products-slider": {
       "type": "recent-products-slider",
       "settings": {
+        "title": "RECENTLY VIEWED",
+        "add_to_cart_text": "Add to bag"
       }
     }
   },
