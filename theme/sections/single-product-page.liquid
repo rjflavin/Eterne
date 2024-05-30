@@ -218,8 +218,6 @@
             <span class="view-in-space__text">{{ 'products.product.xr_button' | t }}</span>
           </button>
         {% endif %}
-
-        {% render 'product-label-detail', product: product, current_variant: current_variant %}
       </div>
 
       {% if product.media.size > 1 %}
@@ -304,9 +302,58 @@
       {%- endif -%}
     {%- endif -%}
   </media-gallery>
+  <carousel-slider class="{% if section.settings.gallery_layout contains 'collage' or section.settings.gallery_layout contains 'columns' %}mobile-only{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ section.settings.accessibility_info | escape }}" data-dynamic-height="true" data-dispatch-events="true">
+      <div class="slider slider--no-scrollbar" id="slider-{{ section.id }}" aria-live="polite" aria-atomic="true">
+        <div class="slider__grid">
+          {%- for media in product.media -%}
+            <div class="slider__item{% if forloop.index0 == initial_slide %} is-active{% endif %}"
+                 role="group" aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
+                 aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+                    {%- unless forloop.index0 == initial_slide %} tabindex="-1"{% endunless %}
+                    {%- if request.design_mode %} data-index="{{ forloop.index0 }}"{% endif %}
+                 data-media-id="{{ media.id }}">
+
+            {%- if media.media_type == 'image' and section.settings.enable_zoom -%}
+              <a class="block show-gallery" href="{{ media.preview_image | image_url: width: zoom_size }}" aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index }}">
+                {%- endif -%}
+
+                {%- liquid
+                  if forloop.index0 == initial_slide
+                    assign loading = 'eager'
+                  else
+                    assign loading = 'lazy'
+                  endif
+
+                  render 'media', media: media, product: product, min_aspect_ratio: min_aspect_ratio, loading: loading
+                -%}
+
+                {%- if media.media_type == 'image' and section.settings.enable_zoom -%}
+              </a>
+              {%- endif -%}
+
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if product.media.size > 1 -%}
+        <div class="slider-nav slider-nav--floating desktop-only js-only">
+          <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
+            <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
+            {% render 'icon-chevron-left' %}
+          </button>
+
+          <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="next" aria-controls="slider-{{ section.id }}">
+            <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
+            {% render 'icon-chevron-right' %}
+          </button>
+        </div>
+      {%- endif -%}
+    </carousel-slider>
 
   <div class="detail product-column-right" data-cc-animate data-cc-animate-delay="0.2s">
     <div class="product-form{% if section.settings.enable_sticky_columns %} sticky-content-container{% endif %}" data-ajax-add-to-cart="true" data-product-id="{{ product.id }}">
+      <div class="product-type">Styles > {{ product.type }}</div>
       {% for block in section.blocks %}
         {% case block.type %}
           {% when '@app' %}
@@ -322,44 +369,6 @@
                 {% render 'price', product: product, show_currency_code: settings.product_currency_code_enabled, for_variant_picker: true, current_variant: current_variant %}
               </div>
             </div>
-
-          {% when 'description' %}
-            {%- if product.description != blank -%}
-              <div class="{% unless block.settings.show_in_quickbuy %}not-in-quickbuy{% endunless %}{% if block.settings.show_in_tab %} product-info-accordion{% endif %}" {{ block.shopify_attributes }}>
-                {% if block.settings.show_in_tab %}
-                  <details-disclosure>
-                    <details class="disclosure"{% if block.settings.open_tab %} open{% endif %}>
-                      <summary class="disclosure__title">
-                        {%- if block.settings.icon == blank -%}
-                          {{- 'products.product.description' | t -}}
-                        {%- else -%}
-                          <div class="with-icon">
-                            {% render 'icon', icon: block.settings.icon, size: 'small' %}
-                            <span class="with-icon__beside">{{ 'products.product.description' | t }}</span>
-                          </div>
-                        {%- endif -%}
-                      </summary>
-                      <div class="disclosure__panel has-motion">
-                        <div class="disclosure__content rte cf">
-                          {{- product.description -}}
-                        </div>
-                      </div>
-                    </details>
-                  </details-disclosure>
-                {% else %}
-                  <div class="product-description rte cf">
-                    {%- if block.settings.icon == blank -%}
-                      {{- product.description -}}
-                    {%- else -%}
-                      <div class="with-icon">
-                        {% render 'icon', icon: block.settings.icon, size: 'small' %}
-                        <span class="with-icon__beside">{{ product.description }}</span>
-                      </div>
-                    {%- endif -%}
-                  </div>
-                {% endif %}
-              </div>
-            {%- endif -%}
 
           {% when 'product-variant-picker' %}
             {% comment %}<div class="input-row" {{ block.shopify_attributes }}>{% endcomment %}
@@ -698,47 +707,8 @@
               </div>
             {%- endif -%}
 
-          {% when 'related-products' %}
-            {% if block.settings.product_list != blank %}
-              <div class="lightly-spaced-row lightish-spaced-row-above not-in-quickbuy" {{ block.shopify_attributes }}>
-                <div class="label">{{ block.settings.title | escape }}</div>
-                <div class="fixed-layout">
-                  {%- liquid
-                    if settings.prod_thumb_shape == 'portrait-23'
-                      assign chosen_aspect_ratio = 0.67
-                    elsif settings.prod_thumb_shape == 'portrait-45'
-                      assign chosen_aspect_ratio = 0.8
-                    elsif settings.prod_thumb_shape == 'square'
-                      assign chosen_aspect_ratio = 1.0
-                    elsif settings.prod_thumb_shape == 'landscape-54'
-                      assign chosen_aspect_ratio = 1.25
-                    elsif settings.prod_thumb_shape == 'landscape-32'
-                      assign chosen_aspect_ratio = 1.50
-                    elsif settings.prod_thumb_shape == 'tallest'
-                      assign chosen_aspect_ratio = 99
-                      for product in block.settings.product_list
-                        if product.featured_media.preview_image.aspect_ratio < chosen_aspect_ratio
-                          assign chosen_aspect_ratio = product.featured_media.preview_image.aspect_ratio
-                        endif
-                      endfor
-                    else
-                      assign chosen_aspect_ratio = 0
-                      for product in block.settings.product_list
-                        if product.featured_media.preview_image.aspect_ratio > chosen_aspect_ratio
-                          assign chosen_aspect_ratio = product.featured_media.preview_image.aspect_ratio
-                        endif
-                      endfor
-                    endif
-
-                    for related_product in block.settings.product_list
-                      echo '<div class="column column--half">'
-                      render 'product-block', product: related_product, no_quick_buy: true, custom_aspect_ratio: chosen_aspect_ratio, grid: 5
-                      echo '</div>'
-                    endfor
-                  -%}
-                </div>
-              </div>
-            {% endif %}
+          {% when 'recent-products-slider' %}
+            {%- render 'recent-products-slider' -%}
 
           {% when 'complementary' %}
             <cc-fetched-content class="not-in-quickbuy" data-id="{{ block.id }}" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&intent=complementary" contains-product-blocks {{ block.shopify_attributes }}>
@@ -888,7 +858,29 @@
         <div class="recommendations-grid">
           <ul class="recommendations-list">
             {%- for product in recommendations.products -%}
-              <li class="product">
+              <li class="product" data-collection-item>
+                <div class="product__quick-add-panel" data-quick-add-panel>
+                  <div class="product__size-variants">
+                    {% for option in product.options_with_values %}
+                      {% assign option_name = option.name | downcase %}
+
+                      {% if option_name == 'size' %}
+                        {% for value in option.values %}
+                          <div
+                                  data-variant-size="{{ value }}"
+                                  class="product__size-variant-text no-select
+                                    {% if sizeOption == value %}product__size-variant-text_selected{% endif %}
+                                  "
+                          >
+                            {{ value }}
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="product__add-to-cart no-select">Add to bag</div>
+                  {% comment %}<div class="collection__add-to-cart-loader">...</div>{% endcomment %}
+                </div>
                 <a href="{{ product.url }}">
                   <img class="product__img" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.featured_image.alt }}">
                   <p class="product__title">{{ product.title }}</p>
@@ -897,10 +889,49 @@
               </li>
             {%- endfor -%}
           </ul>
-          <button class="show-more-btn">Show More</button>
+          <button class="show-more-btn">See More</button>
         </div>
       {%- endif -%}
     </div>
+
+    <hr {% unless block.settings.show_in_quickbuy %}class="not-in-quickbuy"{% endunless %} {{ block.shopify_attributes }}>
+    {%- if product.description != blank -%}
+      <h4 class="product-details">Details  –</h4>
+      <div class="{% unless block.settings.show_in_quickbuy %}not-in-quickbuy{% endunless %}{% if block.settings.show_in_tab %} product-info-accordion{% endif %}" {{ block.shopify_attributes }}>
+        {% if block.settings.show_in_tab %}
+          <details-disclosure>
+            <details class="disclosure"{% if block.settings.open_tab %} open{% endif %}>
+              <summary class="disclosure__title">
+                {%- if block.settings.icon == blank -%}
+                  {{- 'products.product.description' | t -}}
+                {%- else -%}
+                  <div class="with-icon">
+                    {% render 'icon', icon: block.settings.icon, size: 'small' %}
+                    <span class="with-icon__beside">{{ 'products.product.description' | t }}</span>
+                  </div>
+                {%- endif -%}
+              </summary>
+              <div class="disclosure__panel has-motion">
+                <div class="disclosure__content rte cf">
+                  {{- product.description -}}
+                </div>
+              </div>
+            </details>
+          </details-disclosure>
+        {% else %}
+          <div class="product-description rte cf">
+            {%- if block.settings.icon == blank -%}
+              {{- product.description -}}
+            {%- else -%}
+              <div class="with-icon">
+                {% render 'icon', icon: block.settings.icon, size: 'small' %}
+                <span class="with-icon__beside">{{ product.description }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        {% endif %}
+      </div>
+    {%- endif -%}
 
     {% javascript %}
     const handleIntersection = (entries, observer) => {
