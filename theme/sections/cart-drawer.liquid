@@ -38,9 +38,11 @@
     {%- endif -%}
 
     <div class="cart-item-list__body cart-flyover-list cart-item-list__body{% if cart.item_count == 0 %} cart-flyover-list__full-height {% endif %}">
-      {% for item in cart.items %}
-        {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
-      {% endfor %}
+      <div name="cart-flyover-item-list">
+        {% for item in cart.items %}
+          {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
+        {% endfor %}
+      </div>
       {%- render 'cart-flyover-you-may-also-like', title_you_may_like: section.settings.title_you_may_like,  product_list_you_may_like: section.settings.product_list_you_may_like -%}
     </div>
 

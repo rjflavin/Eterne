@@ -5,16 +5,10 @@
 
 {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
 
-<div class="filterWrapper collection__sort-category" data-is-filter-category-open="true">
+<div class="filterWrapper collection__sort-category">
   <fieldset class="filterWrapperFieldset collection__sort-category-fieldset">
     <div class="collection__sort-category-title-wrap no-select">
       <span class="collection__sort-category-title-text">Sort by</span>
-      <div data-filter-category-status="minus" class="collection__sort-category-title-status">
-        {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-      </div>
-      <div data-filter-category-status="plus" class="collection__sort-category-title-status">
-        {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-      </div>
     </div>
 
     <ul class="filterWrapperFieldsetList collection__sort-category-options" role="list">

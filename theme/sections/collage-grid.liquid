@@ -31,12 +31,14 @@
                                     src="{{ block.settings.image | img_url: "master" }}"
                                     alt="{{ block.settings.image.alt }}"
                                     style="object-position: {{ block.settings.image.presentation.focal_point }}"
+                                    loading="lazy"
                             >
                             <img
                                     class="collage__image only-mob"
                                     src="{{ image_mobile | img_url: "master" }}"
                                     alt="{{ image_mobile.alt }}"
                                     style="object-position: {{ image_mobile.presentation.focal_point }}"
+                                    loading="lazy"
                             >
                             {{ caption }}
                         </div>
@@ -52,6 +54,7 @@
                                         src="{{ block.settings.image_mobile | img_url: "master" }}"
                                         alt="{{ block.settings.image_mobile.alt }}"
                                         style="object-position: {{ block.settings.image_mobile.presentation.focal_point }}"
+                                        loading="lazy"
                                 >
                               {% endif %}
 
@@ -60,6 +63,7 @@
                                       src="{{ block.settings.image | img_url: "master" }}"
                                       alt="{{ block.settings.image.alt }}"
                                       style="object-position: {{ block.settings.image.presentation.focal_point }}"
+                                      loading="lazy"
                               >
                             </div>
                           {% endif %}
@@ -104,12 +108,14 @@
                                 src="{{ block.settings.image_1 | img_url: "master" }}"
                                 alt="{{ block.settings.image_1.alt }}"
                                 style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                loading="lazy"
                         >
                         <img
                                 class="media__image only-mob"
                                 src="{{ image_mobile_1 | img_url: "master" }}"
                                 alt="{{ image_mobile_1.alt }}"
                                 style="object-position: {{ image_mobile_1.presentation.focal_point }}"
+                                loading="lazy"
                         >
                         {{ caption }}
                       {% elsif media_type_1 == "video" %}
@@ -124,6 +130,7 @@
                                         src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
                                         alt="{{ block.settings.image_mobile_1.alt }}"
                                         style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                                        loading="lazy"
                                 >
                               {% endif %}
 
@@ -132,6 +139,7 @@
                                       src="{{ block.settings.image_1 | img_url: "master" }}"
                                       alt="{{ block.settings.image_1.alt }}"
                                       style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                      loading="lazy"
                               >
                             </div>
                           {% endif %}
@@ -174,12 +182,14 @@
                               src="{{ block.settings.image_2 | img_url: "master" }}"
                               alt="{{ block.settings.image_2.alt }}"
                               style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                              loading="lazy"
                       >
                       <img
                               class="media__image only-mob"
                               src="{{ image_mobile_2 | img_url: "master" }}"
                               alt="{{ image_mobile_2.alt }}"
                               style="object-position: {{ image_mobile_2.presentation.focal_point }}"
+                              loading="lazy"
                       >
                       {{ capture }}
                     {% elsif media_type_2 == "video" %}
@@ -194,6 +204,7 @@
                                       src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
                                       alt="{{ block.settings.image_mobile_2.alt }}"
                                       style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
+                                      loading="lazy"
                               >
                             {% endif %}
 
@@ -202,6 +213,7 @@
                                     src="{{ block.settings.image_2 | img_url: "master" }}"
                                     alt="{{ block.settings.image_2.alt }}"
                                     style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                                    loading="lazy"
                             >
                           </div>
                         {% endif %}
@@ -234,6 +246,7 @@
                           src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
                           alt="{{ block.settings.image_mobile_1.alt }}"
                           style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                          loading="lazy"
                       >
                     {% endif %}
                     <img
@@ -241,6 +254,7 @@
                           src="{{ block.settings.image_1 | img_url: "master" }}"
                           alt="{{ block.settings.image_1.alt }}"
                           style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                          loading="lazy"
                     >
                   </div>
                   {% if block.settings.caption_1 != blank or block.settings.product_link_1 != blank %}
@@ -264,6 +278,7 @@
                               src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
                               alt="{{ block.settings.image_mobile_2.alt }}"
                               style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
+                              loading="lazy"
                       >
                     {% endif %}
                     <img
@@ -271,6 +286,7 @@
                             src="{{ block.settings.image_2 | img_url: "master" }}"
                             alt="{{ block.settings.image_2.alt }}"
                             style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                            loading="lazy"
                     >
                   </div>
                   {% if block.settings.caption_2 or block.settings.product_link_2 %}
@@ -294,6 +310,7 @@
                               src="{{ block.settings.image_mobile_3 | img_url: "master" }}"
                               alt="{{ block.settings.image_mobile_3.alt }}"
                               style="object-position: {{ block.settings.image_mobile_3.presentation.focal_point }}"
+                              loading="lazy"
                       >
                     {% endif %}
                     <img
@@ -301,6 +318,7 @@
                             src="{{ block.settings.image_3 | img_url: "master" }}"
                             alt="{{ block.settings.image_3.alt }}"
                             style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
+                            loading="lazy"
                     >
                   </div>
                   {% if block.settings.caption_3 or block.settings.product_link_3 %}

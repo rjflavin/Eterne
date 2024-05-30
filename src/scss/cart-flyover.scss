@@ -91,7 +91,7 @@
         margin: 0;
         padding: 21px 16px 15px 18px;
 
-        @include for-mobile {
+        @include for-mobile-accurate {
             padding: 20px 12.5px 12px 13px;
         }
     }
@@ -103,7 +103,7 @@
         overflow-y: auto;
         max-height: calc(100vh - 234px);
 
-        @include for-mobile {
+        @include for-mobile-accurate {
             max-height: 100%;
             padding: 0;
         }
@@ -127,7 +127,7 @@
         margin: 0 0 23px;
         padding: 0 18px 0 16px;
 
-        @include for-mobile {
+        @include for-mobile-accurate {
             padding: 0 12.5px 0 13px;
             margin: 0 0 20px;
         }
@@ -181,7 +181,7 @@
         padding: 10px 18px;
         display: flex;
 
-        @include for-mobile {
+        @include for-mobile-accurate {
             padding: 10px 12.5px 10px 14px;
         }
 
@@ -200,7 +200,7 @@
             background-size: cover;
             display: flex;
 
-            @include for-mobile {
+            @include for-mobile-accurate {
                 height: 142.6px;
                 width: 100px;
             }
@@ -215,7 +215,7 @@
             align-items: flex-start;
             justify-content: space-between;
 
-            @include for-mobile {
+            @include for-mobile-accurate {
                 gap: 0;
                 padding: 18px 13px 17.6px 10px;
             }
@@ -225,7 +225,7 @@
                 flex-direction: column;
                 width: 164px;
 
-                @include for-mobile {
+                @include for-mobile-accurate {
                     width: 156px;
                 }
 
@@ -238,7 +238,7 @@
                     text-align: left;
                     color: var(--black2);
 
-                    @include for-mobile {
+                    @include for-mobile-accurate {
                         font-size: 11px;
                         line-height: 14.3px;
                         text-transform: uppercase;
@@ -256,7 +256,7 @@
                     margin-top: 5px;
                     text-transform: uppercase;
 
-                    @include for-mobile {
+                    @include for-mobile-accurate {
                         font-size: 11px;
                     }
                 }
@@ -268,7 +268,7 @@
                     gap: 30px;
                     margin-top: 15px;
 
-                    @include for-mobile {
+                    @include for-mobile-accurate {
                         margin-top: 11px;
                         border: 1px solid var(--gray3);
                         padding: 4px 10px;
@@ -284,7 +284,7 @@
                         text-align: left;
                         color: var(--black2);
 
-                        @include for-mobile {
+                        @include for-mobile-accurate {
                             font-size: 12px;
                             line-height: 16.8px;
                         }
@@ -310,7 +310,7 @@
                     gap: 7px;
                     margin-top: 15px;
 
-                    @include for-mobile {
+                    @include for-mobile-accurate {
                         margin-top: 13px;
                     }
 
@@ -336,7 +336,7 @@
                 text-align: right;
                 color: var(--gray2);
 
-                @include for-mobile {
+                @include for-mobile-accurate {
                     font-size: 11px;
                 }
             }
@@ -349,7 +349,7 @@
         padding: 40px 16px 20px 18px;
         width: 100%;
 
-        @include for-mobile {
+        @include for-mobile-accurate {
             padding: 17px 12.5px 20px 14px;
         }
 
@@ -361,7 +361,7 @@
             gap: 10px;
             margin-bottom: 10px;
 
-            @include for-mobile {
+            @include for-mobile-accurate {
                 align-items: flex-end;
                 flex-direction: column-reverse;
             }

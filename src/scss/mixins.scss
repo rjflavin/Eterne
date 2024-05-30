@@ -2,6 +2,7 @@ $breakpoint: 768;
 $mobile-mockup: 393;
 $tablet-mockup: 1024;
 $desktop-mockup: 1440;
+$accurate-mobile-width: 767.98;
 
 @mixin size($propName, $mobileValue, $desktopValue) {
   @if $mobileValue {
@@ -33,6 +34,12 @@ $desktop-mockup: 1440;
 
 @mixin for-mobile {
   @media (max-width: #{$breakpoint - 1}px) {
+    @content;
+  }
+}
+
+@mixin for-mobile-accurate {
+  @media (max-width: #{$accurate-mobile-width}px) {
     @content;
   }
 }
