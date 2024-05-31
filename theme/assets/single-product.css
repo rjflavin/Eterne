@@ -39,6 +39,41 @@
   min-height: 28px;
   padding: 0;
 }
+.product-form .quantity-submit-row.has-spb .btn {
+  min-height: 28px;
+  padding: 0;
+}
+.product-form .quantity-submit-row .add-to-cart {
+  background: var(--black1);
+  color: var(--white);
+}
+.product-form .quantity-submit-row .add-to-cart:hover {
+  background: var(--white);
+  color: var(--black1);
+}
+.product-form .quantity-submit-row .payment-info {
+  width: 444px;
+  height: 25px;
+  margin: 20px 0;
+  padding: 0 5px;
+  border: 1px solid var(--gray6);
+  border-radius: 5px;
+  background-color: var(--white);
+}
+.product-form .quantity-submit-row .payment-info span {
+  font-size: 14px;
+  color: var(--gray1);
+}
+.product-form .quantity-submit-row .payment-info span a {
+  color: var(--black1);
+  text-decoration: underline;
+}
+.product-form .quantity-submit-row .payment-info span a:hover {
+  text-decoration: none;
+}
+.product-form .quantity-submit-row .payment-info span a:first-child {
+  font-weight: 600;
+}
 .product-form .product-type {
   margin-bottom: 15px;
   font-weight: 400;
@@ -86,6 +121,18 @@
 }
 .product-form fieldset.option-selector.color-switcher.single-product-options .opt-label {
   border-radius: 50%;
+}
+.product-form fieldset.option-selector.size-chart {
+  justify-content: space-between;
+}
+.product-form fieldset.option-selector.size-chart .option-selector__btns {
+  margin: -10px 0 0 -50px;
+}
+.product-form fieldset.option-selector.size-chart .size-guide {
+  margin-top: -13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .color-tooltip {
@@ -236,6 +283,12 @@
 .product-info .product-column-right .product-description p span {
   color: var(--gray4);
 }
+.product-info .product-column-right .shopify-payment-button {
+  display: none;
+}
+.product-info .product-column-right #smartwishlist {
+  display: none;
+}
 @media (min-width: 768px) {
   .product-info .product-column-right {
     max-width: 445px;
@@ -257,5 +310,5 @@
 }
 
 .recent-products-slider {
-  padding-top: 0 !important;
+  padding-top: 8px !important;
 }
