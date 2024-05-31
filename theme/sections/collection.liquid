@@ -85,6 +85,7 @@
       <div class="collection__products-wrap">
         <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
           {% for product in collection.products %}
+            {% assign loop_color = "" %}
             {% assign unavailable_variantss = "" %}
 
             {% for variantt in product.variants %}
