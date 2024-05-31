@@ -955,6 +955,7 @@
         "color": "",
         "size": "",
         "price": "",
+        "inventory_quantity": "",
         "images": [],
         "variantSizes": [],
         "variantAvailableFrom": '',
@@ -976,6 +977,7 @@
           productObject.variantAvailableFrom = `{{ variant.metafields.custom.available_from | date: "%B %d, %Y" }}`
           productObject.url = `{{ variant.url }}`
           productObject.price = `{{ variant.price | money_without_trailing_zeros }}`
+          productObject.inventory_quantity = `{{ variant.inventory_quantity }}`
           {% for option in variant.options %}
             {% if forloop.index0 == 0 %}
               productObject.color = `{{ option }}`

@@ -84,7 +84,7 @@
                   <div class="swiper-slide-title">${product.title}</div>
                   <div class="swiper-slide-title">${product.color}</div>
                   <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
-                  <button class="swiper-slide-preorder">Preorder</button>
+                  ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `<button class="swiper-slide-preorder">Preorder</button>` : ''}
                 </div>
               </div>
             </a>
