@@ -86,6 +86,32 @@
         <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
           {% for product in collection.products %}
             {% assign loop_color = "" %}
+            {% assign unavailable_variantss = "" %}
+
+            {% for variantt in product.variants %}
+              {% assign variant_available_fromm = variantt.metafields.custom.available_from | date: "%s" %}
+
+              {% for optionn in product.options_with_values %}
+                {% assign option_namee = optionn.name | downcase %}
+
+                {% if option_namee == 'color' %}
+                  {% assign productColorOptionss = optionn.values %}
+                  {% for variantOptionn in variantt.options %}
+                    {% for productColorOptionn in productColorOptionss %}
+                      {% if variantOptionn == productColorOptionn %}
+                        {% assign colorOptionn = variantOptionn %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+
+              {% if variant_available_fromm > now %}
+                {% assign unavailable_variantss = unavailable_variantss | append: colorOptionn | append: ',' %}
+              {% endif %}
+            {% endfor %}
+
+            {% assign not_rendering_color_options = unavailable_variantss | split: ',' %}
 
             {% for variant in product.variants %}
               {% assign color_value = "" %}
@@ -234,29 +260,32 @@
 
                           {% for colorOptionValue in option.values %}
                             {% assign colorOptionValueDowncase = colorOptionValue | downcase | replace: ' ', '_' %}
-
-                            <div
-                              data-color-name="{{ colorOptionValue }}"
-                              class="collection__item-color-wrap
+                            {% if not_rendering_color_options contains colorOptionValue %}
+                              {% continue %}
+                            {% else %}
+                              <div
+                                data-color-name="{{ colorOptionValue }}"
+                                class="collection__item-color-wrap
                               {% if forloop.index > colorsQtyToShowOnMobile %}
                                 collection__item-color-wrap_hide-mobile
                               {% endif %}
                             "
-                              title="{{ colorOptionValue | upcase }}"
-                            >
-                              <div class="collection__item-color-cont">
-                                {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
-                                  {% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}
-                                  {% if colorEntryNameDowncase == colorOptionValueDowncase %}
-                                    {% assign variantColor = colorEntry.color.value %}
-                                  {% endif %}
-                                {% endfor %}
-                                <div
-                                  class="collection__item-color"
-                                  style="background-color: {{ variantColor }}"
-                                ></div>
+                                title="{{ colorOptionValue | upcase }}"
+                              >
+                                <div class="collection__item-color-cont">
+                                  {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
+                                    {% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}
+                                    {% if colorEntryNameDowncase == colorOptionValueDowncase %}
+                                      {% assign variantColor = colorEntry.color.value %}
+                                    {% endif %}
+                                  {% endfor %}
+                                  <div
+                                    class="collection__item-color"
+                                    style="background-color: {{ variantColor }}"
+                                  ></div>
+                                </div>
                               </div>
-                            </div>
+                            {% endif %}
                           {% endfor %}
                         {% endif %}
                       {% endfor %}
