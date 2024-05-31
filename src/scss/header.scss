@@ -1,11 +1,15 @@
 @import "mixins";
 
+page-header {
+  transition: all .5s ease-in-out !important;
+}
+
 .h-logo-area {
   width: 100%;
 }
 
 .logo {
-  padding: 24px 0 19px !important;
+  padding: 19px 0 19px !important;
   text-align: center;
 }
 
@@ -87,7 +91,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding-bottom: 35px;
+  padding-bottom: 19.5px;
 }
 
 .desk-nav-list__item {
