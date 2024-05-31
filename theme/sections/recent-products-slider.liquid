@@ -20,6 +20,7 @@
   </div>
 
   <script>
+  document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
       if (localStorage.getItem('recently_viewed_products')) {
         const productsString = localStorage.getItem('recently_viewed_products');
@@ -34,14 +35,16 @@
     const setUpSlides = (products) => {
       const MAX_PRODUCT_AMOUNT = 4
       const slider = document.querySelector('.section-recent-products-slider')
-      if (slider && products.length <= MAX_PRODUCT_AMOUNT) {
+      if (slider && products.length <= MAX_PRODUCT_AMOUNT && products.length > 0) {
         const leftArrow = document.querySelector('.recent-products-swiper-button-prev')
         const rightArrow = document.querySelector('.recent-products-swiper-button-next')
         if (leftArrow && rightArrow) {
           leftArrow.classList.add('hide')
           rightArrow.classList.add('hide')
         }
-      } else if (!slider || products.length === 0) {
+      }
+
+      if (!slider || products.length <= 0) {
         slider.classList.add('hide')
       }
 
@@ -81,6 +84,7 @@
                   <div class="swiper-slide-title">${product.title}</div>
                   <div class="swiper-slide-title">${product.color}</div>
                   <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
+                  <button class="swiper-slide-preorder">Preorder</button>
                 </div>
               </div>
             </a>
@@ -91,10 +95,19 @@
       if (wrapper) {
         wrapper.innerHTML = wrapperCode
       }
+
+      const preorderButtons = document.querySelectorAll('.swiper-slide-preorder')
+      for (const button of preorderButtons) {
+        button.addEventListener("click", (event) => {
+          event.preventDefault()
+          event.stopPropagation()
+        })
+      }
     }
 
     const products = getProductsFromLocalStorage()
     setUpSlides(products)
+  })
   </script>
 </div>
 
