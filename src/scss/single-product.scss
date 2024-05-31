@@ -28,6 +28,79 @@
   }
 }
 
+.variant-picker__item-color-wrap {
+  display: flex;
+  padding: 5px 7.5px;
+  cursor: pointer;
+
+  &:hover {
+    @include for-desktop {
+      .collection__item-tooltip-text {
+        visibility: visible !important;
+      }
+    }
+  }
+
+  @include for-tablet {
+    margin: 0 15px 0 0 !important;
+
+    &:before, &:after {
+      display: none;
+    }
+  }
+
+  &_hide-mobile {
+    @include for-tablet {
+      display: none;
+    }
+  }
+}
+
+.swatch-style-icon_circle .option-selector .opt-label--swatch {
+  @include for-tablet {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+.variant-picker__item-color-cont {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--black2);
+
+  @include for-tablet {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 768px) {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.swatch-style-icon_circle .option-selector .opt-btn:checked+.opt-label--swatch:after {
+  box-shadow: unset;
+}
+
+.variant-picker__item-color {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+
+  @include for-tablet {
+    border: 2px solid var(--white);
+  }
+}
+
 .product-media-collage {
   &.desktop-only {
     display: flex;
