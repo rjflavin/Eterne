@@ -973,7 +973,7 @@
       {% for variant in product.variants %}
         if (currentVariantId === `{{ variant.id }}`) {
           productObject.variantId = `{{ variant.id }}`
-          productObject.variantAvailableFrom = `{{ variant.metafields.custom.available_from | date: "%s" }}`
+          productObject.variantAvailableFrom = `{{ variant.metafields.custom.available_from | date: "%B %d, %Y" }}`
           productObject.url = `{{ variant.url }}`
           productObject.price = `{{ variant.price | money_without_trailing_zeros }}`
           {% for option in variant.options %}
