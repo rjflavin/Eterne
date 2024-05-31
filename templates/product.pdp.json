@@ -33,7 +33,7 @@
             "select_first_variant": true,
             "selector_style": "listed",
             "enable_dynamic_availability": true,
-            "enable_size_chart": false,
+            "enable_size_chart": true,
             "size_chart_variant": "Size",
             "size_chart_page": ""
           }
@@ -86,6 +86,8 @@
     "recent-products-slider": {
       "type": "recent-products-slider",
       "settings": {
+        "title": "RECENTLY VIEWED",
+        "add_to_cart_text": "Add to bag"
       }
     }
   },
