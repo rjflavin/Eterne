@@ -29,6 +29,7 @@
         -%}
 
         <variant-picker class="no-js-hidden" data-url="{{ product.url }}" data-update-url="{{ update_url }}" data-show-availability="{{ block.settings.enable_dynamic_availability }}" data-availability-mode="{{ dynamic_availability_mode | default: 'selection' }}">
+
             {%- for option in product.options_with_values -%}
               {%- capture option_id %}{{ product_form_id }}-{{ option.name | handle }}{% endcapture -%}
               {%- liquid
