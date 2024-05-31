@@ -219,36 +219,6 @@
           </button>
         {% endif %}
       </div>
-
-      {% if product.media.size > 1 %}
-        <carousel-slider class="carousel block thumbnails{% unless section.settings.gallery_layout contains 'carousel' %} mobile-only{% endunless %}">
-          <div class="slider slider--no-scrollbar">
-            <ul class="slider__grid">
-              {% for media in product.media %}
-                <li class="slider__item{% if forloop.index0 == initial_slide %} is-active{% endif %}" data-media-id="{{ media.id }}">
-                  <a class="thumbnail thumbnail--media-{{ media.media_type }}" href="{% if section.settings.enable_zoom %}{{ media.preview_image | image_url: width: zoom_size }}{% else %}#{% endif %}">
-                    {%- liquid
-                      assign custom_aspect_ratio = media.preview_image.aspect_ratio | at_least: min_aspect_ratio
-                      render 'image' with media.preview_image, sizes: '65px', widths: '65px, 130px', custom_aspect_ratio: custom_aspect_ratio, custom_crop: 'contain'
-                    -%}
-
-                    {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
-                      <div class="thumbnail__badge">
-                        {% render 'icon-video-badge-full-color' %}
-                      </div>
-                    {%- endif -%}
-                    {%- if media.media_type == 'model' -%}
-                      <div class="thumbnail__badge">
-                        {% render 'icon-3d-badge-full-color' %}
-                      </div>
-                    {%- endif -%}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </carousel-slider>
-      {% endif %}
     </div>
 
     {%- if section.settings.enable_zoom -%}
@@ -302,54 +272,6 @@
       {%- endif -%}
     {%- endif -%}
   </media-gallery>
-  <carousel-slider class="{% if section.settings.gallery_layout contains 'collage' or section.settings.gallery_layout contains 'columns' %}mobile-only{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ section.settings.accessibility_info | escape }}" data-dynamic-height="true" data-dispatch-events="true">
-      <div class="slider slider--no-scrollbar" id="slider-{{ section.id }}" aria-live="polite" aria-atomic="true">
-        <div class="slider__grid">
-          {%- for media in product.media -%}
-            <div class="slider__item{% if forloop.index0 == initial_slide %} is-active{% endif %}"
-                 role="group" aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
-                 aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
-                    {%- unless forloop.index0 == initial_slide %} tabindex="-1"{% endunless %}
-                    {%- if request.design_mode %} data-index="{{ forloop.index0 }}"{% endif %}
-                 data-media-id="{{ media.id }}">
-
-            {%- if media.media_type == 'image' and section.settings.enable_zoom -%}
-              <a class="block show-gallery" href="{{ media.preview_image | image_url: width: zoom_size }}" aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index }}">
-                {%- endif -%}
-
-                {%- liquid
-                  if forloop.index0 == initial_slide
-                    assign loading = 'eager'
-                  else
-                    assign loading = 'lazy'
-                  endif
-
-                  render 'media', media: media, product: product, min_aspect_ratio: min_aspect_ratio, loading: loading
-                -%}
-
-                {%- if media.media_type == 'image' and section.settings.enable_zoom -%}
-              </a>
-              {%- endif -%}
-
-            </div>
-          {%- endfor -%}
-        </div>
-      </div>
-
-      {%- if product.media.size > 1 -%}
-        <div class="slider-nav slider-nav--floating desktop-only js-only">
-          <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
-            <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
-            {% render 'icon-chevron-left' %}
-          </button>
-
-          <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="next" aria-controls="slider-{{ section.id }}">
-            <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
-            {% render 'icon-chevron-right' %}
-          </button>
-        </div>
-      {%- endif -%}
-    </carousel-slider>
 
   <div class="detail product-column-right" data-cc-animate data-cc-animate-delay="0.2s">
     <div class="product-form{% if section.settings.enable_sticky_columns %} sticky-content-container{% endif %}" data-ajax-add-to-cart="true" data-product-id="{{ product.id }}">
@@ -865,7 +787,7 @@
         <div class="recommendations-grid">
           <ul class="recommendations-list">
             {%- for product in recommendations.products -%}
-              <li class="product" data-collection-item>
+              <li class="product" data-product-id="{{ product.id }}" data-collection-item>
                 <div class="product__quick-add-panel" data-quick-add-panel>
                   <div class="product__size-variants">
                     {% for option in product.options_with_values %}
@@ -873,7 +795,14 @@
 
                       {% if option_name == 'size' %}
                         {% for value in option.values %}
+                            {% assign variant_id = '' %}
+                            {% for variant in product.variants %}
+                                {% if variant.option2 == value %}
+                                    {% assign variant_id = variant.id %}
+                                {% endif %}
+                            {% endfor %}
                           <div
+                                  data-variand-id="{{ variant_id }}"
                                   data-variant-size="{{ value }}"
                                   class="product__size-variant-text no-select
                                     {% if sizeOption == value %}product__size-variant-text_selected{% endif %}
@@ -938,6 +867,7 @@
           </div>
         {% endif %}
       </div>
+      <h4 class="product-sizes">Size & FIt Information  +</h4>
     {%- endif -%}
 
     {% javascript %}
