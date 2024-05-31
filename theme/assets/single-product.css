@@ -41,6 +41,9 @@
   margin-left: 10px;
 }
 
+.product-form .quantity-submit-row .quantity-submit-row__submit {
+  margin-bottom: 10px;
+}
 .product-form .quantity-submit-row .quantity-submit-row__submit button[type=submit] {
   min-height: 28px;
   padding: 0;
@@ -50,17 +53,23 @@
   padding: 0;
 }
 .product-form .quantity-submit-row .add-to-cart {
-  background: var(--black1);
+  background: var(--black2);
   color: var(--white);
+  cursor: pointer;
 }
 .product-form .quantity-submit-row .add-to-cart:hover {
+  background: var(--black2);
+  color: var(--white);
+  cursor: pointer;
+}
+.product-form .quantity-submit-row .add-to-wishlist:hover {
   background: var(--white);
-  color: var(--black1);
+  color: var(--black2);
 }
 .product-form .quantity-submit-row .payment-info {
   width: 100%;
   min-height: 25px;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 0 5px;
   border: 1px solid var(--gray6);
   border-radius: 5px;
@@ -81,7 +90,7 @@
   font-weight: 600;
 }
 .product-form .product-type {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
@@ -94,7 +103,7 @@
   }
 }
 .product-form fieldset.option-selector {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 .product-form fieldset.option-selector.single-product-options {
   display: flex;
@@ -188,6 +197,8 @@
   width: 47.7%;
   margin-bottom: 20px;
   position: relative;
+  max-height: 406px;
+  height: 100%;
 }
 .product-info .product-column-right .product-recommendations .recommendations-list .product img {
   width: 100%;
@@ -223,7 +234,7 @@
 .product-info .product-column-right .product-recommendations .product__quick-add-panel {
   display: flex;
   position: absolute;
-  bottom: 70px;
+  bottom: 80px;
   z-index: 200;
   width: 100%;
   display: none;
@@ -292,12 +303,14 @@
 .product-info .product-column-right .product-details, .product-info .product-column-right .product-sizes {
   text-transform: uppercase;
   font-size: 14px;
+  cursor: pointer;
+  margin-top: 25px;
 }
 .product-info .product-column-right .product-details span, .product-info .product-column-right .product-sizes span {
   color: var(--gray4);
 }
 .product-info .product-column-right hr {
-  margin: 17px 0 25px 0;
+  margin: 10px 0 25px 0;
 }
 .product-info .product-column-right .product-description {
   margin-top: 5px;

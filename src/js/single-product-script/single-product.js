@@ -1,5 +1,4 @@
 import { addToCart } from "../utils/cart-handler";
-import { checkParentsForClass } from "../utils/check-parents-for-class";
 
 export default class SingleProduct extends HTMLElement {
     constructor() {
@@ -20,6 +19,8 @@ export default class SingleProduct extends HTMLElement {
             this.showDefaultColorImages();
             this.initializeColorSwatchHover();
             this.initializeProductMediaHover();
+            this.initializeProductDetailsToggle();
+            this.initializeSizeInfoToggle(); // Added line
         });
 
         document.addEventListener('variant:change', this.handleVariantChange.bind(this));
@@ -195,6 +196,32 @@ export default class SingleProduct extends HTMLElement {
     getNewAlt(currentAlt) {
         const currentIndex = this.availableColors.indexOf(currentAlt);
         return this.availableColors[currentIndex];
+    }
+
+    initializeProductDetailsToggle() {
+        const productDetailsHeader = this.querySelector('.product-details');
+        const productDetailsBlock = this.querySelector('.product-details-block');
+
+        if (productDetailsHeader && productDetailsBlock) {
+            productDetailsHeader.addEventListener('click', () => {
+                const isOpen = productDetailsBlock.classList.toggle('open');
+                productDetailsHeader.textContent = `Details ${isOpen ? '-' : '+'}`;
+                productDetailsBlock.style.display = isOpen ? 'block' : 'none';
+            });
+        }
+    }
+
+    initializeSizeInfoToggle() {
+        const productSizesHeader = this.querySelector('.product-sizes');
+        const productSizesBlock = this.querySelector('.product-sizes-block');
+
+        if (productSizesHeader && productSizesBlock) {
+            productSizesHeader.addEventListener('click', () => {
+                const isOpen = productSizesBlock.classList.toggle('open');
+                productSizesHeader.textContent = `Size & Fit Information ${isOpen ? '-' : '+'}`;
+                productSizesBlock.style.display = isOpen ? 'block' : 'none';
+            });
+        }
     }
 
     watchProductsClickTargetHandler(event) {
