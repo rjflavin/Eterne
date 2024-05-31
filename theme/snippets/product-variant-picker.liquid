@@ -36,6 +36,7 @@
                 assign is_variant_image_style = false
                 assign show_size_chart = false
                 assign is_dropdown = false
+                assign is_size_chart = false
 
                 if block.settings.selector_style == 'dropdown'
                   assign is_dropdown = true
@@ -64,6 +65,10 @@
 
                 if block.settings.enable_size_chart and block.settings.size_chart_variant == option.name and block.settings.size_chart_page != blank
                   assign show_size_chart = true
+                endif
+
+                if block.settings.enable_size_chart and block.settings.size_chart_variant contains option.name
+                  assign is_size_chart = true
                 endif
               -%}
 
@@ -127,7 +132,7 @@
                   %}
                 </div>
               {%- else -%}
-                <fieldset class="option-selector single-product-options {% if is_color_selector %}color-switcher{% endif %}" data-selector-type="listed">
+                <fieldset class="option-selector single-product-options {% if is_color_selector %}color-switcher{% endif %} {% if is_size_chart %}size-chart{% endif %}" data-selector-type="listed">
                   {%- if show_size_chart -%}
                     <div class="flex justify-between">
                       <legend class="label">{{- option.name -}}</legend>
@@ -178,9 +183,13 @@
                       {%- endif -%}
                     {%- endfor -%}
                   </div>
+                  {% if is_size_chart %}
+                        <div class="size-guide">View Size Guide</div>
+                    {% endif %}
                 </fieldset>
               {%- endif -%}
-{%- endfor -%}
+            {%- endfor -%}
+            {% comment %}<div class="size-guide">View Size Guide</div>{% endcomment %}
 
             <script type="application/json">
                 {"variants": {{- product.variants | json -}},"formatted": {

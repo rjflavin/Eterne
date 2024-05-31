@@ -366,8 +366,8 @@
               <div class="title-container">
                 <h5 class="product-title">{{ product.title | escape }}</h5>
           {% when 'price' %}
-                {% render 'price', product: product, show_currency_code: settings.product_currency_code_enabled, for_variant_picker: true, current_variant: current_variant %}
-            </div>
+                <span class="price__current">{{ product.price | money_without_trailing_zeros }}</span>
+              </div>
             </div>
 
           {% when 'product-variant-picker' %}
@@ -419,6 +419,9 @@
                     {% endif %}
 
                     <div class="quantity-submit-row__submit input-row">
+                      <div class="payment-info">
+                        <span>4 interest-free payments of $71.25 with <a href="#">Klarna</a>. <a href="#">Learn More</a></span>
+                      </div>
                       <div class="js-form-error lightly-spaced-row" role="alert" hidden></div>
 
                       {%- capture add_to_cart_text -%}
@@ -436,6 +439,10 @@
                         {%- endif -%}
                       </button>
                     </div>
+                    <!-- Add to Wishlist Button -->
+                    <button class="btn btn--large add-to-wishlist" type="button" name="add_to_wishlist">
+                      Add to wishlist
+                    </button>
                     {% if enable_dynamic_payment_button %}
                       <script class="dynamic-payment-button-template" type="text/template">
                         {{ form | payment_button }}
@@ -884,7 +891,7 @@
                 <a href="{{ product.url }}">
                   <img class="product__img" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.featured_image.alt }}" loading="lazy">
                   <p class="product__title">{{ product.title }}</p>
-                  <p class="product__price">{{ product.price | money}}</p>
+                  <p class="product__price">{{ product.price | money_without_trailing_zeros }}</p>
                 </a>
               </li>
             {%- endfor -%}

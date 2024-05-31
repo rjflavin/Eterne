@@ -96,7 +96,7 @@ export default class SingleProduct extends HTMLElement {
         const productPriceCurrentElement = this.querySelector('.price__current');
 
         if (productPriceCurrentElement) {
-            productPriceCurrentElement.textContent = `$${(price / 100).toFixed(2)}`;
+            productPriceCurrentElement.textContent = `$${(price / 100)}`;
         }
     }
 
@@ -194,8 +194,7 @@ export default class SingleProduct extends HTMLElement {
 
     getNewAlt(currentAlt) {
         const currentIndex = this.availableColors.indexOf(currentAlt);
-        const nextIndex = (currentIndex + 1) % this.availableColors.length;
-        return this.availableColors[nextIndex];
+        return this.availableColors[currentIndex];
     }
 
     async watchProductsClickTargetHandler(event) {
