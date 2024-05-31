@@ -182,7 +182,6 @@
                   <div class="option-selector__btns flex flex-wrap">
                     {%- for value in option.values -%}
                       {%- assign value_index0 = forloop.index0 -%}
-                      <pre>{{ not_rendering_color_options | json }}</pre>
                       {% if not_rendering_color_options contains value %}
                         {% continue %}
                       {% else %}
