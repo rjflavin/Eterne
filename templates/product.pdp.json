@@ -86,8 +86,6 @@
     "recent-products-slider": {
       "type": "recent-products-slider",
       "settings": {
-        "title": "RECENTLY VIEWED",
-        "add_to_cart_text": "Add to bag"
       }
     }
   },
