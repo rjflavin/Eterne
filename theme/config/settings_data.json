@@ -517,6 +517,14 @@
     },
     "content_for_index": [
 
-    ]
+    ],
+    "blocks": {
+      "6858403126979251294": {
+        "type": "shopify:\/\/apps\/consentik-cookie\/blocks\/omega-cookies-notification\/13cba824-a338-452e-9b8e-c83046a79f21",
+        "disabled": false,
+        "settings": {
+        }
+      }
+    }
   }
 }

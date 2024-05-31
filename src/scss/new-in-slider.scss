@@ -127,8 +127,35 @@
     color: var(--gray1);
 
     @media (max-width: 1024px) {
-      display: none;
+      line-height: 16px;
     }
+  }
+
+  &__preorder-wrap {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 11px;
+  }
+
+  &__preorder {
+    display: flex;
+    border: 1px solid var(--black1);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  &__preorder-text {
+    display: flex;
+    padding: 0 10px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15.8px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--black1);
   }
 
   &__arrow-item {
