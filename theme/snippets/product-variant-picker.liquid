@@ -13,6 +13,36 @@
   {% render 'product-variant-picker', product: product, product_form_id: product_form_id, block: block %}
 {% endcomment %}
 
+
+{% assign now = "now" | date: "%s" %}
+
+{% assign unavailable_variantss = "" %}
+
+{% for variantt in product.variants %}
+    {% assign variant_available_fromm = variantt.metafields.custom.available_from | date: "%s" %}
+
+    {% for optionn in product.options_with_values %}
+        {% assign option_namee = optionn.name | downcase %}
+
+        {% if option_namee == 'color' %}
+            {% assign productColorOptionss = optionn.values %}
+            {% for variantOptionn in variantt.options %}
+                {% for productColorOptionn in productColorOptionss %}
+                    {% if variantOptionn == productColorOptionn %}
+                        {% assign colorOptionn = variantOptionn %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    {% if variant_available_fromm > now %}
+        {% assign unavailable_variantss = unavailable_variantss | append: colorOptionn | append: ',' %}
+    {% endif %}
+{% endfor %}
+
+{% assign not_rendering_color_options = unavailable_variantss | split: ',' %}
+
 {%- unless product.has_only_default_variant -%}
     {%- if product.variants.size > 1 or block.settings.show_single -%}
         <script src="{{ 'variant-picker.js' | asset_url }}" defer></script>
@@ -29,6 +59,7 @@
         -%}
 
         <variant-picker class="no-js-hidden" data-url="{{ product.url }}" data-update-url="{{ update_url }}" data-show-availability="{{ block.settings.enable_dynamic_availability }}" data-availability-mode="{{ dynamic_availability_mode | default: 'selection' }}">
+
             {%- for option in product.options_with_values -%}
               {%- capture option_id %}{{ product_form_id }}-{{ option.name | handle }}{% endcapture -%}
               {%- liquid
@@ -151,6 +182,9 @@
                   <div class="option-selector__btns flex flex-wrap">
                     {%- for value in option.values -%}
                       {%- assign value_index0 = forloop.index0 -%}
+                      {% if not_rendering_color_options contains value %}
+                        {% continue %}
+                      {% else %}
                       <input type="radio" class="opt-btn visually-hidden focus-label js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ value_index0 }}" value="{{ value | escape }}" required{% if block.settings.select_first_variant or product.variants.size == 1 or product.selected_variant %}{% if option.selected_value == value %} checked{% endif %}{% endif %}>
                       {%- if is_variant_image_style -%}
                         {%- for variant in product.variants -%}
@@ -177,10 +211,34 @@
                             assign is_swatch = true
                           endif
                         -%}
-                        <label class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center"{% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %} for="{{ option_id }}-opt-{{ value_index0 }}">
-                          <span class="{% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
-                        </label>
+                        {% if is_color_selector %}
+                            {% assign colorOptionValueDowncase = value | downcase | replace: ' ', '_' %}
+                            <label
+                                class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center variant-picker__item-color-wrap"
+                                {% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %}
+                                for="{{ option_id }}-opt-{{ value_index0 }}"
+                                title="{{ colorOptionValue | upcase }}"
+                            >
+                                <div class="variant-picker__item-color-cont">
+                                    {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
+                                        {% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}
+                                        {% if colorEntryNameDowncase == colorOptionValueDowncase %}
+                                            {% assign variantColor = colorEntry.color.value %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div
+                                        class="variant-picker__item-color"
+                                        style="background-color: {{ variantColor }}"
+                                    ></div>
+                                </div>
+                            </label>
+                        {% else %}
+                            <label class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center"{% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %} for="{{ option_id }}-opt-{{ value_index0 }}">
+                                <span class="{% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
+                            </label>
+                        {% endif %}
                       {%- endif -%}
+                      {% endif %}
                     {%- endfor -%}
                   </div>
                   {% if is_size_chart %}

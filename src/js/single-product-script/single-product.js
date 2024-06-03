@@ -1,5 +1,4 @@
 import { addToCart } from "../utils/cart-handler";
-import { checkParentsForClass } from "../utils/check-parents-for-class";
 
 export default class SingleProduct extends HTMLElement {
     constructor() {
@@ -20,6 +19,8 @@ export default class SingleProduct extends HTMLElement {
             this.showDefaultColorImages();
             this.initializeColorSwatchHover();
             this.initializeProductMediaHover();
+            this.initializeProductDetailsToggle();
+            this.initializeSizeInfoToggle();
         });
 
         document.addEventListener('variant:change', this.handleVariantChange.bind(this));
@@ -126,12 +127,12 @@ export default class SingleProduct extends HTMLElement {
 
     showTooltip(event) {
         const label = event.currentTarget;
-        const colorName = label.querySelector('.js-value').textContent;
+        const colorName = label.getAttribute('data-swatch');
         let tooltip = label.querySelector('.color-tooltip');
         if (!tooltip) {
             tooltip = document.createElement('div');
             tooltip.className = 'color-tooltip';
-            tooltip.textContent = colorName;
+            tooltip.textContent = colorName.replace(/_/g, ' ').toUpperCase();
             label.appendChild(tooltip);
         }
         tooltip.style.display = 'block';
@@ -197,61 +198,79 @@ export default class SingleProduct extends HTMLElement {
         return this.availableColors[currentIndex];
     }
 
-    async watchProductsClickTargetHandler(event) {
+    initializeProductDetailsToggle() {
+        const productDetailsHeader = this.querySelector('.product-details');
+        const productDetailsBlock = this.querySelector('.product-details-block');
+
+        if (productDetailsHeader && productDetailsBlock) {
+            productDetailsHeader.addEventListener('click', () => {
+                const isOpen = productDetailsBlock.classList.toggle('open');
+                productDetailsHeader.textContent = `Details ${isOpen ? '-' : '+'}`;
+                productDetailsBlock.style.display = isOpen ? 'block' : 'none';
+            });
+        }
+    }
+
+    initializeSizeInfoToggle() {
+        const productSizesHeader = this.querySelector('.product-sizes');
+        const productSizesBlock = this.querySelector('.product-sizes-block');
+
+        if (productSizesHeader && productSizesBlock) {
+            productSizesHeader.addEventListener('click', () => {
+                const isOpen = productSizesBlock.classList.toggle('open');
+                productSizesHeader.textContent = `Size & Fit Information ${isOpen ? '-' : '+'}`;
+                productSizesBlock.style.display = isOpen ? 'block' : 'none';
+            });
+        }
+    }
+
+    watchProductsClickTargetHandler(event) {
         const productElement = event.target.closest('.product');
         if (productElement) {
             const sizeVariantElement = event.target.closest('.product__size-variant-text.no-select');
+
             if (sizeVariantElement) {
                 const clickedSize = sizeVariantElement.dataset.variantSize;
+
                 const sizeVariants = productElement.querySelectorAll('.product__size-variant-text');
                 sizeVariants.forEach(variant => {
                     variant.classList.remove('product__size-variant-text_selected');
                 });
 
                 sizeVariantElement.classList.add('product__size-variant-text_selected');
-
-                const variantCardElement = productElement.closest('[data-collection-item]');
-                const productHandle = variantCardElement.dataset.productHandle;
-                const preorderWrapperElement = variantCardElement.querySelector('.product__preorder-wrap');
-                const isVariantReadyToFetch = variantCardElement.dataset.isVariantReadyToFetch === 'false';
-
-                if (isVariantReadyToFetch) {
-                    variantCardElement.dataset.selectedSize = clickedSize;
-
-                    const checkVariantAvailability = async () => {
-                        variantCardElement.dataset.isVariantReadyToFetch = 'true';
-                        const response = await this.getProductInfo(productHandle);
-                        if (response) {
-                            response.variants.forEach((variant) => {
-                                const parts = variant.title.split('/').map(part => part.trim());
-                                const color = parts[0];
-                                const size = parts[1];
-
-                                const isClickedSizeInVariantTitle = size === clickedSize;
-                                const isSelectedColorInVariantTitle = color === selectedColor;
-
-                                if (isClickedSizeInVariantTitle && isSelectedColorInVariantTitle) {
-                                    variantCardElement.dataset.variantId = variant.id;
-
-                                    if (variant.available) {
-                                        preorderWrapperElement.classList.remove('disp-flx-imp');
-                                        variantCardElement.dataset.isVariantInStock = 'true';
-                                    } else {
-                                        preorderWrapperElement.classList.add('disp-flx-imp');
-                                        variantCardElement.dataset.isVariantInStock = 'false';
-                                    }
-                                }
-                            });
-                        }
-
-                        variantCardElement.dataset.isVariantReadyToFetch = 'false';
-                    }
-
-                    checkVariantAvailability();
-                }
             }
 
-            const addToCartElement = event.target.closest('.product__add-to-cart');
+            const addToCartButton = event.target.closest('.product__add-to-cart');
+            if (addToCartButton) {
+                const selectedVariantElement = productElement.querySelector('.product__size-variant-text_selected');
+                if (selectedVariantElement) {
+                    const variantId = selectedVariantElement.dataset.variandId;
+console.log('variantId: ' + variantId);
+                    const addToCartAndDisableLoader = async () => {
+                        const response = await addToCart(variantId, 1);
+
+                        if (response) {
+                            const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+                                bubbles: true
+                            })
+                            document.dispatchEvent(e)
+
+                            const event = new CustomEvent("dispatch:cart-drawer:open", {
+                                bubbles: true
+                            })
+                            document.dispatchEvent(event)
+                        }
+                    }
+
+                    if (variantId) {
+                        addToCartAndDisableLoader();
+                    } else {
+                        console.error("Variant ID not found. Ensure that the size variant has a valid ID.");
+                    }
+                } else {
+                    console.error("No size variant selected. Please select a size before adding to the cart.");
+                }
+            }
         }
     }
 

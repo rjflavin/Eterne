@@ -160,7 +160,7 @@
           </div>
 
           {%- if product.media.size > 1 -%}
-            <div class="slider-nav slider-nav--floating desktop-only js-only">
+            <div class="slider-nav slider-nav--floating mobile-only js-only">
               <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
                 <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
                 {% render 'icon-chevron-left' %}
@@ -219,36 +219,6 @@
           </button>
         {% endif %}
       </div>
-
-      {% if product.media.size > 1 %}
-        <carousel-slider class="carousel block thumbnails{% unless section.settings.gallery_layout contains 'carousel' %} mobile-only{% endunless %}">
-          <div class="slider slider--no-scrollbar">
-            <ul class="slider__grid">
-              {% for media in product.media %}
-                <li class="slider__item{% if forloop.index0 == initial_slide %} is-active{% endif %}" data-media-id="{{ media.id }}">
-                  <a class="thumbnail thumbnail--media-{{ media.media_type }}" href="{% if section.settings.enable_zoom %}{{ media.preview_image | image_url: width: zoom_size }}{% else %}#{% endif %}">
-                    {%- liquid
-                      assign custom_aspect_ratio = media.preview_image.aspect_ratio | at_least: min_aspect_ratio
-                      render 'image' with media.preview_image, sizes: '65px', widths: '65px, 130px', custom_aspect_ratio: custom_aspect_ratio, custom_crop: 'contain'
-                    -%}
-
-                    {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
-                      <div class="thumbnail__badge">
-                        {% render 'icon-video-badge-full-color' %}
-                      </div>
-                    {%- endif -%}
-                    {%- if media.media_type == 'model' -%}
-                      <div class="thumbnail__badge">
-                        {% render 'icon-3d-badge-full-color' %}
-                      </div>
-                    {%- endif -%}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </carousel-slider>
-      {% endif %}
     </div>
 
     {%- if section.settings.enable_zoom -%}
@@ -302,54 +272,6 @@
       {%- endif -%}
     {%- endif -%}
   </media-gallery>
-  <carousel-slider class="{% if section.settings.gallery_layout contains 'collage' or section.settings.gallery_layout contains 'columns' %}mobile-only{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ section.settings.accessibility_info | escape }}" data-dynamic-height="true" data-dispatch-events="true">
-      <div class="slider slider--no-scrollbar" id="slider-{{ section.id }}" aria-live="polite" aria-atomic="true">
-        <div class="slider__grid">
-          {%- for media in product.media -%}
-            <div class="slider__item{% if forloop.index0 == initial_slide %} is-active{% endif %}"
-                 role="group" aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
-                 aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
-                    {%- unless forloop.index0 == initial_slide %} tabindex="-1"{% endunless %}
-                    {%- if request.design_mode %} data-index="{{ forloop.index0 }}"{% endif %}
-                 data-media-id="{{ media.id }}">
-
-            {%- if media.media_type == 'image' and section.settings.enable_zoom -%}
-              <a class="block show-gallery" href="{{ media.preview_image | image_url: width: zoom_size }}" aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index }}">
-                {%- endif -%}
-
-                {%- liquid
-                  if forloop.index0 == initial_slide
-                    assign loading = 'eager'
-                  else
-                    assign loading = 'lazy'
-                  endif
-
-                  render 'media', media: media, product: product, min_aspect_ratio: min_aspect_ratio, loading: loading
-                -%}
-
-                {%- if media.media_type == 'image' and section.settings.enable_zoom -%}
-              </a>
-              {%- endif -%}
-
-            </div>
-          {%- endfor -%}
-        </div>
-      </div>
-
-      {%- if product.media.size > 1 -%}
-        <div class="slider-nav slider-nav--floating desktop-only js-only">
-          <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
-            <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
-            {% render 'icon-chevron-left' %}
-          </button>
-
-          <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="next" aria-controls="slider-{{ section.id }}">
-            <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
-            {% render 'icon-chevron-right' %}
-          </button>
-        </div>
-      {%- endif -%}
-    </carousel-slider>
 
   <div class="detail product-column-right" data-cc-animate data-cc-animate-delay="0.2s">
     <div class="product-form{% if section.settings.enable_sticky_columns %} sticky-content-container{% endif %}" data-ajax-add-to-cart="true" data-product-id="{{ product.id }}">
@@ -419,9 +341,6 @@
                     {% endif %}
 
                     <div class="quantity-submit-row__submit input-row">
-                      <div class="payment-info">
-                        <span>4 interest-free payments of $71.25 with <a href="#">Klarna</a>. <a href="#">Learn More</a></span>
-                      </div>
                       <div class="js-form-error lightly-spaced-row" role="alert" hidden></div>
 
                       {%- capture add_to_cart_text -%}
@@ -441,6 +360,16 @@
                     </div>
                     <!-- Add to Wishlist Button -->
                     <button class="btn btn--large add-to-wishlist" type="button" name="add_to_wishlist">
+                      <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_4401_955)">
+                          <path d="M3.91196 0.125031C3.44175 0.124826 2.97626 0.218769 2.54294 0.401337C2.10962 0.583904 1.71727 0.851418 1.38898 1.18805C0.719851 1.87278 0.345215 2.79216 0.345215 3.74954C0.345215 4.70693 0.719851 5.6263 1.38898 6.31104L6.96396 12.001C6.99675 12.0339 7.03571 12.06 7.07861 12.0779C7.12151 12.0957 7.16751 12.1048 7.21396 12.1048C7.26041 12.1048 7.3064 12.0957 7.3493 12.0779C7.3922 12.06 7.43117 12.0339 7.46396 12.001C9.32396 10.107 11.184 8.21204 13.044 6.31604C13.7133 5.63143 14.0881 4.71201 14.0881 3.75455C14.0881 2.79708 13.7133 1.87763 13.044 1.19302C12.715 0.856578 12.3222 0.589251 11.8885 0.406738C11.4548 0.224226 10.989 0.130219 10.5185 0.130219C10.0479 0.130219 9.58216 0.224226 9.14847 0.406738C8.71478 0.589251 8.32189 0.856578 7.99295 1.19302L7.21597 1.98602L6.43896 1.18604C6.10964 0.849391 5.71638 0.581958 5.28226 0.399414C4.84813 0.21687 4.38192 0.122906 3.91098 0.123047L3.91196 0.125031ZM3.91196 0.819031C4.28968 0.82087 4.66322 0.898371 5.0105 1.04694C5.35778 1.1955 5.67177 1.41211 5.93396 1.68402L6.96997 2.73602C7.0027 2.76904 7.04162 2.79526 7.08453 2.81314C7.12744 2.83103 7.17348 2.84024 7.21997 2.84024C7.26646 2.84024 7.31247 2.83103 7.35538 2.81314C7.39829 2.79526 7.43724 2.76904 7.46997 2.73602L8.49997 1.68903C8.76132 1.41633 9.07514 1.19936 9.42255 1.05112C9.76995 0.902876 10.1437 0.826447 10.5215 0.826447C10.8992 0.826447 11.273 0.902876 11.6204 1.05112C11.9678 1.19936 12.2816 1.41633 12.543 1.68903C13.0849 2.24115 13.3885 2.9839 13.3885 3.75754C13.3885 4.53117 13.0849 5.27392 12.543 5.82605L7.21597 11.252L1.88898 5.82104C1.3473 5.26879 1.04385 4.52609 1.04385 3.75253C1.04385 2.97898 1.3473 2.23627 1.88898 1.68402C2.15116 1.41211 2.46516 1.1955 2.81244 1.04694C3.15972 0.898371 3.53424 0.82087 3.91196 0.819031Z" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="0.25"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_4401_955">
+                            <rect width="14.435" height="12.231" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
                       Add to wishlist
                     </button>
                     {% if enable_dynamic_payment_button %}
@@ -865,19 +794,33 @@
         <div class="recommendations-grid">
           <ul class="recommendations-list">
             {%- for product in recommendations.products -%}
-              <li class="product" data-collection-item>
+              <li class="product" data-product-id="{{ product.id }}" data-collection-item>
                 <div class="product__quick-add-panel" data-quick-add-panel>
                   <div class="product__size-variants">
                     {% for option in product.options_with_values %}
                       {% assign option_name = option.name | downcase %}
 
                       {% if option_name == 'size' %}
+                        {% assign is_first_size = true %}
                         {% for value in option.values %}
+                          {% assign variant_id = '' %}
+                          {% for variant in product.variants %}
+                            {% if variant.option3 == value %}
+                              {% assign variant_id = variant.id %}
+                            {% endif %}
+                            {% if variant.option2 == value %}
+                              {% assign variant_id = variant.id %}
+                            {% endif %}
+                          {% endfor %}
                           <div
+                                  data-variand-id="{{ variant_id }}"
                                   data-variant-size="{{ value }}"
                                   class="product__size-variant-text no-select
-                                    {% if sizeOption == value %}product__size-variant-text_selected{% endif %}
-                                  "
+                                        {% if is_first_size %}
+                                            product__size-variant-text_selected
+                                            {% assign is_first_size = false %}
+                                        {% endif %}
+                                    "
                           >
                             {{ value }}
                           </div>
@@ -903,8 +846,8 @@
 
     <hr {% unless block.settings.show_in_quickbuy %}class="not-in-quickbuy recommendations-devider"{% endunless %} {{ block.shopify_attributes }}>
     {%- if product.description != blank -%}
-      <h4 class="product-details">Details  –</h4>
-      <div class="{% unless block.settings.show_in_quickbuy %}not-in-quickbuy{% endunless %}{% if block.settings.show_in_tab %} product-info-accordion{% endif %}" {{ block.shopify_attributes }}>
+      <h4 class="product-details">Details  +</h4>
+      <div class="product-details-block {% unless block.settings.show_in_quickbuy %}not-in-quickbuy{% endunless %}{% if block.settings.show_in_tab %} product-info-accordion{% endif %}" {{ block.shopify_attributes }} style="display: none;">
         {% if block.settings.show_in_tab %}
           <details-disclosure>
             <details class="disclosure"{% if block.settings.open_tab %} open{% endif %}>
@@ -937,6 +880,9 @@
             {%- endif -%}
           </div>
         {% endif %}
+      </div>
+      <h4 class="product-sizes">Size & FIt Information  +</h4>
+      <div class="product-sizes-block" style="display: none;">
       </div>
     {%- endif -%}
 

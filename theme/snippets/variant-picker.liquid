@@ -13,6 +13,35 @@
   {% render 'variant-picker', product: product, product_form_id: product_form_id, block: block %}
 {% endcomment %}
 
+{% assign now = "now" | date: "%s" %}
+
+{% assign unavailable_variantss = "" %}
+
+{% for variantt in product.variants %}
+  {% assign variant_available_fromm = variantt.metafields.custom.available_from | date: "%s" %}
+
+  {% for optionn in product.options_with_values %}
+    {% assign option_namee = optionn.name | downcase %}
+
+    {% if option_namee == 'color' %}
+      {% assign productColorOptionss = optionn.values %}
+      {% for variantOptionn in variantt.options %}
+        {% for productColorOptionn in productColorOptionss %}
+          {% if variantOptionn == productColorOptionn %}
+            {% assign colorOptionn = variantOptionn %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  {% if variant_available_fromm > now %}
+    {% assign unavailable_variantss = unavailable_variantss | append: colorOptionn | append: ',' %}
+  {% endif %}
+{% endfor %}
+
+{% assign not_rendering_color_options = unavailable_variantss | split: ',' %}
+
 {%- unless product.has_only_default_variant -%}
   {%- if product.variants.size > 1 or block.settings.show_single -%}
     <script src="{{ 'variant-picker.js' | asset_url }}" defer></script>
@@ -139,36 +168,40 @@
             <div class="option-selector__btns flex flex-wrap">
               {%- for value in option.values -%}
                 {%- assign value_index0 = forloop.index0 -%}
-                <input type="radio" class="opt-btn visually-hidden focus-label js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ value_index0 }}" value="{{ value | escape }}" required{% if block.settings.select_first_variant or product.variants.size == 1 or product.selected_variant %}{% if option.selected_value == value %} checked{% endif %}{% endif %}>
-                {%- if is_variant_image_style -%}
-                  {%- for variant in product.variants -%}
-                    {%- if variant.options[option_index0] == value -%}
-                      <label class="opt-label opt-label--image" for="{{ option_id }}-opt-{{ value_index0 }}">
-                        <div class="opt-label__media media">
-                          {%- render 'image',
-                            image: variant.featured_media,
-                            sizes: img_sizes,
-                            widths: img_widths,
-                            custom_aspect_ratio: img_aspect_ratio,
-                            custom_crop: img_crop_align
-                          -%}
-                        </div>
-                        <span class="{% if settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
-                      </label>
-                      {%- break -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                {%- else -%}
-                  {%- liquid
-                    assign is_swatch = false
-                    if is_color_selector and settings.swatch_method == 'swatches'
-                      assign is_swatch = true
-                    endif
-                  -%}
-                  <label class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center"{% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %} for="{{ option_id }}-opt-{{ value_index0 }}">
-                    <span class="{% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
-                  </label>
-                {%- endif -%}
+                {% if not_rendering_color_options contains value %}
+                  {% continue %}
+                {% else %}
+                  <input type="radio" class="opt-btn visually-hidden focus-label js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ value_index0 }}" value="{{ value | escape }}" required{% if block.settings.select_first_variant or product.variants.size == 1 or product.selected_variant %}{% if option.selected_value == value %} checked{% endif %}{% endif %}>
+                  {%- if is_variant_image_style -%}
+                    {%- for variant in product.variants -%}
+                      {%- if variant.options[option_index0] == value -%}
+                        <label class="opt-label opt-label--image" for="{{ option_id }}-opt-{{ value_index0 }}">
+                          <div class="opt-label__media media">
+                            {%- render 'image',
+                              image: variant.featured_media,
+                              sizes: img_sizes,
+                              widths: img_widths,
+                              custom_aspect_ratio: img_aspect_ratio,
+                              custom_crop: img_crop_align
+                            -%}
+                          </div>
+                          <span class="{% if settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
+                        </label>
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- else -%}
+                    {%- liquid
+                      assign is_swatch = false
+                      if is_color_selector and settings.swatch_method == 'swatches'
+                        assign is_swatch = true
+                      endif
+                    -%}
+                    <label class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center"{% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %} for="{{ option_id }}-opt-{{ value_index0 }}">
+                      <span class="{% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
+                    </label>
+                  {%- endif -%}
+                {% endif %}
               {%- endfor -%}
             </div>
           </fieldset>
