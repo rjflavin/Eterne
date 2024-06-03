@@ -964,7 +964,7 @@
       productObject.title = `{{ productTitle }}`
       {% assign productId = product.id %}
       productObject.productId = `{{ productId }}`
-      
+
       let currentVariantId = getCurrentVariantId()
       if (!currentVariantId) {
         currentVariantId = `{{ product.first_available_variant.id }}`
@@ -995,7 +995,7 @@
 
       let imageLimit = 2
       {% for image in product.images %}
-        if (imageLimit > 0 && productObject.color === `{{ image.alt }}`) {
+        if (imageLimit > 0 && productObject.color.toUpperCase() === `{{ image.alt }}`.toUpperCase()) {
           const imageObject = {
             "src": `{{ image.src | image_url }}`,
             "alt": `{{ image.alt }}`,
@@ -1016,7 +1016,9 @@
       addProductToLocalStorage(productObject, recentProducts, MAX_PRODUCT_AMOUNT)
     }
 
-    updateProductsInStorage()
+    setTimeout(() => {
+      updateProductsInStorage()
+    }, 500)
 
     const colorSwatchButtons = document.querySelectorAll('.opt-label.opt-label--swatch')
     for (const button of colorSwatchButtons) {
