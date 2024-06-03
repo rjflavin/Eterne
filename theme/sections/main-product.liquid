@@ -997,7 +997,6 @@
 
       let imageLimit = 2
       {% for image in product.images %}
-        console.log(`{{ image.alt }}`, productObject.color.toUpperCase())
         if (imageLimit > 0 && productObject.color.toUpperCase() === `{{ image.alt }}`.toUpperCase()) {
           const imageObject = {
             "src": `{{ image.src | image_url }}`,
