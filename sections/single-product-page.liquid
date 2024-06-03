@@ -805,12 +805,11 @@
                         {% for value in option.values %}
                           {% assign variant_id = '' %}
                           {% for variant in product.variants %}
-                            {% if variant.option3 == value %}
-                              {% assign variant_id = variant.id %}
-                            {% endif %}
-                            {% if variant.option2 == value %}
-                              {% assign variant_id = variant.id %}
-                            {% endif %}
+                            {% for option in variant.options %}
+                              {% if option == value %}
+                                {% assign variant_id = variant.id %}
+                              {% endif %}
+                            {% endfor %}
                           {% endfor %}
                           <div
                                   data-variand-id="{{ variant_id }}"
@@ -846,43 +845,33 @@
 
     <hr {% unless block.settings.show_in_quickbuy %}class="not-in-quickbuy recommendations-devider"{% endunless %} {{ block.shopify_attributes }}>
     {%- if product.description != blank -%}
-      <h4 class="product-details">Details  +</h4>
-      <div class="product-details-block {% unless block.settings.show_in_quickbuy %}not-in-quickbuy{% endunless %}{% if block.settings.show_in_tab %} product-info-accordion{% endif %}" {{ block.shopify_attributes }} style="display: none;">
-        {% if block.settings.show_in_tab %}
-          <details-disclosure>
-            <details class="disclosure"{% if block.settings.open_tab %} open{% endif %}>
-              <summary class="disclosure__title">
-                {%- if block.settings.icon == blank -%}
-                  {{- 'products.product.description' | t -}}
-                {%- else -%}
-                  <div class="with-icon">
-                    {% render 'icon', icon: block.settings.icon, size: 'small' %}
-                    <span class="with-icon__beside">{{ 'products.product.description' | t }}</span>
-                  </div>
-                {%- endif -%}
-              </summary>
-              <div class="disclosure__panel has-motion">
-                <div class="disclosure__content rte cf">
-                  {{- product.description -}}
-                </div>
-              </div>
-            </details>
-          </details-disclosure>
-        {% else %}
-          <div class="product-description rte cf">
-            {%- if block.settings.icon == blank -%}
-              {{- product.description -}}
-            {%- else -%}
-              <div class="with-icon">
-                {% render 'icon', icon: block.settings.icon, size: 'small' %}
-                <span class="with-icon__beside">{{ product.description }}</span>
-              </div>
-            {%- endif -%}
+      <div class="product-details product-details_first" data-product-details>
+        <div class="product-details__header">
+          <h4 class="product-details__title no-select">{{ settings.details_title_text }}</h4>
+          <div class="product-details__btn" data-plus-button>
+            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
           </div>
-        {% endif %}
+          <div class="product-details__btn disp-none-imp" data-minus-button>
+            {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+          </div>
+        </div>
+        <div class="product-details__content">
+          {{ product.description }}
+        </div>
       </div>
-      <h4 class="product-sizes">Size & FIt Information  +</h4>
-      <div class="product-sizes-block" style="display: none;">
+      <div class="product-details" data-product-size-and-info>
+        <div class="product-details__header">
+          <h4 class="product-details__title no-select">{{ settings.size_fit_information_title_text }}</h4>
+          <div class="product-details__btn" data-plus-button>
+            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+          </div>
+          <div class="product-details__btn disp-none-imp" data-minus-button>
+            {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+          </div>
+        </div>
+        <div class="product-details__content">
+          {{ product.metafields.custom.size_fit_information.value }}
+        </div>
       </div>
     {%- endif -%}
 
