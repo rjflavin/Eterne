@@ -965,7 +965,7 @@
       productObject.title = `{{ productTitle }}`
       {% assign productId = product.id %}
       productObject.productId = `{{ productId }}`
-
+      
       let currentVariantId = getCurrentVariantId()
       if (!currentVariantId) {
         currentVariantId = `{{ product.first_available_variant.id }}`
