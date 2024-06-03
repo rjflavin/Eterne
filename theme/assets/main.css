@@ -9986,8 +9986,7 @@ ul.inline li {
   margin-left: auto;
 }
 
-.container.container--reading-width,
-.container .shopify-policy__container {
+.container.container--reading-width {
   max-width: var(--reading-container-width);
   box-sizing: content-box;
 }
