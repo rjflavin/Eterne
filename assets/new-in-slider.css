@@ -114,8 +114,32 @@
 }
 @media (max-width: 1024px) {
   .new-in__item-price {
-    display: none;
+    line-height: 16px;
   }
+}
+.new-in__preorder-wrap {
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 11px;
+}
+.new-in__preorder {
+  display: flex;
+  border: 1px solid var(--black1);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.new-in__preorder-text {
+  display: flex;
+  padding: 0 10px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15.8px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--black1);
 }
 .new-in__arrow-item {
   position: absolute;
