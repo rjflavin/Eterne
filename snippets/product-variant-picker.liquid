@@ -212,32 +212,30 @@
                           endif
                         -%}
                         {% if is_color_selector %}
-
-                          {% assign colorOptionValueDowncase = value | downcase | replace: ' ', '_' %}
-                          <label
-                            class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center variant-picker__item-color-wrap"
-                            {% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %}
-                            for="{{ option_id }}-opt-{{ value_index0 }}"
-                            title="{{ colorOptionValue | upcase }}"
-                          >
-                            <div class="variant-picker__item-color-cont">
-                              {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
-                                {% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}
-                                {% if colorEntryNameDowncase == colorOptionValueDowncase %}
-                                  {% assign variantColor = colorEntry.color.value %}
-                                {% endif %}
-                              {% endfor %}
-                              <div
-                                class="variant-picker__item-color"
-                                style="background-color: {{ variantColor }}"
-                              ></div>
-                            </div>
-                          </label>
-
+                            {% assign colorOptionValueDowncase = value | downcase | replace: ' ', '_' %}
+                            <label
+                                class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center variant-picker__item-color-wrap"
+                                {% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %}
+                                for="{{ option_id }}-opt-{{ value_index0 }}"
+                                title="{{ colorOptionValue | upcase }}"
+                            >
+                                <div class="variant-picker__item-color-cont">
+                                    {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
+                                        {% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}
+                                        {% if colorEntryNameDowncase == colorOptionValueDowncase %}
+                                            {% assign variantColor = colorEntry.color.value %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div
+                                        class="variant-picker__item-color"
+                                        style="background-color: {{ variantColor }}"
+                                    ></div>
+                                </div>
+                            </label>
                         {% else %}
-                          <label class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center"{% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %} for="{{ option_id }}-opt-{{ value_index0 }}">
-                            <span class="{% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
-                          </label>
+                            <label class="opt-label {% if is_swatch %}opt-label--swatch{% else %}opt-label--btn{% endif %} btn relative text-center"{% if is_swatch %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %} for="{{ option_id }}-opt-{{ value_index0 }}">
+                                <span class="{% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
+                            </label>
                         {% endif %}
                       {%- endif -%}
                       {% endif %}

@@ -160,7 +160,7 @@
           </div>
 
           {%- if product.media.size > 1 -%}
-            <div class="slider-nav slider-nav--floating desktop-only js-only">
+            <div class="slider-nav slider-nav--floating mobile-only js-only">
               <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
                 <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
                 {% render 'icon-chevron-left' %}
@@ -801,19 +801,26 @@
                       {% assign option_name = option.name | downcase %}
 
                       {% if option_name == 'size' %}
+                        {% assign is_first_size = true %}
                         {% for value in option.values %}
-                            {% assign variant_id = '' %}
-                            {% for variant in product.variants %}
-                                {% if variant.option2 == value %}
-                                    {% assign variant_id = variant.id %}
-                                {% endif %}
-                            {% endfor %}
+                          {% assign variant_id = '' %}
+                          {% for variant in product.variants %}
+                            {% if variant.option3 == value %}
+                              {% assign variant_id = variant.id %}
+                            {% endif %}
+                            {% if variant.option2 == value %}
+                              {% assign variant_id = variant.id %}
+                            {% endif %}
+                          {% endfor %}
                           <div
                                   data-variand-id="{{ variant_id }}"
                                   data-variant-size="{{ value }}"
                                   class="product__size-variant-text no-select
-                                    {% if sizeOption == value %}product__size-variant-text_selected{% endif %}
-                                  "
+                                        {% if is_first_size %}
+                                            product__size-variant-text_selected
+                                            {% assign is_first_size = false %}
+                                        {% endif %}
+                                    "
                           >
                             {{ value }}
                           </div>
