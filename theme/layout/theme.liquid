@@ -175,11 +175,14 @@
   {%- endif -%}
 </head>
 
-<body class="template-{{ template | split: '.' | first | handle }}
+<body
+  data-currency-symbol="{{ cart.currency.symbol }}"
+  class="template-{{ template | split: '.' | first | handle }}
     {%- if template.suffix %} template-suffix-{{ template.suffix }}{% endif -%}
     {%- if settings.swatch_enabled %} swatch-method-{{ settings.swatch_method }} swatch-style-{{ settings.swatch_style }}{% endif -%}
     {%- if settings.animations_enabled_desktop %} cc-animate-enabled{% endif -%}
-    ">
+  "
+>
 
   <a class="skip-link visually-hidden" href="#content">{{ 'accessibility.skip_to_content' | t }}</a>
 

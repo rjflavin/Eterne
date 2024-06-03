@@ -11,6 +11,30 @@ export default class SingleProduct extends HTMLElement {
         this.availableColors = this.getAvailableColors();
         this.watchProductsClickTargetHandler = this.watchProductsClickTargetHandler.bind(this);
         document.addEventListener('DOMContentLoaded', this.watchProductsClickTarget.bind(this));
+
+        this.productDetailsHandler = (dataAttribute) => {
+            const productSizeAndFitElement = this.querySelector(`[${dataAttribute}]`);
+            const productSizeAndFitHeaderElement = productSizeAndFitElement.querySelector('.product-details__header');
+            const productSizeAndFitContentElement = productSizeAndFitElement.querySelector('.product-details__content');
+            const plusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-plus-button]');
+            const minusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-minus-button]');
+
+            if (productSizeAndFitHeaderElement && productSizeAndFitContentElement) {
+                productSizeAndFitHeaderElement.addEventListener('click', () => {
+                    const isOpen = productSizeAndFitContentElement.classList.contains('disp-flx-imp');
+
+                    if (isOpen) {
+                        productSizeAndFitContentElement.classList.remove('disp-flx-imp');
+                        plusButtonElement?.classList.remove('disp-none-imp');
+                        minusButtonElement?.classList.add('disp-none-imp');
+                    } else {
+                        productSizeAndFitContentElement.classList.add('disp-flx-imp');
+                        plusButtonElement?.classList.add('disp-none-imp');
+                        minusButtonElement?.classList.remove('disp-none-imp');
+                    }
+                });
+            }
+        }
     }
 
     connectedCallback() {
@@ -199,7 +223,7 @@ export default class SingleProduct extends HTMLElement {
     }
 
     initializeProductDetailsToggle() {
-        const productDetailsHeader = this.querySelector('.product-details');
+        /*const productDetailsHeader = this.querySelector('.product-details');
         const productDetailsBlock = this.querySelector('.product-details-block');
 
         if (productDetailsHeader && productDetailsBlock) {
@@ -208,20 +232,13 @@ export default class SingleProduct extends HTMLElement {
                 productDetailsHeader.textContent = `Details ${isOpen ? '-' : '+'}`;
                 productDetailsBlock.style.display = isOpen ? 'block' : 'none';
             });
-        }
+        }*/
+
+        this.productDetailsHandler('data-product-details');
     }
 
     initializeSizeInfoToggle() {
-        const productSizesHeader = this.querySelector('.product-sizes');
-        const productSizesBlock = this.querySelector('.product-sizes-block');
-
-        if (productSizesHeader && productSizesBlock) {
-            productSizesHeader.addEventListener('click', () => {
-                const isOpen = productSizesBlock.classList.toggle('open');
-                productSizesHeader.textContent = `Size & Fit Information ${isOpen ? '-' : '+'}`;
-                productSizesBlock.style.display = isOpen ? 'block' : 'none';
-            });
-        }
+        this.productDetailsHandler('data-product-size-and-info');
     }
 
     watchProductsClickTargetHandler(event) {
