@@ -971,6 +971,16 @@
         currentVariantId = `{{ product.first_available_variant.id }}`
       }
 
+      {% assign colorIndex = 0 %}
+      {% assign sizeIndex = 1 %}
+      {% for option in product.options %}
+        {% if option == "Color" %}
+          {% assign colorIndex = forloop.index0 %}
+        {% elsif option == "Size" %}
+          {% assign sizeIndex = forloop.index0 %}
+        {% endif %}
+      {% endfor %}
+
       {% for variant in product.variants %}
         if (currentVariantId === `{{ variant.id }}`) {
           productObject.variantId = `{{ variant.id }}`
@@ -979,9 +989,9 @@
           productObject.price = `{{ variant.price | money_without_trailing_zeros }}`
           productObject.inventory_quantity = `{{ variant.inventory_quantity }}`
           {% for option in variant.options %}
-            {% if forloop.index0 == 0 %}
+            {% if forloop.index0 == colorIndex %}
               productObject.color = `{{ option }}`
-            {% elsif forloop.index0 == 1 %}
+            {% elsif forloop.index0 == sizeIndex %}
               productObject.size = `{{ option }}`
             {% endif %}
           {% endfor %}
