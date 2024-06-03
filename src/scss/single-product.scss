@@ -480,14 +480,69 @@
       color: var(--gray2);
     }
 
-    .product-details, .product-sizes {
-      text-transform: uppercase;
-      font-size: 14px;
-      cursor: pointer;
-      margin-top: 25px;
+    .product-details {
+      margin-top: 24px;
 
-      span {
+      @include for-tablet {
+        margin-top: 20px;
+      }
+
+      &_first {
+        margin-top: 19px;
+
+        @include for-tablet {
+          margin-top: 30px;
+        }
+      }
+
+      &__header {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        cursor: pointer;
+      }
+
+      &__title {
+        font-size: 14px;
+        line-height: 18.2px;
+        text-transform: uppercase;
+
+        @include for-tablet {
+          line-height: 16.8px;
+        }
+      }
+
+      &__btn {
+        display: flex;
+        margin-left: 10px;
+      }
+
+      &__content {
+        display: none;
+        flex-direction: column;
+        margin-top: 5px;
+        font-size: 14px;
+        line-height: 19.6px;
         color: var(--gray4);
+        text-transform: none;
+
+        @include for-tablet {
+          font-size: 12px;
+          line-height: 16.8px;
+        }
+
+        div, span, li, p, a, u, h2, h3, h4, h5, h6, blockquote {
+          font-size: 14px;
+          line-height: 19.6px;
+          color: var(--gray4);
+          text-transform: none;
+
+          @include for-tablet {
+            font-size: 12px;
+            line-height: 16.8px;
+          }
+        }
       }
     }
 
