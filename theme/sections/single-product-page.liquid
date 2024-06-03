@@ -805,12 +805,11 @@
                         {% for value in option.values %}
                           {% assign variant_id = '' %}
                           {% for variant in product.variants %}
-                            {% if variant.option3 == value %}
-                              {% assign variant_id = variant.id %}
-                            {% endif %}
-                            {% if variant.option2 == value %}
-                              {% assign variant_id = variant.id %}
-                            {% endif %}
+                            {% for option in variant.options %}
+                              {% if option == value %}
+                                {% assign variant_id = variant.id %}
+                              {% endif %}
+                            {% endfor %}
                           {% endfor %}
                           <div
                                   data-variand-id="{{ variant_id }}"

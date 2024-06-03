@@ -22,11 +22,15 @@
   .media-gallery--layout-collage-3.media-gallery-size-medium {
     width: 67.4%;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) and (max-width: 1039px){
       width: 60%;
     }
 
     @include for-tablet {
+      width: 65%;
+    }
+
+    @include for-mobile {
       width: 100%;
     }
   }
@@ -118,13 +122,28 @@
     margin-bottom: 11px;
     height: 748px;
 
-    @media (min-width: 1960px) {
-      height: auto;
-    }
+    .img-ar--contain {
+      img {
+        height: 748px;
+        object-fit: cover;
 
+        @media (max-width: 768px) {
+          height: auto;
+          object-fit: contain;
+        }
+      }
+    }
 
     &:nth-of-type(2n) {
       margin-left: 10px;
+    }
+
+    @include for-tablet {
+      width: 48%;
+    }
+
+    @media (max-width: 768px) {
+      height: auto;
     }
   }
 }
@@ -269,7 +288,7 @@
         .option-selector__btns {
           margin: -10px 0 0 -50px;
 
-          @include for-mobile {
+          @media (max-width: 768px) {
             margin: -10px 0 0 0;
           }
         }
@@ -285,6 +304,11 @@
           }
         }
 
+        @media (min-width: 512px) and (max-width: 768px) {
+          flex-wrap: wrap;
+          height: 90px;
+        }
+
         @include for-mobile {
           justify-content: unset;
         }
@@ -295,13 +319,13 @@
 
 .color-tooltip {
   position: absolute;
-  bottom: 100%;
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
+  background-color: var(--white);
+  color: var(--black1);
   padding: 5px;
-  border-radius: 3px;
+  border: 1px solid var(--black2);
   white-space: nowrap;
   display: none;
   z-index: 10;
@@ -358,6 +382,10 @@
             width: 100%;
             height: 323px;
 
+            @media (min-width: 512px) and (max-width: 768px) {
+              height: auto;
+            }
+
             @include for-mobile {
               height: 267px;
             }
@@ -371,6 +399,10 @@
             .product__quick-add-panel {
               display: flex;
             }
+          }
+
+          @media (min-width: 512px) and (max-width: 768px) {
+            width: 46.7%;
           }
         }
       }
@@ -471,13 +503,18 @@
       font-size: 20px;
       text-transform: uppercase;
 
-      @media (min-width: 1024px) {
+      @media (max-width: 1024px) {
         font-size: 18px;
       }
+
     }
 
     .price__current {
       color: var(--gray2);
+
+      @media (min-width: 512px) and (max-width: 1024px) {
+        width: 50px;
+      }
     }
 
     .product-details, .product-sizes {
