@@ -1,13 +1,14 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "about-us": {
+      "type": "about-us",
       "settings": {
-        "full_width": false
+        "image": "shopify:\/\/shop_images\/about-us.webp",
+        "text": "Established in 2020, Éterne was founded by stylist Chloé Bartoli as the go-to destination for timeless and seasonless essentials. With a clear vision for the key items in a women’s wardrobe and how they should fit and function, the brand follows the guiding principles of high quality craftsmanship and wearable luxury."
       }
     }
   },
   "order": [
-    "main"
+    "about-us"
   ]
 }

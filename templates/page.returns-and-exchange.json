@@ -2,8 +2,7 @@
   "sections": {
     "returns-and-exchange": {
       "type": "returns-and-exchanges",
-      "settings": {
-      }
+      "settings": {}
     }
   },
   "order": [
