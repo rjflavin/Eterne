@@ -161,12 +161,12 @@
 
           {%- if product.media.size > 1 -%}
             <div class="slider-nav slider-nav--floating mobile-only js-only">
-              <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
+              <button type="button" class="slider-nav__btn slider-nav__btn--style-2" name="prev" aria-controls="slider-{{ section.id }}">
                 <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
                 {% render 'icon-chevron-left' %}
               </button>
 
-              <button type="button" class="slider-nav__btn slider-nav__btn--style-2 has-ltr-icon" name="next" aria-controls="slider-{{ section.id }}">
+              <button type="button" class="slider-nav__btn slider-nav__btn--style-2" name="next" aria-controls="slider-{{ section.id }}">
                 <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
                 {% render 'icon-chevron-right' %}
               </button>
@@ -799,27 +799,31 @@
                   <div class="product__size-variants">
                     {% for option in product.options_with_values %}
                       {% assign option_name = option.name | downcase %}
-
                       {% if option_name == 'size' %}
                         {% assign is_first_size = true %}
                         {% for value in option.values %}
                           {% assign variant_id = '' %}
+                          {% assign product_color = product.featured_image.alt %}
+
                           {% for variant in product.variants %}
-                            {% for option in variant.options %}
-                              {% if option == value %}
-                                {% assign variant_id = variant.id %}
-                              {% endif %}
-                            {% endfor %}
+                            {% assign available = variant.available %}
+                            {% if variant.featured_image.alt == product_color %}
+                              {% for option in variant.options %}
+                                {% if option == value %}
+                                  {% assign variant_id = variant.id %}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
                           {% endfor %}
                           <div
-                                  data-variand-id="{{ variant_id }}"
+                                  data-variant-id="{{ variant_id }}"
                                   data-variant-size="{{ value }}"
                                   class="product__size-variant-text no-select
-                                        {% if is_first_size %}
-                                            product__size-variant-text_selected
-                                            {% assign is_first_size = false %}
-                                        {% endif %}
-                                    "
+                                {% if is_first_size %}
+                                    product__size-variant-text_selected
+                                    {% assign is_first_size = false %}
+                                {% endif %}
+                            "
                           >
                             {{ value }}
                           </div>
@@ -827,8 +831,7 @@
                       {% endif %}
                     {% endfor %}
                   </div>
-                  <div class="product__add-to-cart no-select">Add to bag</div>
-                  {% comment %}<div class="collection__add-to-cart-loader">...</div>{% endcomment %}
+                  <div class="product__add-to-cart no-select">{% if available %}Add to bag{% else %}Preorder{% endif %}</div>
                 </div>
                 <a href="{{ product.url }}">
                   <img class="product__img" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.featured_image.alt }}" loading="lazy">
@@ -941,6 +944,139 @@
   {%- render 'structured-data-product', product: product, current_variant: product.selected_or_first_available_variant -%}
 </product-form>
 </single-product>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const MAX_PRODUCT_AMOUNT = 7
+
+    const addProductToLocalStorage = (product, productArray, maxProductAmount) => {
+      const filteredArray = productArray.filter(el => (el.productId !== product.productId) || (el.variantId !== product.variantId))
+      while (filteredArray.length >= maxProductAmount) {
+        filteredArray.pop()
+      }
+      filteredArray.splice(0, 0, product);
+
+      const products = JSON.stringify(filteredArray)
+      localStorage.setItem("recently_viewed_products", `${products}`)
+    };
+
+    const getProductsFromLocalStorage = () => {
+      if (localStorage.getItem("recently_viewed_products")) {
+        const productsString = localStorage.getItem("recently_viewed_products")
+        const products = JSON.parse(productsString)
+
+        return products
+      }
+
+      return []
+    }
+
+    const getCurrentVariantId = () => {
+      const url = window.location.href
+      const urlArray = url.split('variant=')
+
+      if (urlArray.length === 2) {
+        return urlArray[1]
+      }
+
+      return ''
+    }
+
+    const initializeProductObject = () => {
+      const productObject = {
+        "productId": "",
+        "variantId": "",
+        "title": "",
+        "url": "",
+        "color": "",
+        "size": "",
+        "price": "",
+        "inventory_quantity": "",
+        "images": [],
+        "variantSizes": [],
+        "variantAvailableFrom": '',
+      }
+
+      {% assign productTitle = product.title %}
+      productObject.title = `{{ productTitle }}`
+      {% assign productId = product.id %}
+      productObject.productId = `{{ productId }}`
+
+      let currentVariantId = getCurrentVariantId()
+      if (!currentVariantId) {
+        currentVariantId = `{{ product.first_available_variant.id }}`
+      }
+
+      {% for variant in product.variants %}
+      if (currentVariantId === `{{ variant.id }}`) {
+        productObject.variantId = `{{ variant.id }}`
+        productObject.variantAvailableFrom = `{{ variant.metafields.custom.available_from | date: "%B %d, %Y" }}`
+        productObject.url = `{{ variant.url }}`
+        productObject.price = `{{ variant.price | money_without_trailing_zeros }}`
+        productObject.inventory_quantity = `{{ variant.inventory_quantity }}`
+        {% for option in variant.options %}
+        {% if forloop.index0 == 0 %}
+        productObject.color = `{{ option }}`
+        {% elsif forloop.index0 == 1 %}
+        productObject.size = `{{ option }}`
+        {% endif %}
+        {% endfor %}
+      }
+      {% for option in variant.options %}
+      {% if forloop.index0 == 1 %}
+      if (!productObject.variantSizes.includes(`{{ option }}`)) {
+        productObject.variantSizes.push(`{{ option }}`)
+      }
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+      let imageLimit = 2
+      {% for image in product.images %}
+      if (imageLimit > 0 && productObject.color.toUpperCase() === `{{ image.alt }}`.toUpperCase()) {
+        const imageObject = {
+          "src": `{{ image.src | image_url }}`,
+          "alt": `{{ image.alt }}`,
+          "mediaType": `{{ image.media_type }}`,
+          "productId": `{{ image.product_id }}`
+        }
+        productObject.images.push(imageObject)
+        imageLimit--
+      }
+      {% endfor %}
+
+      return productObject
+    }
+
+    const updateProductsInStorage = () => {
+      const productObject = initializeProductObject()
+      const recentProducts = getProductsFromLocalStorage()
+      addProductToLocalStorage(productObject, recentProducts, MAX_PRODUCT_AMOUNT)
+    }
+
+    setTimeout(() => {
+      updateProductsInStorage()
+    }, 500)
+
+    const colorSwatchButtons = document.querySelectorAll('.opt-label.opt-label--swatch')
+    for (const button of colorSwatchButtons) {
+      button.addEventListener("click", () => {
+        setTimeout(() => {
+          updateProductsInStorage()
+        }, 500)
+      })
+    }
+
+    const sizeSwatchButtons = document.querySelectorAll('.opt-label.opt-label--btn')
+    for (const button of sizeSwatchButtons) {
+      button.addEventListener("click", () => {
+        setTimeout(() => {
+          updateProductsInStorage()
+        }, 500)
+      })
+    }
+  })
+</script>
 
 {{ 'single-product-script.js' | asset_url | script_tag }}
 

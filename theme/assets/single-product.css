@@ -279,6 +279,11 @@
     justify-content: unset;
   }
 }
+@media (min-width: 512px) and (max-width: 768px) {
+  .product-form fieldset.option-selector.material-switcher .label {
+    width: 150px;
+  }
+}
 
 .color-tooltip {
   position: absolute;
@@ -330,6 +335,11 @@
   position: relative;
   max-height: 406px;
   height: 100%;
+}
+@media (min-width: 512px) and (max-width: 768px) {
+  .product-info .product-column-right .product-recommendations .recommendations-list .product {
+    max-height: 200px;
+  }
 }
 .product-info .product-column-right .product-recommendations .recommendations-list .product img {
   width: 100%;
@@ -571,4 +581,10 @@
 
 .recent-products-slider {
   padding-top: 8px !important;
+}
+
+@media (max-width: 767px) {
+  .gallery-viewer-modal {
+    display: none;
+  }
 }

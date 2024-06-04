@@ -313,6 +313,14 @@
           justify-content: unset;
         }
       }
+
+      &.material-switcher {
+        .label {
+          @media (min-width: 512px) and (max-width: 768px) {
+            width: 150px;
+          }
+        }
+      }
     }
   }
 }
@@ -377,6 +385,10 @@
           position: relative;
           max-height: 406px;
           height: 100%;
+
+          @media (min-width: 512px) and (max-width: 768px) {
+            max-height: 200px;
+          }
 
           img {
             width: 100%;
@@ -658,6 +670,8 @@
   padding-top: 8px !important;
 }
 
-
-
-
+.gallery-viewer-modal {
+  @include for-mobile {
+    display: none;
+  }
+}
