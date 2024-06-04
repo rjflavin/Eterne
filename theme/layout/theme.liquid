@@ -46,8 +46,6 @@
     <noscript><link rel="stylesheet" href="{{ 'swatches.css' | asset_url }}"></noscript>
   {%- endif -%}
 
-  {{ 'base.scss' | asset_url | stylesheet_tag }}
-
   {%- unless base_font.system? -%}
     <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
   {%- endunless -%}
@@ -173,6 +171,9 @@
     {{- settings.custom_html_head -}}
     <!-- CC Custom Head End -->
   {%- endif -%}
+
+  {{ 'base.scss' | asset_url | stylesheet_tag }}
+  {{ 'policies.css' | asset_url | stylesheet_tag }}
 </head>
 
 <body
