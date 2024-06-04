@@ -1,44 +1,41 @@
 {
   "sections": {
-    "contact": {
-      "type": "rich-text",
+    "contact_us": {
+      "type": "contact-us",
       "blocks": {
-        "icon": {
-          "type": "icon",
+        "contact_us_block_MPTqRj": {
+          "type": "contact_us_block",
           "settings": {
-            "icon": "chat_bubble"
+            "description_text": "General",
+            "link": "support@eterne.com"
           }
         },
-        "heading": {
-          "type": "heading",
+        "contact_us_block_tNLyEx": {
+          "type": "contact_us_block",
           "settings": {
-            "title": "Get in touch"
+            "description_text": "Marketing",
+            "link": "marketing@eterne.com"
           }
         },
-        "text": {
-          "type": "text",
+        "contact_us_block_RXXAFh": {
+          "type": "contact_us_block",
           "settings": {
-            "text": "<p>Have questions about your order, or a general enquiry?<\/p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Contact us"
+            "description_text": "Press",
+            "link": "press@eterne.com"
           }
         }
       },
       "block_order": [
-        "icon",
-        "heading",
-        "text",
-        "button"
+        "contact_us_block_MPTqRj",
+        "contact_us_block_tNLyEx",
+        "contact_us_block_RXXAFh"
       ],
       "settings": {
+        "contact_us_title": "Contact us"
       }
     }
   },
   "order": [
-    "contact"
+    "contact_us"
   ]
 }
