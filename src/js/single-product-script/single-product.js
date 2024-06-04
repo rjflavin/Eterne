@@ -261,7 +261,7 @@ export default class SingleProduct extends HTMLElement {
             if (addToCartButton) {
                 const selectedVariantElement = productElement.querySelector('.product__size-variant-text_selected');
                 if (selectedVariantElement) {
-                    const variantId = selectedVariantElement.dataset.variandId;
+                    const variantId = selectedVariantElement.dataset.variantId;
                     const addToCartAndDisableLoader = async () => {
                         const response = await addToCart(variantId, 1);
 
