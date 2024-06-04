@@ -80,16 +80,25 @@
     }
   }
 
-  & p span {
+  div, div a {
+    font-size: 12px;
+    line-height: 19.2px;
+    letter-spacing: 0.16px;
+  }
+
+  p, p span, p a {
     font-size: 14px;
     line-height: 22.4px;
     letter-spacing: 0.16px;
     margin-bottom: 10px;
   }
 
-  & div {
-    font-size: 12px;
-    line-height: 19.2px;
-    letter-spacing: 0.16px;
+  a {
+    text-decoration: underline;
+    text-decoration-color: var(--black2);
+
+    &:hover {
+      color: var(--gray);
+    }
   }
 }
