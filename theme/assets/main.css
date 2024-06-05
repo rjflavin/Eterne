@@ -3519,10 +3519,6 @@ body:not(.reveal-mobile-nav) .mobile-navigation-drawer .mobile-navigation-drawer
   }
 }
 @media (min-width: 768px) {
-  .product-info {
-    display: flex;
-    justify-content: center;
-  }
   .product-info .product-column-left {
     flex: 0 0 auto;
     width: 50%;
@@ -7419,7 +7415,6 @@ hotspots-image .image-overlay {
 .media-gallery .main-image {
   position: relative;
   width: 100%;
-  margin: 0 0 20px;
   text-align: center;
 }
 @media (max-width: 767.98px) {

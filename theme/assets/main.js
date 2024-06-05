@@ -131,13 +131,13 @@ theme.scrollToRevealElement = (el) => {
   const inViewTop = scrollTop + theme.stickyHeaderHeight();
   const inViewBot = scrollTop + scrollVisibleHeight - 50;
 
-  if (elTop < inViewTop || elBot > inViewBot) {
+  /*if (elTop < inViewTop || elBot > inViewBot) {
     scrollContainer.scrollTo({
       top: elTop - 100 - theme.stickyHeaderHeight(),
       left: 0,
       behavior: 'smooth'
     });
-  }
+  }*/
 };
 
 theme.getEmptyOptionSelectors = (formContainer) => {
