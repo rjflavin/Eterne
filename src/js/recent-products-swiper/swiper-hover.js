@@ -2,10 +2,8 @@ import { addToCartSetup } from "../utils/cart-handler";
 
 document.addEventListener("DOMContentLoaded", () => {
     const recentProductsItems = document.querySelectorAll('.recent-products__slider-slide');
-    console.log('recentProductsItems -', recentProductsItems);
 
     recentProductsItems.forEach((item) => {
-        console.log('item -', item);
         const mouseHoverIn = ((item) => {
             const infoContainer = item.querySelector('.swiper-slide-image-info')
             if (infoContainer) {
@@ -25,17 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 
         item.addEventListener('mouseover', () => {
-            console.log('1');
             mouseHoverIn(item)
         });
 
         item.addEventListener('mouseenter', () => {
-            console.log('2');
             mouseHoverIn(item)
         });
 
         item.addEventListener('mouseout', () => {
-            console.log('3');
             const infoContainer = item.querySelector('.swiper-slide-image-info')
             if (infoContainer) {
                 infoContainer.classList.remove('show')
@@ -49,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         item.addEventListener('mouseleave', () => {
-            console.log('4');
             const itemInfoButton = item.querySelector('.swiper-slide-image-info-button')
             if (itemInfoButton) {
                 itemInfoButton.classList.remove('hide')
