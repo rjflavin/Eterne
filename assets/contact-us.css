@@ -42,6 +42,3 @@
 .contact-us__link {
   text-decoration: underline;
 }
-.contact-us__link:hover {
-  color: var(--gray);
-}

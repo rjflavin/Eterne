@@ -6,13 +6,12 @@
         "one_image_row_BNxRBq": {
           "type": "one_image_row",
           "settings": {
-            "media_type": "video",
+            "media_type": "image",
             "orientation": "landscape",
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections",
             "product_link_text": "shop tees",
-            "image": "shopify:\/\/shop_images\/Frame_7_74de2eca-9d86-4d92-9d96-376c5f008b46.jpg",
-            "video": "shopify:\/\/files\/videos\/20200612_ETERNE_NAJ JAMAI_EDIT_COLOR.mov"
+            "image": "shopify:\/\/shop_images\/Frame_7_74de2eca-9d86-4d92-9d96-376c5f008b46.jpg"
           }
         },
         "two_images_row_VbNWxi": {
