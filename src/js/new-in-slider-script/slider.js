@@ -5,7 +5,7 @@ import 'swiper/css';
 Swiper.use([Navigation]);
 
 document.addEventListener("DOMContentLoaded", () => {
-  const slider = new Swiper('.new-in__swiper', {
+  const newInSlider = new Swiper('.new-in__swiper', {
     allowTouchMove: true,
     loop: true,
     modules: [Navigation],
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // when window width is >= 768px
       768: {
         slidesPerView: 4,
-        allowTouchMove: false
+        allowTouchMove: false,
       },
 
       // when window width is >= 1024px
