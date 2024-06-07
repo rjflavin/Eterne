@@ -814,6 +814,10 @@
 .page-section-spacing {
   margin-bottom: 85px;
 
+  @media (max-width: 1439px) {
+    margin-top: 0;
+  }
+
   @include for-tablet {
     margin-bottom: 22px;
   }

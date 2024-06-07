@@ -717,6 +717,11 @@
 .page-section-spacing {
   margin-bottom: 85px;
 }
+@media (max-width: 1439px) {
+  .page-section-spacing {
+    margin-top: 0;
+  }
+}
 @media (max-width: 1023px) {
   .page-section-spacing {
     margin-bottom: 22px;
