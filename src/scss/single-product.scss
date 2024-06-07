@@ -484,9 +484,9 @@
           &__item-quick-add-btn {
             display: none;
 
-            @media (max-width: 1024px) {
-              width: 3.8167939vw; // 15px on 393px screen
-              height: 3.8167939vw; // 15px on 393px screen
+            @include for-tablet {
+              width: 27px;
+              height: 27px;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -494,18 +494,8 @@
               background-color: var(--gray3);
 
               svg {
-                width: 1.7811705vw; // 7px on 393px screen
-                height: 1.7811705vw; // 7px on 393px screen
-              }
-
-              @include min-mobile {
                 width: 15px;
                 height: 15px;
-
-                svg {
-                  width: 7px;
-                  height: 7px;
-                }
               }
             }
           }
