@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slidesPerView: 1,
     spaceBetween: 0,
     watchSlidesVisibility: true,
+    slideClass: 'recent-products__slider-slide',
     wrapperClass: 'recent-products__swiper-wrapper',
     breakpoints: {
       320: {

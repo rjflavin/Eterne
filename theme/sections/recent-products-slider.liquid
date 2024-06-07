@@ -53,7 +53,7 @@
       for (const product of products) {
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           wrapperCode = wrapperCode + `
-            <a href="${product.url}" id="${product.variantId}" class="swiper-slide">
+            <a href="${product.url}" id="${product.variantId}" class="recent-products__slider-slide swiper-slide">
               <div class="swiper-slide-container">
                 <div class="swiper-slide-image-container">
                   <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
