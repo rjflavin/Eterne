@@ -4,7 +4,7 @@ import 'swiper/css';
 
 Swiper.use([Navigation]);
 document.addEventListener("DOMContentLoaded", () => {
-  const slider = new Swiper('.recent-products-swiper', {
+  const recentlyViewedProductsSlider = new Swiper('.recent-products-swiper', {
     allowTouchMove: true,
     loop: true,
     modules: [Navigation],
@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slidesPerView: 1,
     spaceBetween: 0,
     watchSlidesVisibility: true,
+    wrapperClass: 'recent-products__swiper-wrapper',
     breakpoints: {
       320: {
         slidesPerView: 1,
@@ -35,13 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
         slidesPerView: 2.8,
       },
       768: {
-        slidesPerView: 3        
+        slidesPerView: 3,
       },
       900: {
-        slidesPerView: 3.6        
+        slidesPerView: 3.6,
       },
       1024: {
-        slidesPerView: 4
+        slidesPerView: 4,
       }
     },
   });
