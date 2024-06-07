@@ -66,7 +66,12 @@
                       }
                     </div>
                     {% if section.settings.add_to_cart_text %}
-                      <button class="swiper-slide-image-info-cart-button">{{ section.settings.add_to_cart_text }}</button>
+                      <button
+                        ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `disabled` : ''}
+                        class="swiper-slide-image-info-cart-button"
+                      >
+                        {{ section.settings.add_to_cart_text }}
+                      </button>
                       <div class="swiper-slide-image-info-cart-loader">
                         <div class="swiper-slide-image-info-cart-loader-circle"></div>
                         <div class="swiper-slide-image-info-cart-loader-circle"></div>
