@@ -808,7 +808,8 @@
 }
 
 .sticky-content-container {
-  top: 157.73px; // header height
+  // top: 157.73px; // header height
+  top: var(--sticky-top, 157.73px);
 }
 
 .page-section-spacing {

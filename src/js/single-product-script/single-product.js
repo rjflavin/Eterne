@@ -54,38 +54,60 @@ export default class SingleProduct extends HTMLElement {
   }
 
   watchScroll () {
-    const headerElement = document.getElementById('pageheader');
-    const stickyContentContainerElement = this.querySelector('[data-sticky-content-container]');
-    const desktopImagesContainerElement = this.querySelector('[data-desktop-images-container]');
-    const defaultTopOffset  = headerElement.offsetHeight;
-    let currentStickyTopOffset = defaultTopOffset;
-    let prevScrollY  = 0;
+    let topValue = 0
+    let previousValue = 0
+    // console.log('hi', stickyContainerElement)
+    window.addEventListener("scroll", () => {
+      const stickyContainerElement = this.querySelector('[data-sticky-content-container]');
+      const productFormElement = this.querySelector('product-form');
+      const elementBottom = stickyContainerElement.getBoundingClientRect().bottom
+      const containerBottom = productFormElement.getBoundingClientRect().bottom
+      console.log('hi', window.innerHeight, elementBottom, containerBottom)
+      console.log('hello', window.innerHeight - elementBottom - 157.73)
+      // stickyContainerElement.style['--sticky-top'] = `${window.innerHeight - elementBottom}px`
 
-    document.addEventListener('scroll', () => {
-      const currentScrollY  = window.scrollY;
-      console.log('currentScrollY -', currentScrollY);
-      const isScrollDirectionTop = currentScrollY < prevScrollY;
-      //prevScrollY = currentScrollY;
-      const currentStickyContentContainerElementHeight = stickyContentContainerElement.offsetHeight;
-      const currentDesktopImagesContainerElementHeight = desktopImagesContainerElement.offsetHeight;
-      const hasSpaceToScroll =
-        currentDesktopImagesContainerElementHeight > currentStickyContentContainerElementHeight;
-      const heightDifference =
-        window.innerHeight - currentStickyContentContainerElementHeight - defaultTopOffset;
-      //const stickyPositionRelativeToTop = ;
-      //const isScrollOnStickyContentContainerElementDownOrBelow = currentScrollY >= currentStickyTopOffset + currentScrollY + ;
-      //const isStickyContentContainerElementScrolledToHisDown = ;
-
-      if (hasSpaceToScroll) {
-        console.log('shouldCalculateTopOffset');
-
-        const heightDifference = window.innerHeight - stickyContentContainerElement - defaultTopOffset;
-        const scrollDifference = Math.abs(currentScrollY - prevScrollY);
-
+      const temp = window.innerHeight - elementBottom - 157.73
+      if (temp > previousValue) {
+        topValue = temp
       }
 
-      prevScrollY = currentScrollY;
-    });
+      stickyContainerElement.style.top = `${window.innerHeight - elementBottom - 157.73}px`
+      // stickyContainerElement.style = {'--sticky-top': `${window.innerHeight - elementBottom - 157.73}px`}
+      previousValue = topValue
+    })
+
+    // const headerElement = document.getElementById('pageheader');
+    // const stickyContentContainerElement = this.querySelector('[data-sticky-content-container]');
+    // const desktopImagesContainerElement = this.querySelector('[data-desktop-images-container]');
+    // const defaultTopOffset  = headerElement.offsetHeight;
+    // let currentStickyTopOffset = defaultTopOffset;
+    // let prevScrollY  = 0;
+
+    // document.addEventListener('scroll', () => {
+    //   const currentScrollY  = window.scrollY;
+    //   console.log('currentScrollY -', currentScrollY);
+    //   const isScrollDirectionTop = currentScrollY < prevScrollY;
+    //   //prevScrollY = currentScrollY;
+    //   const currentStickyContentContainerElementHeight = stickyContentContainerElement.offsetHeight;
+    //   const currentDesktopImagesContainerElementHeight = desktopImagesContainerElement.offsetHeight;
+    //   const hasSpaceToScroll =
+    //     currentDesktopImagesContainerElementHeight > currentStickyContentContainerElementHeight;
+    //   const heightDifference =
+    //     window.innerHeight - currentStickyContentContainerElementHeight - defaultTopOffset;
+    //   //const stickyPositionRelativeToTop = ;
+    //   //const isScrollOnStickyContentContainerElementDownOrBelow = currentScrollY >= currentStickyTopOffset + currentScrollY + ;
+    //   //const isStickyContentContainerElementScrolledToHisDown = ;
+
+    //   if (hasSpaceToScroll) {
+    //     console.log('shouldCalculateTopOffset');
+
+    //     const heightDifference = window.innerHeight - stickyContentContainerElement - defaultTopOffset;
+    //     const scrollDifference = Math.abs(currentScrollY - prevScrollY);
+
+    //   }
+
+    //   prevScrollY = currentScrollY;
+    // });
   }
 
   getAvailableColors() {

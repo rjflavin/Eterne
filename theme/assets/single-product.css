@@ -711,7 +711,7 @@
 }
 
 .sticky-content-container {
-  top: 157.73px;
+  top: var(--sticky-top, 157.73px);
 }
 
 .page-section-spacing {
