@@ -50,12 +50,9 @@ export const addToCartSetup = (element, productId, quantity, loaderElement, load
         element.addEventListener("click", async (event) => {
             event.preventDefault();
 
-            if (element.disabled) {
-                console.log('1');
+            if (element.hasAttribute('disabled')) {
                 return;
             }
-
-            console.log('2');
 
             element.disabled = true
 
