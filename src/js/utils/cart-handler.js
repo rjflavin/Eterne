@@ -45,15 +45,27 @@ export const updateCartItemQuantity = async (productId, quantity) => {
     return result
 }
 
-export const addToCartSetup = (element, productId, quantity, loaderElement) => {
+export const addToCartSetup = (element, productId, quantity, loaderElement, loaderFillTextElement) => {
     if (element) {
         element.addEventListener("click", async (event) => {
             event.preventDefault();
+
+            if (element.disabled) {
+                console.log('1');
+                return;
+            }
+
+            console.log('2');
+
             element.disabled = true
 
             if (loaderElement) {
                 element.classList.add('hide')
                 loaderElement.classList.add('show')
+
+                if (loaderFillTextElement) {
+                    loaderFillTextElement.classList.remove('disp-none-imp')
+                }
             }
 
             const response = await addToCart(productId, quantity)
@@ -73,6 +85,10 @@ export const addToCartSetup = (element, productId, quantity, loaderElement) => {
                 if (loaderElement) {
                     element.classList.remove('hide')
                     loaderElement.classList.remove('show')
+
+                    if (loaderFillTextElement) {
+                        loaderFillTextElement.classList.add('disp-none-imp')
+                    }
                 }
             }
         })
