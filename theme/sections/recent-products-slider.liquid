@@ -53,8 +53,9 @@
       for (const product of products) {
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           wrapperCode = wrapperCode + `
-            <a href="${product.url}" id="${product.variantId}" class="recent-products__slider-slide swiper-slide">
+            <div id="${product.variantId}" class="recent-products__slider-slide swiper-slide">
               <div class="swiper-slide-container">
+                <a href="${product.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container">
                   <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
                   <div class="swiper-slide-image-info">
@@ -72,10 +73,13 @@
                       >
                         {{ section.settings.add_to_cart_text }}
                       </button>
+                      <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
                       <div class="swiper-slide-image-info-cart-loader">
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circles-wrap">
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        </div>
                       </div>
                     {% endif %}
                   </div>
@@ -92,7 +96,7 @@
                   ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `<button class="swiper-slide-preorder">Preorder</button>` : ''}
                 </div>
               </div>
-            </a>
+            </div>
           `
         }
       }
