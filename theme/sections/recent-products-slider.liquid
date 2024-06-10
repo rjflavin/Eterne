@@ -8,7 +8,7 @@
   {% endif %}
 
   <div class="recent-products-swiper">
-    <div class="swiper-wrapper">
+    <div class="recent-products__swiper-wrapper swiper-wrapper">
 
     </div>
     <div class="recent-products-swiper-button-prev">
@@ -53,8 +53,9 @@
       for (const product of products) {
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           wrapperCode = wrapperCode + `
-            <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
+            <div id="${product.variantId}" class="recent-products__slider-slide swiper-slide">
               <div class="swiper-slide-container">
+                <a href="${product.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container">
                   <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
                   <div class="swiper-slide-image-info">
@@ -66,11 +67,19 @@
                       }
                     </div>
                     {% if section.settings.add_to_cart_text %}
-                      <button class="swiper-slide-image-info-cart-button">{{ section.settings.add_to_cart_text }}</button>
+                      <div
+                        ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `disabled` : ''}
+                        class="swiper-slide-image-info-cart-button"
+                      >
+                        {{ section.settings.add_to_cart_text }}
+                      </div>
+                      <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
                       <div class="swiper-slide-image-info-cart-loader">
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circles-wrap">
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        </div>
                       </div>
                     {% endif %}
                   </div>
@@ -87,11 +96,11 @@
                   ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `<button class="swiper-slide-preorder">Preorder</button>` : ''}
                 </div>
               </div>
-            </a>
+            </div>
           `
         }
       }
-      const wrapper = document.querySelector('.swiper-wrapper')
+      const wrapper = document.querySelector('.recent-products__swiper-wrapper')
       if (wrapper) {
         wrapper.innerHTML = wrapperCode
       }
