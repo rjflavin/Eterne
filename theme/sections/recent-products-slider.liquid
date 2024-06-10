@@ -67,12 +67,12 @@
                       }
                     </div>
                     {% if section.settings.add_to_cart_text %}
-                      <button
+                      <div
                         ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `disabled` : ''}
                         class="swiper-slide-image-info-cart-button"
                       >
                         {{ section.settings.add_to_cart_text }}
-                      </button>
+                      </div>
                       <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
                       <div class="swiper-slide-image-info-cart-loader">
                         <div class="swiper-slide-image-info-cart-loader-circles-wrap">
