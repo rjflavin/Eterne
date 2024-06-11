@@ -1,12 +1,20 @@
+body {
+  min-height: 100vh;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 .about-us {
   width: fit-content;
   display: flex;
   padding: 0 20px;
-  margin: 0 auto;
+  margin: 0 auto 15px;
 }
 @media (max-width: 767px) {
   .about-us {
     flex-direction: column;
+    margin: 0 auto;
   }
 }
 .about-us__image {
