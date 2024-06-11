@@ -1,13 +1,21 @@
 @import "mixins";
 
+body {
+  min-height: 100vh;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 .about-us {
   width: fit-content;
   display: flex;
   padding: 0 20px;
-  margin: 0 auto;
+  margin: 0 auto 15px;
 
   @include for-mobile {
     flex-direction: column;
+    margin: 0 auto;
   }
 
   &__image {
