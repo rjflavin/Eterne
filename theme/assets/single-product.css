@@ -257,17 +257,6 @@
     margin: -10px 0 0 0;
   }
 }
-.product-form fieldset.option-selector.size-chart .size-guide {
-  margin-top: -13px;
-  text-transform: uppercase;
-  cursor: pointer;
-  text-decoration: underline;
-}
-@media (max-width: 767px) {
-  .product-form fieldset.option-selector.size-chart .size-guide {
-    font-size: 12px;
-  }
-}
 @media (min-width: 512px) and (max-width: 768px) {
   .product-form fieldset.option-selector.size-chart {
     flex-wrap: wrap;

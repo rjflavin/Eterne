@@ -1,0 +1,260 @@
+.size-guide .sg-button {
+  margin-top: -13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: underline;
+}
+@media (max-width: 767px) {
+  .size-guide .sg-button {
+    font-size: 12px;
+  }
+}
+.size-guide .sg-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 11, 11, 0.8);
+  overflow-y: scroll;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+@media (max-width: 767px) {
+  .size-guide .sg-modal {
+    align-items: start;
+    background: #fff;
+  }
+}
+.size-guide .sg-modal.close {
+  opacity: 0;
+  visibility: hidden;
+}
+.size-guide .sg-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+.size-guide .sg-modal_close {
+  position: absolute;
+  font-size: 39px;
+  right: 8px;
+  top: 6px;
+  color: #333;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  font-family: miller-display, "PT Serif", serif;
+}
+@media (max-width: 575px) {
+  .size-guide .sg-modal_close {
+    right: 13px;
+    top: 1px;
+    font-size: 33px;
+  }
+}
+.size-guide .sg-modal__inner {
+  position: relative;
+  background: #fff;
+  padding: 48px 48px 57px;
+  margin: 20px auto;
+  max-width: 940px;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .size-guide .sg-modal__inner {
+    min-height: 100%;
+    padding: 49px 27px 36px;
+    margin: 0;
+  }
+}
+.size-guide .sg-modal__product {
+  display: flex;
+  gap: 40px;
+  padding-bottom: 48px;
+  padding-top: 0;
+  border-top: none;
+}
+@media (max-width: 575px) {
+  .size-guide .sg-modal__product {
+    padding-bottom: 20px;
+    border-top: 2px solid #f7f7f7;
+    padding-top: 20px;
+    gap: 16px;
+  }
+}
+.size-guide .sg-modal__product-image-wrapper {
+  max-width: 234px;
+}
+@media (max-width: 575px) {
+  .size-guide .sg-modal__product-image-wrapper {
+    max-width: 107px;
+  }
+}
+.size-guide .sg-modal__product-image-wrapper img {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+.size-guide .sg-modal__product-title {
+  font-family: "Helvetica Neue", sans-serif, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 21px;
+  font-size: 22px;
+  line-height: 26px;
+  text-transform: uppercase;
+}
+@media (max-width: 575px) {
+  .size-guide .sg-modal__product-title {
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+.size-guide .sg-modal__product-info-details > * {
+  font-size: 14px;
+  line-height: 1.6;
+}
+@media (max-width: 575px) {
+  .size-guide .sg-modal__product-info-details > * {
+    font-size: 12px;
+  }
+}
+.size-guide .sg-modal__product-info-details p {
+  margin-bottom: 15px;
+}
+.size-guide .sg-modal__product-info-details ul {
+  margin-bottom: 0;
+  list-style-type: disc;
+  margin-left: 25px;
+}
+.size-guide .sg-modal__product-info-details li {
+  margin-bottom: 0.4em;
+}
+.size-guide .sg-modal__chart .size-tabs {
+  overflow: hidden;
+  border-top: solid 1px #f7f7f7;
+  border-bottom: solid 1px #f7f7f7;
+  margin-bottom: 1.5em;
+  padding-top: 36.5px;
+}
+.size-guide .sg-modal__chart .size-tabs button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.75em;
+  transition: 0.3s;
+  border-bottom: solid 3px transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  line-height: 1.6;
+  font-family: "Helvetica Neue", sans-serif, sans-serif;
+  color: #2b2b2b;
+  letter-spacing: 0.16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+.size-guide .sg-modal__chart .size-tablinks {
+  opacity: 0.8;
+}
+.size-guide .sg-modal__chart .size-tabs button:hover,
+.size-guide .sg-modal__chart .size-tabs button:active,
+.size-guide .sg-modal__chart .size-tablinks.active {
+  border-bottom: solid 3px #2e3438;
+  opacity: 1;
+}
+.size-guide .sg-modal__chart .size-tabs-heading {
+  font-family: "Helvetica Neue", sans-serif, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  margin: 0 0 15px;
+  line-height: 1.4;
+  text-align: left;
+  text-transform: uppercase;
+  color: #2b2b2b;
+  letter-spacing: 0.16px;
+}
+.size-guide .sg-modal__chart .size-tabcontent {
+  display: none;
+  border: 0px solid transparent;
+  border-top: none;
+}
+@media (max-width: 767px) {
+  .size-guide .sg-modal__chart .size-tabcontent {
+    flex-wrap: wrap;
+  }
+}
+.size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-heading {
+  padding: 10px;
+  background-color: #2e3438;
+  color: #fff;
+}
+.size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-wrapper {
+  display: inline-block;
+  padding: 2% 4%;
+  margin: 0 1% 1% 0;
+  border: solid 1px #f7f7f7;
+  width: 90%;
+  /* @include at-query ($min, $medium) {
+     width: 18%;
+   }
+
+   @include at-query ($max, $medium) {
+     width: 45%;
+   }*/
+}
+@media (max-width: 767px) {
+  .size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-wrapper {
+    width: 45%;
+  }
+}
+.size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-wrapper .size-tabcontent-title {
+  margin: 3%;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 23px;
+  font-weight: 500;
+}
+.size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-wrapper .size-divider {
+  display: block;
+  color: transparent;
+  width: 33%;
+  background-color: #2e3438;
+  height: 2px;
+  margin: 10% 0;
+}
+.size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-wrapper .size-tabcontent-item,
+.size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-wrapper .size-tabcontent-item > :not(.size-item-prop) {
+  opacity: 1;
+  font-size: 10.8px;
+  line-height: 21.6px;
+  text-align: right;
+  font-family: "Helvetica Neue", sans-serif, sans-serif;
+  font-weight: 600;
+}
+.size-guide .sg-modal__chart .size-tabcontent .size-tabcontent-wrapper .size-item-prop {
+  display: inline-block;
+  float: left;
+  opacity: 0.8;
+  text-align: left;
+  font-size: 10.8px;
+  font-weight: 400;
+  line-height: 21.6px;
+}

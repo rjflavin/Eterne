@@ -18,17 +18,30 @@
 {%- liquid
   assign min_aspect_ratio = 0.6
   assign current_variant = product.selected_or_first_available_variant
+  assign size_guide_text = ''
+  assign enable_size_chart = false
 
   unless product.has_only_default_variant
     for block in section.blocks
-      if block.type == 'product-variant-picker' and block.settings.select_first_variant == false and product.variants.size > 1
-        assign current_variant = product.selected_variant | default: false
+      if block.type == 'product-variant-picker'
+        assign size_guide_text = block.settings.size_guide_text
+        if block.settings.size_guide_page != blank
+          assign enable_size_chart = true
+        endif
+        if block.settings.select_first_variant == false and product.variants.size > 1
+          assign current_variant = product.selected_variant | default: false
+        endif
       endif
+
     endfor
   endunless
 
   assign product_form_id = 'product-form-' | append: section.id | append: '-' | append: product.id
 -%}
+
+{% if enable_size_chart %}
+  {{ 'size-guide.css' | asset_url | stylesheet_tag }}
+{% endif %}
 
 {%- if product.media.size > 1 -%}
   <script src="{{ 'slideshow.js' | asset_url }}" defer></script>
@@ -164,7 +177,10 @@
                 size_chart_icon: size_chart_icon,
                 media_ratio: 1,
                 swatch_crop: settings.swatch_crop_align,
-                dynamic_availability_mode: 'down'
+                dynamic_availability_mode: 'down',
+                enable_size_chart: enable_size_chart,
+                size_guide_text: size_guide_text,
+                size_guide_page: block.settings.size_guide_page
               %}
 
             {% when 'buy-buttons' %}
@@ -561,6 +577,7 @@
 </script>
 
 {{ 'single-product-script.js' | asset_url | script_tag }}
+{{ 'size-guide-chart.js' | asset_url | script_tag }}
 
 {% schema %}
 {
@@ -643,16 +660,6 @@
           "default": true
         },
         {
-          "type": "header",
-          "content": "Size chart"
-        },
-        {
-          "type": "checkbox",
-          "id": "enable_size_chart",
-          "label": "Enable size chart",
-          "default": false
-        },
-        {
           "type": "text",
           "id": "size_chart_variant",
           "label": "Option name",
@@ -660,8 +667,18 @@
           "default": "Size"
         },
         {
+          "type": "header",
+          "content": "Size chart"
+        },
+        {
+          "type": "text",
+          "id": "size_guide_text",
+          "label": "Size guide button text",
+          "default": "View Size Guide"
+        },
+        {
           "type": "page",
-          "id": "size_chart_page",
+          "id": "size_guide_page",
           "label": "Page containing size chart"
         }
       ],

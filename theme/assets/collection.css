@@ -457,7 +457,7 @@
     height: 1.7811705vw;
   }
 }
-@media (max-width: 1024px) and (max-width: 393px) {
+@media (max-width: 1024px) and (max-width: 575px) {
   .collection__item-quick-add-btn {
     width: 15px;
     height: 15px;

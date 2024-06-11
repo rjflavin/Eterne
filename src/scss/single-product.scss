@@ -293,17 +293,6 @@
           }
         }
 
-        .size-guide {
-          margin-top: -13px;
-          text-transform: uppercase;
-          cursor: pointer;
-          text-decoration: underline;
-
-          @include for-mobile {
-            font-size: 12px;
-          }
-        }
-
         @media (min-width: 512px) and (max-width: 768px) {
           flex-wrap: wrap;
           height: 90px;
