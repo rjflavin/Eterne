@@ -41,9 +41,7 @@ export default class SingleProduct extends HTMLElement {
     document.addEventListener('DOMContentLoaded', () => {
       this.initializeOptionSelectors();
       this.watchScroll();
-      /*this.showDefaultColorImages();*/ /* should be enabled */
-      /*this.initializeColorSwatchHover();*/
-      /*this.initializeProductMediaHover();*/
+      this.showDefaultColorImages();
       this.watchProductsClickTarget();
       this.setTitleForColorSwatches();
       this.initializeProductDetailsToggle();
@@ -206,43 +204,6 @@ export default class SingleProduct extends HTMLElement {
       });
     }
   }
-
-  /*initializeColorSwatchHover() {
-    const swatchLabels = document.querySelectorAll('.opt-label--swatch');
-    swatchLabels.forEach(label => {
-      label.addEventListener('mouseenter', this.showTooltip);
-      label.addEventListener('mouseleave', this.hideTooltip);
-    });
-  }
-
-  showTooltip(event) {
-    const label = event.currentTarget;
-    const colorName = label.getAttribute('data-swatch');
-    let tooltip = label.querySelector('.color-tooltip');
-    if (!tooltip) {
-      tooltip = document.createElement('div');
-      tooltip.className = 'color-tooltip';
-      tooltip.textContent = colorName.replace(/_/g, ' ').toUpperCase();
-      label.appendChild(tooltip);
-    }
-    tooltip.style.display = 'block';
-  }
-
-  hideTooltip(event) {
-    const label = event.currentTarget;
-    const tooltip = label.querySelector('.color-tooltip');
-    if (tooltip) {
-      tooltip.style.display = 'none';
-    }
-  }*/
-
-  /*initializeProductMediaHover() {
-    const productMediaItems = this.querySelectorAll('.product-media--image');
-    productMediaItems.forEach(item => {
-      item.addEventListener('mouseenter', this.handleMediaHover.bind(this));
-      item.addEventListener('mouseleave', this.handleMediaMouseLeave.bind(this));
-    });
-  }*/
 
   handleMediaHover(event) {
     const item = event.currentTarget;
