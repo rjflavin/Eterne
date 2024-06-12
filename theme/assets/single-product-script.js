@@ -653,6 +653,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var swip
 
 /***/ }),
 
+/***/ "./src/js/utils/cart-handler.js":
+/*!**************************************!*\
+  !*** ./src/js/utils/cart-handler.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   addToCart: () => (/* binding */ addToCart),\n/* harmony export */   addToCartSetup: () => (/* binding */ addToCartSetup),\n/* harmony export */   updateCartItemQuantity: () => (/* binding */ updateCartItemQuantity),\n/* harmony export */   updateCartItemQuantitySetup: () => (/* binding */ updateCartItemQuantitySetup)\n/* harmony export */ });\n/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ \"./node_modules/console-browserify/index.js\");\nconst addToCart = async (productId, quantity) => {\n  const formData = {\n    'items': [{\n      'id': productId,\n      'quantity': quantity\n    }]\n  };\n  const result = await fetch(window.Shopify.routes.root + 'cart/add.js', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(formData)\n  }).then(response => {\n    return response.json();\n  }).catch(error => {\n    console.error('Add to cart Error:', error);\n  });\n  return result;\n};\nconst updateCartItemQuantity = async (productId, quantity) => {\n  const updates = {\n    [productId]: quantity\n  };\n  const result = fetch(window.Shopify.routes.root + 'cart/update.js', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify({\n      updates\n    })\n  }).then(response => {\n    return response.json();\n  }).catch(error => {\n    console.error('Update cart item error:', error);\n  });\n  return result;\n};\nconst addToCartSetup = (element, productId, quantity, loaderElement, loaderFillTextElement) => {\n  if (element) {\n    element.addEventListener(\"click\", async event => {\n      event.preventDefault();\n      if (element.hasAttribute('disabled')) {\n        return;\n      }\n      element.disabled = true;\n      if (loaderElement) {\n        element.classList.add('hide');\n        loaderElement.classList.add('show');\n        if (loaderFillTextElement) {\n          loaderFillTextElement.classList.remove('disp-none-imp');\n        }\n      }\n      const response = await addToCart(productId, quantity);\n      if (response) {\n        element.disabled = false;\n        const e = new CustomEvent(\"dispatch:cart-flyover:refresh\", {\n          bubbles: true\n        });\n        document.dispatchEvent(e);\n        const event = new CustomEvent(\"dispatch:cart-drawer:open\", {\n          bubbles: true\n        });\n        document.dispatchEvent(event);\n        if (loaderElement) {\n          element.classList.remove('hide');\n          loaderElement.classList.remove('show');\n          if (loaderFillTextElement) {\n            loaderFillTextElement.classList.add('disp-none-imp');\n          }\n        }\n      }\n    });\n  }\n};\nconst updateCartItemQuantitySetup = (element, productId, quantity, loaderElement) => {\n  if (element) {\n    element.addEventListener(\"click\", async event => {\n      event.preventDefault();\n      element.disabled = true;\n      if (loaderElement) {\n        element.classList.add('hide');\n        loaderElement.classList.add('show');\n      }\n      const response = await updateCartItemQuantity(productId, quantity);\n      if (response) {\n        element.disabled = false;\n        if (loaderElement) {\n          element.classList.remove('hide');\n          loaderElement.classList.remove('show');\n        }\n      }\n    });\n  }\n};\n\n//# sourceURL=webpack://my-webpack-project/./src/js/utils/cart-handler.js?");
+
+/***/ }),
+
 /***/ "./src/js/utils/check-parents-for-class.js":
 /*!*************************************************!*\
   !*** ./src/js/utils/check-parents-for-class.js ***!
@@ -1152,7 +1163,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -1166,17 +1177,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -1189,7 +1200,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -1201,7 +1212,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -1213,12 +1224,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -1229,44 +1240,44 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		__webpack_require__.b = document.baseURI || self.location.href;
-/******/ 		
+/******/
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"single-product-script": 0
 /******/ 		};
-/******/ 		
+/******/
 /******/ 		// no chunk on demand loading
-/******/ 		
+/******/
 /******/ 		// no prefetching
-/******/ 		
+/******/
 /******/ 		// no preloaded
-/******/ 		
+/******/
 /******/ 		// no HMR
-/******/ 		
+/******/
 /******/ 		// no HMR manifest
-/******/ 		
+/******/
 /******/ 		// no on chunks loaded
-/******/ 		
+/******/
 /******/ 		// no jsonp function
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/nonce */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/js/single-product-script/index.js");
-/******/ 	
+/******/
 /******/ })()
 ;
