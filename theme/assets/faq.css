@@ -31,9 +31,13 @@ body {
   letter-spacing: 0.4px;
   margin-top: 30px;
   margin-right: 40px;
+  margin-bottom: 11px;
 }
 .faq__header-desc a {
   text-decoration: underline;
+}
+.faq__header-desc a.link-default {
+  text-decoration: none;
 }
 .faq__header-desc_small-top-margin {
   margin-top: 10px;
@@ -45,7 +49,10 @@ body {
 }
 .faq__question-category-title {
   display: flex;
-  margin-top: 75px;
+  margin-top: 59px;
+}
+.faq__question-category-title:first-child {
+  margin-top: 57px;
 }
 .faq__question-category-title-text {
   font-size: 20px;
@@ -57,10 +64,10 @@ body {
 .faq__item {
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: 38px;
 }
 .faq__item_first-group-item {
-  margin-top: 22px;
+  margin-top: 19px;
 }
 .faq__item:last-child {
   margin-bottom: 75px;
@@ -81,7 +88,7 @@ body {
 .faq__question-btns {
   display: flex;
   margin-left: 8px;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 .faq__question-btn {
   display: flex;
@@ -95,4 +102,10 @@ body {
 }
 .faq__answer a {
   text-decoration: underline;
+}
+.faq__answer a.link-default {
+  text-decoration: none;
+}
+.faq__answer_small-top-margin {
+  margin-top: 10px;
 }

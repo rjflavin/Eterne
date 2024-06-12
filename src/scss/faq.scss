@@ -34,9 +34,14 @@ body {
       letter-spacing: 0.4px;
       margin-top: 30px;
       margin-right: 40px;
+      margin-bottom: 11px;
 
       a {
         text-decoration: underline;
+      }
+
+      a.link-default {
+        text-decoration: none;
       }
 
       &_small-top-margin {
@@ -53,7 +58,11 @@ body {
 
   &__question-category-title {
     display: flex;
-    margin-top: 75px;
+    margin-top: 59px;
+
+    &:first-child {
+      margin-top: 57px;
+    }
 
     &-text {
       font-size: 20px;
@@ -67,15 +76,17 @@ body {
   &__item {
     display: flex;
     flex-direction: column;
-    margin-top: 32px;
+    margin-top: 38px;
 
     &_first-group-item {
-      margin-top: 22px;
+      margin-top: 19px;
     }
 
     &:last-child {
       margin-bottom: 75px;
     }
+
+
   }
 
   &__question {
@@ -95,7 +106,7 @@ body {
     &-btns {
       display: flex;
       margin-left: 8px;
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     &-btn {
@@ -112,6 +123,14 @@ body {
 
     a {
       text-decoration: underline;
+    }
+
+    a.link-default {
+      text-decoration: none;
+    }
+
+    &_small-top-margin {
+      margin-top: 10px;
     }
   }
 }
