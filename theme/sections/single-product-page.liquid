@@ -3,11 +3,21 @@
 {%- liquid
   assign min_aspect_ratio = 0.6
   assign current_variant = product.selected_or_first_available_variant
+  assign size_guide_text = ''
+  assign enable_size_chart = false
+  assign size_chart_page = ''
 
   unless product.has_only_default_variant
     for block in section.blocks
-      if block.type == 'product-variant-picker' and block.settings.select_first_variant == false and product.variants.size > 1
-        assign current_variant = product.selected_variant | default: false
+      if block.type == 'product-variant-picker'
+        assign size_guide_text = block.settings.size_guide_text
+        assign size_chart_page = block.settings.size_guide_page
+        if block.settings.size_guide_page != blank
+          assign enable_size_chart = true
+        endif
+        if block.settings.select_first_variant == false and product.variants.size > 1
+          assign current_variant = product.selected_variant | default: false
+        endif
       endif
     endfor
   endunless
@@ -15,20 +25,9 @@
   assign product_form_id = 'product-form-' | append: section.id | append: '-' | append: product.id
 -%}
 
-{%- liquid
-  assign min_aspect_ratio = 0.6
-  assign current_variant = product.selected_or_first_available_variant
-
-  unless product.has_only_default_variant
-    for block in section.blocks
-      if block.type == 'product-variant-picker' and block.settings.select_first_variant == false and product.variants.size > 1
-        assign current_variant = product.selected_variant | default: false
-      endif
-    endfor
-  endunless
-
-  assign product_form_id = 'product-form-' | append: section.id | append: '-' | append: product.id
--%}
+{% if enable_size_chart %}
+  {{ 'size-guide.css' | asset_url | stylesheet_tag }}
+{% endif %}
 
 {%- if product.media.size > 1 -%}
   <script src="{{ 'slideshow.js' | asset_url }}" defer></script>
@@ -178,16 +177,19 @@
                   </div>
                   </div>
 
-                {% when 'product-variant-picker' %}
-                  {% render 'product-variant-picker',
-                    product: product,
-                    product_form_id: product_form_id,
-                    block: block,
-                    size_chart_icon: size_chart_icon,
-                    media_ratio: 1,
-                    swatch_crop: settings.swatch_crop_align,
-                    dynamic_availability_mode: 'down'
-                  %}
+            {% when 'product-variant-picker' %}
+              {% render 'product-variant-picker',
+                product: product,
+                product_form_id: product_form_id,
+                block: block,
+                size_chart_icon: size_chart_icon,
+                media_ratio: 1,
+                swatch_crop: settings.swatch_crop_align,
+                dynamic_availability_mode: 'down',
+                enable_size_chart: enable_size_chart,
+                size_guide_text: size_guide_text,
+                size_guide_page: block.settings.size_guide_page
+              %}
 
                 {% when 'buy-buttons' %}
                   <buy-buttons class="buy-buttons-row block" {{ block.shopify_attributes }}>
@@ -605,6 +607,9 @@
 </script>
 
 {{ 'single-product-script.js' | asset_url | script_tag }}
+{% if enable_size_chart %}
+  {{ 'size-guide-chart.js' | asset_url | script_tag }}
+{% endif %}
 
 {% schema %}
 {
@@ -691,21 +696,20 @@
           "content": "Size chart"
         },
         {
-          "type": "checkbox",
-          "id": "enable_size_chart",
-          "label": "Enable size chart",
-          "default": false
-        },
-        {
           "type": "text",
-          "id": "size_chart_variant",
-          "label": "Option name",
-          "info": "The label to show the link beside",
+          "id": "size_guide_variant",
+          "label": "Option name where size guide to display",
           "default": "Size"
         },
         {
+          "type": "text",
+          "id": "size_guide_text",
+          "label": "Size guide button text",
+          "default": "View Size Guide"
+        },
+        {
           "type": "page",
-          "id": "size_chart_page",
+          "id": "size_guide_page",
           "label": "Page containing size chart"
         }
       ],

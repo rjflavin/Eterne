@@ -337,24 +337,6 @@
           }
         }
       }
-
-      &.size-chart {
-        justify-content: space-between;
-
-        .size-guide {
-          margin-left: 15px;
-          font-size: 14px;
-          line-height: 12px;
-          text-align: center;
-          text-transform: uppercase;
-          text-decoration: underline;
-          cursor: pointer;
-
-          @include for-mobile {
-            font-size: 12px;
-          }
-        }
-      }
     }
   }
 }

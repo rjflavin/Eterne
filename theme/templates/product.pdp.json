@@ -29,7 +29,7 @@
             "enable_dynamic_availability": true,
             "enable_size_chart": true,
             "size_chart_variant": "Size",
-            "size_chart_page": ""
+            "size_guide_page": "view-size-guide"
           }
         },
         "buy-buttons": {
@@ -51,7 +51,7 @@
         "buy-buttons"
       ],
       "settings": {
-        "enable_sticky_columns": true
+        "enable_sticky_columns": false
       }
     },
     "recent-products-slider": {
