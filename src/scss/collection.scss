@@ -253,6 +253,7 @@
     &-options-grid {
       display: grid;
       grid-template: 1fr / 1fr 1fr;
+      align-items: flex-start;
       margin-top: 15px;
 
       @include for-tablet {

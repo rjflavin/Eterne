@@ -1,0 +1,111 @@
+body {
+  min-height: 100vh;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.faq {
+  max-width: 615px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+.faq__header {
+  margin-top: 23px;
+}
+.faq__header-title {
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.faq__header-desc {
+  font-size: 14px;
+  line-height: 19.6px;
+  letter-spacing: 0.4px;
+  margin-top: 30px;
+  margin-right: 40px;
+  margin-bottom: 11px;
+}
+.faq__header-desc a {
+  text-decoration: underline;
+}
+.faq__header-desc a.link-default {
+  text-decoration: none;
+}
+.faq__header-desc_small-top-margin {
+  margin-top: 10px;
+}
+.faq__questions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.faq__question-category-title {
+  display: flex;
+  margin-top: 69px;
+}
+.faq__question-category-title:first-child {
+  margin-top: 57px;
+}
+.faq__question-category-title-text {
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.faq__item {
+  display: flex;
+  flex-direction: column;
+  margin-top: 38px;
+}
+.faq__item_first-group-item {
+  margin-top: 19px;
+}
+.faq__item:last-child {
+  margin-bottom: 75px;
+}
+.faq__question {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.faq__question-text {
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.6px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.faq__question-btns {
+  display: flex;
+  margin-left: 8px;
+  margin-top: 5px;
+}
+.faq__question-btn {
+  display: flex;
+}
+.faq__answer {
+  margin-top: 3px;
+  margin-right: 20px;
+  font-size: 14px;
+  line-height: 19.6px;
+  letter-spacing: 0.4px;
+}
+.faq__answer a {
+  text-decoration: underline;
+}
+.faq__answer a.link-default {
+  text-decoration: none;
+}
+.faq__answer_small-top-margin {
+  margin-top: 10px;
+}

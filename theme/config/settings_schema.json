@@ -8,6 +8,23 @@
     "theme_support_url": "http:\/\/cleancanvas.co.uk\/support\/symmetry\/"
   },
   {
+    "name": "Product page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "details_title_text",
+        "label": "Details title text",
+        "default": "Details"
+      },
+      {
+        "type": "text",
+        "id": "size_fit_information_title_text",
+        "label": "Size & Fit Information title text",
+        "default": "Size & Fit Information"
+      }
+    ]
+  },
+  {
     "name": "Cart",
     "settings": [
       {
