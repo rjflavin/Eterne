@@ -1,12 +1,42 @@
 <div class="product-{{ item.product.handle }} cart-flyover-item" variant-id="{{ item.variant.id }}">
   <div>
-    <a href="{{ item.url }}" data-bgimage="{{ item.image | image_url }}" class="cart-flyover-item__image lazyLoad"></a>
+    {% assign imageURL = 'no-image.webp' | asset_url %}
+    {% assign colorIndex = 0 %}
+    {% assign sizeIndex = 1 %}
+    {% for option in item.product.options %}
+      {% if option == "Color" %}
+        {% assign colorIndex = forloop.index0 %}
+      {% elsif option == "Size" %}
+        {% assign sizeIndex = forloop.index0 %}
+      {% endif %}
+    {% endfor %}
+
+    {% for option in item.variant.options %}
+      {% if forloop.index0 == colorIndex %}
+        {% assign variantColor = option | upcase %} 
+        {% assign color = option %} 
+      {% elsif forloop.index0 == sizeIndex %}
+        {% assign size = option %} 
+      {% endif %}
+    {% endfor %}
+
+    {% assign imageLimit = 1 %}
+    {% for image in item.product.images %}
+      {% assign imageAlt = image.alt | upcase %}
+      {% if imageLimit > 0 and variantColor and imageAlt == variantColor %}
+        {% assign imageURL = image | image_url %}
+        {% assign imageLimit = imageLimit | minus: 1 %}
+      {% endif %}
+    {% endfor %}
+    <a {% if item.url %}href="{{ item.url }}"{% endif %} data-bgimage="{{ imageURL }}" class="cart-flyover-item__image lazyLoad"></a>
   </div>
 
   <div class="cart-flyover-item-description">
     <div class="cart-flyover-item-description-info">
-      <div class="cart-flyover-item-description-info__title">{{ item.product.title | escape_once }}</div>
-      <div class="cart-flyover-item-description-info__options">{{ item.variant.options | join: ' / ' }}</div>
+      {% if item.product.title %}
+        <div class="cart-flyover-item-description-info__title">{{ item.product.title | escape_once }}</div>
+      {% endif %}
+      <div class="cart-flyover-item-description-info__options">{% if color %}{{ color }}{% endif %}{% if color and size %} / {% endif %}{% if size %}{{ size }}{% endif %}</div>
       <div data-variant-id="{{ item.variant.id }}" class="cart-flyover-item-description-info-cart-buttons">
         <button name="remove-button" class="cart-flyover-item-description-info-cart-buttons__button">–</button>
         <div name="item-quantity" item-quantity="{{ item.quantity }}" class="cart-flyover-item-description-info-cart-buttons__quantity">{{ item.quantity }}</div>
@@ -18,6 +48,8 @@
         <button name="wishlist-button" class="cart-flyover-item-description-info-extra__text">Add to Wish List</button>
       </div>
     </div>
-    <div class="cart-flyover-item-description__price">{{ item.variant.price | money_without_trailing_zeros }}</div>
+    {% if item.variant.price %}
+      <div class="cart-flyover-item-description__price">{{ item.variant.price | money_without_trailing_zeros }}</div>
+    {% endif %}
   </div>
 </div>

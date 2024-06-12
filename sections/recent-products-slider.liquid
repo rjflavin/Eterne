@@ -8,7 +8,7 @@
   {% endif %}
 
   <div class="recent-products-swiper">
-    <div class="swiper-wrapper">
+    <div class="recent-products__swiper-wrapper swiper-wrapper">
 
     </div>
     <div class="recent-products-swiper-button-prev">
@@ -20,6 +20,7 @@
   </div>
 
   <script>
+  document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
       if (localStorage.getItem('recently_viewed_products')) {
         const productsString = localStorage.getItem('recently_viewed_products');
@@ -34,24 +35,27 @@
     const setUpSlides = (products) => {
       const MAX_PRODUCT_AMOUNT = 4
       const slider = document.querySelector('.section-recent-products-slider')
-      if (slider && products.length <= MAX_PRODUCT_AMOUNT) {
+      if (slider && products.length <= MAX_PRODUCT_AMOUNT && products.length > 0) {
         const leftArrow = document.querySelector('.recent-products-swiper-button-prev')
         const rightArrow = document.querySelector('.recent-products-swiper-button-next')
         if (leftArrow && rightArrow) {
           leftArrow.classList.add('hide')
           rightArrow.classList.add('hide')
         }
-      } else if (!slider || products.length === 0) {
+      }
+
+      if (!slider || products.length <= 0) {
         slider.classList.add('hide')
       }
 
       const noImage = `{{ 'no-image.webp' | asset_url }}`
       let wrapperCode = ''
       for (const product of products) {
-        if (product.variantAvailableFrom === '' || +product.variantAvailableFrom < Date.now()) {
+        if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           wrapperCode = wrapperCode + `
-            <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
+            <div id="${product.variantId}" class="recent-products__slider-slide swiper-slide">
               <div class="swiper-slide-container">
+                <a href="${product.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container">
                   <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
                   <div class="swiper-slide-image-info">
@@ -63,11 +67,19 @@
                       }
                     </div>
                     {% if section.settings.add_to_cart_text %}
-                      <button class="swiper-slide-image-info-cart-button">{{ section.settings.add_to_cart_text }}</button>
+                      <div
+                        ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `disabled` : ''}
+                        class="swiper-slide-image-info-cart-button"
+                      >
+                        {{ section.settings.add_to_cart_text }}
+                      </div>
+                      <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
                       <div class="swiper-slide-image-info-cart-loader">
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circles-wrap">
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        </div>
                       </div>
                     {% endif %}
                   </div>
@@ -81,20 +93,30 @@
                   <div class="swiper-slide-title">${product.title}</div>
                   <div class="swiper-slide-title">${product.color}</div>
                   <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
+                  ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `<button class="swiper-slide-preorder">Preorder</button>` : ''}
                 </div>
               </div>
-            </a>
+            </div>
           `
         }
       }
-      const wrapper = document.querySelector('.swiper-wrapper')
+      const wrapper = document.querySelector('.recent-products__swiper-wrapper')
       if (wrapper) {
         wrapper.innerHTML = wrapperCode
+      }
+
+      const preorderButtons = document.querySelectorAll('.swiper-slide-preorder')
+      for (const button of preorderButtons) {
+        button.addEventListener("click", (event) => {
+          event.preventDefault()
+          event.stopPropagation()
+        })
       }
     }
 
     const products = getProductsFromLocalStorage()
     setUpSlides(products)
+  })
   </script>
 </div>
 

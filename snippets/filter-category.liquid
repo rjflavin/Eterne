@@ -1,4 +1,4 @@
-<div class="filterWrapper collection__sort-category" data-is-filter-category-open="false">
+<div class="filterWrapper collection__sort-category" data-is-filter-category-open="true">
   <fieldset class="filterWrapperFieldset collection__sort-category-fieldset">
     <div class="collection__sort-category-title-wrap no-select">
       <span class="collection__sort-category-title-text">{{ filterLabel | escape }}</span>
@@ -24,6 +24,23 @@
       {% for value in filter.values %}
         {% if value.count > 0 %}
           {% assign renderedFiltersQuantity = renderedFiltersQuantity | plus: 1 %}
+          {% assign filterQuantityValue = value.count %}
+
+          {% if activeFiltersQuantity == 0 %}
+            {% assign filterQuantityValue = 0 %}
+            {% if filterName == "category" %}
+              {% assign valueLabelDowncase = value.label | downcase %}
+              {% for collectionProductForCategory in collection.products %}
+                {% for productCollectionName in collectionProductForCategory.metafields.custom.product_collections.value %}
+                  {% assign productCollectionNameDowncase = productCollectionName | downcase %}
+                  {% if productCollectionNameDowncase == valueLabelDowncase %}
+                    {% assign filterQuantityValue = filterQuantityValue | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+
           <li
             id="filter-{{ index }}--{{ forloop.index }}"
             class="filterWrapperListItem collection__sort-category-option
@@ -54,7 +71,7 @@
                   class="filterWrapperListItemText collection__sort-category-option-text"
                   aria-hidden="true"
                 >
-                  {{ value.label }} ({{ value.count }})
+                  {{ value.label }} ({{ filterQuantityValue }})
                 </span>
               </label>
             {% else %}
@@ -73,7 +90,6 @@
                   {% endif %}
                 "
                 {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
-                data-checked="true"
               >
                 <span
                   class="filterWrapperListItemText collection__sort-category-option-text"

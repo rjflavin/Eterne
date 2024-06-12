@@ -10,23 +10,33 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/js/check-parents-for-class/check-parents-for-class.js":
-/*!*******************************************************************!*\
-  !*** ./src/js/check-parents-for-class/check-parents-for-class.js ***!
-  \*******************************************************************/
+/***/ "./src/js/faq-script/index.js":
+/*!************************************!*\
+  !*** ./src/js/faq-script/index.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   checkParentsForClass: () => (/* binding */ checkParentsForClass)\n/* harmony export */ });\nconst checkParentsForClass = (element, className) => {\n  let currentElement = element;\n  let isParentHaveClass = false;\n  while (currentElement !== null) {\n    if (currentElement.classList.contains(className)) {\n      isParentHaveClass = true;\n    }\n    currentElement = currentElement.parentElement;\n  }\n  return isParentHaveClass;\n};\n\n//# sourceURL=webpack://my-webpack-project/./src/js/check-parents-for-class/check-parents-for-class.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _toggle_visibility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toggle-visibility */ \"./src/js/faq-script/toggle-visibility.js\");\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/faq-script/index.js?");
 
 /***/ }),
 
-/***/ "./src/js/check-parents-for-class/index.js":
+/***/ "./src/js/faq-script/toggle-visibility.js":
+/*!************************************************!*\
+  !*** ./src/js/faq-script/toggle-visibility.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_check_parents_for_class__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/check-parents-for-class */ \"./src/js/utils/check-parents-for-class.js\");\n\nconst questionsContainerElement = document.querySelector('.faq__questions');\nconst toggleVisibilityHandler = event => {\n  const questionBlockElement = event.target.closest('[data-faq-item]');\n  const isClickOnQuestion = (0,_utils_check_parents_for_class__WEBPACK_IMPORTED_MODULE_0__.checkParentsForClass)(event.target, 'faq__question');\n  if (isClickOnQuestion) {\n    const answerElement = questionBlockElement.querySelector('.faq__answer');\n    const plusButtonElement = questionBlockElement.querySelector('[data-plus-button]');\n    const minusButtonElement = questionBlockElement.querySelector('[data-minus-button]');\n    const isOpen = answerElement.classList.contains('disp-none-imp');\n    if (isOpen) {\n      answerElement.classList.remove('disp-none-imp');\n      plusButtonElement.classList.add('disp-none-imp');\n      minusButtonElement.classList.remove('disp-none-imp');\n    } else {\n      answerElement.classList.add('disp-none-imp');\n      plusButtonElement.classList.remove('disp-none-imp');\n      minusButtonElement.classList.add('disp-none-imp');\n    }\n  }\n};\nquestionsContainerElement.addEventListener('click', toggleVisibilityHandler);\n\n//# sourceURL=webpack://my-webpack-project/./src/js/faq-script/toggle-visibility.js?");
+
+/***/ }),
+
+/***/ "./src/js/utils/check-parents-for-class.js":
 /*!*************************************************!*\
-  !*** ./src/js/check-parents-for-class/index.js ***!
+  !*** ./src/js/utils/check-parents-for-class.js ***!
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _check_parents_for_class__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./check-parents-for-class */ \"./src/js/check-parents-for-class/check-parents-for-class.js\");\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/check-parents-for-class/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   checkParentsForClass: () => (/* binding */ checkParentsForClass)\n/* harmony export */ });\nconst checkParentsForClass = (element, className) => {\n  let currentElement = element;\n  let isParentHaveClass = false;\n  while (currentElement !== null) {\n    if (currentElement.classList.contains(className)) {\n      isParentHaveClass = true;\n    }\n    currentElement = currentElement.parentElement;\n  }\n  return isParentHaveClass;\n};\n\n//# sourceURL=webpack://my-webpack-project/./src/js/utils/check-parents-for-class.js?");
 
 /***/ })
 
@@ -90,7 +100,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _che
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/check-parents-for-class/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/faq-script/index.js");
 /******/ 	
 /******/ })()
 ;

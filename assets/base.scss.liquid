@@ -1,35 +1,37 @@
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url("{{ 'HelveticaNeueLight.otf' | asset_url }}");
+  src: url("{{ 'HelveticaNeueLight.otf' | asset_url }}") format("otf");
   font-weight: 300;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url("{{ 'helvetica-neue-roman.ttf' | asset_url }}");
+  src: url("{{ 'helvetica-neue-roman.woff2' | asset_url }}") format("woff2");
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url("{{ 'helvetica-neue-medium.ttf' | asset_url }}");
+  src: url("{{ 'helvetica-neue-medium.woff2' | asset_url }}") format("woff2");
   font-weight: 500;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url("{{ 'helvetica-neue-bold.ttf' | asset_url }}");
+  src: url("{{ 'helvetica-neue-bold.ttf' | asset_url }}") format("ttf");
   font-weight: 700;
 }
 
 html {
   --black1: #000000;
   --black2: #2B2B2B;
+  --gray: #515151;
   --gray1: #585858;
   --gray2: #8B8B8B;
   --gray3: #D9D9D9;
   --gray4: #8F8F8F;
   --gray5: #A8A8A8;
+  --gray6: #E9E7E4;
   --white: #FFFFFF;
   --transparent-white: #FFFFFFCC;
   --red1: #dc0202;
@@ -117,11 +119,11 @@ input[type="number"]:focus {
   touch-action: none;
 }
 
-.vis-hid {
+.visibility-hidden {
   visibility: hidden;
 }
 
-.vis-vis {
+.visibility-visible {
   visibility: visible;
 }
 
@@ -137,4 +139,8 @@ input[type="number"]:focus {
   .scr-dis-on-mbl {
     overflow: initial;
   }
+}
+
+.otCookiesNotification #cookies-message {
+  margin-bottom: 10px;
 }

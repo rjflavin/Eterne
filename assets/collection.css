@@ -224,6 +224,7 @@
 .collection__sort-category-options-grid {
   display: grid;
   grid-template: 1fr/1fr 1fr;
+  align-items: flex-start;
   margin-top: 15px;
 }
 @media (max-width: 1023px) {
@@ -633,7 +634,7 @@
   padding: 0 10px;
   font-size: 10px;
   font-weight: 500;
-  line-height: 16.8px;
+  line-height: 15.8px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   text-align: center;
