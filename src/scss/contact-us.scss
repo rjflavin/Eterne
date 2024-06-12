@@ -46,5 +46,9 @@
 
   &__link {
     text-decoration: underline;
+
+    &:hover {
+      color: var(--gray);
+    }
   }
 }

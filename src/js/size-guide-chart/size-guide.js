@@ -8,7 +8,7 @@ export default class SizeGuide extends HTMLElement {
     }
 
     connectedCallback() {
-        this.removeEmptyDerails();
+        this.removeEmptyDetails();
 
         if (!this.tabLinksElems[0].classList.contains('active')) {
             this.tabLinksElems[0].classList.add('active');
@@ -42,7 +42,7 @@ export default class SizeGuide extends HTMLElement {
         }
     }
 
-    removeEmptyDerails() {
+    removeEmptyDetails() {
         const productDetailsElements = Array.from(this.querySelector('[data-product-details]').children);
         productDetailsElements.forEach((detail) => {
             const detailInnerHtml = detail.innerHTML.trim();

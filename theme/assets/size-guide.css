@@ -1,8 +1,11 @@
 .size-guide .sg-button {
-  margin-top: -13px;
+  margin-left: 15px;
+  font-size: 14px;
+  line-height: 12px;
+  text-align: center;
   text-transform: uppercase;
-  cursor: pointer;
   text-decoration: underline;
+  cursor: pointer;
 }
 @media (max-width: 767px) {
   .size-guide .sg-button {
