@@ -710,8 +710,12 @@
   }
 }
 
-.sticky-content-container {
-  top: 157.73px;
+@media (min-width: 1024px) {
+  .sticky-content-scroll[data-sticky-content-container] {
+    position: sticky;
+    top: var(--sticky-top, 157.73px);
+    transition: 0.5s top ease-in-out;
+  }
 }
 
 .page-section-spacing {
