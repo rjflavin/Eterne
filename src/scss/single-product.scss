@@ -807,9 +807,14 @@
   }
 }
 
-.sticky-content-container {
-  // top: 157.73px; // header height
-  top: var(--sticky-top, 157.73px);
+.sticky-content-scroll {
+  &[data-sticky-content-container] {
+    @media (min-width: 1024px) {
+      position: sticky;
+      top: var(--sticky-top, 157.73px);
+      transition: .5s top ease-in-out;
+    }
+  }
 }
 
 .page-section-spacing {
