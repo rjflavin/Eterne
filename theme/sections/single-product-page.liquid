@@ -129,6 +129,7 @@
             product-media-collage__single-image
           {% endif %}
         "
+        data-desktop-images-container
       >
         {%- for media in product.media -%}
           <div
@@ -153,7 +154,8 @@
       class="detail product-column-right"
       data-cc-animate data-cc-animate-delay="0.2s"
     >
-      <div class="{% if section.settings.enable_sticky_columns %}sticky-content-container{% endif %}">
+      <div {% if section.settings.enable_sticky_columns %}class="sticky-content-scroll" data-sticky-content-container{% endif %}
+      >
         <div class="product-form" data-ajax-add-to-cart="true" data-product-id="{{ product.id }}">
             {% if product.type.size > 0 %}
               <div class="product-type">Styles > {{ product.type }}</div>

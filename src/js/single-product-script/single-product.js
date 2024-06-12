@@ -1,5 +1,4 @@
-import {addToCart} from "../utils/cart-handler";
-import { checkParentsForClass } from "../utils/check-parents-for-class";
+import {checkParentsForClass} from "../utils/check-parents-for-class";
 
 export default class SingleProduct extends HTMLElement {
   constructor() {
@@ -41,9 +40,8 @@ export default class SingleProduct extends HTMLElement {
   connectedCallback() {
     document.addEventListener('DOMContentLoaded', () => {
       this.initializeOptionSelectors();
+      this.watchScroll();
       this.showDefaultColorImages();
-      /*this.initializeColorSwatchHover();*/
-      /*this.initializeProductMediaHover();*/
       this.watchProductsClickTarget();
       this.setTitleForColorSwatches();
       this.initializeProductDetailsToggle();
@@ -51,6 +49,40 @@ export default class SingleProduct extends HTMLElement {
     });
 
     document.addEventListener('variant:change', this.handleVariantChange.bind(this));
+  }
+
+  watchScroll () {
+    let lastScrollTop = 157.73;
+
+    window.addEventListener('scroll', () => {
+      const stickyContent = document.querySelector('[data-sticky-content-container]');
+      const productColumnRight = document.querySelector('.product-column-right');
+      const offset = productColumnRight.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (stickyContent) {
+        const stickyHeight = stickyContent.offsetHeight;
+        const topOffset = offset.top - stickyHeight + windowHeight;
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScrollTop > lastScrollTop) {
+          if (window.pageYOffset >= topOffset && stickyHeight > windowHeight) {
+            stickyContent.style.top = `${windowHeight - stickyHeight - 40}px`;
+          } else if (window.pageYOffset >= topOffset) {
+            stickyContent.style.top = '40px';
+          }
+        } else {
+          if (window.pageYOffset < offset.top) {
+            stickyContent.style.top = '157.73px';
+          } else {
+            const topPosition = Math.min(157.73, parseInt(stickyContent.style.top) + (lastScrollTop - currentScrollTop));
+            stickyContent.style.top = `${topPosition}px`;
+          }
+        }
+
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+      }
+    });
   }
 
   getAvailableColors() {
@@ -172,43 +204,6 @@ export default class SingleProduct extends HTMLElement {
       });
     }
   }
-
-  /*initializeColorSwatchHover() {
-    const swatchLabels = document.querySelectorAll('.opt-label--swatch');
-    swatchLabels.forEach(label => {
-      label.addEventListener('mouseenter', this.showTooltip);
-      label.addEventListener('mouseleave', this.hideTooltip);
-    });
-  }
-
-  showTooltip(event) {
-    const label = event.currentTarget;
-    const colorName = label.getAttribute('data-swatch');
-    let tooltip = label.querySelector('.color-tooltip');
-    if (!tooltip) {
-      tooltip = document.createElement('div');
-      tooltip.className = 'color-tooltip';
-      tooltip.textContent = colorName.replace(/_/g, ' ').toUpperCase();
-      label.appendChild(tooltip);
-    }
-    tooltip.style.display = 'block';
-  }
-
-  hideTooltip(event) {
-    const label = event.currentTarget;
-    const tooltip = label.querySelector('.color-tooltip');
-    if (tooltip) {
-      tooltip.style.display = 'none';
-    }
-  }*/
-
-  /*initializeProductMediaHover() {
-    const productMediaItems = this.querySelectorAll('.product-media--image');
-    productMediaItems.forEach(item => {
-      item.addEventListener('mouseenter', this.handleMediaHover.bind(this));
-      item.addEventListener('mouseleave', this.handleMediaMouseLeave.bind(this));
-    });
-  }*/
 
   handleMediaHover(event) {
     const item = event.currentTarget;
