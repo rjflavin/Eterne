@@ -257,6 +257,9 @@
 
                 <div class="collection__item-text-wrap">
                   <div class="collection__item-title">{{ product.title }} {{ colorOption }}</div>
+                  {% if  product.metafields.custom.fabric_type != blank %}
+                    <div class="collection__item-fabric-title">{{ product.metafields.custom.fabric_type }}</div>
+                  {% endif %}
                   <div class="collection__item-price">{{ currentVariant.price | money_without_trailing_zeros }}</div>
                 </div>
               </div>
