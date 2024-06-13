@@ -43,7 +43,7 @@ export default class SizeGuide extends HTMLElement {
     }
 
     removeEmptyDetails() {
-        const productDetailsElements = Array.from(this.querySelector('[data-product-details]').children);
+        const productDetailsElements = Array.from(this.querySelector('[data-product-details-size]').children);
         productDetailsElements.forEach((detail) => {
             const detailInnerHtml = detail.innerHTML.trim();
             if (detailInnerHtml === '' || detailInnerHtml === '<br>') {
