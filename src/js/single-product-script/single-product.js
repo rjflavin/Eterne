@@ -4,11 +4,9 @@ export default class SingleProduct extends HTMLElement {
   constructor() {
     super();
     this.product = {
-      "variants": window.productData.variants,
-      "options": window.productData.options
+      variants: window.productData.variants,
+      options: window.productData.options
     };
-    this.productId = window.productData.productId;
-    this.availableColors = this.getAvailableColors();
     this.watchProductsClickTargetHandler = this.watchProductsClickTargetHandler.bind(this);
     document.addEventListener('DOMContentLoaded', this.watchProductsClickTarget.bind(this));
 
@@ -44,7 +42,6 @@ export default class SingleProduct extends HTMLElement {
     document.addEventListener('DOMContentLoaded', () => {
       this.initializeOptionSelectors();
       this.watchScroll();
-      this.showDefaultColorImages();
       this.watchProductsClickTarget();
       this.setTitleForColorSwatches();
       this.initializeProductDetailsToggle();
@@ -86,11 +83,6 @@ export default class SingleProduct extends HTMLElement {
         lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
       }
     });
-  }
-
-  getAvailableColors() {
-    const colorLabels = document.querySelectorAll('.opt-label--swatch .js-value');
-    return Array.from(colorLabels).map(label => label.textContent.toLowerCase());
   }
 
   initializeOptionSelectors() {
@@ -135,42 +127,8 @@ export default class SingleProduct extends HTMLElement {
   }
 
   updateProductDetails(variant, selectedColor) {
-    this.updateProductImage(selectedColor);
     this.updateProductPrice(variant.price);
     this.updateProductAvailability(variant.available);
-  }
-
-  updateProductImage(selectedColor) {
-    const productMediaItemsDesktopElements = this.querySelectorAll('.product-media-collage__item');
-
-    productMediaItemsDesktopElements.forEach(item => {
-      const img = item.querySelector('img');
-      if (img && img.alt.toLowerCase() === selectedColor.toLowerCase()) {
-        item.style.display = 'block';
-        item.classList.add('is-active');
-      } else {
-        item.style.display = 'none';
-        item.classList.remove('is-active');
-      }
-    });
-
-    const allMobileImagesForProductSliderContainerElement = document.querySelector('[data-mobile-siler-all-images]');
-    const allMobileImagesForProductSliderElements = allMobileImagesForProductSliderContainerElement.querySelectorAll('img');
-    const mobileProductSliderWrapperElement = this.querySelector('.product-slider__swiper-wrapper');
-    const mobileProductSliderWrapperImagesElements = mobileProductSliderWrapperElement.querySelectorAll('img');
-
-    mobileProductSliderWrapperImagesElements.forEach((imageElement) => imageElement.remove());
-    let index = 0;
-    allMobileImagesForProductSliderElements.forEach((imageElement) => {
-      if (imageElement.dataset.colorName === selectedColor.toLowerCase()) {
-        const imageElementClone = imageElement.cloneNode();
-        imageElementClone.dataset.swiperSlideIndex = String(index);
-        index = index + 1;
-        mobileProductSliderWrapperElement.append(imageElementClone);
-      }
-    });
-
-    document.dispatchEvent(new CustomEvent('productMobileSlidesUpdated'));
   }
 
   updateProductPrice(price) {
@@ -186,14 +144,6 @@ export default class SingleProduct extends HTMLElement {
 
     if (productAvailabilityElement) {
       productAvailabilityElement.textContent = available ? 'In Stock' : 'Out of Stock';
-    }
-  }
-
-  showDefaultColorImages() {
-    const defaultColorInput = this.querySelector('.js-option[name*="color-option"][checked]');
-    if (defaultColorInput) {
-      const defaultColor = defaultColorInput.value;
-      this.updateProductImage(defaultColor);
     }
   }
 
@@ -337,22 +287,6 @@ export default class SingleProduct extends HTMLElement {
     } else {
       console.error("productsContainer element not found. Ensure that the .product-recommendations element exists in the HTML.");
     }
-
     this.addEventListener('click', this.watchProductsClickTargetHandler);
-  }
-
-  async getProductInfo(productHandle) {
-    try {
-      const response = await fetch(`/products/${productHandle}.json`);
-      if (response.ok) {
-        const productData = await response.json();
-        return productData.product;
-      } else {
-        console.error('Error fetching product data:', response.status);
-      }
-    } catch (error) {
-      console.error('Error fetching product data:', error);
-    }
-    return null;
   }
 }
