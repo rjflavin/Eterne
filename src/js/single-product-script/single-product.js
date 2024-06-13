@@ -14,25 +14,28 @@ export default class SingleProduct extends HTMLElement {
 
     this.productDetailsHandler = (dataAttribute) => {
       const productSizeAndFitElement = this.querySelector(`[${dataAttribute}]`);
-      const productSizeAndFitHeaderElement = productSizeAndFitElement.querySelector('.product-details__header');
-      const productSizeAndFitContentElement = productSizeAndFitElement.querySelector('.product-details__content');
-      const plusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-plus-button]');
-      const minusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-minus-button]');
 
-      if (productSizeAndFitHeaderElement && productSizeAndFitContentElement) {
-        productSizeAndFitHeaderElement.addEventListener('click', () => {
-          const isOpen = productSizeAndFitContentElement.classList.contains('disp-flx-imp');
+      if (productSizeAndFitElement) {
+        const productSizeAndFitHeaderElement = productSizeAndFitElement.querySelector('.product-details__header');
+        const productSizeAndFitContentElement = productSizeAndFitElement.querySelector('.product-details__content');
+        const plusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-plus-button]');
+        const minusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-minus-button]');
 
-          if (isOpen) {
-            productSizeAndFitContentElement.classList.remove('disp-flx-imp');
-            plusButtonElement?.classList.remove('disp-none-imp');
-            minusButtonElement?.classList.add('disp-none-imp');
-          } else {
-            productSizeAndFitContentElement.classList.add('disp-flx-imp');
-            plusButtonElement?.classList.add('disp-none-imp');
-            minusButtonElement?.classList.remove('disp-none-imp');
-          }
-        });
+        if (productSizeAndFitHeaderElement && productSizeAndFitContentElement) {
+          productSizeAndFitHeaderElement.addEventListener('click', () => {
+            const isOpen = productSizeAndFitContentElement.classList.contains('disp-flx-imp');
+
+            if (isOpen) {
+              productSizeAndFitContentElement.classList.remove('disp-flx-imp');
+              plusButtonElement?.classList.remove('disp-none-imp');
+              minusButtonElement?.classList.add('disp-none-imp');
+            } else {
+              productSizeAndFitContentElement.classList.add('disp-flx-imp');
+              plusButtonElement?.classList.add('disp-none-imp');
+              minusButtonElement?.classList.remove('disp-none-imp');
+            }
+          });
+        }
       }
     }
   }
