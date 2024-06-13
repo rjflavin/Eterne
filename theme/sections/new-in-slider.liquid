@@ -9,7 +9,12 @@
     <div class="new-in__swiper">
         <div class="new-in__swiper-wrapper swiper-wrapper">
             {% for product in collections[collection_handle].products %}
-                {% assign available_variant = product.first_available_variant %}
+                {% if product.available %}
+                    {% assign available_variant = product.first_available_variant %}
+                    {% else %}
+                    {% assign available_variant = product.variants | first %}
+                {% endif %}
+
 
                 <div class="new-in__item swiper-slide">
                     <div class="new-in__item-inner">
