@@ -29,7 +29,7 @@
             "enable_dynamic_availability": true,
             "enable_size_chart": true,
             "size_chart_variant": "Size",
-            "size_chart_page": ""
+            "size_chart_page": "view-size-guide"
           }
         },
         "buy-buttons": {
