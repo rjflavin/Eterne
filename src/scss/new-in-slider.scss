@@ -88,7 +88,7 @@
     background-position: center center;
     font-size: 0;
     line-height: 1;
-    background-color: var(--gray2);
+    transition: all .15s ease-in-out;
   }
 
   &__item-bg-img-hover {
