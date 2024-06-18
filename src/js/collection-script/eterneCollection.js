@@ -291,7 +291,6 @@ export class EterneCollection extends HTMLElement {
 
       if (isVariantReadyToFetch) {
         if (isLoadedWithFilters) {
-          console.log('true')
           const emptyImageUrl = variantCardElement.dataset.emptyImage;
           const hoverImages = variantCardElement.dataset.hoverImages;
 
@@ -326,7 +325,6 @@ export class EterneCollection extends HTMLElement {
                   } else {
                     firstImageUrl = emptyImageUrl;
                   }
-                  console.log(firstImageElement)
                   firstImageElement.setAttribute('style', `background-image: url(${firstImageUrl})`);
 
                   const variantHoverImageUrl = hoverImagesArray.find(item => item.variantId === variant.id)?.hoverImageUrl;
@@ -338,7 +336,6 @@ export class EterneCollection extends HTMLElement {
                   } else {
                     secondImageUrl = emptyImageUrl;
                   }
-                  console.log(secondImageElement)
                   secondImageElement.setAttribute('style', `background-image: url(${secondImageUrl})`);
 
                   if (variant.available) {
