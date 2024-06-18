@@ -11,7 +11,18 @@ export class FiltersForm extends HTMLElement {
         const facetForm = this.querySelector('form#CollectionFiltersForm');
         facetForm.addEventListener('input', this.debouncedOnFiltersFormSubmit.bind(this));
 
-        localStorage.clear();
+        const filterName = this.querySelectorAll('[data-render]') || null;
+        if (filterName) {
+            filterName.forEach(filterWrap => {
+                const renderAttribute = filterWrap.getAttribute('data-render');
+                const targetElement = this.querySelector(`[data-render="${renderAttribute}"]`);
+                const isSeeMoreOpenKey = `isSeeMoreOpen_${renderAttribute}`;
+
+                if (targetElement) {
+                    localStorage.setItem(isSeeMoreOpenKey, 'false');
+                }
+            });
+        }
     }
 
     static setListeners() {
