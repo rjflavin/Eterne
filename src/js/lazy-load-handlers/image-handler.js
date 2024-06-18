@@ -1,7 +1,7 @@
 // Check for IntersectionObserver support
 if ('IntersectionObserver' in window) {
     document.addEventListener("DOMContentLoaded", function () {
-        handleIntersection = (entries) => {
+        const handleIntersection = (entries) => {
             entries.map((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.style.backgroundImage = "url('" + entry.target.dataset.bgimage + "')";
