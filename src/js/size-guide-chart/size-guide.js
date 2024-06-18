@@ -20,25 +20,32 @@ export default class SizeGuide extends HTMLElement {
         })
 
         this.querySelectorAll('[data-toggle-modal]').forEach(( modalButton) => {
-            modalButton.addEventListener('click', this.handleModalVisibility.bind(this, modalButton))
+            modalButton.addEventListener('click', (e) => this.handleModalVisibility(modalButton, e))
         })
     }
 
-    handleModalVisibility (modalButton) {
-        const modalElement = document.querySelector(`#${modalButton.dataset.connectedModal}`);
-        switch (modalButton.dataset.toggleModal) {
-            case 'open': {
-                modalElement.classList.add('open');
-                const scrollWidth = scrollbarWidth();
-                document.body.style.overflow = 'hidden';
-                document.body.style.marginRight = `${scrollWidth}px`;
+    handleModalVisibility (modalButton, e) {
+        e.preventDefault();
+        const header = document.querySelector('.section-header');
+        if (e.target == modalButton) {
+            const modalElement = document.querySelector(`#${modalButton.dataset.connectedModal}`);
+            switch (modalButton.dataset.toggleModal) {
+                case 'open':
+                    modalElement.classList.add('open');
+                    const scrollWidth = scrollbarWidth();
+                    document.body.style.overflow = 'hidden';
+                    document.body.style.marginRight = `${scrollWidth}px`;
+                    header.style.position = 'relative';
+                    header.style.zIndex = '0';
+                    break;
+                case 'close':
+                    modalElement.classList.remove('open');
+                    document.body.style.overflow = null;
+                    document.body.style.marginRight = '0';
+                    header.style.position = 'sticky';
+                    header.style.zIndex = '999';
+                    break;
             }
-                break;
-            case 'close':
-                modalElement.classList.remove('open');
-                document.body.style.overflow = null;
-                document.body.style.marginRight = '0';
-                break;
         }
     }
 

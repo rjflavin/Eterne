@@ -262,6 +262,11 @@
       .option-selector__content {
         display: flex;
         align-items: flex-start;
+        width: 100%;
+
+        .size-guide {
+          margin-left: auto;
+        }
       }
 
       &.single-product-options {
@@ -379,6 +384,7 @@
     max-width: 445px !important;
     width: 100% !important;
     margin-inline-start: 30px !important;
+    margin-right: 30px;
 
     @include for-tablet {
       max-width: 100% !important;
