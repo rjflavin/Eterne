@@ -233,6 +233,10 @@
 .product-form fieldset.option-selector .option-selector__content {
   display: flex;
   align-items: flex-start;
+  width: 100%;
+}
+.product-form fieldset.option-selector .option-selector__content .size-guide {
+  margin-left: auto;
 }
 .product-form fieldset.option-selector.single-product-options {
   display: flex;
@@ -329,6 +333,7 @@
   max-width: 445px !important;
   width: 100% !important;
   margin-inline-start: 30px !important;
+  margin-right: 30px;
 }
 @media (max-width: 1023px) {
   .product-info .product-column-right {
