@@ -388,7 +388,6 @@ export class EterneCollection extends HTMLElement {
                     }
 
                     checkVariantAvailability();
-
                 } else {
                     const targetProductCardElement = this.productsContainerElement.querySelector(`[data-product-title="${productTitle}"][data-default-color="${clickedColor}"]`);
                     const newFirstImageUrl = targetProductCardElement.dataset.firstImage;
