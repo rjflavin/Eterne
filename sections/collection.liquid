@@ -35,7 +35,7 @@
   {% assign productsPerPage = section.settings.products_per_page %}
 {% endif %}
 
-<eterne-collection class="collection" data-is-filter-open="true">
+<eterne-collection class="collection" data-is-filter-open="false">
 
   {% paginate collection.products by productsPerPage %}
     <div class="collection__title-wrap">
@@ -227,21 +227,32 @@
                   <div class="collection__img-wrap">
                     <div class="collection__quick-add-panel" data-quick-add-panel>
                       <div class="collection__size-variants">
-                        {% for option in product.options_with_values %}
-                          {% assign option_name = option.name | downcase %}
+                        {% assign selected_color = colorOption %}
 
-                          {% if option_name == 'size' %}
-                            {% for value in option.values %}
-                              <div
-                                      data-variant-size="{{ value }}"
-                                      class="collection__size-variant-text no-select
-                                  {% if sizeOption == value %}collection__size-variant-text_selected{% endif %}
-                                "
-                              >
-                                {{ value }}
-                              </div>
-                            {% endfor %}
+                        {% assign size_options = '' %}
+                        {% for variant in product.variants %}
+                          {% if variant.options contains selected_color %}
+                            {% assign size_options = size_options | append: variant.option2 | append: ',' %}
                           {% endif %}
+                        {% endfor %}
+                        {% assign size_options = size_options | split: ',' | uniq %}
+
+                        {% for size in size_options %}
+                          {% unless size == '' %}
+                            {% assign is_disabled = true %}
+                            {% for variant in product.variants %}
+                              {% if variant.option2 == size and variant.options contains selected_color and variant.inventory_quantity > 0 %}
+                                {% assign is_disabled = false %}
+                              {% endif %}
+                            {% endfor %}
+                            <div data-variant-size="{{ size }}"
+                                 class="collection__size-variant-text no-select
+                                 {% if sizeOption == size %}collection__size-variant-text_selected{% endif %}
+                                 {% if is_disabled %} disabled{% endif %}"
+                            >
+                              {{ size }}
+                            </div>
+                          {% endunless %}
                         {% endfor %}
                       </div>
                       <div class="collection__add-to-cart no-select">Add to bag</div>
@@ -430,21 +441,32 @@
                       <div class="collection__img-wrap">
                         <div class="collection__quick-add-panel" data-quick-add-panel>
                           <div class="collection__size-variants">
-                            {% for option in product.options_with_values %}
-                              {% assign option_name = option.name | downcase %}
+                            {% assign selected_color = colorOption %}
 
-                              {% if option_name == 'size' %}
-                                {% for value in option.values %}
-                                  <div
-                                          data-variant-size="{{ value }}"
-                                          class="collection__size-variant-text no-select
-                                      {% if sizeOption == value %}collection__size-variant-text_selected{% endif %}
-                                    "
-                                  >
-                                    {{ value }}
-                                  </div>
-                                {% endfor %}
+                            {% assign size_options = '' %}
+                            {% for variant in product.variants %}
+                              {% if variant.options contains selected_color %}
+                                {% assign size_options = size_options | append: variant.option2 | append: ',' %}
                               {% endif %}
+                            {% endfor %}
+                            {% assign size_options = size_options | split: ',' | uniq %}
+
+                            {% for size in size_options %}
+                              {% unless size == '' %}
+                                {% assign is_disabled = true %}
+                                {% for variant in product.variants %}
+                                  {% if variant.option2 == size and variant.options contains selected_color and variant.inventory_quantity > 0 %}
+                                    {% assign is_disabled = false %}
+                                  {% endif %}
+                                {% endfor %}
+                                <div data-variant-size="{{ size }}"
+                                     class="collection__size-variant-text no-select
+                                     {% if sizeOption == size %}collection__size-variant-text_selected{% endif %}
+                                     {% if is_disabled %} disabled{% endif %}"
+                                >
+                                  {{ size }}
+                                </div>
+                              {% endunless %}
                             {% endfor %}
                           </div>
                           <div class="collection__add-to-cart no-select">Add to bag</div>
