@@ -2,11 +2,7 @@
   "sections": {
     "collection": {
       "type": "collection",
-      "settings": {
-        "products_per_page": 9,
-        "products_per_page_with_filter": 3,
-        "filters_value": "category,color,size"
-      }
+      "settings": {}
     }
   },
   "order": [

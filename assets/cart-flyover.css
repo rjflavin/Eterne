@@ -134,7 +134,8 @@
   width: calc(100% - 2px);
 }
 .cart-flyover-shipping-bar__border-background {
-  border: 2px solid var(--white);
+  border-left: 2px solid var(--white);
+  border-right: 2px solid var(--white);
   border-radius: 6px;
   height: 9px;
   position: absolute;

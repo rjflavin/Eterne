@@ -27,9 +27,9 @@
             "select_first_variant": true,
             "selector_style": "listed",
             "enable_dynamic_availability": true,
-            "enable_size_chart": true,
-            "size_chart_variant": "Size",
-            "size_chart_page": ""
+            "size_guide_variant": "Size",
+            "size_guide_text": "View Size Guide",
+            "size_guide_page": "view-size-guide"
           }
         },
         "buy-buttons": {
@@ -51,7 +51,7 @@
         "buy-buttons"
       ],
       "settings": {
-        "enable_sticky_columns": true
+        "enable_sticky_columns": false
       }
     },
     "recent-products-slider": {

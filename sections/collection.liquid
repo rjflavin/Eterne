@@ -63,7 +63,7 @@
             <div id="FacetsWrapperDesktop" class="collection__filters-content">
               <div class="collection__radio-filters">
                 {% render 'filter-category-sorting',
-                  visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
+                        visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
                 %}
               </div>
 
@@ -84,11 +84,11 @@
                   {% if filter.type == 'list' and filtersToDisplay contains filterName %}
                     {% if visibleFiltresQuantity > 0 %}
                       {% render 'filter-category',
-                        filter: filter,
-                        filterLabel: filterLabel,
-                        index: forloop.index,
-                        filtersType: 'checkbox',
-                        visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
+                              filter: filter,
+                              filterLabel: filterLabel,
+                              index: forloop.index,
+                              filtersType: 'checkbox',
+                              visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
                       %}
                     {% endif %}
                   {% endif %}
@@ -100,7 +100,15 @@
       </collection-filters-form>
 
       <div class="collection__products-wrap">
-        <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
+        <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}"
+             data-next-url="{{ paginate.next.url }}">
+          {% for filter in collection.filters %}
+            {% for value in filter.values %}
+              {% if value.active %}
+                {% assign activeFiltersQuantity = activeFiltersQuantity | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
           {% if activeFiltersQuantity > 0 %}
             {% for product in collection.products %}
               {% if product.selected_or_first_available_variant.featured_image != blank %}
@@ -197,22 +205,22 @@
               {% endfor %}
 
               <div
-                class="collection__item"
-                data-is-loaded-with-filters="true"
-                data-collection-item
-                data-is-variant-ready-to-fetch="true"
-                data-is-variant-in-stock="{{ isVariantInStock }}"
-                data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
-                data-product-handle="{{ product.handle }}"
-                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                data-selected-size="{{ sizeOption }}"
-                data-selected-color="{{ colorOption }}"
-                data-product-title="{{ product.title }}"
-                data-default-color="{{ colorOption }}"
-                data-first-image="{{ first_image }}"
-                data-second-image="{{ second_image }}"
-                data-empty-image="{{ emptyImage }}"
-                data-hover-images="{{ hoverImages }}"
+                      class="collection__item"
+                      data-is-loaded-with-filters="true"
+                      data-collection-item
+                      data-is-variant-ready-to-fetch="true"
+                      data-is-variant-in-stock="{{ isVariantInStock }}"
+                      data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
+                      data-product-handle="{{ product.handle }}"
+                      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                      data-selected-size="{{ sizeOption }}"
+                      data-selected-color="{{ colorOption }}"
+                      data-product-title="{{ product.title }}"
+                      data-default-color="{{ colorOption }}"
+                      data-first-image="{{ first_image }}"
+                      data-second-image="{{ second_image }}"
+                      data-empty-image="{{ emptyImage }}"
+                      data-hover-images="{{ hoverImages }}"
               >
                 <div class="collection__item-inner">
 
@@ -225,8 +233,8 @@
                           {% if option_name == 'size' %}
                             {% for value in option.values %}
                               <div
-                                data-variant-size="{{ value }}"
-                                class="collection__size-variant-text no-select
+                                      data-variant-size="{{ value }}"
+                                      class="collection__size-variant-text no-select
                                   {% if sizeOption == value %}collection__size-variant-text_selected{% endif %}
                                 "
                               >
@@ -247,13 +255,13 @@
                     <a href="{{ variant_url }}" class="collection__item-link"></a>
                     <div class="collection__item-bg-imgs-wrap">
                       <div
-                        class="collection__item-bg-img"
-                        style="background-image: url('{{ first_image }}')"
+                              class="collection__item-bg-img"
+                              style="background-image: url('{{ first_image }}')"
                       ></div>
                       {% if second_image != blank %}
                         <div
-                          class="collection__item-bg-img-hover"
-                          style="background-image: url('{{ second_image }}')"
+                                class="collection__item-bg-img-hover"
+                                style="background-image: url('{{ second_image }}')"
                         ></div>
                       {% endif %}
                     </div>
@@ -277,13 +285,13 @@
                         {% assign colorOptionValueDowncase = colorOptionValue | downcase | replace: ' ', '_' %}
 
                         <div
-                          data-color-name="{{ colorOptionValue }}"
-                          class="collection__item-color-wrap
+                                data-color-name="{{ colorOptionValue }}"
+                                class="collection__item-color-wrap
                             {% if forloop.index > colorsQtyToShowOnMobile %}
                               collection__item-color-wrap_hide-mobile
                             {% endif %}
                           "
-                          title="{{ colorOptionValue | upcase }}"
+                                title="{{ colorOptionValue | upcase }}"
                         >
                           <div class="collection__item-color-cont">
                             {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
@@ -293,8 +301,8 @@
                               {% endif %}
                             {% endfor %}
                             <div
-                              class="collection__item-color"
-                              style="background-color: {{ variantColor }}"
+                                    class="collection__item-color"
+                                    style="background-color: {{ variantColor }}"
                             ></div>
                           </div>
                         </div>
@@ -318,7 +326,6 @@
                 </div>
               </div>
             {% endfor %}
-
           {% else %}
             {% for product in collection.products %}
               {% assign loop_color = "" %}
@@ -403,20 +410,20 @@
                   {% endfor %}
 
                   <div
-                    class="collection__item"
-                    data-is-loaded-with-filters="false"
-                    data-collection-item
-                    data-is-variant-ready-to-fetch="true"
-                    data-is-variant-in-stock="{{ isVariantInStock }}"
-                    data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
-                    data-product-handle="{{ product.handle }}"
-                    data-variant-id="{{ variantId }}"
-                    data-selected-size="{{ sizeOption }}"
-                    data-selected-color="{{ colorOption }}"
-                    data-product-title="{{ product.title }}"
-                    data-default-color="{{ colorOption }}"
-                    data-first-image="{{ first_image }}"
-                    data-second-image="{{ second_image }}"
+                          class="collection__item"
+                          data-is-loaded-with-filters="false"
+                          data-collection-item
+                          data-is-variant-ready-to-fetch="true"
+                          data-is-variant-in-stock="{{ isVariantInStock }}"
+                          data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
+                          data-product-handle="{{ product.handle }}"
+                          data-variant-id="{{ variantId }}"
+                          data-selected-size="{{ sizeOption }}"
+                          data-selected-color="{{ colorOption }}"
+                          data-product-title="{{ product.title }}"
+                          data-default-color="{{ colorOption }}"
+                          data-first-image="{{ first_image }}"
+                          data-second-image="{{ second_image }}"
                   >
                     <div class="collection__item-inner">
 
@@ -429,8 +436,8 @@
                               {% if option_name == 'size' %}
                                 {% for value in option.values %}
                                   <div
-                                    data-variant-size="{{ value }}"
-                                    class="collection__size-variant-text no-select
+                                          data-variant-size="{{ value }}"
+                                          class="collection__size-variant-text no-select
                                       {% if sizeOption == value %}collection__size-variant-text_selected{% endif %}
                                     "
                                   >
@@ -451,13 +458,13 @@
                         <a href="{{ variant_url }}" class="collection__item-link"></a>
                         <div class="collection__item-bg-imgs-wrap">
                           <div
-                            class="collection__item-bg-img"
-                            style="background-image: url('{{ first_image }}')"
+                                  class="collection__item-bg-img"
+                                  style="background-image: url('{{ first_image }}')"
                           ></div>
                           {% if second_image != blank %}
                             <div
-                              class="collection__item-bg-img-hover"
-                              style="background-image: url('{{ second_image }}')"
+                                    class="collection__item-bg-img-hover"
+                                    style="background-image: url('{{ second_image }}')"
                             ></div>
                           {% endif %}
                         </div>
@@ -481,13 +488,13 @@
                             {% assign colorOptionValueDowncase = colorOptionValue | downcase | replace: ' ', '_' %}
 
                             <div
-                              data-color-name="{{ colorOptionValue }}"
-                              class="collection__item-color-wrap
+                                    data-color-name="{{ colorOptionValue }}"
+                                    class="collection__item-color-wrap
                                 {% if forloop.index > colorsQtyToShowOnMobile %}
                                   collection__item-color-wrap_hide-mobile
                                 {% endif %}
                               "
-                              title="{{ colorOptionValue | upcase }}"
+                                    title="{{ colorOptionValue | upcase }}"
                             >
                               <div class="collection__item-color-cont">
                                 {% for colorEntry in shop.metaobjects['swatch_colors'].values %}
@@ -497,8 +504,8 @@
                                   {% endif %}
                                 {% endfor %}
                                 <div
-                                  class="collection__item-color"
-                                  style="background-color: {{ variantColor }}"
+                                        class="collection__item-color"
+                                        style="background-color: {{ variantColor }}"
                                 ></div>
                               </div>
                             </div>
