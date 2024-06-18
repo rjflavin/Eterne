@@ -1,7 +1,7 @@
-import { addToCart } from "../utils/cart-handler";
-import { checkParentsForClass } from "../utils/check-parents-for-class";
-import { debounce } from "../utils/debounce";
-import { formatPrice } from "../utils/format-price";
+import {addToCart} from "../utils/cart-handler";
+import {checkParentsForClass} from "../utils/check-parents-for-class";
+import {debounce} from "../utils/debounce";
+import {formatPrice} from "../utils/format-price";
 
 export class EterneCollection extends HTMLElement {
   constructor() {
@@ -16,38 +16,57 @@ export class EterneCollection extends HTMLElement {
     this.watchProductsClickTarget();
     this.watchFiltersClickTarget();
 
+    this.isLoading = false;
+
     this.loadMoreProducts = () => {
+      if (this.isLoading) return;
       if (window.scrollY + window.innerHeight >= this.getProductsContainerScrollHeight() - this.getProductCardHeight() * 2) {
-        const nextPageUrl = this.querySelector('[data-next-url]').dataset.nextUrl;
+        const nextPageUrl = this.productsContainerElement.dataset.nextUrl;
 
         if (nextPageUrl) {
+          this.isLoading = true;
           fetch(nextPageUrl, {
             method: 'GET',
             headers: {
               'Content-Type': 'text/html; charset=utf-8'
             }
           })
-            .then((response) => response.text())
-            .then((responseText) => {
-              const newHtml = new DOMParser().parseFromString(responseText, 'text/html');
-              const newNextUrl = newHtml.querySelector('[data-next-url]').dataset.nextUrl;
-              const newProductsContainerElement = newHtml.querySelectorAll('[data-collection-item]');
-              const newProductsDocumentFragment = document.createDocumentFragment();
-              newProductsContainerElement.forEach((newProductElement) => {
-                newProductsDocumentFragment.appendChild(newProductElement);
-              });
-              this.productsContainerElement.appendChild(newProductsDocumentFragment);
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.text();
+              })
+              .then((responseText) => {
+                const newHtml = new DOMParser().parseFromString(responseText, 'text/html');
+                const newNextUrl = newHtml.querySelector('[data-next-url]')?.dataset.nextUrl;
+                const newProductsContainerElement = newHtml.querySelectorAll('[data-collection-item]');
+                const newProductsDocumentFragment = document.createDocumentFragment();
 
-              if (newNextUrl) {
-                this.productsContainerElement.dataset.nextUrl = newNextUrl;
-              } else {
-                this.productsContainerElement.dataset.nextUrl = '';
-              }
-              const items = document.querySelectorAll('.lazyLoad');
-              items.forEach(item => {
+                newProductsContainerElement.forEach((newProductElement) => {
+                  newProductsDocumentFragment.appendChild(newProductElement);
+                });
+
+                this.productsContainerElement.appendChild(newProductsDocumentFragment);
+
+                if (newNextUrl) {
+                  this.productsContainerElement.dataset.nextUrl = newNextUrl;
+                } else {
+                  this.productsContainerElement.dataset.nextUrl = '';
+                }
+
+                const items = document.querySelectorAll('.lazyLoad');
+                items.forEach(item => {
                   item.style.backgroundImage = "url('" + item.dataset.bgimage + "')";
+                });
+
+                this.isLoading = false;
+              })
+              .catch((error) => {
+                console.error('Error fetching data:', error);
+                this.isLoading = false;
+                console.log('isLoading after error:', this.isLoading);
               });
-            });
         }
       }
     };
@@ -57,7 +76,6 @@ export class EterneCollection extends HTMLElement {
     }, 300);
 
     this.infiniteScrollProducts = () => {
-      // insert page 2 products
       const textHtml = this._page2Content;
       this.productsContainerElement.insertAdjacentHTML("beforeend", textHtml);
       const newProductCardElements = this.productsContainerElement.querySelectorAll('[data-collection-item]');
@@ -78,7 +96,7 @@ export class EterneCollection extends HTMLElement {
     };
 
     this.loadProductsPage2 = () => {
-      const nextPageUrl = this.querySelector('[data-next-url]').dataset.nextUrl;
+      const nextPageUrl = this.productsContainerElement.dataset.nextUrl;
 
       fetch(nextPageUrl, {
         method: 'GET',
@@ -86,29 +104,40 @@ export class EterneCollection extends HTMLElement {
           'Content-Type': 'text/html; charset=utf-8'
         }
       })
-        .then((response) => response.text())
-        .then((responseText) => {
-          const newHtml = new DOMParser().parseFromString(responseText, 'text/html');
-          const newNextUrl = newHtml.querySelector('[data-next-url]').dataset.nextUrl;
-          const newProductsContainerElement = newHtml.querySelectorAll('[data-collection-item]');
-          const newProductsDocumentFragment = document.createDocumentFragment();
-          newProductsContainerElement.forEach((newProductElement) => {
-            newProductsDocumentFragment.appendChild(newProductElement);
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((responseText) => {
+            const newHtml = new DOMParser().parseFromString(responseText, 'text/html');
+            const newNextUrl = newHtml.querySelector('[data-next-url]')?.dataset.nextUrl;
+            const newProductsContainerElement = newHtml.querySelectorAll('[data-collection-item]');
+            const newProductsDocumentFragment = document.createDocumentFragment();
+
+            newProductsContainerElement.forEach((newProductElement) => {
+              newProductsDocumentFragment.appendChild(newProductElement);
+            });
+
+            const serializer = new XMLSerializer();
+            this._page2Content = serializer.serializeToString(newProductsDocumentFragment);
+
+            if (newNextUrl) {
+              this.productsContainerElement.dataset.nextUrl = newNextUrl;
+            } else {
+              this.productsContainerElement.dataset.nextUrl = '';
+            }
+
+            const seeMoreLoaderElement = this.querySelector('[data-see-more-loader]');
+
+            if (seeMoreLoaderElement && !seeMoreLoaderElement.classList.contains('disp-none-imp')) {
+              this.infiniteScrollProducts();
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
           });
-
-          const serializer = new XMLSerializer();
-          this._page2Content = serializer.serializeToString(newProductsDocumentFragment);
-
-          if (newNextUrl) {
-            this.productsContainerElement.dataset.nextUrl = newNextUrl;
-          }
-
-          const seeMoreLoaderElement = this.querySelector('[data-see-more-loader]');
-
-          if (seeMoreLoaderElement && !seeMoreLoaderElement.classList.contains('disp-none-imp')) {
-            this.infiniteScrollProducts();
-          }
-        });
     }
 
     this.seeMoreButtonHandler = (event) => {
@@ -135,35 +164,36 @@ export class EterneCollection extends HTMLElement {
     });
   }
 
-  connectedCallback() {}
+  connectedCallback() {
+  }
 
   getProductInfo = async (productHandle) => {
     let result;
 
     await fetch(window.Shopify.routes.root + `products/${productHandle}.js`)
-      .then(response => {
-        result = response.json();
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+        .then(response => {
+          result = response.json();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
 
     return result;
   }
 
-  getProductsContainerScrollHeight () {
+  getProductsContainerScrollHeight() {
     const productsContainerElements = this.querySelector('.collection__products');
 
     return productsContainerElements.scrollHeight;
   }
 
-  getProductCardHeight () {
+  getProductCardHeight() {
     const productElement = this.querySelector('[data-collection-item]');
 
     return productElement.scrollHeight;
   }
 
-  filtersVisibilityToggle () {
+  filtersVisibilityToggle() {
     const filtersButtonElement = this.querySelector('.collection__filter-open-btn-wrap');
 
     filtersButtonElement.addEventListener('click', () => {
@@ -179,7 +209,7 @@ export class EterneCollection extends HTMLElement {
 
   watchProductsClickTargetHandler = (event) => {
     const variantCardElement = event.target.closest('[data-collection-item]');
-    const currencySymbol  = document.querySelector('body').dataset.currencySymbol.trim();
+    const currencySymbol = document.querySelector('body').dataset.currencySymbol.trim();
     const clickOnSize = checkParentsForClass(event.target, 'collection__size-variant-text');
     const clickOnColor = checkParentsForClass(event.target, 'collection__item-color-wrap');
     const clickOnMobileQuickAddShowButton = checkParentsForClass(event.target, 'collection__item-quick-add-btn-wrap');
@@ -261,6 +291,7 @@ export class EterneCollection extends HTMLElement {
 
       if (isVariantReadyToFetch) {
         if (isLoadedWithFilters) {
+          console.log('true')
           const emptyImageUrl = variantCardElement.dataset.emptyImage;
           const hoverImages = variantCardElement.dataset.hoverImages;
 
@@ -283,32 +314,32 @@ export class EterneCollection extends HTMLElement {
                   variantCardElement.dataset.selectedColor = clickedColor;
                   productTitleElement.innerHTML = `${productTitle} ${clickedColor}`;
 
-                  if (hoverImages.length > 0) {
-                    const items = hoverImages.split(";").filter(item => item);
-                    const hoverImagesArray = items.map(item => {
-                      const [variantId, hoverImageUrl] = item.split(",");
-                      return { variantId: parseInt(variantId), hoverImageUrl };
-                    });
+                  const items = hoverImages.split(";").filter(item => item);
+                  const hoverImagesArray = items.map(item => {
+                    const [variantId, hoverImageUrl] = item.split(",");
+                    return { variantId: parseInt(variantId), hoverImageUrl };
+                  });
 
-                    let firstImageUrl;
-                    if (featuredImageUrl) {
-                      firstImageUrl = featuredImageUrl;
-                    } else {
-                      firstImageUrl = emptyImageUrl;
-                    }
-                    firstImageElement.setAttribute('style', `background-image: url(${firstImageUrl})`);
-
-                    const variantHoverImageUrl = hoverImagesArray.find(item => item.variantId === variant.id)?.hoverImageUrl;
-                    let secondImageUrl;
-                    if (variantHoverImageUrl) {
-                      secondImageUrl = variantHoverImageUrl;
-                    } else if (firstImageUrl) {
-                      secondImageUrl = firstImageUrl;
-                    } else {
-                      secondImageUrl = emptyImageUrl;
-                    }
-                    secondImageElement.setAttribute('style', `background-image: url(${secondImageUrl})`);
+                  let firstImageUrl;
+                  if (featuredImageUrl) {
+                    firstImageUrl = featuredImageUrl;
+                  } else {
+                    firstImageUrl = emptyImageUrl;
                   }
+                  console.log(firstImageElement)
+                  firstImageElement.setAttribute('style', `background-image: url(${firstImageUrl})`);
+
+                  const variantHoverImageUrl = hoverImagesArray.find(item => item.variantId === variant.id)?.hoverImageUrl;
+                  let secondImageUrl;
+                  if (variantHoverImageUrl) {
+                    secondImageUrl = variantHoverImageUrl;
+                  } else if (firstImageUrl) {
+                    secondImageUrl = firstImageUrl;
+                  } else {
+                    secondImageUrl = emptyImageUrl;
+                  }
+                  console.log(secondImageElement)
+                  secondImageElement.setAttribute('style', `background-image: url(${secondImageUrl})`);
 
                   if (variant.available) {
                     preorderWrapperElement.classList.remove('disp-flx-imp');
@@ -326,6 +357,7 @@ export class EterneCollection extends HTMLElement {
 
           checkVariantAvailability();
         } else {
+          console.log('false')
           const targetProductCardElement = this.productsContainerElement.querySelector(`[data-product-title="${productTitle}"][data-default-color="${clickedColor}"]`);
           const newFirstImageUrl = targetProductCardElement.dataset.firstImage;
           const newSecondImageUrl = targetProductCardElement.dataset.secondImage;
@@ -389,18 +421,18 @@ export class EterneCollection extends HTMLElement {
         const addToCartAndDisableLoader = async () => {
           const response = await addToCart(variantId, 1);
 
-            if (response) {
-              const e = new CustomEvent("dispatch:cart-flyover:refresh", { bubbles: true });
-              document.dispatchEvent(e);
+          if (response) {
+            const e = new CustomEvent("dispatch:cart-flyover:refresh", {bubbles: true});
+            document.dispatchEvent(e);
 
-              const event = new CustomEvent("dispatch:cart-drawer:open", { bubbles: true });
-              document.dispatchEvent(event);
+            const event = new CustomEvent("dispatch:cart-drawer:open", {bubbles: true});
+            document.dispatchEvent(event);
 
-              if (addToCartLoaderElement) {
-                addToCartButtonElement.classList.remove('disp-none-imp');
-                addToCartLoaderElement.classList.remove('disp-flx-imp');
-              }
+            if (addToCartLoaderElement) {
+              addToCartButtonElement.classList.remove('disp-none-imp');
+              addToCartLoaderElement.classList.remove('disp-flx-imp');
             }
+          }
 
           variantCardElement.dataset.isVariantReadyToFetch = 'true';
         }
@@ -428,11 +460,11 @@ export class EterneCollection extends HTMLElement {
     }
   }
 
-  watchProductsClickTarget () {
+  watchProductsClickTarget() {
     this.productsContainerElement.addEventListener('click', this.watchProductsClickTargetHandler);
   }
 
-  watchFiltersClickTargetHandler (event) {
+  watchFiltersClickTargetHandler(event) {
     const isClickOnFilterCategoryTitle = checkParentsForClass(event.target, 'collection__sort-category-title-wrap');
     const isClickOnSeeMore = checkParentsForClass(event.target, 'collection__sort-category-see-more');
 
@@ -458,41 +490,34 @@ export class EterneCollection extends HTMLElement {
       const seeMoreElement = sortCategoryWrapperElement.querySelector('.collection__sort-category-see-more');
       const seeMoreTextElement = sortCategoryWrapperElement.querySelector('.collection__sort-category-see-more-text');
       const seeLessTextElement = sortCategoryWrapperElement.querySelector('.collection__sort-category-see-less-text');
-      const isSeeMoreOpen = seeMoreElement.dataset.isSeeMoreOpen === 'true';
+      const renderAttribute = sortCategoryWrapperElement.closest('[data-render]').getAttribute('data-render');
+      const isSeeMoreOpenKey = `isSeeMoreOpen_${renderAttribute}`;
+      const isSeeMoreOpen = localStorage.getItem(isSeeMoreOpenKey) === 'true';
+
+      seeMoreElement.dataset.isSeeMoreOpen = isSeeMoreOpen ? 'true' : 'false';
 
       optionsElements.forEach((optionElement) => {
-        const isOptionToHide = optionElement.dataset.optionToHide && optionElement.dataset.optionToHide === 'true';
+        const isOptionToHide = optionElement.dataset.optionToHide;
 
         if (isOptionToHide) {
           const labelElement = optionElement.querySelector('label');
-
-          if (isSeeMoreOpen) {
-            optionElement.classList.add('collection__sort-category-option_hidden');
-            labelElement.classList.add('disp-none-imp');
-          } else {
-            optionElement.classList.remove('collection__sort-category-option_hidden');
-            labelElement.classList.remove('disp-none-imp');
-          }
+          optionElement.classList.toggle('collection__sort-category-option_hidden', isSeeMoreOpen);
+          labelElement.classList.toggle('disp-none-imp', isSeeMoreOpen);
         }
       });
 
-      if (isSeeMoreOpen) {
-        seeMoreElement.dataset.isSeeMoreOpen = 'false';
-        seeMoreTextElement.classList.remove('disp-none-imp');
-        seeLessTextElement.classList.add('disp-none-imp');
-      } else {
-        seeMoreElement.dataset.isSeeMoreOpen = 'true';
-        seeMoreTextElement.classList.add('disp-none-imp');
-        seeLessTextElement.classList.remove('disp-none-imp');
-      }
+      seeMoreTextElement.classList.toggle('disp-none-imp', isSeeMoreOpen);
+      seeLessTextElement.classList.toggle('disp-none-imp', !isSeeMoreOpen);
+
+      localStorage.setItem(isSeeMoreOpenKey, isSeeMoreOpen ? 'false' : 'true');
     }
   }
 
-  watchFiltersClickTarget () {
+  watchFiltersClickTarget() {
     this.filtersContainerElement.addEventListener('click', this.watchFiltersClickTargetHandler);
   }
 
-  seeMore () {
+  seeMore() {
     if (this.seeMoreButtonElement) {
       this.seeMoreButtonElement.addEventListener('click', this.seeMoreButtonHandler);
     }
@@ -500,13 +525,13 @@ export class EterneCollection extends HTMLElement {
     this.loadProductsPage2();
   }
 
-  addListeners () {
+  addListeners() {
     this.watchProductsClickTarget();
     this.watchFiltersClickTarget();
     this.seeMore();
   }
 
-  removeListeners () {
+  removeListeners() {
     window.removeEventListener('scroll', this.scrollDebounceHandler);
 
     if (this.seeMoreButtonElement) {

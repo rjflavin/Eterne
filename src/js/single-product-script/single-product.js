@@ -1,4 +1,4 @@
-import {checkParentsForClass} from "../utils/check-parents-for-class";
+import { checkParentsForClass } from "../utils/check-parents-for-class";
 
 export default class SingleProduct extends HTMLElement {
   constructor() {
@@ -37,7 +37,7 @@ export default class SingleProduct extends HTMLElement {
           });
         }
       }
-    }
+    };
   }
 
   connectedCallback() {
@@ -54,7 +54,7 @@ export default class SingleProduct extends HTMLElement {
     document.addEventListener('variant:change', this.handleVariantChange.bind(this));
   }
 
-  watchScroll () {
+  watchScroll() {
     let lastScrollTop = 157.73;
 
     window.addEventListener('scroll', () => {
@@ -197,7 +197,7 @@ export default class SingleProduct extends HTMLElement {
     }
   }
 
-  setTitleForColorSwatches () {
+  setTitleForColorSwatches() {
     const colorSwatchesElements = this.querySelectorAll('.opt-label--swatch');
 
     if (colorSwatchesElements) {
@@ -237,11 +237,11 @@ export default class SingleProduct extends HTMLElement {
     productMediaItems.forEach(mediaItem => {
       const img = mediaItem.querySelector('img');
       if (img && img.alt.toLowerCase() === newAlt.toLowerCase()) {
-        const currentImg = item.querySelector('img');
-        if (currentImg) {
-          currentImg.src = img.src;
-          currentImg.alt = img.alt;
-          currentImg.srcset = img.srcset; // Update srcset
+        const currentImage = item.querySelector('img');
+        if (currentImage) {
+          currentImage.src = img.src;
+          currentImage.alt = img.alt;
+          currentImage.srcset = img.srcset;
         }
       }
     });
@@ -283,24 +283,20 @@ export default class SingleProduct extends HTMLElement {
         const selectedVariantElement = productElement.querySelector('.product__size-variant-text_selected');
         if (selectedVariantElement) {
           const variantId = selectedVariantElement.dataset.variantId;
-          const addToCart = async () => {
-            const response = await addToCart(variantId, 1);
-
-            if (response) {
-              const e = new CustomEvent("dispatch:cart-flyover:refresh", {
-                bubbles: true
-              })
-              document.dispatchEvent(e)
-
-              const event = new CustomEvent("dispatch:cart-drawer:open", {
-                bubbles: true
-              })
-              document.dispatchEvent(event)
-            }
-          }
-
           if (variantId) {
-            addToCart();
+            this.addToCart(variantId, 1).then(response => {
+              if (response) {
+                const cartFlyoverEvent = new CustomEvent("dispatch:cart-flyover:refresh", {
+                  bubbles: true
+                });
+                document.dispatchEvent(cartFlyoverEvent);
+
+                const cartDrawerEvent = new CustomEvent("dispatch:cart-drawer:open", {
+                  bubbles: true
+                });
+                document.dispatchEvent(cartDrawerEvent);
+              }
+            });
           } else {
             console.error("Variant ID not found. Ensure that the size variant has a valid ID.");
           }
@@ -320,11 +316,11 @@ export default class SingleProduct extends HTMLElement {
       const quickAddPanelsElements = this.querySelectorAll('[data-quick-add-panel]');
       const quickAddMobileButtonElements = this.querySelectorAll('[data-quick-add-button]');
 
-      quickAddPanelsElements.forEach((panelElement) => {
+      quickAddPanelsElements.forEach(panelElement => {
         panelElement.classList.remove('product__quick-add-panel_show-mobile');
       });
 
-      quickAddMobileButtonElements.forEach((quickAddMobileButtonElement) => {
+      quickAddMobileButtonElements.forEach(quickAddMobileButtonElement => {
         quickAddMobileButtonElement.classList.remove('disp-none-imp');
       });
     }
@@ -352,6 +348,31 @@ export default class SingleProduct extends HTMLElement {
       }
     } catch (error) {
       console.error('Error fetching product data:', error);
+    }
+    return null;
+  }
+
+  async addToCart(variantId, quantity) {
+    try {
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: quantity,
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        return responseData;
+      } else {
+        console.error('Error adding to cart:', response.status);
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
     }
     return null;
   }

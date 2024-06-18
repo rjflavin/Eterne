@@ -405,6 +405,10 @@
   line-height: 16.8px;
   cursor: pointer;
 }
+.collection__size-variant-text.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .collection__size-variant-text:first-child {
   margin-left: 0;
 }

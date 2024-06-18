@@ -537,6 +537,10 @@
   white-space: nowrap;
   cursor: pointer;
 }
+.product-info .product-column-right .product-recommendations .product__quick-add-panel .product__size-variants .product__size-variant-text.disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}
 .product-info .product-column-right .product-recommendations .product__quick-add-panel .product__size-variants .product__size-variant-text:last-child {
   margin-right: 0;
 }

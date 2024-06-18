@@ -328,15 +328,14 @@
                                       {% endif %}
                                     {% endfor %}
                                     <div
-                                      data-variant-id="{{ variant_id }}"
-                                      data-variant-size="{{ value }}"
-                                      class="product__size-variant-text no-select
-                                      {% if is_first_size %}
-                                        product__size-variant-text_selected
-                                        {% assign is_first_size = false %}
-                                      {% endif %}
-                                    "
-                                    >
+                                            data-variant-id="{{ variant_id }}"
+                                            data-variant-size="{{ value }}"
+                                            class="product__size-variant-text no-select
+                                            {% if is_first_size %}
+                                                product__size-variant-text_selected
+                                                {% assign is_first_size = false %}
+                                            {% endif %}
+                                        ">
                                       {{ value }}
                                     </div>
                                   {% endfor %}

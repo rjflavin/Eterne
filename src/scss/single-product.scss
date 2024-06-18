@@ -603,6 +603,11 @@
             white-space: nowrap;
             cursor: pointer;
 
+            &.disabled {
+              opacity: .7;
+              pointer-events: none;
+            }
+
             &:last-child {
               margin-right: 0;
             }
