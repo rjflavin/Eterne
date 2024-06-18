@@ -250,7 +250,7 @@ export class EterneCollection extends HTMLElement {
                                 sizesByColor[color] = [];
                             }
 
-                            sizesByColor[color].push({ size, available: variant.available });
+                            sizesByColor[color].push({size, available: variant.available});
                         });
 
                         if (response) {
@@ -322,13 +322,13 @@ export class EterneCollection extends HTMLElement {
                                     sizesByColor[color] = [];
                                 }
 
-                                sizesByColor[color].push({ size, available: variant.available });
+                                sizesByColor[color].push({size, available: variant.available});
                             });
 
                             const availableSizes = sizesByColor[clickedColor] || [];
                             updateAvailableSizesUI(availableSizes);
 
-                            const firstAvailableSize = availableSizes.find(({ available }) => available)?.size;
+                            const firstAvailableSize = availableSizes.find(({available}) => available)?.size;
                             if (firstAvailableSize) {
                                 selectedSize = firstAvailableSize;
                                 variantCardElement.dataset.selectedSize = selectedSize;
@@ -350,7 +350,7 @@ export class EterneCollection extends HTMLElement {
                                         const items = hoverImages.split(";").filter(item => item);
                                         const hoverImagesArray = items.map(item => {
                                             const [variantId, hoverImageUrl] = item.split(",");
-                                            return { variantId: parseInt(variantId), hoverImageUrl };
+                                            return {variantId: parseInt(variantId), hoverImageUrl};
                                         });
 
                                         let firstImageUrl;
@@ -389,8 +389,7 @@ export class EterneCollection extends HTMLElement {
 
                     checkVariantAvailability();
 
-                }
-                else {
+                } else {
                     const targetProductCardElement = this.productsContainerElement.querySelector(`[data-product-title="${productTitle}"][data-default-color="${clickedColor}"]`);
                     const newFirstImageUrl = targetProductCardElement.dataset.firstImage;
                     const newSecondImageUrl = targetProductCardElement.dataset.secondImage;
@@ -418,13 +417,13 @@ export class EterneCollection extends HTMLElement {
                                     sizesByColor[color] = [];
                                 }
 
-                                sizesByColor[color].push({ size, available: variant.available });
+                                sizesByColor[color].push({size, available: variant.available});
                             });
 
                             const availableSizes = sizesByColor[clickedColor] || [];
                             updateAvailableSizesUI(availableSizes);
 
-                            const firstAvailableSize = availableSizes.find(({ available }) => available)?.size;
+                            const firstAvailableSize = availableSizes.find(({available}) => available)?.size;
                             if (firstAvailableSize) {
                                 selectedSize = firstAvailableSize;
                                 variantCardElement.dataset.selectedSize = selectedSize;
@@ -463,7 +462,7 @@ export class EterneCollection extends HTMLElement {
 
                     let firstAvailableSize = null;
 
-                    sizes.forEach(({ size, available }) => {
+                    sizes.forEach(({size, available}) => {
                         const sizeElement = document.createElement('div');
                         sizeElement.className = 'collection__size-variant-text no-select';
                         sizeElement.innerText = size;
