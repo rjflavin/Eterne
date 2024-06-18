@@ -405,6 +405,10 @@
   line-height: 16.8px;
   cursor: pointer;
 }
+.collection__size-variant-text.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .collection__size-variant-text:first-child {
   margin-left: 0;
 }
@@ -457,7 +461,7 @@
     height: 1.7811705vw;
   }
 }
-@media (max-width: 1024px) and (max-width: 393px) {
+@media (max-width: 1024px) and (max-width: 575px) {
   .collection__item-quick-add-btn {
     width: 15px;
     height: 15px;
@@ -512,7 +516,7 @@
   margin: 10px 10px 0 10px;
   font-size: 12px;
   font-weight: 700;
-  line-height: 16.8px;
+  line-height: 140%;
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
@@ -528,7 +532,7 @@
   margin: 0 10px;
   font-size: 12px;
   font-weight: 300;
-  line-height: 16.8px;
+  line-height: 140%;
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
@@ -543,8 +547,8 @@
   display: flex;
   margin: 4px 10px 0 10px;
   font-size: 12px;
-  font-weight: 500;
-  line-height: 16.8px;
+  font-weight: 400;
+  line-height: 183%;
   text-align: center;
   letter-spacing: 0.4px;
   color: var(--black1);

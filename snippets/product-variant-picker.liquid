@@ -69,9 +69,7 @@
         {%- liquid
           assign is_color_selector = false
           assign is_variant_image_style = false
-          assign show_size_chart = false
           assign is_dropdown = false
-          assign is_size_chart = false
 
           if block.settings.selector_style == 'dropdown'
             assign is_dropdown = true
@@ -98,28 +96,14 @@
             endif
           endif
 
-          if block.settings.enable_size_chart and block.settings.size_chart_variant == option.name and block.settings.size_chart_page != blank
+          assign show_size_chart = false
+          assign size_guide_variant_downcased = block.settings.size_guide_variant | downcase
+          assign option_name_downcased = option.name | downcase
+
+          if enable_size_chart and size_guide_variant_downcased == option_name_downcased
             assign show_size_chart = true
           endif
-
-          if block.settings.enable_size_chart and block.settings.size_chart_variant contains option.name
-            assign is_size_chart = true
-          endif
-        -%}
-
-        {%- if show_size_chart -%}
-          {%- capture size_chart_link -%}
-            <modal-opener class="no-js-hidden" data-modal="size-chart-{{ product.id }}-{{ section.id }}">
-              <button type="button" class="link block text-sm size-chart-link" aria-haspopup="dialog">
-                <span class="size-chart-link__icon">{%- render 'icon', icon: 'ruler', size: 'small' -%}</span>
-                <span class="size-chart-link__text underline">{{- 'products.product.size_chart' | t -}}</span>
-              </button>
-            </modal-opener>
-            <noscript>
-              <a href="{{ block.settings.size_chart_page.url }}" class="link">{{ 'products.product.size_chart' | t }}</a>
-            </noscript>
-          {%- endcapture -%}
-        {%- endif -%}
+              -%}
 
         {%- if is_dropdown -%}
           {%- if is_variant_image_style -%}
@@ -140,14 +124,6 @@
             <label class="label" id="{{ option_id }}-label">{{- option.name -}}</label>
           {%- endcapture -%}
           <div class="option-selector" data-selector-type="dropdown">
-            {%- if show_size_chart -%}
-              <div class="flex justify-between">
-                {{ selector_label }}
-                {{ size_chart_link }}
-              </div>
-            {%- else -%}
-              {{ selector_label }}
-            {%- endif -%}
             {%- liquid
               if block.settings.select_first_variant or product.variants.size == 1
                 assign selected_value = option.selected_value
@@ -169,20 +145,9 @@
         {%- else -%}
           <fieldset class="option-selector single-product-options {% if option.name == 'Material' %}material-switcher{% endif %}{% if is_color_selector %}color-switcher{% endif %} {% if is_size_chart %}size-chart{% endif %}" data-selector-type="listed">
             <div class="option-selector__content">
-              {%- if show_size_chart -%}
-                <div class="flex justify-between">
+               <div class="flex justify-between">
                   <legend class="label">{{- option.name -}}</legend>
-                  {{ size_chart_link }}
                 </div>
-              {%- else -%}
-                <div class="label {% if option.name == 'Color' %}label_color{% endif %}">
-                  {% if option.name == 'Material' %}
-                    Available in
-                  {% else %}
-                    {{ option.name }}
-                  {% endif %}
-                </div>
-              {%- endif -%}
               <div class="option-selector__btns flex flex-wrap">
                 {%- for value in option.values -%}
                   {%- assign value_index0 = forloop.index0 -%}
@@ -250,10 +215,13 @@
                   {% endif %}
                 {%- endfor -%}
               </div>
+               {%- if show_size_chart -%}
+               {%- render 'size-guide',
+                                product: product,
+                                size_guide_text: size_guide_text,
+                                size_guide_page: size_guide_page -%}
+               {%- endif -%}
             </div>
-            {% if is_size_chart %}
-              <div class="size-guide">View Size Guide</div>
-            {% endif %}
           </fieldset>
         {%- endif -%}
       {%- endfor -%}
