@@ -45,9 +45,17 @@
 {% endif %}
 
 {%- if product.media.size > 1 -%}
-    <script src="{{ 'slideshow.js' | asset_url }}" defer></script>
+  <script src="{{ 'slideshow.js' | asset_url }}" defer></script>
 {%- endif -%}
 <link rel="stylesheet" href="{{ 'modal.css' | asset_url }}">
+
+{% if section.settings.show_breadcrumbs %}
+  <div class="container desktop-only not-in-quickbuy" data-cc-animate data-cc-animate-delay="0.2s">
+    <div class="page-header">
+      {% render 'breadcrumbs', show_next_prev: true %}
+    </div>
+  </div>
+{% endif %}
 
 <script>
     var productData = {

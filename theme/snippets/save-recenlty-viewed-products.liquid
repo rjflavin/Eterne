@@ -1,3 +1,11 @@
+{%- comment -%}
+  Info: This snipped must be added to a section on product page for every template (to save all visited products)
+  Parameters:
+  - product {Object} - Product object.
+
+  Usage:
+  {% render 'save-recenlty-viewed-products', product: product %}
+{%- endcomment -%}
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -25,30 +33,14 @@
             return []
         }
 
-        const getCurrentVariantId = () => {
-            const url = window.location.href
-            const urlArray = url.split('variant=')
-
-            if (urlArray.length === 2) {
-                return urlArray[1]
-            }
-
-            return ''
-        }
-
         const initializeProductObject = () => {
             const productObject = {
                 "productId": "",
-                "variantId": "",
                 "title": "",
-                "url": "",
                 "color": "",
-                "size": "",
-                "price": "",
                 "inventory_quantity": "",
                 "images": [],
-                "variantSizes": [],
-                "variantAvailableFrom": '',
+                "variants": [],
             }
 
             {% assign productTitle = product.title %}
@@ -56,7 +48,8 @@
             {% assign productId = product.id %}
             productObject.productId = `{{ productId }}`
 
-            let currentVariantId = getCurrentVariantId()
+            let currentVariantId = {{ product.selected_or_first_available_variant | json }}
+            console.log('selected product: ', currentVariantId);
             if (!currentVariantId) {
                 currentVariantId = `{{ product.first_available_variant.id }}`
             }

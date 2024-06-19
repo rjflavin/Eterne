@@ -1,300 +1,299 @@
-import { addToCart } from "../utils/cart-handler";
+import {checkParentsForClass} from "../utils/check-parents-for-class";
+import {addToCart} from "../utils/cart-handler";
 
 export default class SingleProduct extends HTMLElement {
-    constructor() {
-        super();
-        this.product = {
-            "variants": window.productData.variants,
-            "options": window.productData.options
-        };
-        this.productId = window.productData.productId;
-        this.availableColors = this.getAvailableColors();
-        this.watchProductsClickTargetHandler = this.watchProductsClickTargetHandler.bind(this);
-        document.addEventListener('DOMContentLoaded', this.watchProductsClickTarget.bind(this));
-    }
+  constructor() {
+    super();
+    this.product = {
+      variants: window.productData.variants,
+      options: window.productData.options
+    };
+    this.sectionId = this.getAttribute('section-id');
 
-    connectedCallback() {
-        document.addEventListener('DOMContentLoaded', () => {
-            this.initializeOptionSelectors();
-            this.showDefaultColorImages();
-            this.initializeColorSwatchHover();
-            this.initializeProductMediaHover();
-            this.initializeProductDetailsToggle();
-            this.initializeSizeInfoToggle(); // Added line
-        });
+    this.productDetailsHandler = (dataAttribute) => {
+      const productSizeAndFitElement = this.querySelector(`[${dataAttribute}]`);
 
-        document.addEventListener('variant:change', this.handleVariantChange.bind(this));
-    }
+      if (productSizeAndFitElement) {
+        const productSizeAndFitHeaderElement = productSizeAndFitElement.querySelector('.product-details__header');
+        const productSizeAndFitContentElement = productSizeAndFitElement.querySelector('.product-details__content');
+        const plusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-plus-button]');
+        const minusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-minus-button]');
 
-    getAvailableColors() {
-        const colorLabels = document.querySelectorAll('.opt-label--swatch .js-value');
-        return Array.from(colorLabels).map(label => label.textContent.toLowerCase());
-    }
+        if (productSizeAndFitHeaderElement && productSizeAndFitContentElement) {
+          productSizeAndFitHeaderElement.addEventListener('click', () => {
+            const isOpen = productSizeAndFitContentElement.classList.contains('disp-flx-imp');
 
-    initializeOptionSelectors() {
-        const optionSelectors = this.querySelectorAll('.js-option');
-
-        optionSelectors.forEach(selector => {
-            selector.addEventListener('change', this.handleOptionChange.bind(this));
-        });
-    }
-
-    handleOptionChange() {
-        const selectedOptions = Array.from(this.querySelectorAll('.js-option:checked')).map(input => {
-            const name = input.name.split('-option')[0].split('-').slice(-1)[0];
-            return {
-                name: name.charAt(0).toUpperCase() + name.slice(1),
-                value: input.value
-            };
-        });
-
-        const variant = this.findVariant(selectedOptions);
-        const selectedColor = selectedOptions.find(option => option.name.toLowerCase() === 'color').value;
-
-        if (variant) {
-            this.updateProductDetails(variant, selectedColor);
-        }
-    }
-
-    handleVariantChange(event) {
-        const variant = event.detail.variant;
-        const selectedColor = variant.options.find(option => option.toLowerCase() === 'color');
-        this.updateProductDetails(variant, selectedColor);
-    }
-
-    findVariant(selectedOptions) {
-        const variant = this.product.variants.find(variant => {
-            return selectedOptions.every(option => {
-                const optionIndex = this.product.options.indexOf(option.name);
-                return variant.options[optionIndex] === option.value;
-            });
-        });
-        return variant;
-    }
-
-    updateProductDetails(variant, selectedColor) {
-        this.updateProductImage(selectedColor);
-        this.updateProductPrice(variant.price);
-        this.updateProductAvailability(variant.available);
-    }
-
-    updateProductImage(selectedColor) {
-        const productMediaItems = this.querySelectorAll('.product-media-collage__item');
-
-        productMediaItems.forEach(item => {
-            const img = item.querySelector('img');
-            if (img && img.alt.toLowerCase() === selectedColor.toLowerCase()) {
-                item.style.display = 'block';
-                item.classList.add('is-active');
+            if (isOpen) {
+              productSizeAndFitContentElement.classList.remove('disp-flx-imp');
+              plusButtonElement?.classList.remove('disp-none-imp');
+              minusButtonElement?.classList.add('disp-none-imp');
             } else {
-                item.style.display = 'none';
-                item.classList.remove('is-active');
+              productSizeAndFitContentElement.classList.add('disp-flx-imp');
+              plusButtonElement?.classList.add('disp-none-imp');
+              minusButtonElement?.classList.remove('disp-none-imp');
             }
-        });
-    }
-
-    updateProductPrice(price) {
-        const productPriceCurrentElement = this.querySelector('.price__current');
-
-        if (productPriceCurrentElement) {
-            productPriceCurrentElement.textContent = `$${(price / 100)}`;
+          });
         }
+      }
     }
+  }
 
-    updateProductAvailability(available) {
-        const productAvailabilityElement = this.querySelector('.product-availability');
+  connectedCallback() {
+    document.addEventListener('DOMContentLoaded', () => {
+      this.initializeOptionSelectors();
+      this.watchScroll();
+      this.watchShowMore();
+      this.watchRecommendedQuickAdd();
+      this.setTitleForColorSwatches();
+      this.initializeProductDetailsToggle();
+      this.initializeSizeInfoToggle();
+    });
 
-        if (productAvailabilityElement) {
-            productAvailabilityElement.textContent = available ? 'In Stock' : 'Out of Stock';
+    this.querySelectorAll('.product-recommendations [name="recommended-product-size"]').forEach((sizeElem) => {
+      sizeElem.addEventListener('change', (e) => {
+        e.preventDefault();
+        const activeLabelClass = 'product__size-label--checked';
+        const activeInputClass = 'product__size-item--checked';
+        const targetLabel = this.querySelector(`label[for="${sizeElem.id}"]`);
+        const targetInput = e.target;
+
+        const oldSelectedSize = sizeElem.closest('.product__size-variants').querySelector(`.${activeLabelClass}`);
+
+        const oldSelectedSizeInput = sizeElem.closest('.product__size-variants').querySelector(`.${activeInputClass}`);
+        if (!targetInput.classList.contains(activeInputClass)) {
+          targetLabel.classList.add(activeLabelClass);
+          targetInput.classList.add(activeInputClass);
+          oldSelectedSize.classList.remove(activeLabelClass);
+          oldSelectedSizeInput.classList.remove(activeInputClass);
         }
-    }
+      })
+    })
 
-    showDefaultColorImages() {
-        const defaultColorInput = this.querySelector('.js-option[name*="color-option"][checked]');
-        if (defaultColorInput) {
-            const defaultColor = defaultColorInput.value;
-            this.updateProductImage(defaultColor);
-        }
-    }
+    document.addEventListener('variant:change', this.handleVariantChange.bind(this));
+  }
 
-    initializeColorSwatchHover() {
-        const swatchLabels = document.querySelectorAll('.opt-label--swatch');
-        swatchLabels.forEach(label => {
-            label.addEventListener('mouseenter', this.showTooltip);
-            label.addEventListener('mouseleave', this.hideTooltip);
-        });
-    }
+  watchScroll () {
+    let lastScrollTop = 157.73;
 
-    showTooltip(event) {
-        const label = event.currentTarget;
-        const colorName = label.querySelector('.js-value').textContent;
-        let tooltip = label.querySelector('.color-tooltip');
-        if (!tooltip) {
-            tooltip = document.createElement('div');
-            tooltip.className = 'color-tooltip';
-            tooltip.textContent = colorName;
-            label.appendChild(tooltip);
-        }
-        tooltip.style.display = 'block';
-    }
+    window.addEventListener('scroll', () => {
+      const stickyContent = document.querySelector('[data-sticky-content-container]');
+      const productColumnRight = document.querySelector('.product-column-right');
+      const offset = productColumnRight.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-    hideTooltip(event) {
-        const label = event.currentTarget;
-        const tooltip = label.querySelector('.color-tooltip');
-        if (tooltip) {
-            tooltip.style.display = 'none';
-        }
-    }
+      if (stickyContent) {
+        const stickyHeight = stickyContent.offsetHeight;
+        const topOffset = offset.top - stickyHeight + windowHeight;
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    initializeProductMediaHover() {
-        const productMediaItems = this.querySelectorAll('.product-media--image');
-        productMediaItems.forEach(item => {
-            item.addEventListener('mouseenter', this.handleMediaHover.bind(this));
-            item.addEventListener('mouseleave', this.handleMediaMouseLeave.bind(this));
-        });
-    }
-
-    handleMediaHover(event) {
-        const item = event.currentTarget;
-        const img = item.querySelector('img');
-        if (img) {
-            const currentAlt = img.alt.toLowerCase();
-            const newAlt = this.getNewAlt(currentAlt);
-
-            img.dataset.originalSrc = img.src;
-            img.dataset.originalAlt = currentAlt;
-            img.dataset.originalSrcset = img.srcset; // Store original srcset
-            this.swapImage(item, newAlt);
-        }
-    }
-
-    handleMediaMouseLeave(event) {
-        const item = event.currentTarget;
-        const img = item.querySelector('img');
-        if (img) {
-            img.src = img.dataset.originalSrc;
-            img.alt = img.dataset.originalAlt;
-            img.srcset = img.dataset.originalSrcset; // Restore original srcset
-        }
-    }
-
-    swapImage(item, newAlt) {
-        const productMediaItems = this.querySelectorAll('.product-media-collage__item');
-        productMediaItems.forEach(mediaItem => {
-            const img = mediaItem.querySelector('img');
-            if (img && img.alt.toLowerCase() === newAlt.toLowerCase()) {
-                const currentImg = item.querySelector('img');
-                if (currentImg) {
-                    currentImg.src = img.src;
-                    currentImg.alt = img.alt;
-                    currentImg.srcset = img.srcset; // Update srcset
-                }
-            }
-        });
-    }
-
-    getNewAlt(currentAlt) {
-        const currentIndex = this.availableColors.indexOf(currentAlt);
-        return this.availableColors[currentIndex];
-    }
-
-    initializeProductDetailsToggle() {
-        const productDetailsHeader = this.querySelector('.product-details');
-        const productDetailsBlock = this.querySelector('.product-details-block');
-
-        if (productDetailsHeader && productDetailsBlock) {
-            productDetailsHeader.addEventListener('click', () => {
-                const isOpen = productDetailsBlock.classList.toggle('open');
-                productDetailsHeader.textContent = `Details ${isOpen ? '-' : '+'}`;
-                productDetailsBlock.style.display = isOpen ? 'block' : 'none';
-            });
-        }
-    }
-
-    initializeSizeInfoToggle() {
-        const productSizesHeader = this.querySelector('.product-sizes');
-        const productSizesBlock = this.querySelector('.product-sizes-block');
-
-        if (productSizesHeader && productSizesBlock) {
-            productSizesHeader.addEventListener('click', () => {
-                const isOpen = productSizesBlock.classList.toggle('open');
-                productSizesHeader.textContent = `Size & Fit Information ${isOpen ? '-' : '+'}`;
-                productSizesBlock.style.display = isOpen ? 'block' : 'none';
-            });
-        }
-    }
-
-    watchProductsClickTargetHandler(event) {
-        const productElement = event.target.closest('.product');
-        if (productElement) {
-            const sizeVariantElement = event.target.closest('.product__size-variant-text.no-select');
-
-            if (sizeVariantElement) {
-                const clickedSize = sizeVariantElement.dataset.variantSize;
-
-                const sizeVariants = productElement.querySelectorAll('.product__size-variant-text');
-                sizeVariants.forEach(variant => {
-                    variant.classList.remove('product__size-variant-text_selected');
-                });
-
-                sizeVariantElement.classList.add('product__size-variant-text_selected');
-            }
-
-            const addToCartButton = event.target.closest('.product__add-to-cart');
-            if (addToCartButton) {
-                const selectedVariantElement = productElement.querySelector('.product__size-variant-text_selected');
-                if (selectedVariantElement) {
-                    const variantId = selectedVariantElement.dataset.variandId;
-
-                    const addToCartAndDisableLoader = async () => {
-                        const response = await addToCart(variantId, 1);
-
-                        if (response) {
-                            const e = new CustomEvent("dispatch:cart-flyover:refresh", {
-                                bubbles: true
-                            })
-                            document.dispatchEvent(e)
-
-                            const event = new CustomEvent("dispatch:cart-drawer:open", {
-                                bubbles: true
-                            })
-                            document.dispatchEvent(event)
-                        }
-                    }
-
-                    if (variantId) {
-                        addToCartAndDisableLoader();
-                    } else {
-                        console.error("Variant ID not found. Ensure that the size variant has a valid ID.");
-                    }
-                } else {
-                    console.error("No size variant selected. Please select a size before adding to the cart.");
-                }
-            }
-        }
-    }
-
-    watchProductsClickTarget() {
-        const productsContainer = document.querySelector('.product-recommendations');
-        if (productsContainer) {
-            productsContainer.addEventListener('click', this.watchProductsClickTargetHandler);
+        if (currentScrollTop > lastScrollTop) {
+          if (window.pageYOffset >= topOffset && stickyHeight > windowHeight) {
+            stickyContent.style.top = `${windowHeight - stickyHeight - 40}px`;
+          } else if (window.pageYOffset >= topOffset) {
+            stickyContent.style.top = '40px';
+          }
         } else {
-            console.error("productsContainer element not found. Ensure that the .product-recommendations element exists in the HTML.");
+          if (window.pageYOffset < offset.top) {
+            stickyContent.style.top = '157.73px';
+          } else {
+            const topPosition = Math.min(157.73, parseInt(stickyContent.style.top) + (lastScrollTop - currentScrollTop));
+            stickyContent.style.top = `${topPosition}px`;
+          }
         }
-    }
 
-    async getProductInfo(productHandle) {
-        try {
-            const response = await fetch(`/products/${productHandle}.json`);
-            if (response.ok) {
-                const productData = await response.json();
-                return productData.product;
-            } else {
-                console.error('Error fetching product data:', response.status);
-            }
-        } catch (error) {
-            console.error('Error fetching product data:', error);
-        }
-        return null;
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+      }
+    });
+  }
+
+  initializeOptionSelectors() {
+    const optionSelectors = this.querySelectorAll('.js-option');
+
+    optionSelectors.forEach(selector => {
+      selector.addEventListener('change', this.handleOptionChange.bind(this));
+    });
+  }
+
+  handleOptionChange() {
+    const selectedOptions = Array.from(this.querySelectorAll('.js-option:checked')).map(input => {
+      const name = input.name.split('-option')[0].split('-').slice(-1)[0];
+      return {
+        name: name.charAt(0).toUpperCase() + name.slice(1),
+        value: input.value
+      };
+    });
+
+    const variant = this.findVariant(selectedOptions);
+    const selectedColor = selectedOptions.find(option => option.name.toLowerCase() === 'color').value;
+    if (variant) {
+      this.updateProduct(variant, selectedColor);
     }
+  }
+
+  handleVariantChange(event) {
+    const variant = event.detail.variant;
+    const selectedColor = variant.options.find(option => option.toLowerCase() === 'color');
+    this.updateProduct(variant, selectedColor);
+  }
+
+  findVariant(selectedOptions) {
+    const variant = this.product.variants.find(variant => {
+      return selectedOptions.every(option => {
+        const optionIndex = this.product.options.indexOf(option.name);
+        return variant.options[optionIndex] === option.value;
+      });
+    });
+    return variant;
+  }
+
+  updateProduct(variant, selectedColor) {
+    this.updateProductPrice(variant.price);
+    this.updateProductAvailability(variant.available);
+    this.updateSelectedVariantLayout(selectedColor);
+    this.updateRecommendedProducts(selectedColor);
+    this.resetShowMoreFunctionality();
+  }
+
+  updateProductPrice(price) {
+    const productPriceCurrentElement = this.querySelector('.price__current');
+
+    if (productPriceCurrentElement) {
+      productPriceCurrentElement.textContent = `$${(price / 100)}`;
+    }
+  }
+
+  updateProductAvailability(available) {
+    const productAvailabilityElement = this.querySelector('.product-availability');
+
+    if (productAvailabilityElement) {
+      productAvailabilityElement.textContent = available ? 'In Stock' : 'Out of Stock';
+    }
+  }
+
+  updateSelectedVariantLayout(selectedColorParam) {
+    const selectedColor = selectedColorParam.toLowerCase();
+    const activeClass = 'product-media-collage--active'
+    const activeColorWrappers = this.querySelectorAll(`[data-color-images-wrapper].${activeClass}`);
+    activeColorWrappers.forEach((activeColorWrapper) => {
+
+      if (activeColorWrapper.dataset.colorImagesWrapper !== selectedColor) {
+        activeColorWrapper.classList.remove(activeClass);
+        const newActiveColorWrappers = this.querySelectorAll(`[data-color-images-wrapper="${selectedColor}"]`);
+        if (newActiveColorWrappers.length > 0) {
+          newActiveColorWrappers.forEach((newActiveColorWrapper) => {
+            newActiveColorWrapper.classList.add(activeClass);
+          })
+        }
+      }
+    })
+  }
+
+  updateRecommendedProducts(selectedColorParam) {
+    const selectedColor = selectedColorParam.toLowerCase();
+    const activeClass = 'recommendations-grid--active';
+    const recommendProductsWrappers = this.querySelectorAll('.product-recommendations [data-rec-products]');
+    recommendProductsWrappers.forEach((recommendedWrapper) => {
+      const wrapperColor = recommendedWrapper.dataset.recProductsColor.toLowerCase();
+      if (wrapperColor !== selectedColor && recommendedWrapper.classList.contains(activeClass)) {
+        recommendedWrapper.classList.remove(activeClass);
+      } else if (wrapperColor === selectedColor) {
+        recommendedWrapper.classList.add(activeClass);
+      }
+    })
+  }
+
+  setTitleForColorSwatches () {
+    const colorSwatchesElements = this.querySelectorAll('.opt-label--swatch');
+
+    if (colorSwatchesElements) {
+      colorSwatchesElements.forEach((colorSwatchesElement) => {
+        const color = colorSwatchesElement.dataset.swatch.toUpperCase();
+        colorSwatchesElement.setAttribute('title', color);
+      });
+    }
+  }
+
+  initializeProductDetailsToggle() {
+    this.productDetailsHandler('data-product-details');
+  }
+
+  initializeSizeInfoToggle() {
+    this.productDetailsHandler('data-product-size-and-info');
+  }
+
+  watchShowMore() {
+    const recommendationsList = this.querySelectorAll('.recommendations-list');
+    recommendationsList.forEach((recommendationsWrapper) => {
+      const showMoreBtn = recommendationsWrapper.closest('[data-rec-products]').querySelector('.show-more-btn');
+      if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', this.watchShowMoreHandler.bind(this, recommendationsWrapper));
+      }
+    })
+  }
+
+  watchShowMoreHandler(recommendationsWrapper) {
+    const hiddenProducts = recommendationsWrapper.querySelectorAll('.product.hidden');
+    const showMoreBtn = recommendationsWrapper.closest('[data-rec-products]').querySelector('.show-more-btn');
+    hiddenProducts.forEach((product, index) => {
+      if (index < 2) {
+        product.classList.remove('hidden');
+      }
+    });
+
+    if (hiddenProducts.length <= 2 ) {
+      showMoreBtn.style.display = 'none';
+    }
+  }
+
+  watchRecommendedQuickAdd() {
+    this.querySelectorAll('.product__add-to-cart').forEach((addRecommended) => {
+      addRecommended.addEventListener('click', () => {
+        const quickAddPanel = this.querySelector(`#${addRecommended.dataset.quickAddPanel}`);
+        const sizeVariants = quickAddPanel.querySelectorAll('input');
+        const selectedVariant = Array.from(sizeVariants).find((variantSize) =>  variantSize.classList.contains('product__size-item--checked'));
+        if (selectedVariant) {
+          const variantId = selectedVariant.dataset.variantId;
+          const addToCartHendler = async () => {
+            const response = await addToCart(variantId, 1);
+            if (response) {
+              const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+                bubbles: true
+              })
+              document.dispatchEvent(e)
+
+              const event = new CustomEvent("dispatch:cart-drawer:open", {
+                bubbles: true
+              })
+              document.dispatchEvent(event)
+            }
+          }
+
+          if (variantId) {
+            addToCartHendler();
+          } else {
+            console.error("Variant ID not found. Ensure that the size variant has a valid ID.");
+          }
+        } else {
+          console.error("No size variant selected. Please select a size before adding to the cart.");
+        }
+      })
+    })
+  }
+
+  resetShowMoreFunctionality () {
+    const recommendationsList = this.querySelectorAll('.recommendations-list');
+    recommendationsList.forEach((recommendationsWrapper) => {
+      const products = recommendationsWrapper.querySelectorAll('.product');
+
+      if (products.length > 2) {
+        const showMoreBtn = recommendationsWrapper.closest('[data-rec-products]').querySelector('.show-more-btn');
+        products.forEach((product, index) => {
+          if (index >= 2) {
+            product.classList.add('hidden');
+          }
+        });
+        showMoreBtn.style.display = 'block';
+      }
+    })
+  }
 }

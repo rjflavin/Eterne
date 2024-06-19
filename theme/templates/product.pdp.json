@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "main": {
@@ -15,15 +24,9 @@
             "enable_product_reviews_by_price": true
           }
         },
-        "vendor": {
-          "type": "vendor",
-          "settings": {
-          }
-        },
         "divider": {
           "type": "divider",
           "settings": {
-            "show_in_quickbuy": false
           }
         },
         "product_variant_picker_xXiYWj": {
@@ -33,9 +36,9 @@
             "select_first_variant": true,
             "selector_style": "listed",
             "enable_dynamic_availability": true,
-            "enable_size_chart": true,
-            "size_chart_variant": "Size",
-            "size_chart_page": ""
+            "size_guide_variant": "Size",
+            "size_guide_text": "View Size Guide",
+            "size_guide_page": "view-size-guide"
           }
         },
         "buy-buttons": {
@@ -47,45 +50,24 @@
             "show_pickup_availability": true,
             "show_gift_card_recipient": false
           }
-        },
-        "description": {
-          "type": "description",
-          "settings": {
-            "show_in_tab": false,
-            "open_tab": false,
-            "icon": "",
-            "show_in_quickbuy": false
-          }
         }
       },
       "block_order": [
         "title",
         "price",
-        "vendor",
         "divider",
         "product_variant_picker_xXiYWj",
-        "buy-buttons",
-        "description"
+        "buy-buttons"
       ],
       "settings": {
-        "show_breadcrumbs": false,
-        "show_location_underneath": false,
-        "inventory_transfers_enable": true,
-        "enable_sticky_columns": false,
-        "gallery_size": "medium",
-        "gallery_layout": "collage-3",
-        "enable_zoom": true,
-        "show_alt_text": false,
-        "alt_text_icon": "",
-        "enable_video_autoplay": false,
-        "enable_video_looping": false,
-        "enable_media_grouping": false,
-        "media_grouping_option": "Color,Colour,Couleur,Farbe"
+        "enable_sticky_columns": true
       }
     },
     "recent-products-slider": {
       "type": "recent-products-slider",
       "settings": {
+        "title": "RECENTLY VIEWED",
+        "add_to_cart_text": "Add to bag"
       }
     }
   },
