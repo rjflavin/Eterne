@@ -46,8 +46,6 @@
     <noscript><link rel="stylesheet" href="{{ 'swatches.css' | asset_url }}"></noscript>
   {%- endif -%}
 
-  {{ 'base.scss' | asset_url | stylesheet_tag }}
-
   {%- unless base_font.system? -%}
     <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
   {%- endunless -%}
@@ -173,13 +171,19 @@
     {{- settings.custom_html_head -}}
     <!-- CC Custom Head End -->
   {%- endif -%}
+
+  {{ 'base.scss' | asset_url | stylesheet_tag }}
+  {{ 'policies.css' | asset_url | stylesheet_tag }}
 </head>
 
-<body class="template-{{ template | split: '.' | first | handle }}
+<body
+  data-currency-symbol="{{ cart.currency.symbol }}"
+  class="template-{{ template | split: '.' | first | handle }}
     {%- if template.suffix %} template-suffix-{{ template.suffix }}{% endif -%}
     {%- if settings.swatch_enabled %} swatch-method-{{ settings.swatch_method }} swatch-style-{{ settings.swatch_style }}{% endif -%}
     {%- if settings.animations_enabled_desktop %} cc-animate-enabled{% endif -%}
-    ">
+  "
+>
 
   <a class="skip-link visually-hidden" href="#content">{{ 'accessibility.skip_to_content' | t }}</a>
 

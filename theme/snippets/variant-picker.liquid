@@ -91,7 +91,7 @@
             endif
           endif
 
-          if block.settings.enable_size_chart and block.settings.size_chart_variant == option.name and block.settings.size_chart_page != blank
+          if enable_size_chart and block.settings.size_chart_variant == option.name
             assign show_size_chart = true
           endif
         -%}

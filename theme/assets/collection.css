@@ -224,6 +224,7 @@
 .collection__sort-category-options-grid {
   display: grid;
   grid-template: 1fr/1fr 1fr;
+  align-items: flex-start;
   margin-top: 15px;
 }
 @media (max-width: 1023px) {
@@ -356,13 +357,16 @@
   width: 100%;
   height: 100%;
   display: flex;
+  overflow: hidden;
 }
 @media (min-width: 1025px) {
   .collection__img-wrap:hover .collection__item-bg-img-hover {
     visibility: visible !important;
   }
   .collection__img-wrap:hover .collection__quick-add-panel {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }
 .collection__quick-add-panel {
@@ -370,13 +374,16 @@
   bottom: -1px;
   z-index: 200;
   width: 100%;
-  display: none;
+  opacity: 0;
+  display: flex;
+  visibility: hidden;
+  transform: translateY(100%);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 0.25s ease-in-out;
 }
 @media (max-width: 1023px) {
   .collection__quick-add-panel {
@@ -385,7 +392,9 @@
 }
 @media (max-width: 1023px) {
   .collection__quick-add-panel_show-mobile {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }
 .collection__size-variants {
@@ -403,6 +412,10 @@
   font-size: 12px;
   line-height: 16.8px;
   cursor: pointer;
+}
+.collection__size-variant-text.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 .collection__size-variant-text:first-child {
   margin-left: 0;
@@ -456,10 +469,10 @@
     height: 1.7811705vw;
   }
 }
-@media (max-width: 1024px) and (max-width: 393px) {
+@media (max-width: 1024px) and (max-width: 575px) {
   .collection__item-quick-add-btn {
-    width: 15px;
-    height: 15px;
+    width: 27px;
+    height: 27px;
   }
   .collection__item-quick-add-btn svg {
     width: 7px;
@@ -511,7 +524,7 @@
   margin: 10px 10px 0 10px;
   font-size: 12px;
   font-weight: 700;
-  line-height: 16.8px;
+  line-height: 140%;
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
@@ -527,7 +540,7 @@
   margin: 0 10px;
   font-size: 12px;
   font-weight: 300;
-  line-height: 16.8px;
+  line-height: 140%;
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
@@ -542,8 +555,8 @@
   display: flex;
   margin: 4px 10px 0 10px;
   font-size: 12px;
-  font-weight: 500;
-  line-height: 16.8px;
+  font-weight: 400;
+  line-height: 183%;
   text-align: center;
   letter-spacing: 0.4px;
   color: var(--black1);

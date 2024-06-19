@@ -1,0 +1,55 @@
+{% comment %}
+  Parameters:
+  - product {Object} - Product object.
+  - size_guide_page {Object} - Page with size chart layout.
+  - size_guide_text {String} - Button text of the size guide.
+
+  Dependencies:
+  - Product variant-picker
+  - Import the script {{ 'size-guide-chart.js' | asset_url | script_tag }}
+
+  Usage:
+  {% render 'size-guide', product: product, size_guide_text: size_guide_text, size_guide_page: size_guide_page %}
+{% endcomment %}
+
+{% assign size_page = pages[size_guide_page] %}
+
+<size-guide class="size-guide">
+    <div class="size-guide sg-button"
+         data-toggle-modal="open"
+         data-connected-modal="sizeGuideModal--{{ section.id }}">
+        {{ size_guide_text }}
+    </div>
+    <div id="sizeGuideModal--{{ section.id }}"
+         class="size-guide__modal sg-modal"
+         data-toggle-modal="close"
+         data-connected-modal="sizeGuideModal--{{ section.id }}">
+        <div class="sg-modal__inner">
+            <button type="button"
+                    class="sg-modal_close"
+                    data-toggle-modal="close"
+                    data-connected-modal="sizeGuideModal--{{ section.id }}">
+                ×
+            </button>
+            <div class="sg-modal__product">
+                <div class="sg-modal__product-image-wrapper">
+                    <img src="{{ product.images[0] | img_url: 'master' }}" loading="lazy" alt="{{ product.title }}">
+                </div>
+                <div class="sg-modal__product-info">
+                    <h3 class="sg-modal__product-title">{{ product.title }}</h3>
+                    <div class="sg-modal__product-info-details"
+                         data-product-details-size>
+                        {{ product.metafields.custom.size_fit_information.value }}
+                    </div>
+                </div>
+            </div>
+            <div class="sg-modal__chart">
+                <div class="size-modal-content">
+                    {{ size_page.content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</size-guide>
+
+

@@ -1,7 +1,7 @@
 import { addToCartSetup } from "../utils/cart-handler";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const recentProductsItems = document.querySelectorAll('.recent-products-slider-item')
+    const recentProductsItems = document.querySelectorAll('.recent-products__slider-slide');
 
     recentProductsItems.forEach((item) => {
         const mouseHoverIn = ((item) => {
@@ -52,8 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const cartButtonElement = item.querySelector('.swiper-slide-image-info-cart-button')
         const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader')
+        const loaderFillTextElement = item.querySelector('.swiper-slide-image-info-cart-loader-fill-text')
         if (item.id && cartButtonElement && loaderElement) {
-            addToCartSetup(cartButtonElement, item.id, 1, loaderElement)
+            addToCartSetup(cartButtonElement, item.id, 1, loaderElement, loaderFillTextElement)
         }
 
         const itemInfoButton = item.querySelector('.swiper-slide-image-info-button')
