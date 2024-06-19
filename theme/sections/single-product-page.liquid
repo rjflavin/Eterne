@@ -272,23 +272,10 @@
                     </div>
                 </div>
 
-
-                {% comment %}{% for metavalue in product.metafields.custom.style_with_products.value %}
-                    {% for rec_products in metavalue['recommended_variants'].value %}
-                        <script>
-                            console.log({{ rec_products | json }})
-                        </script>
-                    {% endfor %}
-                {% endfor %}{% endcomment %}
-
-
                 <div class="product-recommendations">
                     <h4>Style With:</h4>
 
                     {% for style_with_metaobjects in product.metafields.custom.style_with_products.value %}
-                        <script>
-                            console.log('style_with_metaobjects: ', {{ style_with_metaobjects | json }})
-                        </script>
                         {% assign variant_color_to_refer = style_with_metaobjects['color'].value.name | downcase %}
 
                             {% if variant_color_to_refer == current_color %}
@@ -301,9 +288,6 @@
                                  data-rec-products-color="{{ variant_color_to_refer }}">
                                 <ul class="recommendations-list">
                                     {% for rec_variant in style_with_metaobjects['recommended_variants'].value %}
-                                        <script>
-                                            console.log('rec_variant: ', {{ rec_variant | json }})
-                                        </script>
                                     {% assign rec_variant_color = rec_variant.option1 | downcase %}
                                     {% assign rec_product = rec_variant.product %}
                                     {% assign rec_product_quantity = forloop.length %}

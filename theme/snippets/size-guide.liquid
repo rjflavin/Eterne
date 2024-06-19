@@ -20,7 +20,10 @@
          data-connected-modal="sizeGuideModal--{{ section.id }}">
         {{ size_guide_text }}
     </div>
-    <div id="sizeGuideModal--{{ section.id }}" class="size-guide__modal sg-modal">
+    <div id="sizeGuideModal--{{ section.id }}"
+         class="size-guide__modal sg-modal"
+         data-toggle-modal="close"
+         data-connected-modal="sizeGuideModal--{{ section.id }}">
         <div class="sg-modal__inner">
             <button type="button"
                     class="sg-modal_close"
