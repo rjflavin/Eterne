@@ -277,6 +277,21 @@ export class EterneCollection extends HTMLElement {
                                             variantCardElement.dataset.isVariantInStock = 'false';
                                         }
                                     }
+
+                                    const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
+                                    inventoryPolicyDivs.forEach(div => {
+                                        const variantIdPolicy = div.getAttribute('data-variant-id-policy');
+                                        const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+                                        console.log(variantCardElement.dataset.variantId)
+
+                                        if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                                            preorderWrapperElement.classList.add('disp-flx-imp');
+                                            variantCardElement.dataset.isVariantInStock = 'false';
+
+                                            return;
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -379,6 +394,21 @@ export class EterneCollection extends HTMLElement {
                                             preorderWrapperElement.classList.add('disp-flx-imp');
                                             variantCardElement.dataset.isVariantInStock = 'false';
                                         }
+
+                                        const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
+                                        inventoryPolicyDivs.forEach(div => {
+                                            const variantIdPolicy = div.getAttribute('data-variant-id-policy');
+                                            const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+                                            console.log(variantCardElement.dataset.variantId)
+
+                                            if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                                                preorderWrapperElement.classList.add('disp-flx-imp');
+                                                variantCardElement.dataset.isVariantInStock = 'false';
+
+                                                return;
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -447,6 +477,21 @@ export class EterneCollection extends HTMLElement {
                                     }
                                 });
                             }
+
+                            const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
+                            inventoryPolicyDivs.forEach(div => {
+                                const variantIdPolicy = div.getAttribute('data-variant-id-policy');
+                                const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+                                console.log(variantCardElement.dataset.variantId)
+
+                                if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                                    preorderWrapperElement.classList.add('disp-flx-imp');
+                                    variantCardElement.dataset.isVariantInStock = 'false';
+
+                                    return;
+                                }
+                            });
                         }
 
                         variantCardElement.dataset.isVariantReadyToFetch = 'true';
@@ -456,7 +501,7 @@ export class EterneCollection extends HTMLElement {
                 }
 
                 const updateAvailableSizesUI = (sizes) => {
-                    const sizeContainer = document.querySelector('.collection__size-variants');
+                    const sizeContainer = variantCardElement.querySelector('.collection__size-variants');
                     sizeContainer.innerHTML = '';
 
                     let firstAvailableSize = null;
@@ -491,7 +536,17 @@ export class EterneCollection extends HTMLElement {
             const addToCartButtonElement = variantCardElement.querySelector('.collection__add-to-cart');
             const addToCartLoaderElement = variantCardElement.querySelector('.collection__add-to-cart-loader');
             const isVariantReadyToFetch = variantCardElement.dataset.isVariantReadyToFetch === 'true';
-            const isSelectedVariantInStock = variantCardElement.dataset.isVariantInStock === 'true';
+            let isSelectedVariantInStock = variantCardElement.dataset.isVariantInStock === 'true';
+            const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
+            inventoryPolicyDivs.forEach(div => {
+                const variantIdPolicy = div.getAttribute('data-variant-id-policy');
+                const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+
+                if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                    isSelectedVariantInStock = variantCardElement.dataset.isVariantInStock = 'false';
+                }
+            });
 
             if (isVariantReadyToFetch && isSelectedVariantInStock) {
                 variantCardElement.dataset.isVariantReadyToFetch = 'false';

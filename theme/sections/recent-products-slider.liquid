@@ -54,6 +54,11 @@
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           wrapperCode = wrapperCode + `
             <div id="${product.variantId}" class="recent-products__slider-slide swiper-slide">
+              <div class="variant_inventory_policy disp-none-imp">
+                 {% for variant in product.variants %}
+                   <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
+                 {% endfor %}
+               </div>
               <div class="swiper-slide-container">
                 <a href="${product.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container">
@@ -93,7 +98,7 @@
                   <div class="swiper-slide-title">${product.title}</div>
                   <div class="swiper-slide-title">${product.color}</div>
                   <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
-                  ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `<button class="swiper-slide-preorder">Preorder</button>` : ''}
+                  <button class="swiper-slide-preorder disp-none-imp">Preorder</button>
                 </div>
               </div>
             </div>
@@ -104,6 +109,19 @@
       if (wrapper) {
         wrapper.innerHTML = wrapperCode
       }
+
+      let recentProducts = document.querySelectorAll('.recent-products__slider-slide')
+
+      recentProducts.forEach(div => {
+        const inventoryPolicyDivs = div.querySelector('.variant_inventory_policy div');
+        const variantId = div.getAttribute('id');
+        const variantIdPolicy = inventoryPolicyDivs.getAttribute('data-variant-id-policy');
+        const inventoryPolicy = inventoryPolicyDivs.getAttribute('data-variant-inventory-policy');
+
+        if (variantId === variantIdPolicy && inventoryPolicy === 'continue') {
+          div.querySelector('.swiper-slide-preorder').classList.remove('disp-none-imp')
+        }
+      });
 
       const preorderButtons = document.querySelectorAll('.swiper-slide-preorder')
       for (const button of preorderButtons) {
