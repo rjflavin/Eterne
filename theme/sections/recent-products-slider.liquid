@@ -51,6 +51,7 @@
       const noImage = `{{ 'no-image.webp' | asset_url }}`
       let wrapperCode = ''
       for (const product of products) {
+        console.log('product: ', product)
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           wrapperCode = wrapperCode + `
             <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
