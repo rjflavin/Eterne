@@ -64,7 +64,7 @@
                                         <div class="new-in__item-title">{{ product.title }} {{ color_value }}</div>
                                         <div class="new-in__item-price">{{ product.price | money_without_trailing_zeros }}</div>
                                     </div>
-                                    <div class="new-in__preorder-wrap {% if product.selected_or_first_available_variant.inventory_quantity <= 0 %}disp-flx-imp{% endif %}">
+                                    <div class="new-in__preorder-wrap {% if product.selected_or_first_available_variant.inventory_policy == 'continue' %}disp-flx-imp{% endif %}">
                                         <div class="new-in__preorder">
                                             <div class="new-in__preorder-text">Preorder</div>
                                         </div>
