@@ -45,50 +45,48 @@ export const updateCartItemQuantity = async (productId, quantity) => {
     return result
 }
 
-export const addToCartSetup = (element, productId, quantity, loaderElement, loaderFillTextElement) => {
-    if (element) {
-        element.addEventListener("click", async (event) => {
-            event.preventDefault();
+export const addToCartSetup = async (element, productId, quantity, loaderElement, loaderFillTextElement) => {
+    event.preventDefault();
 
-            if (element.hasAttribute('disabled')) {
-                return;
-            }
+    if (element.hasAttribute('disabled')) {
+        return;
+    }
 
-            element.disabled = true
+    element.disabled = true
 
-            if (loaderElement) {
-                element.classList.add('hide')
-                loaderElement.classList.add('show')
+    if (loaderElement) {
+        element.classList.add('hide')
+        loaderElement.classList.add('show')
 
-                if (loaderFillTextElement) {
-                    loaderFillTextElement.classList.remove('disp-none-imp')
-                }
-            }
+        if (loaderFillTextElement) {
+            loaderFillTextElement.classList.remove('disp-none-imp')
+        }
+    }
+    console.log('variant to add for fetch: ', productId)
 
-            const response = await addToCart(productId, quantity)
+    const response = await addToCart(productId, quantity)
 
-            if (response) {
-                element.disabled = false
-                const e = new CustomEvent("dispatch:cart-flyover:refresh", {
-                    bubbles: true
-                })
-                document.dispatchEvent(e)
-
-                const event = new CustomEvent("dispatch:cart-drawer:open", {
-                    bubbles: true
-                })
-                document.dispatchEvent(event)
-
-                if (loaderElement) {
-                    element.classList.remove('hide')
-                    loaderElement.classList.remove('show')
-
-                    if (loaderFillTextElement) {
-                        loaderFillTextElement.classList.add('disp-none-imp')
-                    }
-                }
-            }
+    console.log('response: ', response)
+    if (response) {
+        element.disabled = false
+        const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+            bubbles: true
         })
+        document.dispatchEvent(e)
+
+        const event = new CustomEvent("dispatch:cart-drawer:open", {
+            bubbles: true
+        })
+        document.dispatchEvent(event)
+
+        if (loaderElement) {
+            element.classList.remove('hide')
+            loaderElement.classList.remove('show')
+
+            if (loaderFillTextElement) {
+                loaderFillTextElement.classList.add('disp-none-imp')
+            }
+        }
     }
 }
 

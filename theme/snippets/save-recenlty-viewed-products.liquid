@@ -7,30 +7,41 @@
   {% render 'save-recenlty-viewed-products', product: product %}
 {%- endcomment -%}
 
-<script>
+<script defer>
     document.addEventListener('DOMContentLoaded', () => {
-        const MAX_PRODUCT_AMOUNT = 7
+        const MAX_PRODUCT_AMOUNT = 7;
+        const productHandle = '{{ product.handle}}';
+        const variants = JSON.parse('{{ product.variants | json }}');
 
         const addProductToLocalStorage = (product, productArray, maxProductAmount) => {
-            const filteredArray = productArray.filter(el => (el.productId !== product.productId) || (el.variantId !== product.variantId))
+            const filteredArray = productArray.filter(el => {
+                return (el.productId.toString() !== product.productId.toString()
+                        || (el.productId.toString() === product.productId.toString() && el.color !== product.color));
+            });
             while (filteredArray.length >= maxProductAmount) {
                 filteredArray.pop()
             }
             filteredArray.splice(0, 0, product);
 
-            const products = JSON.stringify(filteredArray)
-            localStorage.setItem("recently_viewed_products", `${products}`)
+            const products = JSON.stringify(filteredArray);
+            localStorage.setItem("recently_viewed_products", `${products}`);
         };
 
         const getProductsFromLocalStorage = () => {
             if (localStorage.getItem("recently_viewed_products")) {
-                const productsString = localStorage.getItem("recently_viewed_products")
-                const products = JSON.parse(productsString)
-
-                return products
+                const productsString = localStorage.getItem("recently_viewed_products");
+                return JSON.parse(productsString);
             }
 
-            return []
+            return [];
+        }
+
+        const getCurrentVariant = () => {
+            const url = window.location.href;
+            const urlArray = url.split('variant=');
+            let currentVariantId = (urlArray.length === 2 && url.includes('variant')) ? urlArray[1] : '{{ product.selected_or_first_available_variant.id }}';
+            const currentVariant = variants.find((variant) => variant.id.toString() === currentVariantId.toString());
+            return currentVariant;
         }
 
         const initializeProductObject = () => {
@@ -38,89 +49,92 @@
                 "productId": "",
                 "title": "",
                 "color": "",
-                "inventory_quantity": "",
-                "images": [],
+                "images": {},
+                "variantAvailableFrom": "",
                 "variants": [],
-            }
+            };
 
-            {% assign productTitle = product.title %}
-            productObject.title = `{{ productTitle }}`
-            {% assign productId = product.id %}
-            productObject.productId = `{{ productId }}`
+            const currentVariant = getCurrentVariant();
+            const variantsOfColor = variants.filter((variant) => {
+                return variant.option1.toLowerCase() === currentVariant.option1.toLowerCase();
+            }) ;
 
-            let currentVariantId = {{ product.selected_or_first_available_variant | json }}
-            console.log('selected product: ', currentVariantId);
-            if (!currentVariantId) {
-                currentVariantId = `{{ product.first_available_variant.id }}`
-            }
+            productObject.productId = '{{ product.id }}';
+            productObject.title = '{{ product.title }}';
+            productObject.color = currentVariant.option1;
+            productObject.variantAvailableFrom = `{{ product.variants[0].metafields.custom.available_from | date: "%B %d, %Y" }}`;
 
+
+            let hoverImages = [],
+                srcCleaned;
             {% for variant in product.variants %}
-            if (currentVariantId === `{{ variant.id }}`) {
-                productObject.variantId = `{{ variant.id }}`
-                productObject.variantAvailableFrom = `{{ variant.metafields.custom.available_from | date: "%B %d, %Y" }}`
-                productObject.url = `{{ variant.url }}`
-                productObject.price = `{{ variant.price | money_without_trailing_zeros }}`
-                productObject.inventory_quantity = `{{ variant.inventory_quantity }}`
-                {% for option in variant.options %}
-                {% if forloop.index0 == 0 %}
-                productObject.color = `{{ option }}`
-                {% elsif forloop.index0 == 1 %}
-                productObject.size = `{{ option }}`
+            {% assign variantColor = variant.option1 | downcase %}
+                {% if variant.metafields.custom.hover_image != blank %}
+                srcCleaned = '{{ variant.metafields.custom.hover_image.value | json }}'.replaceAll('"', '')
+                hoverImages.push({
+                    variantId: '{{ variant.id }}',
+                    src: srcCleaned,
+                    color: '{{ variantColor }}'
+                })
                 {% endif %}
-                {% endfor %}
-            }
-            {% for option in variant.options %}
-            {% if forloop.index0 == 1 %}
-            if (!productObject.variantSizes.includes(`{{ option }}`)) {
-                productObject.variantSizes.push(`{{ option }}`)
-            }
-            {% endif %}
-            {% endfor %}
             {% endfor %}
 
-            let imageLimit = 2
-            {% for image in product.images %}
-            if (imageLimit > 0 && productObject.color.toUpperCase() === `{{ image.alt }}`.toUpperCase()) {
-                const imageObject = {
-                    "src": `{{ image.src | image_url }}`,
-                    "alt": `{{ image.alt }}`,
-                    "mediaType": `{{ image.media_type }}`,
-                    "productId": `{{ image.product_id }}`
-                }
-                productObject.images.push(imageObject)
-                imageLimit--
-            }
-            {% endfor %}
+            const hoverImage = hoverImages.find((imageData) => imageData.color === currentVariant.option1.toLowerCase());
+            const hoverImageSrc = (hoverImage) ? hoverImage.src : null;
+            productObject.images = [
+                currentVariant.featured_image.src,
+            ];
+            if (hoverImageSrc) productObject.images.push(hoverImageSrc)
 
-            return productObject
+            let firstAvailable = false;
+            let firstAvailableFound = false;
+            productObject.variants = variantsOfColor.map((variantData) => {
+                if (variantData.available && !firstAvailable && !firstAvailableFound) {
+                    firstAvailable = true;
+                    firstAvailableFound = true;
+                } else firstAvailable = false;
+
+                const { id, available, price} = variantData;
+                return {
+                    id,
+                    available,
+                    size: variantData.option2,
+                    price: parseFloat(price * 0.01),
+                    url: `/products/${productHandle}?variant=${id}`,
+                    firstAvailable,
+                };
+            })
+
+            return productObject;
         }
 
         const updateProductsInStorage = () => {
-            const productObject = initializeProductObject()
-            const recentProducts = getProductsFromLocalStorage()
-            addProductToLocalStorage(productObject, recentProducts, MAX_PRODUCT_AMOUNT)
+            const productObject = initializeProductObject();
+            const recentProducts = getProductsFromLocalStorage();
+            addProductToLocalStorage(productObject, recentProducts, MAX_PRODUCT_AMOUNT);
         }
 
         setTimeout(() => {
-            updateProductsInStorage()
+            updateProductsInStorage();
         }, 500)
 
-        const colorSwatchButtons = document.querySelectorAll('.opt-label.opt-label--swatch')
+        const colorSwatchButtons = document.querySelectorAll('.opt-label.opt-label--swatch');
         for (const button of colorSwatchButtons) {
             button.addEventListener("click", () => {
                 setTimeout(() => {
-                    updateProductsInStorage()
+                    updateProductsInStorage();
                 }, 500)
             })
         }
 
-        const sizeSwatchButtons = document.querySelectorAll('.opt-label.opt-label--btn')
+        const sizeSwatchButtons = document.querySelectorAll('.opt-label.opt-label--btn');
         for (const button of sizeSwatchButtons) {
             button.addEventListener("click", () => {
                 setTimeout(() => {
-                    updateProductsInStorage()
+                    updateProductsInStorage();
                 }, 500)
             })
         }
     })
 </script>
+

@@ -1,4 +1,5 @@
 import { addToCartSetup } from "../utils/cart-handler";
+import { getSiblings } from "../utils/get-sibling-elements";
 
 document.addEventListener("DOMContentLoaded", () => {
     const recentProductsItems = document.querySelectorAll('.recent-products__slider-slide');
@@ -50,11 +51,31 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        const currentPriceElem = item.querySelector('[data-current-price]')
+
+        item.querySelectorAll('[data-size-item]').forEach((sizeElem) => {
+            const activeClass = 'selected-size'
+            sizeElem.addEventListener('click', (e) => {
+                const siblingSizes = getSiblings(e.target)
+                item.setAttribute('data-active-variant', sizeElem.dataset.sizeItem)
+                e.target.classList.add(activeClass)
+                siblingSizes.forEach((siblingSize) => {
+                    if (siblingSize.classList.contains(activeClass))
+                        siblingSize.classList.remove(activeClass)
+                })
+                console.log('New price: ', sizeElem.dataset.price)
+                currentPriceElem.innerHTML = sizeElem.dataset.price
+            })
+        })
+
         const cartButtonElement = item.querySelector('.swiper-slide-image-info-cart-button')
-        const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader')
-        const loaderFillTextElement = item.querySelector('.swiper-slide-image-info-cart-loader-fill-text')
-        if (item.id && cartButtonElement && loaderElement) {
-            addToCartSetup(cartButtonElement, item.id, 1, loaderElement, loaderFillTextElement)
+        if (cartButtonElement) {
+            cartButtonElement.addEventListener('click', () => {
+                const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader')
+                const loaderFillTextElement = item.querySelector('.swiper-slide-image-info-cart-loader-fill-text')
+                const activeVariant = document.getElementById(item.id)
+                addToCartSetup(cartButtonElement, activeVariant.dataset.activeVariant, 1, loaderElement, loaderFillTextElement)
+            })
         }
 
         const itemInfoButton = item.querySelector('.swiper-slide-image-info-button')
