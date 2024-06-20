@@ -15,7 +15,6 @@ export default class SizeGuide extends HTMLElement {
         }
 
         this.tabLinksElems.forEach((tabLink) => {
-            console.log(tabLink.dataset.type);
             tabLink.addEventListener('click', (event) => this.openSize(event, tabLink.dataset.type));
         })
 

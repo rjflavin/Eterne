@@ -22,13 +22,10 @@
   <script>
   document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
-      if (localStorage.getItem('recently_viewed_products')) {
-        const productsString = localStorage.getItem('recently_viewed_products');
-        const products = JSON.parse(productsString);
-
-        return products;
+      const productsString = localStorage.getItem('recently_viewed_products')
+      if (productsString) {
+        return JSON.parse(productsString);
       }
-
       return [];
     };
 
@@ -44,38 +41,41 @@
         }
       }
 
-      if (!slider || products.length <= 0) {
+      if (products.length <= 0) {
         slider.classList.add('hide')
+        return
       }
 
       const noImage = `{{ 'no-image.webp' | asset_url }}`
       let wrapperCode = ''
       for (const product of products) {
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
+          const firstAvailableVariant = product.variants.find((variant) => variant.firstAvailable);
           wrapperCode = wrapperCode + `
-            <div id="${product.variantId}" class="recent-products__slider-slide swiper-slide">
-              <div class="variant_inventory_policy disp-none-imp">
-                 {% for variant in product.variants %}
-                   <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
-                 {% endfor %}
-               </div>
+            <div id="${product.productId}--${product.color}"
+                 class="recent-products__slider-slide swiper-slide"
+                 data-recent-product-item
+                 data-active-variant="${firstAvailableVariant.id}">
               <div class="swiper-slide-container">
-                <a href="${product.url}" class="swiper-slide-link"></a>
+                <a href="${firstAvailableVariant.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container">
-                  <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
+                  <div data-bgimage="${product.images[0] ? product.images[0] : noImage}" class="swiper-slide-image lazyLoad"></div>
                   <div class="swiper-slide-image-info">
                     <div class="swiper-slide-image-info-sizes">
-                      ${product && product.variantSizes &&
-                        product.variantSizes.map(size => {
-                          return `<div class="swiper-slide-image-info-sizes-item ${product.size === size && 'selected-size'}">${size}</div>`
-                        }).join("")
+                      ${(product && product.variants &&
+                        product.variants.map((variant, index) => {
+                          return `<div class="swiper-slide-image-info-sizes-item
+                                              ${((variant.firstAvailable) ? ' selected-size' : '') ||
+                                              ((variant.available) ? '' : ' unavailable')}"
+                                              data-size-item="${variant.id}"
+                                              data-price="{{ cart.currency.symbol }}${variant.price}"}>
+                                        ${variant.size}
+                                  </div>`
+                        }).join(""))
                       }
                     </div>
                     {% if section.settings.add_to_cart_text %}
-                      <div
-                        ${product.inventory_quantity && product.inventory_quantity !== 'undefined' && product.inventory_quantity === '0' ? `disabled` : ''}
-                        class="swiper-slide-image-info-cart-button"
-                      >
+                      <div class="swiper-slide-image-info-cart-button">
                         {{ section.settings.add_to_cart_text }}
                       </div>
                       <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
@@ -89,39 +89,29 @@
                     {% endif %}
                   </div>
                   <div class="swiper-slide-image-info-button">
-                    <img src="{{ 'plus-icon.png' | asset_img_url }}" loading="lazy">
+                    {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
                   </div>
-                  <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]?.src}" />
-                  <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]?.src}" />
+                  <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]}" />
+                  <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]}" />
                 </div>
                 <div class="swiper-slide-text-container">
                   <div class="swiper-slide-title">${product.title}</div>
                   <div class="swiper-slide-title">${product.color}</div>
-                  <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
-                  <button class="swiper-slide-preorder disp-none-imp">Preorder</button>
+                  <div class="swiper-slide-title swiper-slide-title-price" data-current-price>{{ cart.currency.symbol }}${firstAvailableVariant.price}</div>
+                  <!--
+                  <button class="swiper-slide-preorder">Preorder</button>
+                  -->
                 </div>
               </div>
             </div>
           `
         }
       }
+
       const wrapper = document.querySelector('.recent-products__swiper-wrapper')
       if (wrapper) {
         wrapper.innerHTML = wrapperCode
       }
-
-      let recentProducts = document.querySelectorAll('.recent-products__slider-slide')
-
-      recentProducts.forEach(div => {
-        const inventoryPolicyDivs = div.querySelector('.variant_inventory_policy div');
-        const variantId = div.getAttribute('id');
-        const variantIdPolicy = inventoryPolicyDivs.getAttribute('data-variant-id-policy');
-        const inventoryPolicy = inventoryPolicyDivs.getAttribute('data-variant-inventory-policy');
-
-        if (variantId === variantIdPolicy && inventoryPolicy === 'continue') {
-          div.querySelector('.swiper-slide-preorder').classList.remove('disp-none-imp')
-        }
-      });
 
       const preorderButtons = document.querySelectorAll('.swiper-slide-preorder')
       for (const button of preorderButtons) {

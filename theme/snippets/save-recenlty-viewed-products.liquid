@@ -1,0 +1,140 @@
+{%- comment -%}
+  Info: This snipped must be added to a section on product page for every template (to save all visited products)
+  Parameters:
+  - product {Object} - Product object.
+
+  Usage:
+  {% render 'save-recenlty-viewed-products', product: product %}
+{%- endcomment -%}
+
+<script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+        const MAX_PRODUCT_AMOUNT = 7;
+        const productHandle = '{{ product.handle}}';
+        const variants = JSON.parse('{{ product.variants | json }}');
+
+        const addProductToLocalStorage = (product, productArray, maxProductAmount) => {
+            const filteredArray = productArray.filter(el => {
+                return (el.productId.toString() !== product.productId.toString()
+                        || (el.productId.toString() === product.productId.toString() && el.color !== product.color));
+            });
+            while (filteredArray.length >= maxProductAmount) {
+                filteredArray.pop()
+            }
+            filteredArray.splice(0, 0, product);
+
+            const products = JSON.stringify(filteredArray);
+            localStorage.setItem("recently_viewed_products", `${products}`);
+        };
+
+        const getProductsFromLocalStorage = () => {
+            if (localStorage.getItem("recently_viewed_products")) {
+                const productsString = localStorage.getItem("recently_viewed_products");
+                return JSON.parse(productsString);
+            }
+
+            return [];
+        }
+
+        const getCurrentVariant = () => {
+            const url = window.location.href;
+            const urlArray = url.split('variant=');
+            let currentVariantId = (urlArray.length === 2 && url.includes('variant')) ? urlArray[1] : '{{ product.selected_or_first_available_variant.id }}';
+            const currentVariant = variants.find((variant) => variant.id.toString() === currentVariantId.toString());
+            return currentVariant;
+        }
+
+        const initializeProductObject = () => {
+            const productObject = {
+                "productId": "",
+                "title": "",
+                "color": "",
+                "images": {},
+                "variantAvailableFrom": "",
+                "variants": [],
+            };
+
+            const currentVariant = getCurrentVariant();
+            const variantsOfColor = variants.filter((variant) => {
+                return variant.option1.toLowerCase() === currentVariant.option1.toLowerCase();
+            }) ;
+
+            productObject.productId = '{{ product.id }}';
+            productObject.title = '{{ product.title }}';
+            productObject.color = currentVariant.option1;
+            productObject.variantAvailableFrom = `{{ product.variants[0].metafields.custom.available_from | date: "%B %d, %Y" }}`;
+
+
+            let hoverImages = [],
+                srcCleaned;
+            {% for variant in product.variants %}
+            {% assign variantColor = variant.option1 | downcase %}
+                {% if variant.metafields.custom.hover_image != blank %}
+                srcCleaned = '{{ variant.metafields.custom.hover_image.value | json }}'.replaceAll('"', '')
+                hoverImages.push({
+                    variantId: '{{ variant.id }}',
+                    src: srcCleaned,
+                    color: '{{ variantColor }}'
+                })
+                {% endif %}
+            {% endfor %}
+
+            const hoverImage = hoverImages.find((imageData) => imageData.color === currentVariant.option1.toLowerCase());
+            const hoverImageSrc = (hoverImage) ? hoverImage.src : null;
+            productObject.images = [
+                currentVariant.featured_image.src,
+            ];
+            if (hoverImageSrc) productObject.images.push(hoverImageSrc)
+
+            let firstAvailable = false;
+            let firstAvailableFound = false;
+            productObject.variants = variantsOfColor.map((variantData) => {
+                if (variantData.available && !firstAvailable && !firstAvailableFound) {
+                    firstAvailable = true;
+                    firstAvailableFound = true;
+                } else firstAvailable = false;
+
+                const { id, available, price} = variantData;
+                return {
+                    id,
+                    available,
+                    size: variantData.option2,
+                    price: parseFloat(price * 0.01),
+                    url: `/products/${productHandle}?variant=${id}`,
+                    firstAvailable,
+                };
+            })
+
+            return productObject;
+        }
+
+        const updateProductsInStorage = () => {
+            const productObject = initializeProductObject();
+            const recentProducts = getProductsFromLocalStorage();
+            addProductToLocalStorage(productObject, recentProducts, MAX_PRODUCT_AMOUNT);
+        }
+
+        setTimeout(() => {
+            updateProductsInStorage();
+        }, 500)
+
+        const colorSwatchButtons = document.querySelectorAll('.opt-label.opt-label--swatch');
+        for (const button of colorSwatchButtons) {
+            button.addEventListener("click", () => {
+                setTimeout(() => {
+                    updateProductsInStorage();
+                }, 500)
+            })
+        }
+
+        const sizeSwatchButtons = document.querySelectorAll('.opt-label.opt-label--btn');
+        for (const button of sizeSwatchButtons) {
+            button.addEventListener("click", () => {
+                setTimeout(() => {
+                    updateProductsInStorage();
+                }, 500)
+            })
+        }
+    })
+</script>
+
