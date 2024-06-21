@@ -13,10 +13,10 @@
 
     {% for option in item.variant.options %}
       {% if forloop.index0 == colorIndex %}
-        {% assign variantColor = option | upcase %} 
-        {% assign color = option %} 
+        {% assign variantColor = option | upcase %}
+        {% assign color = option %}
       {% elsif forloop.index0 == sizeIndex %}
-        {% assign size = option %} 
+        {% assign size = option %}
       {% endif %}
     {% endfor %}
 

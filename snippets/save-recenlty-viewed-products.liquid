@@ -7,46 +7,11 @@
   {% render 'save-recenlty-viewed-products', product: product %}
 {%- endcomment -%}
 
-<script defer async>
+<script defer>
     document.addEventListener('DOMContentLoaded', () => {
         const MAX_PRODUCT_AMOUNT = 7;
-
-        const isFloat = (n) =>{
-            return Number(n) === n && n % 1 !== 0;
-        }
-
-        let variants = [],
-            loopVariant,
-            variantPrice,
-            variantPriceCleaned,
-            featuredImageCleaned,
-            hoverImage,
-            hoverImageCleaned;
-        {% for variant in product.variants %}
-            variantPrice = '{{ variant.price }}';
-            variantPriceCleaned = parseFloat(variantPrice * 0.01);
-            featuredImageCleaned = JSON.parse('{{ variant.featured_image | json }}');
-            hoverImage = JSON.parse('{{ variant.metafields.custom.hover_image.value | json }}')
-            if (hoverImage && hoverImage.src ) hoverImageCleaned = hoverImage.src;
-            else if (hoverImage) hoverImageCleaned = hoverImage;
-
-            loopVariant = {
-                available: !!'{{ variant.available | escape }}',
-                compare_at_price: +'{{ variant.compare_at_price }}',
-                featured_image: (featuredImageCleaned) ? featuredImageCleaned : '',
-                hover_image: (hoverImageCleaned) ? hoverImageCleaned : '',
-                id: +'{{ variant.id | escape }}',
-                inventory_quantity: +'{{ variant.inventory_quantity | escape }}',
-                option1: '{{ variant.option1 | escape }}',
-                option2: '{{ variant.option2 | escape }}',
-                option3: '{{ variant.option3 | escape }}',
-                options: JSON.parse('{{ variant.options | json }}'),
-                price: (isFloat(variantPriceCleaned)) ? variantPriceCleaned.toFixed(2) : parseInt(variantPriceCleaned, 10),
-                title: '{{ variant.title | escape }}',
-                url: '{{ variant.url | escape }}',
-            }
-            variants.push(loopVariant);
-        {% endfor %}
+        const productHandle = '{{ product.handle}}';
+        const variants = JSON.parse('{{ product.variants | json }}');
 
         const addProductToLocalStorage = (product, productArray, maxProductAmount) => {
             const filteredArray = productArray.filter(el => {
@@ -84,7 +49,7 @@
                 "productId": "",
                 "title": "",
                 "color": "",
-                "images": [],
+                "images": {},
                 "variantAvailableFrom": "",
                 "variants": [],
             };
@@ -92,17 +57,34 @@
             const currentVariant = getCurrentVariant();
             const variantsOfColor = variants.filter((variant) => {
                 return variant.option1.toLowerCase() === currentVariant.option1.toLowerCase();
-            });
+            }) ;
 
             productObject.productId = '{{ product.id }}';
-            productObject.title = '{{ product.title | replace: "'", "&apos;" }}';
+            productObject.title = '{{ product.title }}';
             productObject.color = currentVariant.option1;
             productObject.variantAvailableFrom = `{{ product.variants[0].metafields.custom.available_from | date: "%B %d, %Y" }}`;
 
-            let variantWithFeaturedImg = variantsOfColor.find((variant) => variant.featured_image),
-                variantWithHoverImg = variantsOfColor.find((variant) => variant.featured_image);
-            productObject.images[0] = (variantWithFeaturedImg) ? variantWithFeaturedImg.featured_image : '';
-            productObject.images[1] = (variantWithHoverImg) ? variantWithHoverImg.hover_image : '';
+
+            let hoverImages = [],
+                srcCleaned;
+            {% for variant in product.variants %}
+            {% assign variantColor = variant.option1 | downcase %}
+                {% if variant.metafields.custom.hover_image != blank %}
+                srcCleaned = '{{ variant.metafields.custom.hover_image.value | json }}'.replaceAll('"', '')
+                hoverImages.push({
+                    variantId: '{{ variant.id }}',
+                    src: srcCleaned,
+                    color: '{{ variantColor }}'
+                })
+                {% endif %}
+            {% endfor %}
+
+            const hoverImage = hoverImages.find((imageData) => imageData.color === currentVariant.option1.toLowerCase());
+            const hoverImageSrc = (hoverImage) ? hoverImage.src : null;
+            productObject.images = [
+                currentVariant.featured_image.src,
+            ];
+            if (hoverImageSrc) productObject.images.push(hoverImageSrc)
 
             let firstAvailable = false;
             let firstAvailableFound = false;
@@ -112,13 +94,13 @@
                     firstAvailableFound = true;
                 } else firstAvailable = false;
 
-                const { id, available, price, url } = variantData;
+                const { id, available, price} = variantData;
                 return {
                     id,
                     available,
                     size: variantData.option2,
-                    price,
-                    url,
+                    price: parseFloat(price * 0.01),
+                    url: `/products/${productHandle}?variant=${id}`,
                     firstAvailable,
                 };
             })
