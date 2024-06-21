@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "collage_grid_YqLqzV": {
@@ -17,7 +26,7 @@
         "two_images_row_VbNWxi": {
           "type": "two_images_row",
           "settings": {
-            "orientation": "portrait",
+            "orientation": "landscape",
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/Frame_17_82ace3bb-2e22-4d79-af25-4f3fa5a0d96d.jpg",
             "caption_1": "<p>day to night<br\/>essentials<\/p>",
