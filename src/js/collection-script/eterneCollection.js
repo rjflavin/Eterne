@@ -277,15 +277,16 @@ export class EterneCollection extends HTMLElement {
                                             variantCardElement.dataset.isVariantInStock = 'false';
                                         }
                                     }
+                                }
 
-                                    const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+                                const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
 
+                                if (inventoryPolicyDivs) {
                                     inventoryPolicyDivs.forEach(div => {
                                         const variantIdPolicy = div.getAttribute('data-variant-id-policy');
                                         const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
-                                        console.log(variantCardElement.dataset.variantId)
 
-                                        if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                                        if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && !variant.available) {
                                             preorderWrapperElement.classList.add('disp-flx-imp');
                                             variantCardElement.dataset.isVariantInStock = 'false';
 
@@ -394,15 +395,16 @@ export class EterneCollection extends HTMLElement {
                                             preorderWrapperElement.classList.add('disp-flx-imp');
                                             variantCardElement.dataset.isVariantInStock = 'false';
                                         }
+                                    }
 
-                                        const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+                                    const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
 
+                                    if (inventoryPolicyDivs) {
                                         inventoryPolicyDivs.forEach(div => {
                                             const variantIdPolicy = div.getAttribute('data-variant-id-policy');
                                             const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
-                                            console.log(variantCardElement.dataset.variantId)
 
-                                            if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                                            if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && !variant.available) {
                                                 preorderWrapperElement.classList.add('disp-flx-imp');
                                                 variantCardElement.dataset.isVariantInStock = 'false';
 
@@ -475,23 +477,24 @@ export class EterneCollection extends HTMLElement {
                                             variantCardElement.dataset.isVariantInStock = 'false';
                                         }
                                     }
+
+                                    const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
+                                    if (inventoryPolicyDivs) {
+                                        inventoryPolicyDivs.forEach(div => {
+                                            const variantIdPolicy = div.getAttribute('data-variant-id-policy');
+                                            const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+
+                                            if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && !variant.available) {
+                                                preorderWrapperElement.classList.add('disp-flx-imp');
+                                                variantCardElement.dataset.isVariantInStock = 'false';
+
+                                                return;
+                                            }
+                                        });
+                                    }
                                 });
                             }
-
-                            const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
-
-                            inventoryPolicyDivs.forEach(div => {
-                                const variantIdPolicy = div.getAttribute('data-variant-id-policy');
-                                const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
-                                console.log(variantCardElement.dataset.variantId)
-
-                                if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
-                                    preorderWrapperElement.classList.add('disp-flx-imp');
-                                    variantCardElement.dataset.isVariantInStock = 'false';
-
-                                    return;
-                                }
-                            });
                         }
 
                         variantCardElement.dataset.isVariantReadyToFetch = 'true';

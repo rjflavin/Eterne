@@ -393,14 +393,14 @@
                     <div class="product-details product-details_first" data-product-details>
                         <div class="product-details__header">
                             <h4 class="product-details__title no-select">{{ settings.details_title_text }}</h4>
-                            <div class="product-details__btn" data-plus-button>
+                            <div class="product-details__btn disp-none-imp" data-plus-button>
                                 {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
                             </div>
-                            <div class="product-details__btn disp-none-imp" data-minus-button>
+                            <div class="product-details__btn " data-minus-button>
                                 {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
                             </div>
                         </div>
-                        <div class="product-details__content">
+                        <div class="product-details__content disp-flx-imp">
                             {{ product.description }}
                         </div>
                     </div>
