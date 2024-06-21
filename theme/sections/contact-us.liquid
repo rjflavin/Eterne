@@ -6,7 +6,7 @@
     {% for block in section.blocks %}
       <div class="contact-us__contact">
         <span class="contact-us__desc">
-          {{ block.settings.description_text }}: <a href="{{ block.settings.link }}" class="contact-us__link">{{ block.settings.link }}</a>
+          {{ block.settings.description_text }}: <a href="mailto:{{ block.settings.link }}" class="contact-us__link">{{ block.settings.link }}</a>
         </span>
       </div>
     {% endfor %}
@@ -43,8 +43,8 @@
         {
           "type": "text",
           "id": "link",
-          "label": "Link",
-          "default": "Please provide link"
+          "label": "Email link",
+          "default": "Please provide email"
         }
       ]
     }
