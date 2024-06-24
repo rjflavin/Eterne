@@ -128,7 +128,7 @@
 
               {% assign shouldStop = false %}
               {% assign currentVariant = "" %}
-              {% assign isVariantInStock = false %}
+              {% assign isVariantInStock = true %}
               {% assign isAnyVariantInStock = false %}
 
               {% assign hoverImages = "" %}
@@ -164,19 +164,26 @@
                     {% if variant.inventory_quantity > 0 %}
                       {% assign isAnyVariantInStock = true %}
                     {% endif %}
+                    {% if variant.inventory_quantity == 0 and variant.inventory_policy != 'continue' %}
+                      {% assign isAnyVariantInStock = true %}
+                    {% endif %}
                   {% endfor %}
 
                   {% for productSizeOptionTemp in productSizeOptions %}
-                    {% for variant in product.variants %}
-                      {% if variant.option2 %}
-                        {% if variant.inventory_policy == 'continue' %}
-                          {% assign isVariantInStock = false %}
-                          {% assign currentVariant = variant %}
-                          {% assign variantId = variant.id %}
-                          {% assign sizeOption = variant.option2 %}
 
-                          {% assign shouldStop = true %}
-                        {% endif %}
+                    {% for variant in product.variants %}
+                      {% assign optionsArr = variant.title | split: ' / ' %}
+                      {% assign option1 = optionsArr[0] | downcase %}
+                      {% assign option2 = optionsArr[1] | downcase %}
+
+                      {% if variant.inventory_policy == 'continue' and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
+                        {% assign sizeOption = optionsArr[1] %}
+                        {% assign isVariantInStock = false %}
+                        {% assign currentVariant = variant %}
+                        {% assign variantId = variant.id %}
+                        {% assign sizeOption = variant.option2 %}
+
+                        {% assign shouldStop = true %}
                       {% endif %}
                     {% endfor %}
 
@@ -396,7 +403,7 @@
                   {% assign shouldStop = false %}
                   {% assign currentVariant = "" %}
                   {% assign variantId = "" %}
-                  {% assign isVariantInStock = false %}
+                  {% assign isVariantInStock = true %}
                   {% assign isColorVariantInDraft = false %}
                   {% for option in product.options_with_values %}
                     {% if shouldStop %}
@@ -422,8 +429,11 @@
                         {% if variant.inventory_quantity > 0 %}
                           {% assign isAnyVariantInStock = true %}
                         {% endif %}
-                      {% endfor %}
 
+                        {% if variant.inventory_quantity == 0 and variant.inventory_policy != 'continue' %}
+                          {% assign isAnyVariantInStock = true %}
+                        {% endif %}
+                      {% endfor %}
 
                       {% for productSizeOptionTemp in productSizeOptions %}
                         {% for variant in product.variants %}
