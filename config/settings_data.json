@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "presets": {
     "Chantilly": {
@@ -530,13 +539,6 @@
         "type": "shopify:\/\/apps\/preorder-now-wod-preorder\/blocks\/app-embed\/fdf17d17-ef12-4a7b-8383-20cc1fc2a4b6",
         "disabled": false,
         "settings": {
-        }
-      },
-      "15714493449218918033": {
-        "type": "shopify:\/\/apps\/personalizerai-recommendations\/blocks\/app-embed\/145d11e4-e845-4516-b629-e52fa33e088d",
-        "disabled": false,
-        "settings": {
-          "personalizerai_styles": ".personalizerai-product-recommendations-target { }"
         }
       }
     }
