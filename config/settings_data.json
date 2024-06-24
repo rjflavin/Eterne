@@ -534,6 +534,19 @@
         "disabled": false,
         "settings": {
         }
+      },
+      "3577669850698438243": {
+        "type": "shopify:\/\/apps\/preorder-now-wod-preorder\/blocks\/app-embed\/fdf17d17-ef12-4a7b-8383-20cc1fc2a4b6",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "15714493449218918033": {
+        "type": "shopify:\/\/apps\/personalizerai-recommendations\/blocks\/app-embed\/145d11e4-e845-4516-b629-e52fa33e088d",
+        "disabled": false,
+        "settings": {
+          "personalizerai_styles": ".personalizerai-product-recommendations-target { }"
+        }
       }
     }
   }
