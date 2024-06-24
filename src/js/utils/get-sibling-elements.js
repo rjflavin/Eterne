@@ -1,4 +1,4 @@
-export  const getSiblings = (elem) => {
+export const getSiblings = (elem) => {
     let siblings = [];
     let sibling = elem;
     while (sibling.previousSibling) {
