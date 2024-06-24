@@ -46,31 +46,37 @@
         return
       }
 
+      const wrapper = document.querySelector('.recent-products__swiper-wrapper')
       const noImage = `{{ 'no-image.webp' | asset_url }}`
-      let wrapperCode = ''
-      for (const product of products) {
+
+      const deb = document.getElementById('debug-div')
+      let productHtmlObject = []
+      for (let index = 0; index < products.length; index++) {
+        const product = products[index];
+
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           const firstAvailableVariant = product.variants.find((variant) => variant.firstAvailable);
-          wrapperCode = wrapperCode + `
-            <div id="${product.productId}--${product.color}"
+          const newProductHtml = `
+            <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
                  class="recent-products__slider-slide swiper-slide"
                  data-recent-product-item
                  data-active-variant="${firstAvailableVariant.id}">
               <div class="swiper-slide-container">
                 <a href="${firstAvailableVariant.url}" class="swiper-slide-link"></a>
+
                 <div class="swiper-slide-image-container">
                   <div data-bgimage="${product.images[0] ? product.images[0] : noImage}" class="swiper-slide-image lazyLoad"></div>
                   <div class="swiper-slide-image-info">
                     <div class="swiper-slide-image-info-sizes">
                       ${(product && product.variants &&
-                        product.variants.map((variant, index) => {
+                        product.variants.map((variant) => {
                           return `<div class="swiper-slide-image-info-sizes-item
-                                              ${((variant.firstAvailable) ? ' selected-size' : '') ||
-                                              ((variant.available) ? '' : ' unavailable')}"
-                                              data-size-item="${variant.id}"
-                                              data-price="{{ cart.currency.symbol }}${variant.price}"}>
-                                        ${variant.size}
-                                  </div>`
+                                                    ${((variant.firstAvailable) ? ' selected-size' : '') ||
+                          ((variant.available) ? '' : ' unavailable')}"
+                                                    data-size-item="${variant.id}"
+                                                    data-price="{{ cart.currency.symbol }}${variant.price}"}>
+                                              ${variant.size}
+                                        </div>`
                         }).join(""))
                       }
                     </div>
@@ -104,14 +110,18 @@
                 </div>
               </div>
             </div>
-          `
+          `;
+
+          deb.innerHTML +='======<br>' + index + ' - ' + product.title + ' - ' + product.color + '<br>'
+
+          const newHtmlDocument = new DOMParser().parseFromString(newProductHtml, 'text/html')
+          const productElem = newHtmlDocument.querySelector('div')
+          console.log('newHtml: ', productElem)
+          wrapper.appendChild(productElem)
         }
       }
-
-      const wrapper = document.querySelector('.recent-products__swiper-wrapper')
-      if (wrapper) {
-        wrapper.innerHTML = wrapperCode
-      }
+      console.log('productHtmlObject: ', productHtmlObject)
+      console.log('wrapper: ', wrapper)
 
       const preorderButtons = document.querySelectorAll('.swiper-slide-preorder')
       for (const button of preorderButtons) {
@@ -124,6 +134,10 @@
 
     const products = getProductsFromLocalStorage()
     setUpSlides(products)
+    if (products.length > 4) {
+      const startEvent = new Event('dispatch:recently-products:init-slider');
+      document.dispatchEvent(startEvent);
+    }
   })
   </script>
 </div>
