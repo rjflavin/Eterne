@@ -3,7 +3,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 
 Swiper.use([Navigation]);
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('dispatch:recently-products:init-slider', () => {
   const recentlyViewedProductsSlider = new Swiper('.recent-products-swiper', {
     allowTouchMove: true,
     loop: true,

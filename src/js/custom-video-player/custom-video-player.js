@@ -2,7 +2,8 @@ export default class CustomVideoPlayer extends HTMLElement {
     constructor() {
         super();
         this.sectionId = this.dataset.id;
-        this.video = this.querySelector('video')
+        this.videoDesk = this.querySelector('video.desktop-video');
+        this.videoMob = (this.querySelector('video.mobile-video')) ? this.querySelector('video.mobile-video') : this.videoDesk;
         this.setListeners();
     }
 
@@ -39,28 +40,33 @@ export default class CustomVideoPlayer extends HTMLElement {
     }
 
     pauseVideoOnScroll () {
-        const videoBounding = this.video.getBoundingClientRect();
-        const isVisible = !!(videoBounding.top < window.innerHeight && videoBounding.bottom >= 0);
-        const isPlaying = this.isVideoPlaying(this.video);
-        if (!isVisible && isPlaying) {
-            if (this.video) {
-                this.video.pause();
-                this.classList.remove('play');
+        this.querySelectorAll('video').forEach((videoElem) => {
+            const videoBounding = videoElem.getBoundingClientRect();
+            const isVisible = !!(videoBounding.top < window.innerHeight && videoBounding.bottom >= 0);
+            const isPlaying = this.isVideoPlaying(videoElem);
+            if (!isVisible && isPlaying) {
+                if (videoElem) {
+                    videoElem.pause();
+                    this.classList.remove('play');
+                }
             }
-        }
+        });
     }
 
-    handleVideoClick (event) {
+    handleVideoClick () {
+        let videoElem = (!this.videoMob || window.innerWidth >= 1024) ? this.videoDesk : this.videoMob;
+        console.log(videoElem);
         if (!event.target.classList.contains('caption')
-        && !event.target.classList.contains('caption__text')
-        && !event.target.classList.contains('caption__link')) {
+            && !event.target.classList.contains('caption__text')
+            && !event.target.classList.contains('caption__link')) {
+
             event.preventDefault();
-            const isPlaying = this.isVideoPlaying(this.video);
+            const isPlaying = this.isVideoPlaying(videoElem);
             if (!isPlaying) {
-                this.video.play();
+                videoElem.play();
                 this.classList.add('play');
             } else {
-                this.video.pause();
+                videoElem.pause();
                 this.classList.remove('play');
             }
         }
