@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (siblingSize.classList.contains(activeClass))
                         siblingSize.classList.remove(activeClass)
                 })
-                console.log('New price: ', sizeElem.dataset.price)
                 currentPriceElem.innerHTML = sizeElem.dataset.price
             })
         })

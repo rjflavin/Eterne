@@ -649,7 +649,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var swip
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_cart_handler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/cart-handler */ \"./src/js/utils/cart-handler.js\");\n/* harmony import */ var _utils_get_sibling_elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/get-sibling-elements */ \"./src/js/utils/get-sibling-elements.js\");\n/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ \"./node_modules/console-browserify/index.js\");\n\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const recentProductsItems = document.querySelectorAll('.recent-products__slider-slide');\n  recentProductsItems.forEach(item => {\n    const mouseHoverIn = item => {\n      const infoContainer = item.querySelector('.swiper-slide-image-info');\n      if (infoContainer) {\n        infoContainer.classList.add('show');\n      }\n      const itemImage = item.querySelector('.swiper-slide-image');\n      const secondImage = item.querySelector('.recent-products-swiper-second-image');\n      if (itemImage && secondImage && secondImage.value && secondImage.value !== 'undefined') {\n        itemImage.style.backgroundImage = \"url('\" + secondImage.value + \"')\";\n      }\n      const itemInfoButton = item.querySelector('.swiper-slide-image-info-button');\n      if (itemInfoButton) {\n        itemInfoButton.classList.add('hide');\n      }\n    };\n    item.addEventListener('mouseover', () => {\n      mouseHoverIn(item);\n    });\n    item.addEventListener('mouseenter', () => {\n      mouseHoverIn(item);\n    });\n    item.addEventListener('mouseout', () => {\n      const infoContainer = item.querySelector('.swiper-slide-image-info');\n      if (infoContainer) {\n        infoContainer.classList.remove('show');\n      }\n      const itemImage = item.querySelector('.swiper-slide-image');\n      const firstImage = item.querySelector('.recent-products-swiper-first-image');\n      if (itemImage && firstImage && firstImage.value && firstImage.value !== 'undefined') {\n        itemImage.style.backgroundImage = \"url('\" + firstImage.value + \"')\";\n      }\n    });\n    item.addEventListener('mouseleave', () => {\n      const itemInfoButton = item.querySelector('.swiper-slide-image-info-button');\n      if (itemInfoButton) {\n        itemInfoButton.classList.remove('hide');\n      }\n    });\n    function checkPreorder(item) {\n      const inventoryPolicyDivs = item.querySelector('.variant_inventory_policy div');\n      const variantId = item.getAttribute('data-active-variant');\n      const variantIdPolicy = inventoryPolicyDivs.getAttribute('data-variant-id-policy');\n      const inventoryPolicy = inventoryPolicyDivs.getAttribute('data-variant-inventory-policy');\n      if (variantId === variantIdPolicy && inventoryPolicy === 'continue') {\n        item.querySelector('.swiper-slide-preorder').classList.remove('disp-none-imp');\n      } else {\n        item.querySelector('.swiper-slide-preorder').classList.add('disp-none-imp');\n      }\n    }\n    checkPreorder(item);\n    const currentPriceElem = item.querySelector('[data-current-price]');\n    item.querySelectorAll('[data-size-item]').forEach(sizeElem => {\n      const activeClass = 'selected-size';\n      sizeElem.addEventListener('click', e => {\n        const siblingSizes = (0,_utils_get_sibling_elements__WEBPACK_IMPORTED_MODULE_1__.getSiblings)(e.target);\n        item.setAttribute('data-active-variant', sizeElem.dataset.sizeItem);\n        e.target.classList.add(activeClass);\n        checkPreorder(item);\n        siblingSizes.forEach(siblingSize => {\n          if (siblingSize.classList.contains(activeClass)) siblingSize.classList.remove(activeClass);\n        });\n        console.log('New price: ', sizeElem.dataset.price);\n        currentPriceElem.innerHTML = sizeElem.dataset.price;\n      });\n    });\n    const cartButtonElement = item.querySelector('.swiper-slide-image-info-cart-button');\n    if (cartButtonElement) {\n      cartButtonElement.addEventListener('click', () => {\n        const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader');\n        const loaderFillTextElement = item.querySelector('.swiper-slide-image-info-cart-loader-fill-text');\n        const activeVariant = document.getElementById(item.id);\n        (0,_utils_cart_handler__WEBPACK_IMPORTED_MODULE_0__.addToCartSetup)(cartButtonElement, activeVariant.dataset.activeVariant, 1, loaderElement, loaderFillTextElement);\n      });\n    }\n    const itemInfoButton = item.querySelector('.swiper-slide-image-info-button');\n    if (itemInfoButton) {\n      itemInfoButton.addEventListener('click', event => {\n        event.preventDefault();\n        const infoContainer = item.querySelector('.swiper-slide-image-info');\n        if (infoContainer) {\n          infoContainer.classList.add('show');\n          itemInfoButton.classList.add('hide');\n        }\n      });\n    }\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/recent-products-swiper/swiper-hover.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_cart_handler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/cart-handler */ \"./src/js/utils/cart-handler.js\");\n/* harmony import */ var _utils_get_sibling_elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/get-sibling-elements */ \"./src/js/utils/get-sibling-elements.js\");\n\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const recentProductsItems = document.querySelectorAll('.recent-products__slider-slide');\n  recentProductsItems.forEach(item => {\n    const mouseHoverIn = item => {\n      const infoContainer = item.querySelector('.swiper-slide-image-info');\n      if (infoContainer) {\n        infoContainer.classList.add('show');\n      }\n      const itemImage = item.querySelector('.swiper-slide-image');\n      const secondImage = item.querySelector('.recent-products-swiper-second-image');\n      if (itemImage && secondImage && secondImage.value && secondImage.value !== 'undefined') {\n        itemImage.style.backgroundImage = \"url('\" + secondImage.value + \"')\";\n      }\n      const itemInfoButton = item.querySelector('.swiper-slide-image-info-button');\n      if (itemInfoButton) {\n        itemInfoButton.classList.add('hide');\n      }\n    };\n    item.addEventListener('mouseover', () => {\n      mouseHoverIn(item);\n    });\n    item.addEventListener('mouseenter', () => {\n      mouseHoverIn(item);\n    });\n    item.addEventListener('mouseout', () => {\n      const infoContainer = item.querySelector('.swiper-slide-image-info');\n      if (infoContainer) {\n        infoContainer.classList.remove('show');\n      }\n      const itemImage = item.querySelector('.swiper-slide-image');\n      const firstImage = item.querySelector('.recent-products-swiper-first-image');\n      if (itemImage && firstImage && firstImage.value && firstImage.value !== 'undefined') {\n        itemImage.style.backgroundImage = \"url('\" + firstImage.value + \"')\";\n      }\n    });\n    item.addEventListener('mouseleave', () => {\n      const itemInfoButton = item.querySelector('.swiper-slide-image-info-button');\n      if (itemInfoButton) {\n        itemInfoButton.classList.remove('hide');\n      }\n    });\n    const currentPriceElem = item.querySelector('[data-current-price]');\n    item.querySelectorAll('[data-size-item]').forEach(sizeElem => {\n      const activeClass = 'selected-size';\n      sizeElem.addEventListener('click', e => {\n        const siblingSizes = (0,_utils_get_sibling_elements__WEBPACK_IMPORTED_MODULE_1__.getSiblings)(e.target);\n        item.setAttribute('data-active-variant', sizeElem.dataset.sizeItem);\n        e.target.classList.add(activeClass);\n        siblingSizes.forEach(siblingSize => {\n          if (siblingSize.classList.contains(activeClass)) siblingSize.classList.remove(activeClass);\n        });\n        currentPriceElem.innerHTML = sizeElem.dataset.price;\n      });\n    });\n    const cartButtonElement = item.querySelector('.swiper-slide-image-info-cart-button');\n    if (cartButtonElement) {\n      cartButtonElement.addEventListener('click', () => {\n        const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader');\n        const loaderFillTextElement = item.querySelector('.swiper-slide-image-info-cart-loader-fill-text');\n        const activeVariant = document.getElementById(item.id);\n        (0,_utils_cart_handler__WEBPACK_IMPORTED_MODULE_0__.addToCartSetup)(cartButtonElement, activeVariant.dataset.activeVariant, 1, loaderElement, loaderFillTextElement);\n      });\n    }\n    const itemInfoButton = item.querySelector('.swiper-slide-image-info-button');\n    if (itemInfoButton) {\n      itemInfoButton.addEventListener('click', event => {\n        event.preventDefault();\n        const infoContainer = item.querySelector('.swiper-slide-image-info');\n        if (infoContainer) {\n          infoContainer.classList.add('show');\n          itemInfoButton.classList.add('hide');\n        }\n      });\n    }\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/js/recent-products-swiper/swiper-hover.js?");
 
 /***/ }),
 
@@ -1163,7 +1163,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -1177,17 +1177,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -1200,7 +1200,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -1212,7 +1212,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -1224,12 +1224,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -1240,44 +1240,44 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		__webpack_require__.b = document.baseURI || self.location.href;
-/******/ 		
+/******/
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"recent-products-swiper": 0
 /******/ 		};
-/******/ 		
+/******/
 /******/ 		// no chunk on demand loading
-/******/ 		
+/******/
 /******/ 		// no prefetching
-/******/ 		
+/******/
 /******/ 		// no preloaded
-/******/ 		
+/******/
 /******/ 		// no HMR
-/******/ 		
+/******/
 /******/ 		// no HMR manifest
-/******/ 		
+/******/
 /******/ 		// no on chunks loaded
-/******/ 		
+/******/
 /******/ 		// no jsonp function
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/nonce */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/js/recent-products-swiper/index.js");
-/******/ 	
+/******/
 /******/ })()
 ;

@@ -82,6 +82,11 @@
   width: 100%;
   position: absolute;
 }
+.collage__cover-video-image video {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .collage .play-icon {
   width: 120px;
   height: 120px;
@@ -160,6 +165,10 @@
     height: 50vh;
   }
 }
+.collage__two-images-row .play-icon {
+  width: 50px;
+  height: 50px;
+}
 .collage__two-images-row .media {
   width: 50%;
   height: 100%;
@@ -222,6 +231,15 @@
   object-fit: cover;
   min-width: 100%;
   min-height: 100%;
+}
+.collage__three-images-row video {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.collage__three-images-row .play-icon {
+  width: 50px;
+  height: 50px;
 }
 .collage__three-images-row .caption {
   position: absolute;
