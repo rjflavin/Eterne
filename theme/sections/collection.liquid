@@ -179,6 +179,15 @@
                         {% assign option1 = optionsArr[0] | downcase %}
                         {% assign option2 = optionsArr[1] | downcase %}
 
+                        {% if variant.inventory_policy == 'continue' %}
+                          {% assign sizeOption = optionsArr[1] %}
+                          {% assign currentVariant = variant %}
+                          {% assign isVariantInStock = false %}
+
+                          {% assign shouldStop = false %}
+                          {% break %}
+                        {% endif %}
+
                         {% if variant.inventory_quantity > 0 and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
                           {% assign sizeOption = optionsArr[1] %}
                           {% assign currentVariant = variant %}
