@@ -541,10 +541,11 @@
         "settings": {
         }
       },
-      "10115289292966514107": {
-        "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser-block\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+      "15714493449218918033": {
+        "type": "shopify:\/\/apps\/personalizerai-recommendations\/blocks\/app-embed\/145d11e4-e845-4516-b629-e52fa33e088d",
         "disabled": false,
         "settings": {
+          "personalizerai_styles": ".personalizerai-product-recommendations-target { }"
         }
       }
     }
