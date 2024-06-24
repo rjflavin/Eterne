@@ -145,6 +145,7 @@
 
     @media (max-width: 480px) {
       min-width: 100%;
+      max-width: 100%;
     }
   }
 
@@ -175,7 +176,7 @@
     }
 
     @include for-tablet {
-      max-width: 315px;
+      max-width: 100%;
       margin-right: 0;
 
       &:nth-child(1) {
@@ -525,8 +526,8 @@
         height: 27px;
 
         svg {
-          width: 7px;
-          height: 7px;
+          width: 13px;
+          height: 13px;
         }
       }
     }

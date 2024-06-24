@@ -407,8 +407,6 @@ export class EterneCollection extends HTMLElement {
                                             if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && !variant.available) {
                                                 preorderWrapperElement.classList.add('disp-flx-imp');
                                                 variantCardElement.dataset.isVariantInStock = 'false';
-
-                                                return;
                                             }
                                         });
                                     }
@@ -462,11 +460,13 @@ export class EterneCollection extends HTMLElement {
                                     const parts = variant.title.split('/').map(part => part.trim());
                                     const color = parts[0];
                                     const size = parts[1];
+                                    console.log(variant)
 
                                     const isSelectedSizeInVariantTitle = size === selectedSize;
                                     const isClickedColorInVariantTitle = color === clickedColor;
 
                                     if (isSelectedSizeInVariantTitle && isClickedColorInVariantTitle) {
+                                        productPriceElement.innerHTML = `${currencySymbol}${formatPrice(variant.price)}`;
                                         variantCardElement.dataset.variantId = variant.id;
 
                                         if (variant.available) {

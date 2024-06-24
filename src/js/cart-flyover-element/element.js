@@ -181,25 +181,18 @@ class CartFlyover extends HTMLElement {
         event.preventDefault();
 
         const parentElement = event.target.parentElement
-        if (!parentElement) {
-            return
-        }
 
-        const variantId = parentElement.getAttribute('data-variant-id')
-        if (!variantId) {
-            return
-        }
-
-        const response = await addToCart(variantId, 1)
-
-        if (response && response.items) {
+        if (parentElement) {
+            const variantId = parentElement.getAttribute('data-variant-id')
             const quantityElement = parentElement.querySelector('[name="item-quantity"]')
-            if (!quantityElement) {
-                return
-            }
+            if (variantId && quantityElement) {
+                const quantity = +quantityElement.getAttribute('item-quantity')
 
-            this.updateQuantity(variantId, response.items, quantityElement)
-            this.refreshCartHandler(false)
+                const response = await updateCartItemQuantity(variantId, quantity + 1)
+
+                this.updateQuantity(variantId, response.items, quantityElement)
+                this.refreshCartHandler(false)
+            }
         }
     }
 
