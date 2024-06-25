@@ -25,6 +25,7 @@
         },
         "two_images_row_VbNWxi": {
           "type": "two_images_row",
+          "disabled": true,
           "settings": {
             "orientation": "portrait",
             "media_type_1": "image",
@@ -41,6 +42,7 @@
         },
         "one_image_row_Jc6jjR": {
           "type": "one_image_row",
+          "disabled": true,
           "settings": {
             "media_type": "image",
             "orientation": "landscape",
@@ -52,6 +54,7 @@
         },
         "three_images_row_gdVYn6": {
           "type": "three_images_row",
+          "disabled": true,
           "settings": {
             "media_type_1": "video",
             "image_1": "shopify:\/\/shop_images\/Frame_28.jpg",
@@ -80,6 +83,7 @@
         },
         "two_images_row_LreNjx": {
           "type": "two_images_row",
+          "disabled": true,
           "settings": {
             "orientation": "landscape",
             "media_type_1": "image",
@@ -103,13 +107,6 @@
         "two_images_row_LreNjx"
       ],
       "settings": {
-      }
-    },
-    "new_in_slider_QYPKPp": {
-      "type": "new-in-slider",
-      "settings": {
-        "section_title": "New in",
-        "selected_collection": "new-in"
       }
     },
     "collage_grid_pjjhzD": {
@@ -216,14 +213,21 @@
       ],
       "settings": {
       }
+    },
+    "new_in_slider_QYPKPp": {
+      "type": "new-in-slider",
+      "settings": {
+        "section_title": "New in",
+        "selected_collection": "new-in"
+      }
     }
   },
   "order": [
     "collage_grid_YqLqzV",
-    "new_in_slider_QYPKPp",
     "collage_grid_pjjhzD",
     "collage_grid_hLgbwf",
     "collage_grid_XT7g8Y",
-    "collage_grid_xVzGkC"
+    "collage_grid_xVzGkC",
+    "new_in_slider_QYPKPp"
   ]
 }
