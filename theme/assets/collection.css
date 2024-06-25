@@ -139,6 +139,7 @@
 @media (max-width: 480px) {
   .collection__filters {
     min-width: 100%;
+    max-width: 100%;
   }
 }
 .collection__sort-category-fieldset {
@@ -157,7 +158,7 @@
 }
 @media (max-width: 1024px) {
   .collection__sort-category {
-    max-width: 315px;
+    max-width: 100%;
     margin-right: 0;
   }
   .collection__sort-category:nth-child(1) {
@@ -475,8 +476,8 @@
     height: 27px;
   }
   .collection__item-quick-add-btn svg {
-    width: 7px;
-    height: 7px;
+    width: 13px;
+    height: 13px;
   }
 }
 .collection__item-link {

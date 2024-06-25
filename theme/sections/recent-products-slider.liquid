@@ -59,6 +59,11 @@
                  class="recent-products__slider-slide swiper-slide"
                  data-recent-product-item
                  data-active-variant="${firstAvailableVariant.id}">
+                 <div class="variant_inventory_policy disp-none-imp">
+                 {% for variant in product.variants %}
+                   <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
+                 {% endfor %}
+               </div>
               <div class="swiper-slide-container">
                 <a href="${firstAvailableVariant.url}" class="swiper-slide-link"></a>
 
@@ -79,7 +84,7 @@
                       }
                     </div>
                     {% if section.settings.add_to_cart_text %}
-                      <div class="swiper-slide-image-info-cart-button">
+                      <div class="swiper-slide-image-info-cart-button preorder-add-to-cart">
                         {{ section.settings.add_to_cart_text }}
                       </div>
                       <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
@@ -102,9 +107,7 @@
                   <div class="swiper-slide-title">${product.title}</div>
                   <div class="swiper-slide-title">${product.color}</div>
                   <div class="swiper-slide-title swiper-slide-title-price" data-current-price>{{ cart.currency.symbol }}${firstAvailableVariant.price}</div>
-                  <!--
-                  <button class="swiper-slide-preorder">Preorder</button>
-                  -->
+                  <button class="swiper-slide-preorder disp-none-imp">Preorder</button>
                 </div>
               </div>
             </div>

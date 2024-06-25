@@ -51,14 +51,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        const currentPriceElem = item.querySelector('[data-current-price]')
+        function checkPreorder(item) {
+            const inventoryPolicyDivs = item.querySelector('.variant_inventory_policy div');
+            const variantId = item.getAttribute('data-active-variant');
+            const variantIdPolicy = inventoryPolicyDivs.getAttribute('data-variant-id-policy');
+            const inventoryPolicy = inventoryPolicyDivs.getAttribute('data-variant-inventory-policy');
+
+            if (variantId === variantIdPolicy && inventoryPolicy === 'continue') {
+                item.querySelector('.swiper-slide-preorder').classList.remove('disp-none-imp')
+            } else {
+                item.querySelector('.swiper-slide-preorder').classList.add('disp-none-imp')
+            }
+        }
+
+        checkPreorder(item);
+
+        const currentPriceElem = item.querySelector('[data-current-price]');
 
         item.querySelectorAll('[data-size-item]').forEach((sizeElem) => {
             const activeClass = 'selected-size'
             sizeElem.addEventListener('click', (e) => {
                 const siblingSizes = getSiblings(e.target)
                 item.setAttribute('data-active-variant', sizeElem.dataset.sizeItem)
-                e.target.classList.add(activeClass)
+                e.target.classList.add(activeClass);
+                checkPreorder(item);
                 siblingSizes.forEach((siblingSize) => {
                     if (siblingSize.classList.contains(activeClass))
                         siblingSize.classList.remove(activeClass)
