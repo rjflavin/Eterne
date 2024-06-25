@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "presets": {
     "Chantilly": {
@@ -524,6 +533,13 @@
         "type": "shopify:\/\/apps\/consentik-cookie\/blocks\/omega-cookies-notification\/13cba824-a338-452e-9b8e-c83046a79f21",
         "disabled": false,
         "settings": {
+        }
+      },
+      "4571859552318407796": {
+        "type": "shopify:\/\/apps\/glo-color-swatch\/blocks\/app-embed-block\/4394f710-096c-4021-bbde-8ebb26057c11",
+        "disabled": false,
+        "settings": {
+          "customCssGCW": ""
         }
       }
     }
