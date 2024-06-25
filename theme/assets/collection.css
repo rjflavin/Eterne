@@ -146,7 +146,7 @@
   position: sticky;
   transition: top 0.5s ease-in-out;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .collection__filters-form {
     position: static;
   }
