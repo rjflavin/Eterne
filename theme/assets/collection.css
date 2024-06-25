@@ -331,6 +331,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+.collection__products-wrap .loading-spinner {
+  margin: 40px auto 0;
+  border-width: 3px;
 }
 .collection__products {
   width: 100%;

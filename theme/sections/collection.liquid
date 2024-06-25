@@ -83,9 +83,6 @@
 
                   {% if filter.type == 'list' and filtersToDisplay contains filterName %}
                     {% if visibleFiltresQuantity > 0 %}
-                      {% assign isFirst = true %}
-                      {% assign isFirst2 = false %}
-                      {% for filter in filters %}
                         {% render 'filter-category',
                                 filter: filter,
                                 filterLabel: filter.label,
@@ -95,9 +92,6 @@
                                 isFirst: isFirst,
                                 isFirst2: isFirst2
                         %}
-                        {% assign isFirst = false %}
-                        {% assign isFirst2 = true %}
-                      {% endfor %}
                     {% endif %}
                   {% endif %}
                 {% endfor %}
@@ -620,6 +614,8 @@
             {% endfor %}
           {% endif %}
         </div>
+
+        <div class="loading-spinner disp-none-imp"></div>
 
         {% if paginate.pages > 1 %}
           <div class="collection__see-more-btn-wrap">

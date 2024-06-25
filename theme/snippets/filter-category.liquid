@@ -1,4 +1,12 @@
-<div class="filterWrapper collection__sort-category" data-is-filter-category-open="{{ isFirst }}" data-is-see-more="{{ isFirst2 }}">
+{% if filterLabel == 'Category' %}
+    {% assign filterCategoryOpen = true %}
+    {% assign seeMore = false %}
+{% else %}
+    {% assign filterCategoryOpen = false %}
+    {% assign seeMore = true %}
+{% endif %}
+
+<div class="filterWrapper collection__sort-category" data-is-filter-category-open="{{ filterCategoryOpen }}" data-is-see-more="{{ seeMore }}">
   <fieldset class="filterWrapperFieldset collection__sort-category-fieldset" data-render="{{ filterLabel }}">
     <div class="collection__sort-category-title-wrap no-select">
       <span class="collection__sort-category-title-text">{{ filterLabel | escape }}</span>
