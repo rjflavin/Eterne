@@ -666,6 +666,15 @@
     line-height: 16.8px;
   }
 }
+.product-info .product-column-right .product-details__content p:first-child, .product-info .product-column-right .product-details__content li:first-child {
+  margin-top: 0;
+}
+.product-info .product-column-right .product-details__content p, .product-info .product-column-right .product-details__content li {
+  margin-top: 11px;
+}
+.product-info .product-column-right .product-details__content a {
+  text-decoration: underline;
+}
 .product-info .product-column-right hr {
   margin: 10px 0 25px 0;
 }
