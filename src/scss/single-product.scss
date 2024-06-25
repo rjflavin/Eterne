@@ -615,7 +615,7 @@
 
               .product__size-label {
                 font-size: 12px;
-                font-weight: 300;
+                font-weight: 400;
                 line-height: 16.8px;
                 white-space: nowrap;
                 cursor: pointer;
@@ -744,6 +744,18 @@
             font-size: 12px;
             line-height: 16.8px;
           }
+        }
+
+        p:first-child, li:first-child {
+          margin-top: 0;
+        }
+
+        p, li {
+          margin-top: 11px;
+        }
+
+        a {
+          text-decoration: underline;
         }
       }
     }

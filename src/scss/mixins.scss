@@ -27,7 +27,7 @@ $accurate-mobile-width: 767.98;
 }
 
 @mixin for-tablet {
-  @media (max-width: #{$tablet-mockup - 1}px) {
+  @media (max-width: #{$tablet-mockup}px) {
     @content;
   }
 }

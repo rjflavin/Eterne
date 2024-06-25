@@ -1,3 +1,5 @@
+import {MOBILE_WIDTH} from "../utils/constants";
+
 export default class CustomVideoPlayer extends HTMLElement {
     constructor() {
         super();
@@ -53,8 +55,9 @@ export default class CustomVideoPlayer extends HTMLElement {
         });
     }
 
-    handleVideoClick () {
-        let videoElem = (!this.videoMob || window.innerWidth >= 1024) ? this.videoDesk : this.videoMob;
+    handleVideoClick (event) {
+        console.log('click', event);
+        let videoElem = (!this.videoMob || window.innerWidth >= MOBILE_WIDTH) ? this.videoDesk : this.videoMob;
         console.log(videoElem);
         if (!event.target.classList.contains('caption')
             && !event.target.classList.contains('caption__text')
