@@ -83,13 +83,15 @@
 
                   {% if filter.type == 'list' and filtersToDisplay contains filterName %}
                     {% if visibleFiltresQuantity > 0 %}
-                      {% render 'filter-category',
-                              filter: filter,
-                              filterLabel: filterLabel,
-                              index: forloop.index,
-                              filtersType: 'checkbox',
-                              visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
-                      %}
+                        {% render 'filter-category',
+                                filter: filter,
+                                filterLabel: filter.label,
+                                index: forloop.index,
+                                filtersType: 'checkbox',
+                                visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
+                                isFirst: isFirst,
+                                isFirst2: isFirst2
+                        %}
                     {% endif %}
                   {% endif %}
                 {% endfor %}
@@ -179,12 +181,19 @@
                         {% assign option1 = optionsArr[0] | downcase %}
                         {% assign option2 = optionsArr[1] | downcase %}
 
-                        {% if variant.inventory_policy == 'continue' %}
+                        {% if variant.inventory_policy == 'continue' and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
                           {% assign sizeOption = optionsArr[1] %}
                           {% assign currentVariant = variant %}
                           {% assign isVariantInStock = false %}
 
-                          {% assign shouldStop = false %}
+                          {% for disabledColor in product.metafields.custom.disabled_option.value %}
+                            {% assign disabledColorDowncase = disabledColor | downcase %}
+                            {% if disabledColorDowncase == variantColorOptionDowncase %}
+                              {% assign isColorVariantInDraft = true %}
+                            {% endif %}
+                          {% endfor %}
+
+                          {% assign shouldStop = true %}
                           {% break %}
                         {% endif %}
 
@@ -606,6 +615,8 @@
           {% endif %}
         </div>
 
+        <div class="loading-spinner disp-none-imp"></div>
+
         {% if paginate.pages > 1 %}
           <div class="collection__see-more-btn-wrap">
             <div data-see-more-button class="collection__see-more-btn">
@@ -636,18 +647,18 @@
       "type": "range",
       "id": "products_per_page",
       "min": 1,
-      "max": 10,
+      "max": 12,
       "step": 1,
-      "default": 3,
+      "default": 12,
       "label": "Products per page"
     },
     {
       "type": "range",
       "id": "products_per_page_with_filter",
       "min": 1,
-      "max": 10,
+      "max": 12,
       "step": 1,
-      "default": 3,
+      "default": 12,
       "label": "Products per page with any enabled filter"
     },
     {

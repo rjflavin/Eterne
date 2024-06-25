@@ -25,6 +25,12 @@ export class EterneCollection extends HTMLElement {
 
                 if (nextPageUrl) {
                     this.isLoading = true;
+                    const loadingSpinner = document.querySelector('.loading-spinner');
+
+                    if (loadingSpinner) {
+                        loadingSpinner.classList.remove('disp-none-imp');
+                    }
+
                     fetch(nextPageUrl, {
                         method: 'GET',
                         headers: {
@@ -61,6 +67,9 @@ export class EterneCollection extends HTMLElement {
                             });
 
                             this.isLoading = false;
+                            if (loadingSpinner) {
+                                loadingSpinner.classList.add('disp-none-imp')
+                            }
                         })
                         .catch((error) => {
                             console.error('Error fetching data:', error);
