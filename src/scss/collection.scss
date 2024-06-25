@@ -58,7 +58,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 19px;
+    margin: 0 19px -14px;
 
     @include for-tablet {
       margin: 18px 19px 0;
@@ -149,7 +149,14 @@
     }
   }
 
-  &__filters-form {}
+  &__filters-form {
+    position: sticky;
+    transition: top .5s ease-in-out;
+
+    @include for-tablet {
+      position: static;
+    }
+  }
 
   &__filters-content-wrap {}
 
