@@ -535,11 +535,10 @@
         "settings": {
         }
       },
-      "4571859552318407796": {
-        "type": "shopify:\/\/apps\/glo-color-swatch\/blocks\/app-embed-block\/4394f710-096c-4021-bbde-8ebb26057c11",
+      "3577669850698438243": {
+        "type": "shopify:\/\/apps\/preorder-now-wod-preorder\/blocks\/app-embed\/fdf17d17-ef12-4a7b-8383-20cc1fc2a4b6",
         "disabled": false,
         "settings": {
-          "customCssGCW": ""
         }
       }
     }
