@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "collage_grid_YqLqzV": {
@@ -76,7 +85,7 @@
         "three_images_row_rpKBnK": {
           "type": "three_images_row",
           "settings": {
-            "media_type_1": "video",
+            "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/Frame_28.jpg",
             "video_1": "shopify:\/\/files\/videos\/13_16x9_COLOR.mp4",
             "caption_1": "<p>Sloane Dress<\/p>",
