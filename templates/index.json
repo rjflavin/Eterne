@@ -138,11 +138,34 @@
       ],
       "settings": {
       }
+    },
+    "collage_grid_hLgbwf": {
+      "type": "collage-grid",
+      "blocks": {
+        "one_image_row_w3pyj6": {
+          "type": "one_image_row",
+          "settings": {
+            "media_type": "image",
+            "orientation": "landscape",
+            "caption": "<p>Elevated<br\/>Essentials<\/p>",
+            "product_link": "shopify:\/\/products\/amina-top",
+            "product_link_text": "shop Underwear",
+            "image": "shopify:\/\/shop_images\/Frame_5.jpg",
+            "video": "shopify:\/\/files\/videos\/ETERNE_March2024_Wide_Look14.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "one_image_row_w3pyj6"
+      ],
+      "settings": {
+      }
     }
   },
   "order": [
     "collage_grid_YqLqzV",
     "new_in_slider_QYPKPp",
-    "collage_grid_pjjhzD"
+    "collage_grid_pjjhzD",
+    "collage_grid_hLgbwf"
   ]
 }
