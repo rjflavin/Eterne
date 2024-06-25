@@ -745,6 +745,18 @@
             line-height: 16.8px;
           }
         }
+
+        p:first-child, li:first-child {
+          margin-top: 0;
+        }
+
+        p, li {
+          margin-top: 11px;
+        }
+
+        a {
+          text-decoration: underline;
+        }
       }
     }
 
