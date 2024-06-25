@@ -9,7 +9,7 @@
   width: 100%;
   position: relative;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .recent-products-slider {
     padding: 93px 30px 57px;
   }
@@ -108,7 +108,7 @@
   justify-content: center;
   z-index: 200;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .recent-products-swiper .swiper-wrapper .swiper-slide-image-info-button {
     display: flex;
   }
@@ -264,7 +264,7 @@
   left: 25px;
   cursor: pointer;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .recent-products-swiper-button-prev {
     display: none;
   }
@@ -281,7 +281,7 @@
   right: 25px;
   cursor: pointer;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .recent-products-swiper-button-next {
     display: none;
   }
