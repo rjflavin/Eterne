@@ -53,7 +53,7 @@
         "three_images_row_gdVYn6": {
           "type": "three_images_row",
           "settings": {
-            "media_type_1": "image",
+            "media_type_1": "video",
             "image_1": "shopify:\/\/shop_images\/Frame_28.jpg",
             "video_1": "shopify:\/\/files\/videos\/ETERNE_March2024_Vertical_Look16.mp4",
             "caption_1": "<p>Sloane Dress<\/p>",
@@ -68,7 +68,6 @@
             "product_link_2": "shopify:\/\/products\/dress",
             "product_link_text_2": "shop",
             "image_mobile_2": "shopify:\/\/shop_images\/Frame_2.jpg",
-            "video_mobile_2": "shopify:\/\/files\/videos\/ETERNE_March2024_Vertical_Look16.mp4",
             "media_type_3": "image",
             "image_3": "shopify:\/\/shop_images\/Frame_26.jpg",
             "video_3": "shopify:\/\/files\/videos\/13_16x9_COLOR.mp4",
@@ -112,10 +111,38 @@
         "section_title": "New in",
         "selected_collection": "new-in"
       }
+    },
+    "collage_grid_pjjhzD": {
+      "type": "collage-grid",
+      "blocks": {
+        "two_images_row_jCkJRF": {
+          "type": "two_images_row",
+          "settings": {
+            "orientation": "portrait",
+            "media_type_1": "image",
+            "image_1": "shopify:\/\/shop_images\/Frame_17_82ace3bb-2e22-4d79-af25-4f3fa5a0d96d.jpg",
+            "video_1": "shopify:\/\/files\/videos\/ETERNE_March2024_Vertical_Look16.mp4",
+            "caption_1": "<p>day to night<br\/>essentials<\/p>",
+            "product_link_1": "shopify:\/\/collections",
+            "product_link_text_1": "shop soir",
+            "media_type_2": "image",
+            "image_2": "shopify:\/\/shop_images\/Frame_2.jpg",
+            "caption_2": "",
+            "product_link_2": "",
+            "product_link_text_2": "shop cashmere"
+          }
+        }
+      },
+      "block_order": [
+        "two_images_row_jCkJRF"
+      ],
+      "settings": {
+      }
     }
   },
   "order": [
     "collage_grid_YqLqzV",
-    "new_in_slider_QYPKPp"
+    "new_in_slider_QYPKPp",
+    "collage_grid_pjjhzD"
   ]
 }
