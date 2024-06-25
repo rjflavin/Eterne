@@ -37,7 +37,7 @@
           "type": "two_images_row",
           "settings": {
             "orientation": "portrait",
-            "media_type_1": "video",
+            "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/Frame_17_82ace3bb-2e22-4d79-af25-4f3fa5a0d96d.jpg",
             "video_1": "shopify:\/\/files\/videos\/ETERNE_March2024_Vertical_Look16.mp4",
             "caption_1": "<p>day to night<br\/>essentials<\/p>",
@@ -87,25 +87,19 @@
           "settings": {
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/Frame_28.jpg",
-            "video_1": "shopify:\/\/files\/videos\/13_16x9_COLOR.mp4",
             "caption_1": "<p>Sloane Dress<\/p>",
             "product_link_1": "shopify:\/\/products\/90s-brief-black",
             "product_link_text_1": "shop",
-            "image_mobile_1": "shopify:\/\/shop_images\/Frame_26.jpg",
             "media_type_2": "image",
             "image_2": "shopify:\/\/shop_images\/Frame_27.jpg",
-            "video_2": "shopify:\/\/files\/videos\/ETERNE_March2024_Wide_Look14.mp4",
             "caption_2": "<p>Charlie Shirt<\/p>",
             "product_link_2": "shopify:\/\/pages\/returns-exchanges",
             "product_link_text_2": "shop",
-            "media_type_3": "video",
+            "media_type_3": "image",
             "image_3": "shopify:\/\/shop_images\/Frame_26.jpg",
-            "video_3": "shopify:\/\/files\/videos\/from_emtb_to_ebike_in_just_10_seconds! (1080p).mp4",
             "caption_3": "<p>Emma Skirt<\/p>",
             "product_link_3": "shopify:\/\/blogs\/news",
-            "product_link_text_3": "shop",
-            "image_mobile_3": "shopify:\/\/shop_images\/Frame17.jpg",
-            "video_mobile_3": "shopify:\/\/files\/videos\/13_16x9_COLOR.mp4"
+            "product_link_text_3": "shop"
           }
         }
       },

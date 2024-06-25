@@ -65,10 +65,6 @@
   min-width: 101%;
   min-height: 100%;
 }
-.collage__one-image-row,
-.collage .media__video-wrapper {
-  width: 100%;
-}
 .collage__one-image-row.play .play-icon, .collage__one-image-row.play .caption, .collage__one-image-row.play .collage__cover-video-image,
 .collage .media__video-wrapper.play .play-icon,
 .collage .media__video-wrapper.play .caption,
