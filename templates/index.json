@@ -190,6 +190,32 @@
       ],
       "settings": {
       }
+    },
+    "collage_grid_xVzGkC": {
+      "type": "collage-grid",
+      "blocks": {
+        "two_images_row_gTBGDq": {
+          "type": "two_images_row",
+          "settings": {
+            "orientation": "landscape",
+            "media_type_1": "image",
+            "image_1": "shopify:\/\/shop_images\/Frame_9.jpg",
+            "caption_1": "<p>refined<br\/>relaxation<\/p>",
+            "product_link_1": "shopify:\/\/pages\/klarna-faq",
+            "product_link_text_1": "shop cashmere",
+            "media_type_2": "image",
+            "image_2": "shopify:\/\/shop_images\/Frame_8.jpg",
+            "caption_2": "",
+            "product_link_2": "",
+            "product_link_text_2": "shop cashmere"
+          }
+        }
+      },
+      "block_order": [
+        "two_images_row_gTBGDq"
+      ],
+      "settings": {
+      }
     }
   },
   "order": [
@@ -197,6 +223,7 @@
     "new_in_slider_QYPKPp",
     "collage_grid_pjjhzD",
     "collage_grid_hLgbwf",
-    "collage_grid_XT7g8Y"
+    "collage_grid_XT7g8Y",
+    "collage_grid_xVzGkC"
   ]
 }
