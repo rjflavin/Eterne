@@ -88,9 +88,6 @@
                     <div class="collage__two-images-row-inner">
                         <div class="media item-1">
                             {% assign media_type_1 = block.settings.media_type_1 %}
-                            <script>
-                                console.log('media_type_1: {{ media_type_1 }}');
-                            </script>
                             {% capture caption %}
                                 {% if block.settings.caption_1 or block.settings.product_link_1 %}
                                     <div class="caption">
@@ -169,9 +166,6 @@
                         </div>
                         <div class="media item-2">
                             {% assign media_type_2 = block.settings.media_type_2 %}
-                            <script>
-                                console.log('media_type_2 {{ media_type_2 }}');
-                            </script>
                             {% capture caption %}
                                 {% if block.settings.caption_2 or block.settings.product_link_2 %}
                                     <div class="caption">
@@ -208,9 +202,6 @@
                             >
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
-                                <script>
-                                    console.log('video in 2 row in the 2nd block');
-                                </script>
                                 <custom-video-player class="media__video-wrapper">
                                     {% if block.settings.image_2 != blank %}
                                         <div class="collage__cover-video-image">
@@ -488,7 +479,7 @@
     {% endfor %}
 </div>
 
-{{ 'custom-video-player.js' | asset_url | script_tag }}
+<script src="{{ 'custom-video-player.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
