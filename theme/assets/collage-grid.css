@@ -65,7 +65,7 @@
   border: 1px solid var(--white);
   padding: 10px 22px;
   transition: all 0.2s;
-  width: fit-content;
+  width: max-content;
 }
 @media (max-width: 767px) {
   .collage__one-image-row .caption__link, .collage__two-images-row .caption__link {
