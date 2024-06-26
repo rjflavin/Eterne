@@ -1,0 +1,27 @@
+<script>
+    window.productCollectionItem = '.collection__item';
+    window.productCollectionHref = '.collection__item-inner a.collection__item-link[href*="/products/"]';
+    window.addEventListener('Globo.swatch.collection.loaded',function(){
+        document.querySelectorAll('.swatches-globo--list .g-variant-color li input[type=radio]').forEach(swatch => {
+            swatch.addEventListener('change', evt => {
+                var productImage = swatch.closest('li.swatches-options').getAttribute("productImage");
+                if (productImage) {
+                    swatch.closest('.collection__item').querySelector('.collection__item-inner .collection__item-bg-img').style.backgroundImage = "url('" + productImage + "')";
+                }
+            });
+        });
+    });
+
+    document.addEventListener('collection-items-updated', () => {
+        if (typeof globoswatch !== 'undefined')
+            globoswatch.init();
+    });
+
+    // document.getElementById('loadMoreButton').addEventListener('click', () => {
+    //     const event = new CustomEvent('collection-items-updated');
+    //     document.dispatchEvent(event);
+    //     if (typeof globoswatch !== 'undefined')
+    //         console.log(globoswatch)
+    //         globoswatch.init();
+    // });
+</script>

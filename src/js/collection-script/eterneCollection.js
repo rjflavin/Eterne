@@ -220,7 +220,7 @@ export class EterneCollection extends HTMLElement {
         const variantCardElement = event.target.closest('[data-collection-item]');
         const currencySymbol = document.querySelector('body').dataset.currencySymbol.trim();
         const clickOnSize = checkParentsForClass(event.target, 'collection__size-variant-text');
-        const clickOnColor = checkParentsForClass(event.target, 'collection__item-color-wrap');
+        const clickOnColor = checkParentsForClass(event.target, 'ul-swatches-list');
         const clickOnMobileQuickAddShowButton = checkParentsForClass(event.target, 'collection__item-quick-add-btn-wrap');
         const clickOnShowMoreColorsButton = checkParentsForClass(event.target, 'collection__show-more-colors-btn');
         const clickOnAddToCartButton = checkParentsForClass(event.target, 'collection__add-to-cart');
@@ -315,8 +315,16 @@ export class EterneCollection extends HTMLElement {
         }
 
         if (clickOnColor) {
-            const isLoadedWithFilters = variantCardElement.dataset.isLoadedWithFilters === "true";
-            const clickedColor = event.target.closest('[data-color-name]').dataset.colorName;
+            //const isLoadedWithFilters = variantCardElement.dataset.isLoadedWithFilters === "true";
+            let closestInputElement = event.target.closest('.swatches-globo input');
+            let clickedColor = null;
+
+            if (closestInputElement) {
+                clickedColor = closestInputElement.value;
+            } else {
+                console.error('No matching input element found');
+            }
+
             let selectedSize = variantCardElement.dataset.selectedSize;
             const productHandle = variantCardElement.dataset.productHandle;
             const productTitle = variantCardElement.dataset.productTitle;
@@ -346,13 +354,13 @@ export class EterneCollection extends HTMLElement {
                                 sizesByColor[color] = [];
                             }
 
-                            sizesByColor[color].push({size, available: variant.available});
+                            sizesByColor[color].push({ size, available: variant.available });
                         });
 
                         const availableSizes = sizesByColor[clickedColor] || [];
                         updateAvailableSizesUI(availableSizes);
 
-                        const firstAvailableSize = availableSizes.find(({available}) => available)?.size;
+                        const firstAvailableSize = availableSizes.find(({ available }) => available)?.size;
                         if (firstAvailableSize) {
                             selectedSize = firstAvailableSize;
                             variantCardElement.dataset.selectedSize = selectedSize;
@@ -374,7 +382,7 @@ export class EterneCollection extends HTMLElement {
                                     const items = hoverImages.split(";").filter(item => item);
                                     const hoverImagesArray = items.map(item => {
                                         const [variantId, hoverImageUrl] = item.split(",");
-                                        return {variantId: parseInt(variantId), hoverImageUrl};
+                                        return { variantId: parseInt(variantId), hoverImageUrl };
                                     });
 
                                     let firstImageUrl;
@@ -433,12 +441,11 @@ export class EterneCollection extends HTMLElement {
 
                     let firstAvailableSize = null;
 
-                    sizes.forEach(({size, available}) => {
+                    sizes.forEach(({ size, available }) => {
                         const sizeElement = document.createElement('div');
                         sizeElement.className = 'collection__size-variant-text no-select';
                         sizeElement.innerText = size;
                         sizeElement.dataset.variantSize = size;
-
 
                         if (!available) {
                             sizeElement.classList.add('disabled');
