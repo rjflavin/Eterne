@@ -69,12 +69,14 @@
     img, video {
       object-fit: cover;
       min-width: 101%;
-      min-height: 100%;
+      min-height: 101%;
     }
   }
 
   &__one-image-row,
   .media__video-wrapper {
+    width: 100%;
+
     &.play {
       .play-icon, .caption, .collage__cover-video-image {
         visibility: hidden;

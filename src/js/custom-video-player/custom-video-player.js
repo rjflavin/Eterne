@@ -3,19 +3,21 @@ import {MOBILE_WIDTH} from "../utils/constants";
 export default class CustomVideoPlayer extends HTMLElement {
     constructor() {
         super();
+    }
+
+    connectedCallback() {
         this.sectionId = this.dataset.id;
         this.videoDesk = this.querySelector('video.desktop-video');
         this.videoMob = (this.querySelector('video.mobile-video')) ? this.querySelector('video.mobile-video') : this.videoDesk;
         this.setListeners();
     }
-
     setListeners() {
         let touchstartX = 0;
         let touchstartY = 0;
         let touchendX = 0;
         let touchendY = 0;
 
-        window.addEventListener('scroll', (event) => this.pauseVideoOnScroll(true), true);
+        window.addEventListener('scroll', () => this.pauseVideoOnScroll(true), true);
 
         this.addEventListener('touchstart', function(event) {
             touchstartX = event.changedTouches[0].screenX;
@@ -56,9 +58,7 @@ export default class CustomVideoPlayer extends HTMLElement {
     }
 
     handleVideoClick (event) {
-        console.log('click', event);
         let videoElem = (!this.videoMob || window.innerWidth >= MOBILE_WIDTH) ? this.videoDesk : this.videoMob;
-        console.log(videoElem);
         if (!event.target.classList.contains('caption')
             && !event.target.classList.contains('caption__text')
             && !event.target.classList.contains('caption__link')) {
