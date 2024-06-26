@@ -6,6 +6,7 @@
         {% case block.type %}
             {% when 'one_image_row' %}
                 {% assign media_type = block.settings.media_type %}
+
                 {% capture caption %}
                     {% if block.settings.caption or block.settings.product_link %}
                         <div class="caption">
@@ -19,6 +20,7 @@
                         </div>
                     {% endif %}
                 {% endcapture %}
+
                 {% if media_type == "image" %}
                     <div class="collage__one-image-row {{ block.settings.orientation }}">
                         {% if block.settings.image_mobile != blank %}
@@ -88,6 +90,7 @@
                     <div class="collage__two-images-row-inner">
                         <div class="media item-1">
                             {% assign media_type_1 = block.settings.media_type_1 %}
+
                             {% capture caption %}
                                 {% if block.settings.caption_1 or block.settings.product_link_1 %}
                                     <div class="caption">
@@ -101,6 +104,7 @@
                                     </div>
                                 {% endif %}
                             {% endcapture %}
+
                             {% if media_type_1 == "image" %}
                                 {% if block.settings.image_mobile_1 != blank %}
                                     {% assign image_mobile_1 = block.settings.image_mobile_1 %}
@@ -166,6 +170,7 @@
                         </div>
                         <div class="media item-2">
                             {% assign media_type_2 = block.settings.media_type_2 %}
+
                             {% capture caption %}
                                 {% if block.settings.caption_2 or block.settings.product_link_2 %}
                                     <div class="caption">
@@ -179,6 +184,7 @@
                                     </div>
                                 {% endif %}
                             {% endcapture %}
+
                             {% if media_type_2 == "image" %}
                                 {% if block.settings.image_mobile_2 != blank %}
                                     {% assign image_mobile_2 = block.settings.image_mobile_2 %}
@@ -250,6 +256,7 @@
                         <li class="media">
                             {% assign media_type_1 = block.settings.media_type_1 %}
                             {% assign image_class = "" %}
+
                             {% capture caption %}
                                 {% if block.settings.caption_1 != blank or block.settings.product_link_1 != blank %}
                                     <div class="caption">
@@ -262,7 +269,8 @@
                                         {% endif %}
                                     </div>
                                 {% endif %}
-                            {%endcapture%}
+                            {% endcapture %}
+
                             {% if media_type_1 == "image" %}
                                 {% if block.settings.image_mobile_1 != blank %}
                                     {% assign image_class = "only-desk" %}
@@ -325,20 +333,22 @@
                         <li class="media">
                             {% assign media_type_2 = block.settings.media_type_2 %}
                             {% assign image_class = "" %}
+
+                            {% capture caption %}
+                                {% if block.settings.caption_2 != blank or block.settings.product_link_2 != blank %}
+                                    <div class="caption">
+                                        {% if block.settings.caption_2 != blank %}
+                                            <div class="caption__text">{{ block.settings.caption_2 }}</div>
+                                        {% endif %}
+                                        {% if block.settings.product_link_2 != blank and block.settings.product_link_text_2 != blank %}
+                                            <a href="{{ block.settings.product_link_2 }}"
+                                               class="caption__link">{{ block.settings.product_link_text_2 }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endcapture %}
+
                             {% if media_type_2 == "image" %}
-                                {% capture caption %}
-                                    {% if block.settings.caption_2 != blank or block.settings.product_link_2 != blank %}
-                                        <div class="caption">
-                                            {% if block.settings.caption_2 != blank %}
-                                                <div class="caption__text">{{ block.settings.caption_2 }}</div>
-                                            {% endif %}
-                                            {% if block.settings.product_link_2 != blank and block.settings.product_link_text_2 != blank %}
-                                                <a href="{{ block.settings.product_link_2 }}"
-                                                   class="caption__link">{{ block.settings.product_link_text_2 }}</a>
-                                            {% endif %}
-                                        </div>
-                                    {% endif %}
-                                {%endcapture%}
                                 {% if block.settings.image_mobile_2 != blank %}
                                     {% assign image_class = "only-desk" %}
                                     <img
@@ -400,21 +410,22 @@
                         <li class="media">
                             {% assign media_type_3 = block.settings.media_type_3 %}
                             {% assign image_class = "" %}
-                            {% if media_type_3 == "image" %}
 
-                                {% capture caption %}
-                                    {% if block.settings.caption_3 != blank or block.settings.product_link_3 != blank %}
-                                        <div class="caption">
-                                            {% if block.settings.caption_3 != blank %}
-                                                <div class="caption__text">{{ block.settings.caption_3 }}</div>
-                                            {% endif %}
-                                            {% if block.settings.product_link_3 != blank and block.settings.product_link_text_3 != blank %}
-                                                <a href="{{ block.settings.product_link_3 }}"
-                                                   class="caption__link">{{ block.settings.product_link_text_3 }}</a>
-                                            {% endif %}
-                                        </div>
-                                    {% endif %}
-                                {%endcapture%}
+                            {% capture caption %}
+                                {% if block.settings.caption_3 != blank or block.settings.product_link_3 != blank %}
+                                    <div class="caption">
+                                        {% if block.settings.caption_3 != blank %}
+                                            <div class="caption__text">{{ block.settings.caption_3 }}</div>
+                                        {% endif %}
+                                        {% if block.settings.product_link_3 != blank and block.settings.product_link_text_3 != blank %}
+                                            <a href="{{ block.settings.product_link_3 }}"
+                                               class="caption__link">{{ block.settings.product_link_text_3 }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endcapture %}
+
+                            {% if media_type_3 == "image" %}
                                 {% if block.settings.image_mobile_3 != blank %}
                                     {% assign image_class = "only-desk" %}
                                     <img
