@@ -70,7 +70,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border: 1px solid var(--black2);
+  border: 1px var(--input-border-color) solid;
 
   @include for-tablet {
     width: 20px;
@@ -86,6 +86,10 @@
 
 .swatch-style-icon_circle .option-selector .opt-btn:checked+.opt-label--swatch:after {
   box-shadow: unset;
+}
+
+.swatch-style-icon_circle .option-selector .opt-btn:checked+.opt-label--swatch > .variant-picker__item-color-cont {
+  border: 1px var(--input-border-color-active) solid;
 }
 
 .variant-picker__item-color {
