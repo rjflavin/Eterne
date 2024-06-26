@@ -75,6 +75,8 @@
 
   &__one-image-row,
   .media__video-wrapper {
+    width: 100%;
+
     &.play {
       .play-icon, .caption, .collage__cover-video-image {
         visibility: hidden;
