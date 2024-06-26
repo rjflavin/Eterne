@@ -4,6 +4,8 @@ export class FiltersForm extends HTMLElement {
     constructor() {
         super();
 
+        this.watchScroll();
+
         this.debouncedOnFiltersFormSubmit = debounce((event) => {
             this.onSubmitHandler(event);
         }, 100);
@@ -152,5 +154,39 @@ export class FiltersForm extends HTMLElement {
         });
 
         this.onSubmitForm(forms.join('&'), event);
+    }
+
+    watchScroll () {
+        let lastScrollTop = 157.73;
+
+        window.addEventListener('scroll', () => {
+            const stickyContent = document.querySelector('#CollectionFiltersForm');
+            const productColumnRight = document.querySelector('collection-filters-form');
+            const offset = productColumnRight.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (stickyContent) {
+                const stickyHeight = stickyContent.offsetHeight;
+                const topOffset = offset.top - stickyHeight + windowHeight;
+                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (currentScrollTop > lastScrollTop) {
+                    if (window.pageYOffset >= topOffset && stickyHeight > windowHeight) {
+                        stickyContent.style.top = `${windowHeight - stickyHeight - 40}px`;
+                    } else if (window.pageYOffset >= topOffset) {
+                        stickyContent.style.top = '40px';
+                    }
+                } else {
+                    if (window.pageYOffset < offset.top) {
+                        stickyContent.style.top = '157.73px';
+                    } else {
+                        const topPosition = Math.min(157.73, parseInt(stickyContent.style.top) + (lastScrollTop - currentScrollTop));
+                        stickyContent.style.top = `${topPosition}px`;
+                    }
+                }
+
+                lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+            }
+        });
     }
 }
