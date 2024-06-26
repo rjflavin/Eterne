@@ -115,7 +115,6 @@
 
           const newHtmlDocument = new DOMParser().parseFromString(newProductHtml, 'text/html')
           const productElem = newHtmlDocument.querySelector('div')
-          console.log('newHtml: ', productElem)
           wrapper.appendChild(productElem)
         }
       }
