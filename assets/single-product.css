@@ -813,12 +813,14 @@
 }
 .product-slider__arrow-prev {
   left: 1px;
+  z-index: 2;
 }
 .product-slider__arrow-prev svg {
   transform: rotate(90deg);
 }
 .product-slider__arrow-next {
   right: 1px;
+  z-index: 2;
 }
 .product-slider__arrow-next svg {
   transform: rotate(270deg);

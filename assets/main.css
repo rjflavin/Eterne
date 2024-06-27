@@ -7408,6 +7408,7 @@ hotspots-image .image-overlay {
 .media-gallery {
   display: block;
   position: relative;
+  overflow: hidden;
   /* always top-right */
 }
 .media-gallery .media-gallery__inner {
