@@ -922,6 +922,7 @@
 
   &__arrow-prev {
     left: 1px;
+    z-index: 2;
 
     svg {
       transform: rotate(90deg);
@@ -930,6 +931,7 @@
 
   &__arrow-next {
     right: 1px;
+    z-index: 2;
 
     svg {
       transform: rotate(270deg);
