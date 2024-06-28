@@ -117,10 +117,6 @@
     display: none;
   }
 
-  &:not(&--active) {
-    display: none !important;
-  }
-
   &_single-image {
     display: flex;
     gap: 0;
@@ -420,10 +416,6 @@
 
         @include for-tablet {
           flex-direction: column;
-        }
-
-        &--active {
-          display: grid !important;
         }
       }
 
