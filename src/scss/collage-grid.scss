@@ -2,7 +2,7 @@
 
 .collage {
   width: 100%;
-  margin: 0 auto;
+  margin: -1px auto 0;
 
   .only-desk {
     display: flex;
@@ -68,8 +68,8 @@
 
     img, video {
       object-fit: cover;
-      min-width: 101%;
-      min-height: 101%;
+      max-width: 100%;
+      height: 100%;
     }
   }
 
@@ -150,24 +150,29 @@
     overflow: hidden;
 
     &.portrait {
-      height: 200vh;
-      @include for-mobile {
-        height: 60vh;
+      aspect-ratio: 5 / 4;
+
+      @include for-tablet {
+        aspect-ratio: 4 / 5;
       }
     }
 
     &.landscape {
-      height: 97vh;
+      aspect-ratio: 16 / 9;
+
+      @include for-tablet {
+        aspect-ratio: 5 / 4;
+      }
 
       @include for-mobile {
-        height: 50vh;
+        aspect-ratio: 1 / 1;
       }
     }
 
     img, video {
       object-fit: cover;
-      width: 100%;
-      min-height: 100%;
+      max-width: 100%;
+      height: 100%;
     }
   }
 
@@ -184,23 +189,25 @@
       height: 100%;
 
       @include for-tablet {
-        min-width: max-content;
+        min-width: 160%;
       }
     }
 
     &.portrait {
-      height: 125vh;
+      height: 100%;
+      aspect-ratio: 6 / 4;
 
-      @include for-mobile {
-        height: 75vh;
+      @include for-tablet {
+        aspect-ratio: 4 / 5;
       }
     }
 
     &.landscape {
-      height: 100vh;
+      height: 100%;
+      aspect-ratio: 16 / 9;
 
-      @include for-mobile {
-        height: 50vh;
+      @include for-tablet {
+        aspect-ratio: 5 / 4;
       }
     }
 
@@ -209,7 +216,6 @@
 
       @include for-tablet {
         display: flex;
-        width: 80vw;
       }
     }
 
@@ -222,13 +228,19 @@
   &__three-images-row {
     overflow-x: auto;
     overflow-y: hidden;
+    aspect-ratio:  6 / 3;
+
+    @include for-tablet {
+      aspect-ratio:  3 / 4;
+    }
 
     &-inner {
       display: flex;
       width: 100%;
+      height: 100%;
 
       @include for-tablet {
-        min-width: max-content;
+        min-width: 240%;
       }
     }
 
@@ -238,11 +250,11 @@
 
     .media {
       width: calc(100% / 3);
-      height: 90vh;
+      height: 100%;
 
       @include for-tablet {
         display: flex;
-        width: 80vw;
+        width: auto;
       }
     }
 
@@ -252,22 +264,22 @@
       overflow: hidden;
       width: calc(100% / 3);
 
-      @include for-tablet {
-        height: 75vh;
-      }
+      //@include for-tablet {
+      //  height: 75vh;
+      //}
 
       .image-wrapper {
         height: 100%;
 
         @include for-tablet {
           display: block;
-          width: 80vw;
+          //width: 80vw;
         }
 
         img {
           object-fit: cover;
-          min-width: 100%;
-          min-height: 100%;
+          max-width: 100%;
+          height: auto;
         }
       }
     }

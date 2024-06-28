@@ -25,10 +25,11 @@
       {% assign imageAlt = image.alt | upcase %}
       {% if imageLimit > 0 and variantColor and imageAlt == variantColor %}
         {% assign imageURL = image | image_url %}
+        {% assign imageURL_lazy = image | img_url: 'small' %}
         {% assign imageLimit = imageLimit | minus: 1 %}
       {% endif %}
     {% endfor %}
-    <a {% if item.url %}href="{{ item.url }}"{% endif %} data-bgimage="{{ imageURL }}" class="cart-flyover-item__image lazyLoad"></a>
+    <a {% if item.url %}href="{{ item.url }}"{% endif %} data-bgimage="{{ imageURL }}" class="cart-flyover-item__image lazyLoad" style="background-image: url('{{ imageURL_lazy }}');"></a>
   </div>
 
   <div class="cart-flyover-item-description">

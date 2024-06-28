@@ -63,7 +63,13 @@ export class EterneCollection extends HTMLElement {
 
                             const items = document.querySelectorAll('.lazyLoad');
                             items.forEach(item => {
-                                item.style.backgroundImage = "url('" + item.dataset.bgimage + "')";
+                                const highQualityImage = item.dataset.bgimage;
+                                const img = new Image();
+                                img.src = highQualityImage;
+                                img.onload = () => {
+                                    item.style.backgroundImage = `url('${highQualityImage}')`;
+                                    item.style.filter = 'none';
+                                };
                             });
 
                             this.isLoading = false;
@@ -98,7 +104,13 @@ export class EterneCollection extends HTMLElement {
 
             const items = document.querySelectorAll('.lazyLoad');
             items.forEach(item => {
-                item.style.backgroundImage = "url('" + item.dataset.bgimage + "')";
+                const highQualityImage = item.dataset.bgimage;
+                const img = new Image();
+                img.src = highQualityImage;
+                img.onload = () => {
+                    item.style.backgroundImage = `url('${highQualityImage}')`;
+                    item.style.filter = 'none';
+                };
             });
 
             window.addEventListener('scroll', this.scrollDebounceHandler);
@@ -220,7 +232,7 @@ export class EterneCollection extends HTMLElement {
         const variantCardElement = event.target.closest('[data-collection-item]');
         const currencySymbol = document.querySelector('body').dataset.currencySymbol.trim();
         const clickOnSize = checkParentsForClass(event.target, 'collection__size-variant-text');
-        const clickOnColor = checkParentsForClass(event.target, 'ul-swatches-list');
+        const clickOnColor = checkParentsForClass(event.target, 'gsw-list-products-group');
         const clickOnMobileQuickAddShowButton = checkParentsForClass(event.target, 'collection__item-quick-add-btn-wrap');
         const clickOnShowMoreColorsButton = checkParentsForClass(event.target, 'collection__show-more-colors-btn');
         const clickOnAddToCartButton = checkParentsForClass(event.target, 'collection__add-to-cart');
@@ -315,15 +327,7 @@ export class EterneCollection extends HTMLElement {
         }
 
         if (clickOnColor) {
-            //const isLoadedWithFilters = variantCardElement.dataset.isLoadedWithFilters === "true";
-            let closestInputElement = event.target.closest('.swatches-globo input');
-            let clickedColor = null;
-
-            if (closestInputElement) {
-                clickedColor = closestInputElement.value;
-            } else {
-                console.error('No matching input element found');
-            }
+            event.preventDefault()
 
             let selectedSize = variantCardElement.dataset.selectedSize;
             const productHandle = variantCardElement.dataset.productHandle;
@@ -338,102 +342,115 @@ export class EterneCollection extends HTMLElement {
 
             if (isVariantReadyToFetch) {
                 const emptyImageUrl = variantCardElement.dataset.emptyImage;
-                const hoverImages = variantCardElement.dataset.hoverImages;
 
-                const checkVariantAvailability = async () => {
+                const checkProductAvailability = async () => {
                     const response = await this.getProductInfo(productHandle);
                     const sizesByColor = {};
 
                     if (response) {
-                        response.variants.forEach((variant) => {
-                            const parts = variant.title.split('/').map(part => part.trim());
-                            const color = parts[0];
-                            const size = parts[1];
+                        const closestLinkElement = event.target.closest('.gsw-prg-item--link');
+                        const closestGroupElement = event.target.closest('.gsw-list-products-group');
+                        let clickedColor = null;
 
-                            if (!sizesByColor[color]) {
-                                sizesByColor[color] = [];
-                            }
+                        closestGroupElement.querySelectorAll('.gsw-prg-item--link').forEach(function (link) {
+                            link.classList.remove('is-gsw-active');
+                        })
 
-                            sizesByColor[color].push({ size, available: variant.available });
-                        });
+                        closestLinkElement.classList.add('is-gsw-active');
 
-                        const availableSizes = sizesByColor[clickedColor] || [];
-                        updateAvailableSizesUI(availableSizes);
+                        const productLink = closestLinkElement.getAttribute('href');
 
-                        const firstAvailableSize = availableSizes.find(({ available }) => available)?.size;
-                        if (firstAvailableSize) {
-                            selectedSize = firstAvailableSize;
-                            variantCardElement.dataset.selectedSize = selectedSize;
-                            response.variants.forEach((variant) => {
-                                const parts = variant.title.split('/').map(part => part.trim());
-                                const color = parts[0];
-                                const size = parts[1];
+                        if (productLink && productLink.trim() !== '') {
+                            let newProductHandle = productLink.split('/').pop();
 
-                                const isSelectedSizeInVariantTitle = size === selectedSize;
-                                const isClickedColorInVariantTitle = color === clickedColor;
+                            const response = await this.getProductInfo(newProductHandle);
 
-                                if (isSelectedSizeInVariantTitle && isClickedColorInVariantTitle) {
-                                    const featuredImageUrl = variant.featured_image?.src;
-                                    productPriceElement.innerHTML = `${currencySymbol}${formatPrice(variant.price)}`;
-                                    variantCardElement.dataset.variantId = variant.id;
-                                    variantCardElement.dataset.selectedColor = clickedColor;
-                                    productTitleElement.innerHTML = `${productTitle} ${clickedColor}`;
+                            if (response) {
+                                const featuredImageUrl =  response.media[0] ? response.media[0]?.src : null;
+                                clickedColor = response.variants[0].option1;
 
-                                    const items = hoverImages.split(";").filter(item => item);
-                                    const hoverImagesArray = items.map(item => {
-                                        const [variantId, hoverImageUrl] = item.split(",");
-                                        return { variantId: parseInt(variantId), hoverImageUrl };
-                                    });
+                                let firstImageUrl = featuredImageUrl || emptyImageUrl;
+                                firstImageElement.setAttribute('style', `background-image: url(${firstImageUrl})`);
 
-                                    let firstImageUrl;
-                                    if (featuredImageUrl) {
-                                        firstImageUrl = featuredImageUrl;
-                                    } else {
-                                        firstImageUrl = emptyImageUrl;
+                                let secondImageUrl = response.media[1] ? response.media[1]?.src : firstImageUrl;
+                                secondImageElement.setAttribute('style', `background-image: url(${secondImageUrl})`);
+
+                                variantCardElement.dataset.productHandle = newProductHandle;
+                                variantCardElement.dataset.variantId = response.id;
+                                variantCardElement.dataset.selectedColor = response.variants[0].option1;
+                                variantCardElement.dataset.productTitle = response.title;
+                                variantCardElement.dataset.firstImage = firstImageUrl;
+                                variantCardElement.dataset.secondImage = secondImageUrl;
+                                variantCardElement.dataset.hoverImages = secondImageUrl;
+
+                                productPriceElement.innerHTML = `${currencySymbol}${formatPrice(response.price)}`;
+                                productTitleElement.innerHTML = response.title;
+
+                                if (response.available) {
+                                    preorderWrapperElement.classList.remove('disp-flx-imp');
+                                    variantCardElement.dataset.isVariantInStock = 'true';
+
+                                    const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
+                                    if (inventoryPolicyDivs) {
+                                        inventoryPolicyDivs.forEach(div => {
+                                            const variantIdPolicy = div.getAttribute('data-variant-id-policy');
+                                            const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+
+                                            if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                                                preorderWrapperElement.classList.add('disp-flx-imp');
+                                                variantCardElement.dataset.isVariantInStock = 'false';
+                                            }
+                                        });
                                     }
-                                    firstImageElement.setAttribute('style', `background-image: url(${firstImageUrl})`);
-
-                                    const variantHoverImageUrl = hoverImagesArray.find(item => item.variantId === variant.id)?.hoverImageUrl;
-                                    let secondImageUrl;
-                                    if (variantHoverImageUrl) {
-                                        secondImageUrl = variantHoverImageUrl;
-                                    } else if (firstImageUrl) {
-                                        secondImageUrl = firstImageUrl;
-                                    } else {
-                                        secondImageUrl = emptyImageUrl;
-                                    }
-                                    secondImageElement.setAttribute('style', `background-image: url(${secondImageUrl})`);
-
-                                    if (variant.available) {
-                                        preorderWrapperElement.classList.remove('disp-flx-imp');
-                                        variantCardElement.dataset.isVariantInStock = 'true';
-                                    } else {
-                                        preorderWrapperElement.classList.add('disp-flx-imp');
-                                        variantCardElement.dataset.isVariantInStock = 'false';
-                                    }
+                                } else {
+                                    preorderWrapperElement.classList.add('disp-flx-imp');
+                                    variantCardElement.dataset.isVariantInStock = 'false';
                                 }
 
-                                const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+                                response.variants.forEach((variant) => {
+                                    const parts = variant.title.split('/').map(part => part.trim());
+                                    const color = parts[0];
+                                    const size = parts[1];
 
-                                if (inventoryPolicyDivs) {
-                                    inventoryPolicyDivs.forEach(div => {
-                                        const variantIdPolicy = div.getAttribute('data-variant-id-policy');
-                                        const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+                                    if (!sizesByColor[color]) {
+                                        sizesByColor[color] = [];
+                                    }
 
-                                        if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && !variant.available) {
-                                            preorderWrapperElement.classList.add('disp-flx-imp');
-                                            variantCardElement.dataset.isVariantInStock = 'false';
+                                    sizesByColor[color].push({size, available: variant.available});
+                                });
+
+                                const availableSizes = sizesByColor[clickedColor] || [];
+                                updateAvailableSizesUI(availableSizes);
+
+                                const firstAvailableSize = availableSizes.find(({ available }) => available)?.size;
+                                if (firstAvailableSize) {
+                                    selectedSize = firstAvailableSize;
+                                    variantCardElement.dataset.selectedSize = selectedSize;
+
+                                    response.variants.forEach((variant) => {
+                                        const parts = variant.title.split('/').map(part => part.trim());
+                                        const color = parts[0];
+                                        const size = parts[1];
+
+                                        const isSelectedSizeInProductTitle = size === selectedSize;
+                                        const isClickedColorInProductTitle = color === clickedColor;
+
+                                        if (isSelectedSizeInProductTitle && isClickedColorInProductTitle) {
+                                            productPriceElement.innerHTML = `${currencySymbol}${formatPrice(variant.price)}`;
+                                            variantCardElement.dataset.variantId = variant.id;
+                                            variantCardElement.dataset.selectedColor = clickedColor;
                                         }
                                     });
                                 }
-                            });
+                            }
                         }
                     }
 
                     variantCardElement.dataset.isVariantReadyToFetch = 'true';
                 }
 
-                checkVariantAvailability();
+                checkProductAvailability();
 
                 const updateAvailableSizesUI = (sizes) => {
                     const sizeContainer = variantCardElement.querySelector('.collection__size-variants');

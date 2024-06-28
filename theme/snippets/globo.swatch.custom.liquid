@@ -17,11 +17,12 @@
             globoswatch.init();
     });
 
-    // document.getElementById('loadMoreButton').addEventListener('click', () => {
-    //     const event = new CustomEvent('collection-items-updated');
-    //     document.dispatchEvent(event);
-    //     if (typeof globoswatch !== 'undefined')
-    //         console.log(globoswatch)
-    //         globoswatch.init();
-    // });
+    document.getElementById('loadMoreButton').addEventListener('click', () => {
+        const event = new CustomEvent('collection-items-updated');
+
+        document.dispatchEvent(event);
+        if (typeof globoswatch !== 'undefined')
+            console.log(globoswatch)
+            globoswatch.init();
+    });
 </script>

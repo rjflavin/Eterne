@@ -112,35 +112,32 @@
             {% endfor %}
           {% endfor %}
           {% for product in collection.products %}
-            {% if product.selected_or_first_available_variant.featured_image != blank %}
-              {% assign first_image = product.selected_or_first_available_variant.featured_image | img_url: 'master' %}
+            {% if product.featured_image != blank %}
+              {% assign first_image = product.featured_image | img_url: 'master' %}
+              {% assign first_image_lazy = product.featured_image | img_url: 'small' %}
             {% else %}
               {% assign first_image = emptyImage %}
             {% endif %}
-            {% if product.selected_or_first_available_variant.metafields.custom.hover_image != blank %}
-              {% assign second_image = product.selected_or_first_available_variant.metafields.custom.hover_image | img_url: 'master' %}
+
+            {% if product.media[1] != blank %}
+              {% assign second_image = product.media[1] | img_url: 'master' %}
+              {% assign second_image_lazy = product.media[1] | img_url: 'small' %}
+              {% assign hoverImages = product.media[1] | img_url: 'master' %}
+              {% assign hoverImages_lazy = product.media[1] | img_url: 'small' %}
             {% elsif product.selected_or_first_available_variant.featured_image != blank %}
               {% assign second_image = product.selected_or_first_available_variant.featured_image | img_url: 'master' %}
+              {% assign second_image_lazy = product.selected_or_first_available_variant.featured_image | img_url: 'small' %}
             {% else %}
               {% assign second_image = emptyImage %}
+              {% assign hoverImages = emptyImage %}
             {% endif %}
 
-            {% assign variant_url = "/collections/" | append: collection.handle | append: "/products/" | append: product.handle | append: "?variant=" | append: product.selected_or_first_available_variant.id %}
+            {% assign variant_url = "/collections/" | append: collection.handle | append: "/products/" | append: product.handle %}
 
             {% assign shouldStop = false %}
             {% assign currentVariant = "" %}
             {% assign isVariantInStock = true %}
             {% assign isAnyVariantInStock = false %}
-
-            {% assign hoverImages = "" %}
-            {% for variant in product.variants %}
-              {% if variant.metafields.custom.hover_image != blank %}
-                {% assign tempHoverImageVariantId = variant.id | append: "," %}
-                {% assign tempHoverImageUrl = variant.metafields.custom.hover_image | img_url: 'master' %}
-                {% assign tempHoverImage = tempHoverImageVariantId | append: tempHoverImageUrl | append: ";" %}
-                {% assign hoverImages = hoverImages | append: tempHoverImage %}
-              {% endif %}
-            {% endfor %}
 
             {% for option in product.options_with_values %}
               {% if shouldStop %}
@@ -299,21 +296,22 @@
                   </div>
                   <a href="{{ variant_url }}" class="collection__item-link"></a>
                   <div class="collection__item-bg-imgs-wrap">
-                    <div
-                            class="collection__item-bg-img"
-                            style="background-image: url('{{ first_image }}')"
+                    <div class="collection__item-bg-img lazyLoad"
+                         data-bgimage="{{ first_image }}"
+                         style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
+                         id="productImage"
                     ></div>
                     {% if second_image != blank %}
-                      <div
-                              class="collection__item-bg-img-hover"
-                              style="background-image: url('{{ second_image }}')"
+                      <div class="collection__item-bg-img-hover lazyLoad"
+                           data-bgimage="{{ second_image }}"
+                           style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
                       ></div>
                     {% endif %}
                   </div>
                 </div>
 
                 <div class="collection__item-text-wrap">
-                  <div class="collection__item-title">{{ product.title }} {{ colorOption }}</div>
+                  <div class="collection__item-title">{{ product.title }}</div>
                   <div class="collection__item-price">{{ currentVariant.price | money_without_trailing_zeros }}</div>
                 </div>
               </div>

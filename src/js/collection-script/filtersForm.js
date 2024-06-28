@@ -106,6 +106,17 @@ export class FiltersForm extends HTMLElement {
                 cancelable: true,
                 detail: {}
             }));
+
+            const items = document.querySelectorAll('.lazyLoad');
+            items.forEach(item => {
+                const highQualityImage = item.dataset.bgimage;
+                const img = new Image();
+                img.src = highQualityImage;
+                img.onload = () => {
+                    item.style.backgroundImage = `url('${highQualityImage}')`;
+                    item.style.filter = 'none';
+                };
+            });
         }
     }
 

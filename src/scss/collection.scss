@@ -415,6 +415,7 @@
       &:hover {
         .collection__item-bg-img-hover {
           visibility: visible !important;
+          opacity: 1 !important;
         }
 
         .collection__quick-add-panel {
@@ -423,6 +424,20 @@
           transform: translateY(0);
         }
       }
+    }
+  }
+
+  .gsw-list-product-groups {
+    legend {
+      display: none;
+    }
+
+    .attr-title-hover-groups {
+      display: block;
+    }
+
+    .gsw-list-products-group {
+      justify-content: center;
     }
   }
 
@@ -575,13 +590,15 @@
     background-position: center center;
     font-size: 0;
     line-height: 1;
-    background-color: var(--gray2);
+    transition: all .15s ease-in-out;
+    opacity: 1;
 
     will-change: transform, opacity;
   }
 
   &__item-bg-img-hover {
     visibility: hidden;
+    opacity: 0;
   }
 
   &__item-text-wrap {

@@ -315,6 +315,9 @@
 .product-form fieldset.option-selector.color-switcher.single-product-options .opt-label {
   border-radius: 50%;
 }
+.product-form .attr-title-hover-groups {
+  display: block;
+}
 
 .color-tooltip {
   position: absolute;
