@@ -18,11 +18,13 @@
                 <div
                   class="new-in__item-bg-img lazyLoad"
                   data-bgimage="{{ product.featured_image | img_url: 'master' }}"
+                  style="background-image: url('{{ product.featured_image | img_url: 'small' }}'); filter: blur(2px)"
                 ></div>
                 {% if product.images[1] != blank %}
                   <div
                     class="new-in__item-bg-img-hover lazyLoad"
                     data-bgimage="{{ product.images[1] | img_url: 'master' }}"
+                    style="background-image: url('{{ product.images[1] | img_url: 'small' }}'); filter: blur(2px)"
                   ></div>
                 {% endif %}
               </div>
