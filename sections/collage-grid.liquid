@@ -28,21 +28,22 @@
                         {% else %}
                             {% assign image_mobile = block.settings.image %}
                         {% endif %}
-
+                        <a href="{{ block.settings.product_link }}" class="caption__link">
                         <img
                                 class="collage__image only-desk"
                                 src="{{ block.settings.image | img_url: "master" }}"
                                 alt="{{ block.settings.image.alt }}"
                                 style="object-position: {{ block.settings.image.presentation.focal_point }}"
                                 loading="lazy"
-                        >
+                        ></a>
+                        <a href="{{ block.settings.product_link }}" class="caption__link">
                         <img
                                 class="collage__image only-mob"
                                 src="{{ image_mobile | img_url: "master" }}"
                                 alt="{{ image_mobile.alt }}"
                                 style="object-position: {{ image_mobile.presentation.focal_point }}"
                                 loading="lazy"
-                        >
+                        ></a>
                         {{ caption }}
                     </div>
                 {% elsif media_type == "video" %}
