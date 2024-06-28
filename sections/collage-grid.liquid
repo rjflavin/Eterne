@@ -28,7 +28,7 @@
                         {% else %}
                             {% assign image_mobile = block.settings.image %}
                         {% endif %}
-                        <a href="{{ block.settings.product_link }}" class="caption__link">
+                        <a href="{{ block.settings.product_link }}">
                         <img
                                 class="collage__image only-desk"
                                 src="{{ block.settings.image | img_url: "master" }}"
@@ -36,7 +36,7 @@
                                 style="object-position: {{ block.settings.image.presentation.focal_point }}"
                                 loading="lazy"
                         ></a>
-                        <a href="{{ block.settings.product_link }}" class="caption__link">
+                        <a href="{{ block.settings.product_link }}">
                         <img
                                 class="collage__image only-mob"
                                 src="{{ image_mobile | img_url: "master" }}"
