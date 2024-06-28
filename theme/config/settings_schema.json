@@ -29,6 +29,23 @@
     "settings": [
       {
         "type": "text",
+        "id": "empty_cart_subtitle_text",
+        "label": "Empty cart subtitle",
+        "default": "Your shopping bag is empty"
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_button_text",
+        "label": "Continue shopping button text",
+        "default": "Continue shopping"
+      },
+      {
+        "type": "collection",
+        "id": "empty_cart_button_link",
+        "label": "Continue shopping button link"
+      },
+      {
+        "type": "text",
         "id": "cart_note_text",
         "label": "Cart note text",
         "default": "Add a note to your order"

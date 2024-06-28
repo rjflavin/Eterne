@@ -215,6 +215,15 @@ class CartFlyover extends HTMLElement {
                     this.deleteItemElement(variantId)
                     this.refreshCartHandler(false)
                 }
+
+                const hasResponseError = !response.items;
+
+                if (!hasResponseError && response.items.length <= 1) {
+                    const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+                    if (emptyCartElement.classList.contains('disp-none-imp')) {
+                        emptyCartElement.classList.remove('disp-none-imp');
+                    }
+                }
             }
         }
     }
@@ -233,6 +242,15 @@ class CartFlyover extends HTMLElement {
                 if (!product) {
                     this.deleteItemElement(variantId)
                     this.refreshCartHandler(false)
+                }
+            }
+
+            const hasResponseError = !response.items;
+
+            if (!hasResponseError && response.items.length <= 1) {
+                const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+                if (emptyCartElement.classList.contains('disp-none-imp')) {
+                    emptyCartElement.classList.remove('disp-none-imp');
                 }
             }
         }

@@ -62,11 +62,18 @@ export const addToCartSetup = async (element, productId, quantity, loaderElement
             loaderFillTextElement.classList.remove('disp-none-imp')
         }
     }
-    console.log('variant to add for fetch: ', productId)
 
     const response = await addToCart(productId, quantity)
 
-    console.log('response: ', response)
+    const hasResponseError = !response.items;
+
+    if (!hasResponseError) {
+        const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+        if (!emptyCartElement.classList.contains('disp-none-imp')) {
+            emptyCartElement.classList.add('disp-none-imp');
+        }
+    }
+
     if (response) {
         element.disabled = false
         const e = new CustomEvent("dispatch:cart-flyover:refresh", {
