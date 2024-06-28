@@ -377,12 +377,22 @@
 @media (min-width: 1025px) {
   .collection__img-wrap:hover .collection__item-bg-img-hover {
     visibility: visible !important;
+    opacity: 1 !important;
   }
   .collection__img-wrap:hover .collection__quick-add-panel {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
+}
+.collection .gsw-list-product-groups legend {
+  display: none;
+}
+.collection .gsw-list-product-groups .attr-title-hover-groups {
+  display: block;
+}
+.collection .gsw-list-product-groups .gsw-list-products-group {
+  justify-content: center;
 }
 .collection__quick-add-panel {
   position: absolute;
@@ -522,11 +532,13 @@
   background-position: center center;
   font-size: 0;
   line-height: 1;
-  background-color: var(--gray2);
+  transition: all 0.15s ease-in-out;
+  opacity: 1;
   will-change: transform, opacity;
 }
 .collection__item-bg-img-hover {
   visibility: hidden;
+  opacity: 0;
 }
 .collection__item-text-wrap {
   width: 100%;
@@ -649,6 +661,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 11px;
+  margin-bottom: 15px;
 }
 .collection__preorder {
   display: flex;
