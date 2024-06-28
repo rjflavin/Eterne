@@ -1,34 +1,6 @@
 <div class="product-{{ item.product.handle }} cart-flyover-item" variant-id="{{ item.variant.id }}">
   <div>
-    {% assign imageURL = 'no-image.webp' | asset_url %}
-    {% assign colorIndex = 0 %}
-    {% assign sizeIndex = 1 %}
-    {% for option in item.product.options %}
-      {% if option == "Color" %}
-        {% assign colorIndex = forloop.index0 %}
-      {% elsif option == "Size" %}
-        {% assign sizeIndex = forloop.index0 %}
-      {% endif %}
-    {% endfor %}
-
-    {% for option in item.variant.options %}
-      {% if forloop.index0 == colorIndex %}
-        {% assign variantColor = option | upcase %}
-        {% assign color = option %}
-      {% elsif forloop.index0 == sizeIndex %}
-        {% assign size = option %}
-      {% endif %}
-    {% endfor %}
-
-    {% assign imageLimit = 1 %}
-    {% for image in item.product.images %}
-      {% assign imageAlt = image.alt | upcase %}
-      {% if imageLimit > 0 and variantColor and imageAlt == variantColor %}
-        {% assign imageURL = image | image_url %}
-        {% assign imageLimit = imageLimit | minus: 1 %}
-      {% endif %}
-    {% endfor %}
-    <a {% if item.url %}href="{{ item.url }}"{% endif %} data-bgimage="{{ imageURL }}" class="cart-flyover-item__image lazyLoad"></a>
+    <a {% if item.url %}href="{{ item.url }}"{% endif %} data-bgimage="{{ item.product.featured_image | image_url }}" class="cart-flyover-item__image lazyLoad"></a>
   </div>
 
   <div class="cart-flyover-item-description">
