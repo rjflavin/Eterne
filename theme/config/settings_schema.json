@@ -20,7 +20,7 @@
         "type": "text",
         "id": "size_fit_information_title_text",
         "label": "Size & Fit Information title text",
-        "default": "Size & Fit Information"
+        "default": "Size &amp; Fit Information"
       }
     ]
   },
