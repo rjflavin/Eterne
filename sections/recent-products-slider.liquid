@@ -54,6 +54,14 @@
 
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
           const firstAvailableVariant = product.variants.find((variant) => variant.firstAvailable);
+          let imageUrl = product.images[0]
+
+          let parts = imageUrl.split('.');
+          let extension = parts.pop();
+          let baseUrl = parts.join('.');
+
+          let imageUrlLazyLoad = `${baseUrl}_small.${extension}`;
+
           const newProductHtml = `
             <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
                  class="recent-products__slider-slide swiper-slide"
@@ -66,9 +74,8 @@
                </div>
               <div class="swiper-slide-container">
                 <a href="${firstAvailableVariant.url}" class="swiper-slide-link"></a>
-
-                <div class="swiper-slide-image-container">
-                  <div data-bgimage="${product.images[0] ? product.images[0] : noImage}" class="swiper-slide-image lazyLoad"></div>
+                <div class="swiper-slide-image-container lazyLoad">
+                  <div data-bgimage="${imageUrl ? imageUrl : noImage}" class="swiper-slide-image lazyLoad" style="background-image: url('${imageUrlLazyLoad ? imageUrlLazyLoad : noImage}'); filter: blur(2px)"></div>
                   <div class="swiper-slide-image-info">
                     <div class="swiper-slide-image-info-sizes">
                       ${(product && product.variants &&

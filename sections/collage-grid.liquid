@@ -28,22 +28,21 @@
                         {% else %}
                             {% assign image_mobile = block.settings.image %}
                         {% endif %}
-                        <a href="{{ block.settings.product_link }}">
+
                         <img
                                 class="collage__image only-desk"
                                 src="{{ block.settings.image | img_url: "master" }}"
                                 alt="{{ block.settings.image.alt }}"
                                 style="object-position: {{ block.settings.image.presentation.focal_point }}"
                                 loading="lazy"
-                        ></a>
-                        <a href="{{ block.settings.product_link }}">
+                        >
                         <img
                                 class="collage__image only-mob"
                                 src="{{ image_mobile | img_url: "master" }}"
                                 alt="{{ image_mobile.alt }}"
                                 style="object-position: {{ image_mobile.presentation.focal_point }}"
                                 loading="lazy"
-                        ></a>
+                        >
                         {{ caption }}
                     </div>
                 {% elsif media_type == "video" %}
@@ -112,22 +111,20 @@
                                 {% else %}
                                     {% assign image_mobile_1 = block.settings.image_1 %}
                                 {% endif %}
-                                <a href="{{ block.settings.product_link_1 }}">
                                 <img
                                         class="media__image only-desk"
                                         src="{{ block.settings.image_1 | img_url: "master" }}"
                                         alt="{{ block.settings.image_1.alt }}"
                                         style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
                                         loading="lazy"
-                                ></a>
-                               <a href="{{ block.settings.product_link_1 }}">
+                                >
                                 <img
                                         class="media__image only-mob"
                                         src="{{ image_mobile_1 | img_url: "master" }}"
                                         alt="{{ image_mobile_1.alt }}"
                                         style="object-position: {{ image_mobile_1.presentation.focal_point }}"
                                         loading="lazy"
-                                ></a>
+                                >
                                 {{ caption }}
                             {% elsif media_type_1 == "video" %}
                                 <custom-video-player class="media__video-wrapper">
@@ -194,22 +191,21 @@
                                 {% else %}
                                     {% assign image_mobile_2 = block.settings.image_2 %}
                                 {% endif %}
-                            <a href="{{ block.settings.product_link_2 }}">
+
                             <img
                                     class="media__image only-desk"
                                     src="{{ block.settings.image_2 | img_url: "master" }}"
                                     alt="{{ block.settings.image_2.alt }}"
                                     style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
                                     loading="lazy"
-                            ></a>
-                            <a href="{{ block.settings.product_link_2 }}">                              
+                            >
                             <img
                                     class="media__image only-mob"
                                     src="{{ image_mobile_2 | img_url: "master" }}"
                                     alt="{{ image_mobile_2.alt }}"
                                     style="object-position: {{ image_mobile_2.presentation.focal_point }}"
                                     loading="lazy"
-                            ></a>
+                            >
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
                                 <custom-video-player class="media__video-wrapper">
@@ -278,23 +274,21 @@
                             {% if media_type_1 == "image" %}
                                 {% if block.settings.image_mobile_1 != blank %}
                                     {% assign image_class = "only-desk" %}
-                                  <a href="{{ block.settings.product_link_1 }}" >
                                     <img
                                             class="media__image only-mob"
                                             src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
                                             alt="{{ block.settings.image_mobile_1.alt }}"
                                             style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
                                             loading="lazy"
-                                    ></a>
+                                    >
                                 {% endif %}
-                                <a href="{{ block.settings.product_link_1 }}" >
                                 <img
                                         class="media__image {{ image_class }}"
                                         src="{{ block.settings.image_1 | img_url: "master" }}"
                                         alt="{{ block.settings.image_1.alt }}"
                                         style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
                                         loading="lazy"
-                                ></a>
+                                >
                                 {{ caption }}
                             {% elsif media_type_1 == "video" %}
                                 <custom-video-player class="media__video-wrapper">
@@ -357,23 +351,21 @@
                             {% if media_type_2 == "image" %}
                                 {% if block.settings.image_mobile_2 != blank %}
                                     {% assign image_class = "only-desk" %}
-                                  <a href="{{ block.settings.product_link_2 }}" >
                                     <img
                                             class="media__image only-mob"
                                             src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
                                             alt="{{ block.settings.image_mobile_2.alt }}"
                                             style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
                                             loading="lazy"
-                                    ></a>
+                                    >
                                 {% endif %}
-                                <a href="{{ block.settings.product_link_2 }}" >
                                 <img
                                         class="media__image {{ image_class }}"
                                         src="{{ block.settings.image_2 | img_url: "master" }}"
                                         alt="{{ block.settings.image_2.alt }}"
                                         style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
                                         loading="lazy"
-                                ></a>
+                                >
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
                                 <custom-video-player class="media__video-wrapper">
@@ -436,23 +428,21 @@
                             {% if media_type_3 == "image" %}
                                 {% if block.settings.image_mobile_3 != blank %}
                                     {% assign image_class = "only-desk" %}
-                                  <a href="{{ block.settings.product_link_3 }}" >
                                     <img
                                             class="media__image only-mob"
                                             src="{{ block.settings.image_mobile_3 | img_url: "master" }}"
                                             alt="{{ block.settings.image_mobile_3.alt }}"
                                             style="object-position: {{ block.settings.image_mobile_3.presentation.focal_point }}"
                                             loading="lazy"
-                                    ></a>
+                                    >
                                 {% endif %}
-                               <a href="{{ block.settings.product_link_3 }}" >
                                 <img
                                         class="media__image {{ image_class }}"
                                         src="{{ block.settings.image_3 | img_url: "master" }}"
                                         alt="{{ block.settings.image_3.alt }}"
                                         style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
                                         loading="lazy"
-                                ></a>
+                                >
                                 {{ caption }}
                             {% elsif media_type_3 == "video" %}
                                 <custom-video-player class="media__video-wrapper">
