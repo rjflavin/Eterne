@@ -41,6 +41,7 @@
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide {
   position: relative;
+  width: 25%;
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-container {
   margin-right: 15px;
