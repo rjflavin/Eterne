@@ -117,10 +117,6 @@
     display: none;
   }
 
-  &:not(&--active) {
-    display: none !important;
-  }
-
   &_single-image {
     display: flex;
     gap: 0;
@@ -359,6 +355,10 @@
       }
     }
   }
+
+  .attr-title-hover-groups {
+    display: block;
+  }
 }
 
 .color-tooltip {
@@ -420,10 +420,6 @@
 
         @include for-tablet {
           flex-direction: column;
-        }
-
-        &--active {
-          display: grid !important;
         }
       }
 
@@ -922,6 +918,7 @@
 
   &__arrow-prev {
     left: 1px;
+    z-index: 2;
 
     svg {
       transform: rotate(90deg);
@@ -930,6 +927,7 @@
 
   &__arrow-next {
     right: 1px;
+    z-index: 2;
 
     svg {
       transform: rotate(270deg);

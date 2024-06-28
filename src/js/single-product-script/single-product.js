@@ -11,9 +11,9 @@ export default class SingleProduct extends HTMLElement {
     this.sectionId = this.getAttribute('section-id');
 
     this.productDetailsHandler = (dataAttribute) => {
-      const productSizeAndFitElement = this.querySelector(`[${dataAttribute}]`);
+    const productSizeAndFitElement = this.querySelector(`[${dataAttribute}]`);
 
-      if (productSizeAndFitElement) {
+    if (productSizeAndFitElement) {
         const productSizeAndFitHeaderElement = productSizeAndFitElement.querySelector('.product-details__header');
         const productSizeAndFitContentElement = productSizeAndFitElement.querySelector('.product-details__content');
         const plusButtonElement = productSizeAndFitHeaderElement.querySelector('[data-plus-button]');
