@@ -46,6 +46,7 @@
         .swiper-wrapper {
             .swiper-slide {
                 position: relative;
+                width: calc(100% / 4);
 
                 &-container {
                     margin-right: 15px;
