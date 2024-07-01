@@ -383,6 +383,7 @@
     }
   },
   "current": {
+    "empty_cart_button_link": "shop",
     "max_page_width": 1600,
     "use_fullwidth_layout": false,
     "font_col_base": "#5c5c5c",
@@ -491,6 +492,7 @@
     "favicon": "shopify:\/\/shop_images\/favicon.png",
     "cart_type": "drawer",
     "after_add_to_cart": "drawer",
+    "free_shipping_amounts": "USD:10000",
     "free_shipping_bar_col_under": "#41872F",
     "sections": {
       "footer": {
@@ -521,6 +523,12 @@
     "blocks": {
       "6858403126979251294": {
         "type": "shopify:\/\/apps\/consentik-cookie\/blocks\/omega-cookies-notification\/13cba824-a338-452e-9b8e-c83046a79f21",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "3577669850698438243": {
+        "type": "shopify:\/\/apps\/preorder-now-wod-preorder\/blocks\/app-embed\/fdf17d17-ef12-4a7b-8383-20cc1fc2a4b6",
         "disabled": false,
         "settings": {
         }

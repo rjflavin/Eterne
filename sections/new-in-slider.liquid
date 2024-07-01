@@ -1,7 +1,6 @@
 {{ 'new-in-slider.css' | asset_url | stylesheet_tag }}
 
 {% assign collection_handle = section.settings.selected_collection.handle %}
-{% assign now = "now" | date: "%s" %}
 
 <div class="new-in">
   <div class="new-in__title-wrap">
@@ -10,72 +9,39 @@
   <div class="new-in__swiper">
     <div class="new-in__swiper-wrapper swiper-wrapper">
       {% for product in collections[collection_handle].products %}
-        {% assign loop_product_id = product.id %}
-        {% assign loop_color = "" %}
+        <div class="new-in__item swiper-slide">
+          <div class="new-in__item-inner">
+            <a href="{{ product.selected_or_first_available_variant.url }}" class="new-in__item-link"></a>
 
-        {% for variant in product.variants %}
-          {% assign variant_available_from = variant.metafields.custom.available_from | date: "%s" %}
-          {% assign color_value = "" %}
-          {% for option in variant.options %}
-            {% if forloop.first %}
-              {% assign color_value = option | downcase %}
-            {% endif %}
-          {% endfor %}
-
-          {% if loop_product_id == product.id and loop_color != color_value %}
-            {% assign loop_color = color_value %}
-            {% assign variant_url = "/products/" | append: product.handle | append: "?variant=" | append: variant.id %}
-
-            {% assign first_image = "" %}
-            {% assign second_image = "" %}
-            {% for image in product.images %}
-              {% assign image_alt_downcase = image.alt | downcase %}
-
-              {% if color_value == image_alt_downcase %}
-                {% if first_image.size == 0 %}
-                  {% assign first_image = image.src %}
-                {% elsif first_image.size > 0 and second_image.size == 0 %}
-                  {% assign second_image = image.src %}
+            <div class="new-in__img-wrap">
+              <div class="new-in__item-bg-imgs-wrap">
+                <div
+                  class="new-in__item-bg-img lazyLoad"
+                  data-bgimage="{{ product.featured_image | img_url: 'master' }}"
+                  style="background-image: url('{{ product.featured_image | img_url: 'small' }}'); filter: blur(2px)"
+                ></div>
+                {% if product.images[1] != blank %}
+                  <div
+                    class="new-in__item-bg-img-hover lazyLoad"
+                    data-bgimage="{{ product.images[1] | img_url: 'master' }}"
+                    style="background-image: url('{{ product.images[1] | img_url: 'small' }}'); filter: blur(2px)"
+                  ></div>
                 {% endif %}
-              {% endif %}
-            {% endfor %}
-
-            {% if variant_available_from < now or variant_available_from == blank %}
-              <div class="new-in__item swiper-slide">
-                <div class="new-in__item-inner">
-                  <a href="{{ variant_url }}" class="new-in__item-link"></a>
-
-                  <div class="new-in__img-wrap">
-                    <div class="new-in__item-bg-imgs-wrap">
-                      <div
-                        class="new-in__item-bg-img lazyLoad"
-                        data-bgimage="{{ first_image | img_url: 'master' }}"
-                      ></div>
-                      {% if second_image != blank %}
-                        <div
-                          class="new-in__item-bg-img-hover lazyLoad"
-                          data-bgimage="{{ second_image | img_url: 'master' }}"
-                        ></div>
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="new-in__item-text-wrap">
-                    <div class="new-in__item-title">{{ product.title }} {{ color_value }}</div>
-                    <div class="new-in__item-price">{{ product.price | money_without_trailing_zeros }}</div>
-                  </div>
-                  <div class="new-in__preorder-wrap {% if product.selected_or_first_available_variant.inventory_quantity <= 0 %}disp-flx-imp{% endif %}">
-                    <div class="new-in__preorder">
-                      <div class="new-in__preorder-text">Preorder</div>
-                    </div>
-                  </div>
-                </div>
               </div>
-            {% endif %}
-          {% else %}
-            {% continue %}
-          {% endif %}
-        {% endfor %}
+            </div>
+
+            <div class="new-in__item-text-wrap">
+              <div class="new-in__item-title">{{ product.title }} {{ color_value }}</div>
+              <div class="new-in__item-price">{{ product.price | money_without_trailing_zeros }}</div>
+            </div>
+            <div
+              class="new-in__preorder-wrap {% if product.selected_or_first_available_variant.inventory_policy == 'continue' and product.selected_or_first_available_variant.inventory_quantity <= 0 %}disp-flx-imp{% endif %}">
+              <div class="new-in__preorder">
+                <div class="new-in__preorder-text">Preorder</div>
+              </div>
+            </div>
+          </div>
+        </div>
       {% endfor %}
     </div>
   </div>
@@ -95,7 +61,10 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {

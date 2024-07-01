@@ -8,7 +8,7 @@
   {% endif %}
 
   <div class="recent-products-swiper">
-    <div class="swiper-wrapper">
+    <div class="recent-products__swiper-wrapper swiper-wrapper">
 
     </div>
     <div class="recent-products-swiper-button-prev">
@@ -20,81 +20,127 @@
   </div>
 
   <script>
+  document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
-      if (localStorage.getItem('recently_viewed_products')) {
-        const productsString = localStorage.getItem('recently_viewed_products');
-        const products = JSON.parse(productsString);
-
-        return products;
+      const productsString = localStorage.getItem('recently_viewed_products')
+      if (productsString) {
+        return JSON.parse(productsString);
       }
-
       return [];
     };
 
     const setUpSlides = (products) => {
       const MAX_PRODUCT_AMOUNT = 4
       const slider = document.querySelector('.section-recent-products-slider')
-      if (slider && products.length <= MAX_PRODUCT_AMOUNT) {
+      if (slider && products.length <= MAX_PRODUCT_AMOUNT && products.length > 0) {
         const leftArrow = document.querySelector('.recent-products-swiper-button-prev')
         const rightArrow = document.querySelector('.recent-products-swiper-button-next')
         if (leftArrow && rightArrow) {
           leftArrow.classList.add('hide')
           rightArrow.classList.add('hide')
         }
-      } else if (!slider || products.length === 0) {
-        slider.classList.add('hide')
       }
 
+      if (products.length <= 0) {
+        slider.classList.add('hide')
+        return
+      }
+
+      const wrapper = document.querySelector('.recent-products__swiper-wrapper')
       const noImage = `{{ 'no-image.webp' | asset_url }}`
-      let wrapperCode = ''
-      for (const product of products) {
+
+      for (let index = 0; index < products.length; index++) {
+        const product = products[index];
+
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
-          wrapperCode = wrapperCode + `
-            <a href="${product.url}" id="${product.variantId}" class="swiper-slide recent-products-slider-item">
+          const firstAvailableVariant = product.variants.find((variant) => variant.firstAvailable);
+          let imageUrl = product.images[0]
+
+          let parts = imageUrl.split('.');
+          let extension = parts.pop();
+          let baseUrl = parts.join('.');
+
+          let imageUrlLazyLoad = `${baseUrl}_small.${extension}`;
+
+          const newProductHtml = `
+            <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
+                 class="recent-products__slider-slide swiper-slide"
+                 data-recent-product-item
+                 data-active-variant="${firstAvailableVariant.id}">
+                 <div class="variant_inventory_policy disp-none-imp">
+                 {% for variant in product.variants %}
+                   <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
+                 {% endfor %}
+               </div>
               <div class="swiper-slide-container">
-                <div class="swiper-slide-image-container">
-                  <div data-bgimage="${product.images[0] ? product.images[0].src : noImage}" class="swiper-slide-image lazyLoad"></div>
+                <a href="${firstAvailableVariant.url}" class="swiper-slide-link"></a>
+                <div class="swiper-slide-image-container lazyLoad">
+                  <div data-bgimage="${imageUrl ? imageUrl : noImage}" class="swiper-slide-image lazyLoad" style="background-image: url('${imageUrlLazyLoad ? imageUrlLazyLoad : noImage}'); filter: blur(2px)"></div>
                   <div class="swiper-slide-image-info">
                     <div class="swiper-slide-image-info-sizes">
-                      ${product && product.variantSizes &&
-                        product.variantSizes.map(size => {
-                          return `<div class="swiper-slide-image-info-sizes-item ${product.size === size && 'selected-size'}">${size}</div>`
-                        }).join("")
+                      ${(product && product.variants &&
+                        product.variants.map((variant) => {
+                          return `<div class="swiper-slide-image-info-sizes-item
+                                                    ${((variant.firstAvailable) ? ' selected-size' : '') ||
+                          ((variant.available) ? '' : ' unavailable')}"
+                                                    data-size-item="${variant.id}"
+                                                    data-price="{{ cart.currency.symbol }}${variant.price}"}>
+                                              ${variant.size}
+                                        </div>`
+                        }).join(""))
                       }
                     </div>
                     {% if section.settings.add_to_cart_text %}
-                      <button class="swiper-slide-image-info-cart-button">{{ section.settings.add_to_cart_text }}</button>
+                      <div class="swiper-slide-image-info-cart-button preorder-add-to-cart">
+                        {{ section.settings.add_to_cart_text }}
+                      </div>
+                      <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
                       <div class="swiper-slide-image-info-cart-loader">
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circles-wrap">
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        </div>
                       </div>
                     {% endif %}
                   </div>
                   <div class="swiper-slide-image-info-button">
-                    <img src="{{ 'plus-icon.png' | asset_img_url }}" loading="lazy">
+                    {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
                   </div>
-                  <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]?.src}" />
-                  <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]?.src}" />
+                  <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]}" />
+                  <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]}" />
                 </div>
                 <div class="swiper-slide-text-container">
                   <div class="swiper-slide-title">${product.title}</div>
-                  <div class="swiper-slide-title">${product.color}</div>
-                  <div class="swiper-slide-title swiper-slide-title-price">${product.price ? product.price : ''}</div>
+                  <div class="swiper-slide-title swiper-slide-title-price" data-current-price>{{ cart.currency.symbol }}${firstAvailableVariant.price}</div>
+                  <button class="swiper-slide-preorder disp-none-imp">Preorder</button>
                 </div>
               </div>
-            </a>
-          `
+            </div>
+          `;
+
+          const newHtmlDocument = new DOMParser().parseFromString(newProductHtml, 'text/html')
+          const productElem = newHtmlDocument.querySelector('div')
+          wrapper.appendChild(productElem)
         }
       }
-      const wrapper = document.querySelector('.swiper-wrapper')
-      if (wrapper) {
-        wrapper.innerHTML = wrapperCode
+
+      const preorderButtons = document.querySelectorAll('.swiper-slide-preorder')
+      for (const button of preorderButtons) {
+        button.addEventListener("click", (event) => {
+          event.preventDefault()
+          event.stopPropagation()
+        })
       }
     }
 
     const products = getProductsFromLocalStorage()
     setUpSlides(products)
+    if (products.length > 4) {
+      const startEvent = new Event('dispatch:recently-products:init-slider');
+      document.dispatchEvent(startEvent);
+    }
+  })
   </script>
 </div>
 

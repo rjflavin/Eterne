@@ -131,13 +131,13 @@ theme.scrollToRevealElement = (el) => {
   const inViewTop = scrollTop + theme.stickyHeaderHeight();
   const inViewBot = scrollTop + scrollVisibleHeight - 50;
 
-  if (elTop < inViewTop || elBot > inViewBot) {
+  /*if (elTop < inViewTop || elBot > inViewBot) {
     scrollContainer.scrollTo({
       top: elTop - 100 - theme.stickyHeaderHeight(),
       left: 0,
       behavior: 'smooth'
     });
-  }
+  }*/
 };
 
 theme.getEmptyOptionSelectors = (formContainer) => {
@@ -2733,6 +2733,10 @@ const ProductForm = class extends HTMLElement {
           bubbles: true
         })
         document.dispatchEvent(event)
+        const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+        if (!emptyCartElement.classList.contains('disp-none-imp')) {
+          emptyCartElement.classList.add('disp-none-imp');
+        }
       } else if (theme.settings.afterAddToCart === 'page') {
         // Allow the tick animation to complete
         setTimeout(() => {

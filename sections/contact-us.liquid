@@ -1,0 +1,69 @@
+{{ 'contact-us.css' | asset_url | stylesheet_tag }}
+
+<div class="contact-us">
+  <div class="contact-us__content">
+    <h2 class="contact-us__title">{{ section.settings.contact_us_title }}</h2>
+    {% for block in section.blocks %}
+      <div class="contact-us__contact">
+        <span class="contact-us__desc">
+          {{ block.settings.description_text }}: <a href="mailto:{{ block.settings.link }}" class="contact-us__link">{{ block.settings.link }}</a>
+        </span>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact us",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "contact_us_title",
+      "label": "Title",
+      "default": "Contact us"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_us_block",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "description_text",
+          "label": "Description text",
+          "default": "Description text"
+        },
+        {
+          "type": "text",
+          "id": "link",
+          "label": "Email link",
+          "default": "Please provide email"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact us",
+      "blocks": [
+        {
+          "type": "contact_us_block"
+        },
+        {
+          "type": "contact_us_block"
+        },
+        {
+          "type": "contact_us_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -6,6 +6,7 @@
         {% case block.type %}
             {% when 'one_image_row' %}
                 {% assign media_type = block.settings.media_type %}
+
                 {% capture caption %}
                     {% if block.settings.caption or block.settings.product_link %}
                         <div class="caption">
@@ -13,332 +14,493 @@
                                 <div class="caption__text">{{ block.settings.caption }}</div>
                             {% endif %}
                             {% if block.settings.product_link and block.settings.product_link_text %}
-                                <a href="{{ block.settings.product_link }}" class="caption__link">{{ block.settings.product_link_text }}</a>
+                                <a href="{{ block.settings.product_link }}"
+                                   class="caption__link">{{ block.settings.product_link_text }}</a>
                             {% endif %}
                         </div>
                     {% endif %}
                 {% endcapture %}
-                    {% if media_type == "image" %}
-                        <div class="collage__one-image-row {{ block.settings.orientation }}">
-                            {% if block.settings.image_mobile != blank %}
-                                {% assign image_mobile = block.settings.image_mobile %}
-                            {% else %}
-                                {% assign image_mobile = block.settings.image %}
-                            {% endif %}
 
-                            <img
-                                    class="collage__image only-desk"
-                                    src="{{ block.settings.image | img_url: "master" }}"
-                                    alt="{{ block.settings.image.alt }}"
-                                    style="object-position: {{ block.settings.image.presentation.focal_point }}"
-                                    loading="lazy"
-                            >
-                            <img
-                                    class="collage__image only-mob"
-                                    src="{{ image_mobile | img_url: "master" }}"
-                                    alt="{{ image_mobile.alt }}"
-                                    style="object-position: {{ image_mobile.presentation.focal_point }}"
-                                    loading="lazy"
-                            >
-                            {{ caption }}
-                        </div>
-                    {% elsif media_type == "video" %}
-                        <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}">
-                          {% if block.settings.image %}
+                {% if media_type == "image" %}
+                    <div class="collage__one-image-row {{ block.settings.orientation }}">
+                        {% if block.settings.image_mobile != blank %}
+                            {% assign image_mobile = block.settings.image_mobile %}
+                        {% else %}
+                            {% assign image_mobile = block.settings.image %}
+                        {% endif %}
+                        <a href="{{ block.settings.product_link }}">
+                        <img
+                                class="collage__image only-desk"
+                                src="{{ block.settings.image | img_url: "master" }}"
+                                alt="{{ block.settings.image.alt }}"
+                                style="object-position: {{ block.settings.image.presentation.focal_point }}"
+                                loading="lazy"
+                        ></a>
+                        <a href="{{ block.settings.product_link }}">
+                        <img
+                                class="collage__image only-mob"
+                                src="{{ image_mobile | img_url: "master" }}"
+                                alt="{{ image_mobile.alt }}"
+                                style="object-position: {{ image_mobile.presentation.focal_point }}"
+                                loading="lazy"
+                        ></a>
+                        {{ caption }}
+                    </div>
+                {% elsif media_type == "video" %}
+                    <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}">
+                        {% if block.settings.image %}
                             <div class="collage__cover-video-image">
-                              {% assign image_desk_class = "" %}
-                              {% if block.settings.image_mobile != blank %}
-                                {% assign image_desk_class = "only-desk" %}
+                                {% assign image_desk_class = "" %}
+                                {% if block.settings.image_mobile != blank %}
+                                    {% assign image_desk_class = "only-desk" %}
+                                    <img
+                                            class="collage__image only-mob"
+                                            src="{{ block.settings.image_mobile | img_url: "master" }}"
+                                            alt="{{ block.settings.image_mobile.alt }}"
+                                            style="object-position: {{ block.settings.image_mobile.presentation.focal_point }}"
+                                            loading="lazy"
+                                    >
+                                {% endif %}
+
                                 <img
-                                        class="collage__image only-mob"
-                                        src="{{ block.settings.image_mobile | img_url: "master" }}"
-                                        alt="{{ block.settings.image_mobile.alt }}"
-                                        style="object-position: {{ block.settings.image_mobile.presentation.focal_point }}"
+                                        class="collage__image {{ image_desk_class }}"
+                                        src="{{ block.settings.image | img_url: "master" }}"
+                                        alt="{{ block.settings.image.alt }}"
+                                        style="object-position: {{ block.settings.image.presentation.focal_point }}"
                                         loading="lazy"
                                 >
-                              {% endif %}
-
-                              <img
-                                      class="collage__image {{ image_desk_class }}"
-                                      src="{{ block.settings.image | img_url: "master" }}"
-                                      alt="{{ block.settings.image.alt }}"
-                                      style="object-position: {{ block.settings.image.presentation.focal_point }}"
-                                      loading="lazy"
-                              >
                             </div>
-                          {% endif %}
+                        {% endif %}
 
-                          {% assign video_class = "" %}
-                          {% if block.settings.video_mobile != blank %}
-                            {% assign video_class = "only-desk" %}
-                            {{ block.settings.video_mobile | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
-                          {% endif %}
-                          {{ block.settings.video | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
-                          <div class="play-icon">
+                        {% assign video_class = "desktop-video" %}
+                        {% assign video_mobile_class = "mobile-video" %}
+                        {% if block.settings.video_mobile != blank %}
+                            {% assign video_class = video_class | append: " only-desk" %}
+                            {% assign video_mobile_class = "mobile-video only-mob" %}
+                            {{ block.settings.video_mobile | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                        {% endif %}
+                        {{ block.settings.video | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                        <div class="play-icon">
                             {% render "icon-play-video" %}
-                          </div>
-                          {{ caption }}
-                        </custom-video-player>
-  {% endif %}
+                        </div>
+                        {{ caption }}
+                    </custom-video-player>
+                {% endif %}
             {% when 'two_images_row' %}
                 <div class="collage__two-images-row {{ block.settings.orientation }}">
-                  <div class="collage__two-images-row-inner">
-                    <div class="media item-1">
-                      {% assign media_type_1 = block.settings.media_type_1 %}
-                      {% capture caption %}
-                        {% if block.settings.caption_1 or block.settings.product_link_1 %}
-                          <div class="caption">
-                            {% if block.settings.caption_1 != blank %}
-                              <div class="caption__text">{{ block.settings.caption_1 }}</div>
-                            {% endif %}
-                            {% if block.settings.product_link_1 and block.settings.product_link_text_1 %}
-                              <a href="{{ block.settings.product_link_1 }}" class="caption__link">{{ block.settings.product_link_text_1 }}</a>
-                            {% endif %}
-                          </div>
-                        {% endif %}
-                      {% endcapture %}
-                      {% if media_type_1 == "image" %}
-                        {% if block.settings.image_mobile_1 != blank %}
-                          {% assign image_mobile_1 = block.settings.image_mobile_1 %}
-                        {% else %}
-                          {% assign image_mobile_1 = block.settings.image_1 %}
-                        {% endif %}
-                        <img
-                                class="media__image only-desk"
-                                src="{{ block.settings.image_1 | img_url: "master" }}"
-                                alt="{{ block.settings.image_1.alt }}"
-                                style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
-                                loading="lazy"
-                        >
-                        <img
-                                class="media__image only-mob"
-                                src="{{ image_mobile_1 | img_url: "master" }}"
-                                alt="{{ image_mobile_1.alt }}"
-                                style="object-position: {{ image_mobile_1.presentation.focal_point }}"
-                                loading="lazy"
-                        >
-                        {{ caption }}
-                      {% elsif media_type_1 == "video" %}
-                        <custom-video-player class="media__video-wrapper">
-                          {% if block.settings.image_1 %}
-                            <div class="collage__cover-video-image">
-                              {% assign image_desk_class = "" %}
-                              {% if block.settings.image_mobile_1 != blank %}
-                                {% assign image_desk_class = "only-desk" %}
+                    <div class="collage__two-images-row-inner">
+                        <div class="media item-1">
+                            {% assign media_type_1 = block.settings.media_type_1 %}
+
+                            {% capture caption %}
+                                {% if block.settings.caption_1 or block.settings.product_link_1 %}
+                                    <div class="caption">
+                                        {% if block.settings.caption_1 != blank %}
+                                            <div class="caption__text">{{ block.settings.caption_1 }}</div>
+                                        {% endif %}
+                                        {% if block.settings.product_link_1 and block.settings.product_link_text_1 %}
+                                            <a href="{{ block.settings.product_link_1 }}"
+                                               class="caption__link">{{ block.settings.product_link_text_1 }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endcapture %}
+
+                            {% if media_type_1 == "image" %}
+                                {% if block.settings.image_mobile_1 != blank %}
+                                    {% assign image_mobile_1 = block.settings.image_mobile_1 %}
+                                {% else %}
+                                    {% assign image_mobile_1 = block.settings.image_1 %}
+                                {% endif %}
+                                <a href="{{ block.settings.product_link_1 }}">
                                 <img
-                                        class="collage__image only-mob"
-                                        src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
-                                        alt="{{ block.settings.image_mobile_1.alt }}"
-                                        style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                                        class="media__image only-desk"
+                                        src="{{ block.settings.image_1 | img_url: "master" }}"
+                                        alt="{{ block.settings.image_1.alt }}"
+                                        style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
                                         loading="lazy"
-                                >
-                              {% endif %}
+                                ></a>
+                               <a href="{{ block.settings.product_link_1 }}">
+                                <img
+                                        class="media__image only-mob"
+                                        src="{{ image_mobile_1 | img_url: "master" }}"
+                                        alt="{{ image_mobile_1.alt }}"
+                                        style="object-position: {{ image_mobile_1.presentation.focal_point }}"
+                                        loading="lazy"
+                                ></a>
+                                {{ caption }}
+                            {% elsif media_type_1 == "video" %}
+                                <custom-video-player class="media__video-wrapper">
+                                    {% if block.settings.image_1 != blank %}
+                                        <div class="collage__cover-video-image">
+                                            {% assign image_desk_class = "" %}
+                                            {% if block.settings.image_mobile_1 != blank %}
+                                                {% assign image_desk_class = "only-desk" %}
+                                            <!--    <img
+                                                        class="collage__image only-mob"
+                                                        src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
+                                                        alt="{{ block.settings.image_mobile_1.alt }}"
+                                                        style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                                                        loading="lazy"
+                                                > -->
+                                            {% endif %}
 
-                              <img
-                                      class="collage__image {{ image_desk_class }}"
-                                      src="{{ block.settings.image_1 | img_url: "master" }}"
-                                      alt="{{ block.settings.image_1.alt }}"
-                                      style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
-                                      loading="lazy"
-                              >
-                            </div>
-                          {% endif %}
-                          {% assign video_class = "" %}
-                          {% if block.settings.video_mobile_1 != blank %}
-                            {% assign video_class = "only-desk" %}
-                            {{ block.settings.video_mobile_1 | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
-                          {% endif %}
-                          {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
-                          <div class="play-icon">
-                            {% render "icon-play-video" %}
-                          </div>
-                          {{ caption }}
-                        </custom-video-player>
-                      {% endif %}
-                    </div>
-                    <div class="media item-2">
-                    {% assign media_type_2 = block.settings.media_type_2 %}
-                    {% capture capture %}
-                      {% if block.settings.caption_2 or block.settings.product_link_2 %}
-                        <div class="caption">
-                          {% if block.settings.caption_2 != blank %}
-                            <div class="caption__text">{{ block.settings.caption_2 }}</div>
-                          {% endif %}
-                          {% if block.settings.product_link_2 and block.settings.product_link_text_2 %}
-                            <a href="{{ block.settings.product_link_2 }}" class="caption__link">{{ block.settings.product_link_text_2 }}</a>
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                    {% endcapture %}
-                    {% if media_type_2 == "image" %}
-                      {% if block.settings.image_mobile_2 != blank %}
-                        {% assign image_mobile_2 = block.settings.image_mobile_2 %}
-                      {% else %}
-                        {% assign image_mobile_2 = block.settings.image_2 %}
-                      {% endif %}
+                                           <!-- <img
+                                                    class="collage__image {{ image_desk_class }}"
+                                                    src="{{ block.settings.image_1 | img_url: "master" }}"
+                                                    alt="{{ block.settings.image_1.alt }}"
+                                                    style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                                    loading="lazy"
+                                            > -->
+                                        </div>
+                                    {% endif %}
+                                    {% assign video_class = "desktop-video" %}
+                                    {% assign video_mobile_class = "mobile-video" %}
+                                    {% if block.settings.video_mobile_1 != blank %}
+                                        {% assign video_class = video_class | append: " only-desk" %}
+                                        {% assign video_mobile_class = "mobile-video only-mob" %}
+                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    {% endif %}
 
-                      <img
-                              class="media__image only-desk"
-                              src="{{ block.settings.image_2 | img_url: "master" }}"
-                              alt="{{ block.settings.image_2.alt }}"
-                              style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
-                              loading="lazy"
-                      >
-                      <img
-                              class="media__image only-mob"
-                              src="{{ image_mobile_2 | img_url: "master" }}"
-                              alt="{{ image_mobile_2.alt }}"
-                              style="object-position: {{ image_mobile_2.presentation.focal_point }}"
-                              loading="lazy"
-                      >
-                      {{ capture }}
-                    {% elsif media_type_2 == "video" %}
-                      <custom-video-player class="media__video-wrapper">
-                        {% if block.settings.image_2 != blank %}
-                          <div class="collage__cover-video-image">
-                            {% assign image_desk_class = "" %}
-                            {% if block.settings.image_mobile_2 != blank %}
-                              {% assign image_desk_class = "only-desk" %}
-                              <img
-                                      class="collage__image only-mob"
-                                      src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
-                                      alt="{{ block.settings.image_mobile_2.alt }}"
-                                      style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
-                                      loading="lazy"
-                              >
+                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+
+                                    <div class="play-icon">
+                                        {% render "icon-play-video" %}
+                                    </div>
+                                    {{ caption }}
+                                </custom-video-player>
                             {% endif %}
+                        </div>
+                        <div class="media item-2">
+                            {% assign media_type_2 = block.settings.media_type_2 %}
 
+                            {% capture caption %}
+                                {% if block.settings.caption_2 or block.settings.product_link_2 %}
+                                    <div class="caption">
+                                        {% if block.settings.caption_2 != blank %}
+                                            <div class="caption__text">{{ block.settings.caption_2 }}</div>
+                                        {% endif %}
+                                        {% if block.settings.product_link_2 and block.settings.product_link_text_2 %}
+                                            <a href="{{ block.settings.product_link_2 }}"
+                                               class="caption__link">{{ block.settings.product_link_text_2 }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endcapture %}
+
+                            {% if media_type_2 == "image" %}
+                                {% if block.settings.image_mobile_2 != blank %}
+                                    {% assign image_mobile_2 = block.settings.image_mobile_2 %}
+                                {% else %}
+                                    {% assign image_mobile_2 = block.settings.image_2 %}
+                                {% endif %}
+                            <a href="{{ block.settings.product_link_2 }}">
                             <img
-                                    class="collage__image {{ image_desk_class }}"
+                                    class="media__image only-desk"
                                     src="{{ block.settings.image_2 | img_url: "master" }}"
                                     alt="{{ block.settings.image_2.alt }}"
                                     style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
                                     loading="lazy"
-                            >
-                          </div>
-                        {% endif %}
-                        {% assign video_class = "" %}
-                        {% if block.settings.video_mobile_2 != blank %}
-                          {% assign video_class = "only-desk" %}
-                          {{ block.settings.video_mobile_2 | video_tag: class: "only-mob", loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
-                        {% endif %}
-                        {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
-                        <div class="play-icon">
-                          {% render "icon-play-video" %}
+                            ></a>
+                            <a href="{{ block.settings.product_link_2 }}">                              
+                            <img
+                                    class="media__image only-mob"
+                                    src="{{ image_mobile_2 | img_url: "master" }}"
+                                    alt="{{ image_mobile_2.alt }}"
+                                    style="object-position: {{ image_mobile_2.presentation.focal_point }}"
+                                    loading="lazy"
+                            ></a>
+                                {{ caption }}
+                            {% elsif media_type_2 == "video" %}
+                                <custom-video-player class="media__video-wrapper">
+                                    {% if block.settings.image_2 != blank %}
+                                        <div class="collage__cover-video-image">
+                                            {% assign image_desk_class = "" %}
+                                            {% if block.settings.image_mobile_2 != blank %}
+                                                {% assign image_desk_class = "only-desk" %}
+                                                <img
+                                                        class="collage__image only-mob"
+                                                        src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
+                                                        alt="{{ block.settings.image_mobile_2.alt }}"
+                                                        style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
+                                                        loading="lazy"
+                                                >
+                                            {% endif %}
+
+                                            <img
+                                                    class="collage__image {{ image_desk_class }}"
+                                                    src="{{ block.settings.image_2 | img_url: "master" }}"
+                                                    alt="{{ block.settings.image_2.alt }}"
+                                                    style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                                                    loading="lazy"
+                                            >
+                                        </div>
+                                    {% endif %}
+                                    {% assign video_class = "desktop-video" %}
+                                    {% assign video_mobile_class = "mobile-video" %}
+                                    {% if block.settings.video_mobile_2 != blank %}
+                                        {% assign video_class = video_class | append: " only-desk" %}
+                                        {% assign video_mobile_class = "mobile-video only-mob" %}
+                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    {% endif %}
+                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    <div class="play-icon">
+                                        {% render "icon-play-video" %}
+                                    </div>
+                                    {{ capture }}
+                                </custom-video-player>
+                            {% endif %}
                         </div>
-                        {{ capture }}
-                      </custom-video-player>
-                    {% endif %}
-                  </div>
-                  </div>
+                    </div>
                 </div>
 
             {% when 'three_images_row' %}
-            <div class="collage__three-images-row">
-              <ul class="collage__three-images-row-inner">
-                <li class="image-item">
-                  <div class="image-wrapper">
-                    {% assign image_class = "" %}
-                    {% if block.settings.image_mobile_1 != blank %}
-                      {% assign image_class = "only-desk" %}
-                      <img
-                          class="media__image only-mob"
-                          src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
-                          alt="{{ block.settings.image_mobile_1.alt }}"
-                          style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
-                          loading="lazy"
-                      >
-                    {% endif %}
-                    <img
-                          class="media__image {{ image_class }}"
-                          src="{{ block.settings.image_1 | img_url: "master" }}"
-                          alt="{{ block.settings.image_1.alt }}"
-                          style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
-                          loading="lazy"
-                    >
-                  </div>
-                  {% if block.settings.caption_1 != blank or block.settings.product_link_1 != blank %}
-                    <div class="caption">
-                      {% if block.settings.caption_1 != blank %}
-                        <div class="caption__text">{{ block.settings.caption_1 }}</div>
-                      {% endif %}
-                      {% if block.settings.product_link_1 != blank and block.settings.product_link_text_1 != blank %}
-                        <a href="{{ block.settings.product_link_1 }}" class="caption__link">{{ block.settings.product_link_text_1 }}</a>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </li>
-                <li class="image-item">
-                  <div class="image-wrapper">
-                    {% assign image_class = "" %}
-                    {% if block.settings.image_mobile_2 != blank %}
-                      {% assign image_class = "only-desk" %}
-                      <img
-                              class="media__image only-mob"
-                              src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
-                              alt="{{ block.settings.image_mobile_2.alt }}"
-                              style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
-                              loading="lazy"
-                      >
-                    {% endif %}
-                    <img
-                            class="media__image {{ image_class }}"
-                            src="{{ block.settings.image_2 | img_url: "master" }}"
-                            alt="{{ block.settings.image_2.alt }}"
-                            style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
-                            loading="lazy"
-                    >
-                  </div>
-                  {% if block.settings.caption_2 or block.settings.product_link_2 %}
-                    <div class="caption">
-                      {% if block.settings.caption_2 != blank %}
-                        <div class="caption__text">{{ block.settings.caption_2 }}</div>
-                      {% endif %}
-                      {% if block.settings.product_link_2 and block.settings.product_link_text_2 %}
-                        <a href="{{ block.settings.product_link_2 }}" class="caption__link">{{ block.settings.product_link_text_2 }}</a>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </li>
-                <li class="image-item">
-                  <div class="image-wrapper">
-                    {% assign image_class = "" %}
-                    {% if block.settings.image_mobile_3 != blank %}
-                      {% assign image_class = "only-desk" %}
-                      <img
-                              class="media__image only-mob"
-                              src="{{ block.settings.image_mobile_3 | img_url: "master" }}"
-                              alt="{{ block.settings.image_mobile_3.alt }}"
-                              style="object-position: {{ block.settings.image_mobile_3.presentation.focal_point }}"
-                              loading="lazy"
-                      >
-                    {% endif %}
-                    <img
-                            class="media__image {{ image_class }}"
-                            src="{{ block.settings.image_3 | img_url: "master" }}"
-                            alt="{{ block.settings.image_3.alt }}"
-                            style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
-                            loading="lazy"
-                    >
-                  </div>
-                  {% if block.settings.caption_3 or block.settings.product_link_3 %}
-                    <div class="caption">
-                      {% if block.settings.caption_3 != blank %}
-                        <div class="caption__text">{{ block.settings.caption_3 }}</div>
-                      {% endif %}
-                      {% if block.settings.product_link_3 and block.settings.product_link_text_3 %}
-                        <a href="{{ block.settings.product_link_3 }}" class="caption__link">{{ block.settings.product_link_text_3 }}</a>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </li>
-              </ul>
-            </div>
+                <div class="collage__three-images-row">
+                    <ul class="collage__three-images-row-inner">
+                        <li class="media">
+                            {% assign media_type_1 = block.settings.media_type_1 %}
+                            {% assign image_class = "" %}
+
+                            {% capture caption %}
+                                {% if block.settings.caption_1 != blank or block.settings.product_link_1 != blank %}
+                                    <div class="caption">
+                                        {% if block.settings.caption_1 != blank %}
+                                            <div class="caption__text">{{ block.settings.caption_1 }}</div>
+                                        {% endif %}
+                                        {% if block.settings.product_link_1 != blank and block.settings.product_link_text_1 != blank %}
+                                            <a href="{{ block.settings.product_link_1 }}"
+                                               class="caption__link">{{ block.settings.product_link_text_1 }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endcapture %}
+
+                            {% if media_type_1 == "image" %}
+                                {% if block.settings.image_mobile_1 != blank %}
+                                    {% assign image_class = "only-desk" %}
+                                  <a href="{{ block.settings.product_link_1 }}" >
+                                    <img
+                                            class="media__image only-mob"
+                                            src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
+                                            alt="{{ block.settings.image_mobile_1.alt }}"
+                                            style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                                            loading="lazy"
+                                    ></a>
+                                {% endif %}
+                                <a href="{{ block.settings.product_link_1 }}" >
+                                <img
+                                        class="media__image {{ image_class }}"
+                                        src="{{ block.settings.image_1 | img_url: "master" }}"
+                                        alt="{{ block.settings.image_1.alt }}"
+                                        style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                        loading="lazy"
+                                ></a>
+                                {{ caption }}
+                            {% elsif media_type_1 == "video" %}
+                                <custom-video-player class="media__video-wrapper">
+                                    {% if block.settings.image_1 != blank %}
+                                        <div class="collage__cover-video-image">
+                                            {% assign image_desk_class = "" %}
+                                            {% if block.settings.image_mobile_1 != blank %}
+                                                {% assign image_desk_class = "only-desk" %}
+                                               <!-- <img
+                                                        class="collage__image only-mob"
+                                                        src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
+                                                        alt="{{ block.settings.image_mobile_1.alt }}"
+                                                        style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                                                        loading="lazy"
+                                                > -->
+                                            {% endif %}
+
+                                           <!-- <img
+                                                    class="collage__image {{ image_desk_class }}"
+                                                    src="{{ block.settings.image_1 | img_url: "master" }}"
+                                                    alt="{{ block.settings.image_1.alt }}"
+                                                    style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                                    loading="lazy"
+                                            > -->
+                                        </div>
+                                    {% endif %}
+                                    {% assign video_class = "desktop-video" %}
+                                    {% assign video_mobile_class = "mobile-video" %}
+                                    {% if block.settings.video_mobile_1 != blank %}
+                                        {% assign video_class = video_class | append: " only-desk" %}
+                                        {% assign video_mobile_class = "mobile-video only-mob" %}
+                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    {% endif %}
+                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    <div class="play-icon">
+                                        {% render "icon-play-video" %}
+                                    </div>
+                                    {{ caption }}
+                                </custom-video-player>
+                            {% endif %}
+                        </li>
+                        <li class="media">
+                            {% assign media_type_2 = block.settings.media_type_2 %}
+                            {% assign image_class = "" %}
+
+                            {% capture caption %}
+                                {% if block.settings.caption_2 != blank or block.settings.product_link_2 != blank %}
+                                    <div class="caption">
+                                        {% if block.settings.caption_2 != blank %}
+                                            <div class="caption__text">{{ block.settings.caption_2 }}</div>
+                                        {% endif %}
+                                        {% if block.settings.product_link_2 != blank and block.settings.product_link_text_2 != blank %}
+                                            <a href="{{ block.settings.product_link_2 }}"
+                                               class="caption__link">{{ block.settings.product_link_text_2 }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endcapture %}
+
+                            {% if media_type_2 == "image" %}
+                                {% if block.settings.image_mobile_2 != blank %}
+                                    {% assign image_class = "only-desk" %}
+                                  <a href="{{ block.settings.product_link_2 }}" >
+                                    <img
+                                            class="media__image only-mob"
+                                            src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
+                                            alt="{{ block.settings.image_mobile_2.alt }}"
+                                            style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
+                                            loading="lazy"
+                                    ></a>
+                                {% endif %}
+                                <a href="{{ block.settings.product_link_2 }}" >
+                                <img
+                                        class="media__image {{ image_class }}"
+                                        src="{{ block.settings.image_2 | img_url: "master" }}"
+                                        alt="{{ block.settings.image_2.alt }}"
+                                        style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                                        loading="lazy"
+                                ></a>
+                                {{ caption }}
+                            {% elsif media_type_2 == "video" %}
+                                <custom-video-player class="media__video-wrapper">
+                                    {% if block.settings.image_2 != blank %}
+                                        <div class="collage__cover-video-image">
+                                            {% assign image_desk_class = "" %}
+                                            {% if block.settings.image_mobile_2 != blank %}
+                                                {% assign image_desk_class = "only-desk" %}
+                                             <!--   <img
+                                                        class="collage__image only-mob"
+                                                        src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
+                                                        alt="{{ block.settings.image_mobile_2.alt }}"
+                                                        style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
+                                                        loading="lazy"
+                                                > -->
+                                            {% endif %}
+
+                                        <!--    <img
+                                                    class="collage__image {{ image_desk_class }}"
+                                                    src="{{ block.settings.image_2 | img_url: "master" }}"
+                                                    alt="{{ block.settings.image_2.alt }}"
+                                                    style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                                                    loading="lazy"
+                                            > -->
+                                        </div>
+                                    {% endif %}
+                                    {% assign video_class = "desktop-video" %}
+                                    {% assign video_mobile_class = "mobile-video" %}
+                                    {% if block.settings.video_mobile_2 != blank %}
+                                        {% assign video_class = video_class | append: " only-desk" %}
+                                        {% assign video_mobile_class = "mobile-video only-mob" %}
+                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    {% endif %}
+                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    <div class="play-icon">
+                                        {% render "icon-play-video" %}
+                                    </div>
+                                    {{ caption }}
+                                </custom-video-player>
+                            {% endif %}
+                        </li>
+                        <li class="media">
+                            {% assign media_type_3 = block.settings.media_type_3 %}
+                            {% assign image_class = "" %}
+
+                            {% capture caption %}
+                                {% if block.settings.caption_3 != blank or block.settings.product_link_3 != blank %}
+                                    <div class="caption">
+                                        {% if block.settings.caption_3 != blank %}
+                                            <div class="caption__text">{{ block.settings.caption_3 }}</div>
+                                        {% endif %}
+                                        {% if block.settings.product_link_3 != blank and block.settings.product_link_text_3 != blank %}
+                                            <a href="{{ block.settings.product_link_3 }}"
+                                               class="caption__link">{{ block.settings.product_link_text_3 }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endcapture %}
+
+                            {% if media_type_3 == "image" %}
+                                {% if block.settings.image_mobile_3 != blank %}
+                                    {% assign image_class = "only-desk" %}
+                                  <a href="{{ block.settings.product_link_3 }}" >
+                                    <img
+                                            class="media__image only-mob"
+                                            src="{{ block.settings.image_mobile_3 | img_url: "master" }}"
+                                            alt="{{ block.settings.image_mobile_3.alt }}"
+                                            style="object-position: {{ block.settings.image_mobile_3.presentation.focal_point }}"
+                                            loading="lazy"
+                                    ></a>
+                                {% endif %}
+                               <a href="{{ block.settings.product_link_3 }}" >
+                                <img
+                                        class="media__image {{ image_class }}"
+                                        src="{{ block.settings.image_3 | img_url: "master" }}"
+                                        alt="{{ block.settings.image_3.alt }}"
+                                        style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
+                                        loading="lazy"
+                                ></a>
+                                {{ caption }}
+                            {% elsif media_type_3 == "video" %}
+                                <custom-video-player class="media__video-wrapper">
+                                    {% if block.settings.image_3 != blank %}
+                                        <div class="collage__cover-video-image">
+                                            {% assign image_desk_class = "" %}
+                                            {% if block.settings.image_mobile_3 != blank %}
+                                                {% assign image_desk_class = "only-desk" %}
+                                            <!--    <img
+                                                        class="collage__image only-mob"
+                                                        src="{{ block.settings.image_mobile_3 | img_url: "master" }}"
+                                                        alt="{{ block.settings.image_mobile_3.alt }}"
+                                                        style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
+                                                        loading="lazy"
+                                                > -->
+                                            {% endif %}
+
+                                     <!--       <img
+                                                    class="collage__image {{ image_desk_class }}"
+                                                    src="{{ block.settings.image_3 | img_url: "master" }}"
+                                                    alt="{{ block.settings.image_3.alt }}"
+                                                    style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
+                                                    loading="lazy"
+                                            > -->
+                                        </div>
+                                    {% endif %}
+                                    {% assign video_class = "desktop-video" %}
+                                    {% assign video_mobile_class = "mobile-video" %}
+                                    {% if block.settings.video_mobile_3 != blank %}
+                                        {% assign video_class = video_class | append: " only-desk" %}
+                                        {% assign video_mobile_class = "mobile-video only-mob" %}
+                                        {{ block.settings.video_mobile_3 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    {% endif %}
+                                    {{ block.settings.video_3 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+                                    <div class="play-icon">
+                                        {% render "icon-play-video" %}
+                                    </div>
+                                    {{ caption }}
+                                </custom-video-player>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
         {% endcase %}
     {% endfor %}
 </div>
 
-{{ 'custom-video-player.js' | asset_url | script_tag }}
+<script src="{{ 'custom-video-player.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -591,9 +753,30 @@
           "content": "Desktop settings"
         },
         {
+          "type": "radio",
+          "id": "media_type_1",
+          "label": "Media type 1st media",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "image"
+        },
+        {
           "type": "image_picker",
           "id": "image_1",
           "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video_1",
+          "label": "Or video"
         },
         {
           "type": "richtext",
@@ -621,6 +804,11 @@
           "label": "Image"
         },
         {
+          "type": "video",
+          "id": "video_mobile_1",
+          "label": "Or video"
+        },
+        {
           "type": "header",
           "content": "Desktop settings"
         },
@@ -629,9 +817,30 @@
           "content": "The 2nd block"
         },
         {
+          "type": "radio",
+          "id": "media_type_2",
+          "label": "Media type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "image"
+        },
+        {
           "type": "image_picker",
           "id": "image_2",
           "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video_2",
+          "label": "Or video"
         },
         {
           "type": "richtext",
@@ -659,6 +868,11 @@
           "label": "Image"
         },
         {
+          "type": "video",
+          "id": "video_mobile_2",
+          "label": "Or video"
+        },
+        {
           "type": "header",
           "content": "The 3st block"
         },
@@ -667,9 +881,30 @@
           "content": "Desktop settings"
         },
         {
+          "type": "radio",
+          "id": "media_type_3",
+          "label": "Media type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "image"
+        },
+        {
           "type": "image_picker",
           "id": "image_3",
           "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video_3",
+          "label": "Or video"
         },
         {
           "type": "richtext",
@@ -695,6 +930,11 @@
           "type": "image_picker",
           "id": "image_mobile_3",
           "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video_mobile_3",
+          "label": "Or video"
         }
       ]
     }
