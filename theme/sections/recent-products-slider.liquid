@@ -52,7 +52,7 @@
       for (let index = 0; index < products.length; index++) {
         const product = products[index];
 
-        if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
+        if (+new Date(product.availableFrom) < +new Date() || product.availableFrom === '') {
           let firstlySelectedVariant = product.variants.find((variant) => variant.firstAvailable);
           if (!firstlySelectedVariant) firstlySelectedVariant = product.variants[0];
           const isFirstVariantPreordered = firstlySelectedVariant.inventoryPolicy === "continue" && firstlySelectedVariant.inventoryQuantity <= 0;

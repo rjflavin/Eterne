@@ -79,7 +79,7 @@
                 title: "",
                 color: "",
                 images: [],
-                variantAvailableFrom: "",
+                availableFrom: "",
                 variants: [],
                 isPreordered: false,
 
@@ -95,14 +95,13 @@
             productObject.productId = '{{ product.id }}';
             productObject.title = '{{ product.title | replace: "'", "&apos;" }}';
             productObject.color = currentVariant.option1;
-            productObject.variantAvailableFrom = `{{ product.variants[0].metafields.custom.available_from | date: "%B %d, %Y" }}`;
+            productObject.availableFrom = `{{ product.metafields.custom.available_from | date: "%B %d, %Y" }}`;
             productObject.images = productMedia.slice(0,2);
             productObject.isPreordered = isProductPreordered;
 
             let firstAvailable = false;
             let firstAvailableFound = false;
             productObject.variants = variants.map((variantData) => {
-                console.log(variantData)
                 if (variantData.available && !firstAvailable && !firstAvailableFound) {
                     firstAvailable = true;
                     firstAvailableFound = true;

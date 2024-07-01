@@ -509,6 +509,15 @@ export class EterneCollection extends HTMLElement {
                     const response = await addToCart(variantId, 1);
 
                     if (response) {
+                        const hasResponseError = !response.items;
+
+                        if (!hasResponseError) {
+                            const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+                            if (!emptyCartElement.classList.contains('disp-none-imp')) {
+                                emptyCartElement.classList.add('disp-none-imp');
+                            }
+                        }
+
                         const e = new CustomEvent("dispatch:cart-flyover:refresh", {bubbles: true});
                         document.dispatchEvent(e);
 
