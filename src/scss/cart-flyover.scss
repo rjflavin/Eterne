@@ -7,6 +7,12 @@
         padding: 0 10px 0 0;
     }
 
+    .preorder-button {
+        align-self: start;
+        margin-top: 5px;
+        @include preorder-button
+    }
+
     &-you-may-also-like {
         display: flex;
         flex-direction: column;

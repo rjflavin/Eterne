@@ -8,6 +8,10 @@
       {% if item.product.title %}
         <div class="cart-flyover-item-description-info__title">{{ item.product.title | escape_once }}</div>
       {% endif %}
+      {% assign properties_exclusive = item.properties.Exclusive | downcase | strip %}
+      {% if properties_exclusive == 'preorder' %}
+        <button class="preorder-button">Preorder</button>
+      {% endif %}
       <div class="cart-flyover-item-description-info__options">{% if color %}{{ color }}{% endif %}{% if color and size %} / {% endif %}{% if size %}{{ size }}{% endif %}</div>
       <div data-variant-id="{{ item.variant.id }}" class="cart-flyover-item-description-info-cart-buttons">
         <button name="remove-button" class="cart-flyover-item-description-info-cart-buttons__button">–</button>
