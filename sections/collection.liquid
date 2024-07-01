@@ -101,6 +101,7 @@
         </form>
       </collection-filters-form>
 
+      {% assign now = "now" | date: "%s" %}
       <div class="collection__products-wrap">
         <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}"
              data-next-url="{{ paginate.next.url }}">
@@ -221,153 +222,157 @@
               {% endif %}
             {% endfor %}
 
-            <div
-                    class="collection__item"
-                    data-is-loaded-with-filters="true"
-                    data-collection-item
-                    data-is-variant-ready-to-fetch="true"
-                    data-is-variant-in-stock="{{ isVariantInStock }}"
-                    data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
-                    data-product-handle="{{ product.handle }}"
-                    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                    data-selected-size="{{ sizeOption }}"
-                    data-selected-color="{{ colorOption }}"
-                    data-product-title="{{ product.title }}"
-                    data-default-color="{{ colorOption }}"
-                    data-first-image="{{ first_image }}"
-                    data-second-image="{{ second_image }}"
-                    data-empty-image="{{ emptyImage }}"
-                    data-hover-images="{{ hoverImages }}"
-            >
-              <div class="variant_inventory_policy disp-none-imp">
-                {% for variant in product.variants %}
-                  <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
-                {% endfor %}
-              </div>
-              <div class="collection__item-inner">
+            {% assign available_from = product.metafields.custom.available_from | date: "%s" %}
 
-                <div class="collection__img-wrap">
-                  <div class="collection__quick-add-panel" data-quick-add-panel>
-                    <div class="collection__size-variants">
-                      {% assign selected_color = colorOption %}
+            {% if available_from < now or available_from == blank %}
+              <div
+                class="collection__item"
+                data-is-loaded-with-filters="true"
+                data-collection-item
+                data-is-variant-ready-to-fetch="true"
+                data-is-variant-in-stock="{{ isVariantInStock }}"
+                data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
+                data-product-handle="{{ product.handle }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                data-selected-size="{{ sizeOption }}"
+                data-selected-color="{{ colorOption }}"
+                data-product-title="{{ product.title }}"
+                data-default-color="{{ colorOption }}"
+                data-first-image="{{ first_image }}"
+                data-second-image="{{ second_image }}"
+                data-empty-image="{{ emptyImage }}"
+                data-hover-images="{{ hoverImages }}"
+              >
+                <div class="variant_inventory_policy disp-none-imp">
+                  {% for variant in product.variants %}
+                    <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
+                  {% endfor %}
+                </div>
+                <div class="collection__item-inner">
 
-                      {% assign size_options = '' %}
-                      {% for variant in product.variants %}
-                        {% if variant.options contains selected_color %}
-                          {% assign size_options = size_options | append: variant.option2 | append: ',' %}
-                        {% endif %}
-                      {% endfor %}
-                      {% assign size_options = size_options | split: ',' | uniq %}
+                  <div class="collection__img-wrap">
+                    <div class="collection__quick-add-panel" data-quick-add-panel>
+                      <div class="collection__size-variants">
+                        {% assign selected_color = colorOption %}
 
-                      {% assign selected_size = '' %}
-                      {% assign is_variant_found = false %}
+                        {% assign size_options = '' %}
+                        {% for variant in product.variants %}
+                          {% if variant.options contains selected_color %}
+                            {% assign size_options = size_options | append: variant.option2 | append: ',' %}
+                          {% endif %}
+                        {% endfor %}
+                        {% assign size_options = size_options | split: ',' | uniq %}
 
-                      {% for size in size_options %}
-                        {% unless size == '' %}
-                          {% assign is_disabled = true %}
-                          {% for variant in product.variants %}
-                            {% if variant.option2 == size and variant.options contains selected_color %}
-                              {% if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' %}
-                                {% assign is_disabled = false %}
-                                {% if is_variant_found == false %}
-                                  {% assign selected_size = size %}
-                                  {% assign is_variant_found = true %}
+                        {% assign selected_size = '' %}
+                        {% assign is_variant_found = false %}
+
+                        {% for size in size_options %}
+                          {% unless size == '' %}
+                            {% assign is_disabled = true %}
+                            {% for variant in product.variants %}
+                              {% if variant.option2 == size and variant.options contains selected_color %}
+                                {% if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' %}
+                                  {% assign is_disabled = false %}
+                                  {% if is_variant_found == false %}
+                                    {% assign selected_size = size %}
+                                    {% assign is_variant_found = true %}
+                                  {% endif %}
                                 {% endif %}
                               {% endif %}
-                            {% endif %}
-                          {% endfor %}
-                          <div data-variant-size="{{ size }}"
-                               class="collection__size-variant-text no-select
+                            {% endfor %}
+                            <div data-variant-size="{{ size }}"
+                                 class="collection__size-variant-text no-select
                                      {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
                                      {% if is_disabled %} disabled{% endif %}"
-                          >
-                            {{ size }}
-                          </div>
-                        {% endunless %}
-                      {% endfor %}
+                            >
+                              {{ size }}
+                            </div>
+                          {% endunless %}
+                        {% endfor %}
+                      </div>
+                      <div class="collection__add-to-cart no-select">Add to bag</div>
+                      <div class="collection__add-to-cart-loader">...</div>
                     </div>
-                    <div class="collection__add-to-cart no-select">Add to bag</div>
-                    <div class="collection__add-to-cart-loader">...</div>
-                  </div>
-                  <div data-quick-add-button class="collection__item-quick-add-btn-wrap">
-                    <div class="collection__item-quick-add-btn">
-                      {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                    <div data-quick-add-button class="collection__item-quick-add-btn-wrap">
+                      <div class="collection__item-quick-add-btn">
+                        {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                      </div>
                     </div>
-                  </div>
-                  <a href="{{ variant_url }}" class="collection__item-link"></a>
-                  <div class="collection__item-bg-imgs-wrap">
-                    <div class="collection__item-bg-img lazyLoad"
-                         data-bgimage="{{ first_image }}"
-                         style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
-                         id="productImage"
-                    ></div>
-                    {% if second_image != blank %}
-                      <div class="collection__item-bg-img-hover lazyLoad"
-                           data-bgimage="{{ second_image }}"
-                           style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
+                    <a href="{{ variant_url }}" class="collection__item-link"></a>
+                    <div class="collection__item-bg-imgs-wrap">
+                      <div class="collection__item-bg-img lazyLoad"
+                           data-bgimage="{{ first_image }}"
+                           style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
+                           id="productImage"
                       ></div>
-                    {% endif %}
+                      {% if second_image != blank %}
+                        <div class="collection__item-bg-img-hover lazyLoad"
+                             data-bgimage="{{ second_image }}"
+                             style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
+                        ></div>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <div class="collection__item-text-wrap">
+                    <div class="collection__item-title">{{ product.title }}</div>
+                    <div class="collection__item-price">{{ currentVariant.price | money_without_trailing_zeros }}</div>
                   </div>
                 </div>
-
-                <div class="collection__item-text-wrap">
-                  <div class="collection__item-title">{{ product.title }}</div>
-                  <div class="collection__item-price">{{ currentVariant.price | money_without_trailing_zeros }}</div>
-                </div>
-              </div>
-              <div class="collection__item-colors-wrap">
-                {% comment %}{% assign colorsQty = 0 %}{% endcomment %}
-                {% comment %}{% assign colorsQtyToShowOnMobile = 3 %}{% endcomment %}
-{% comment %}{% endcomment %}
-                {% comment %}{% for option in product.options_with_values %}{% endcomment %}
+                <div class="collection__item-colors-wrap">
+                  {% comment %}{% assign colorsQty = 0 %}{% endcomment %}
+                  {% comment %}{% assign colorsQtyToShowOnMobile = 3 %}{% endcomment %}
+                  {% comment %}{% endcomment %}
+                  {% comment %}{% for option in product.options_with_values %}{% endcomment %}
                   {% comment %}{% assign option_name = option.name | downcase %}{% endcomment %}
                   {% comment %}{% if option_name == 'color' %}{% endcomment %}
-                    {% comment %}{% assign colorsQty = option.values.size %}{% endcomment %}
-{% comment %}{% endcomment %}
-                    {% comment %}{% for colorOptionValue in option.values %}{% endcomment %}
-                      {% comment %}{% assign colorOptionValueDowncase = colorOptionValue | downcase | replace: ' ', '_' %}{% endcomment %}
-{% comment %}{% endcomment %}
-                      {% comment %}<div{% endcomment %}
-                              {% comment %}data-color-name="{{ colorOptionValue }}"{% endcomment %}
-                              {% comment %}class="collection__item-color-wrap{% endcomment %}
-                            {% comment %}{% if forloop.index > colorsQtyToShowOnMobile %}{% endcomment %}
-                              {% comment %}collection__item-color-wrap_hide-mobile{% endcomment %}
-                            {% comment %}{% endif %}{% endcomment %}
-                          {% comment %}"{% endcomment %}
-                              {% comment %}title="{{ colorOptionValue | upcase }}"{% endcomment %}
-                      {% comment %}>{% endcomment %}
-                        {% comment %}<div class="collection__item-color-cont">{% endcomment %}
-                          {% comment %}{% for colorEntry in shop.metaobjects['swatch_colors'].values %}{% endcomment %}
-                            {% comment %}{% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}{% endcomment %}
-                            {% comment %}{% if colorEntryNameDowncase == colorOptionValueDowncase %}{% endcomment %}
-                              {% comment %}{% assign variantColor = colorEntry.color.value %}{% endcomment %}
-                            {% comment %}{% endif %}{% endcomment %}
-                          {% comment %}{% endfor %}{% endcomment %}
-                          {% comment %}<div{% endcomment %}
-                                  {% comment %}class="collection__item-color"{% endcomment %}
-                                  {% comment %}style="background-color: {{ variantColor }}"{% endcomment %}
-                          {% comment %}></div>{% endcomment %}
-                        {% comment %}</div>{% endcomment %}
-                      {% comment %}</div>{% endcomment %}
-                    {% comment %}{% endfor %}{% endcomment %}
+                  {% comment %}{% assign colorsQty = option.values.size %}{% endcomment %}
+                  {% comment %}{% endcomment %}
+                  {% comment %}{% for colorOptionValue in option.values %}{% endcomment %}
+                  {% comment %}{% assign colorOptionValueDowncase = colorOptionValue | downcase | replace: ' ', '_' %}{% endcomment %}
+                  {% comment %}{% endcomment %}
+                  {% comment %}<div{% endcomment %}
+                  {% comment %}data-color-name="{{ colorOptionValue }}"{% endcomment %}
+                  {% comment %}class="collection__item-color-wrap{% endcomment %}
+                  {% comment %}{% if forloop.index > colorsQtyToShowOnMobile %}{% endcomment %}
+                  {% comment %}collection__item-color-wrap_hide-mobile{% endcomment %}
                   {% comment %}{% endif %}{% endcomment %}
-                {% comment %}{% endfor %}{% endcomment %}
-{% comment %}{% endcomment %}
-                {% comment %}{% if colorsQty > colorsQtyToShowOnMobile %}{% endcomment %}
+                  {% comment %}"{% endcomment %}
+                  {% comment %}title="{{ colorOptionValue | upcase }}"{% endcomment %}
+                  {% comment %}>{% endcomment %}
+                  {% comment %}<div class="collection__item-color-cont">{% endcomment %}
+                  {% comment %}{% for colorEntry in shop.metaobjects['swatch_colors'].values %}{% endcomment %}
+                  {% comment %}{% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}{% endcomment %}
+                  {% comment %}{% if colorEntryNameDowncase == colorOptionValueDowncase %}{% endcomment %}
+                  {% comment %}{% assign variantColor = colorEntry.color.value %}{% endcomment %}
+                  {% comment %}{% endif %}{% endcomment %}
+                  {% comment %}{% endfor %}{% endcomment %}
+                  {% comment %}<div{% endcomment %}
+                  {% comment %}class="collection__item-color"{% endcomment %}
+                  {% comment %}style="background-color: {{ variantColor }}"{% endcomment %}
+                  {% comment %}></div>{% endcomment %}
+                  {% comment %}</div>{% endcomment %}
+                  {% comment %}</div>{% endcomment %}
+                  {% comment %}{% endfor %}{% endcomment %}
+                  {% comment %}{% endif %}{% endcomment %}
+                  {% comment %}{% endfor %}{% endcomment %}
+                  {% comment %}{% endcomment %}
+                  {% comment %}{% if colorsQty > colorsQtyToShowOnMobile %}{% endcomment %}
                   {% comment %}{% assign showMoreColorsQty = colorsQty | minus: colorsQtyToShowOnMobile %}{% endcomment %}
                   {% comment %}<div class="collection__show-more-colors-btn">{% endcomment %}
-                      {% comment %}<span class="collection__show-more-colors-btn-text">{% endcomment %}
-                        {% comment %}+ {{ showMoreColorsQty }} more{% endcomment %}
-                      {% comment %}</span>{% endcomment %}
+                  {% comment %}<span class="collection__show-more-colors-btn-text">{% endcomment %}
+                  {% comment %}+ {{ showMoreColorsQty }} more{% endcomment %}
+                  {% comment %}</span>{% endcomment %}
                   {% comment %}</div>{% endcomment %}
-                {% comment %}{% endif %}{% endcomment %}
-              </div>
-              <div class="collection__preorder-wrap {% if isVariantInStock == false %}disp-flx-imp{% endif %}">
-                <div class="collection__preorder">
-                  <div class="collection__preorder-text">Preorder</div>
+                  {% comment %}{% endif %}{% endcomment %}
+                </div>
+                <div class="collection__preorder-wrap {% if isVariantInStock == false %}disp-flx-imp{% endif %}">
+                  <div class="collection__preorder">
+                    <div class="collection__preorder-text">Preorder</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            {% endif %}
           {% endfor %}
         </div>
 

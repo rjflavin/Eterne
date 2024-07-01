@@ -77,7 +77,7 @@
                 "title": "",
                 "color": "",
                 "images": [],
-                "variantAvailableFrom": "",
+                "availableFrom": "",
                 "variants": [],
             };
 
@@ -95,7 +95,7 @@
             productObject.productId = '{{ product.id }}';
             productObject.title = '{{ product.title | replace: "'", "&apos;" }}';
             productObject.color = currentVariant.option1;
-            productObject.variantAvailableFrom = `{{ product.variants[0].metafields.custom.available_from | date: "%B %d, %Y" }}`;
+            productObject.availableFrom = `{{ product.metafields.custom.available_from | date: "%B %d, %Y" }}`;
             productObject.images = productMedia.slice(0,2);
 
             let firstAvailable = false;
