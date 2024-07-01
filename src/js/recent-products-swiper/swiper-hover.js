@@ -51,9 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        function checkPreorder(item) {
-            const isPreordered = item.querySelector('[data-size-item].selected-size').dataset.isPreordered;
-            const buttonOrder = item.querySelector('.swiper-slide-preorder');
+        function checkPreorder(event = null) {
+            const selectesSize = (event) ? event.target : item.querySelector('[data-size-item].selected-size');
+            const isPreordered = selectesSize.dataset.isPreordered;
+            const buttonOrder = item.querySelector('.preorder-button');
             const seeMoreButton = item.querySelector('[data-see-more-preordered]');
             const quickAddButton = item.querySelector('[data-quick-add]');
 
@@ -68,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        checkPreorder(item);
+        checkPreorder();
 
         const currentPriceElem = item.querySelector('[data-current-price]');
 
@@ -78,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const siblingSizes = getSiblings(e.target)
                 item.setAttribute('data-active-variant', sizeElem.dataset.sizeItem)
                 e.target.classList.add(activeClass);
-                checkPreorder(item);
+                checkPreorder(e);
                 siblingSizes.forEach((siblingSize) => {
                     if (siblingSize.classList.contains(activeClass))
                         siblingSize.classList.remove(activeClass)
