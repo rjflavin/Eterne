@@ -53,7 +53,9 @@
         const product = products[index];
 
         if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
-          const firstAvailableVariant = product.variants.find((variant) => variant.firstAvailable);
+          let firstlySelectedVariant = product.variants.find((variant) => variant.firstAvailable);
+          if (!firstlySelectedVariant) firstlySelectedVariant = product.variants[0];
+          const isFirstVariantPreordered = firstlySelectedVariant.inventoryPolicy === "continue" && firstlySelectedVariant.inventoryQuantity <= 0;
           let imageUrl = product.images[0]
 
           let parts = imageUrl.split('.');
@@ -66,14 +68,14 @@
             <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
                  class="recent-products__slider-slide swiper-slide"
                  data-recent-product-item
-                 data-active-variant="${firstAvailableVariant.id}">
+                 data-active-variant="${firstlySelectedVariant.id}">
                  <div class="variant_inventory_policy disp-none-imp">
                  {% for variant in product.variants %}
                    <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
                  {% endfor %}
                </div>
               <div class="swiper-slide-container">
-                <a href="${firstAvailableVariant.url}" class="swiper-slide-link"></a>
+                <a href="${firstlySelectedVariant.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container lazyLoad">
                   <div data-bgimage="${imageUrl ? imageUrl : noImage}" class="swiper-slide-image lazyLoad" style="background-image: url('${imageUrlLazyLoad ? imageUrlLazyLoad : noImage}'); filter: blur(2px)"></div>
                   <div class="swiper-slide-image-info">
@@ -82,27 +84,32 @@
                         product.variants.map((variant) => {
                           return `<div class="swiper-slide-image-info-sizes-item
                                                     ${((variant.firstAvailable) ? ' selected-size' : '') ||
-                          ((variant.available) ? '' : ' unavailable')}"
+                                                    ((variant.available) ? '' : ' unavailable')}"
                                                     data-size-item="${variant.id}"
-                                                    data-price="{{ cart.currency.symbol }}${variant.price}"}>
+                                                    data-price="{{ cart.currency.symbol }}${variant.price}"
+                                                    data-is-preordered="${(variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0}">
                                               ${variant.size}
                                         </div>`
                         }).join(""))
                       }
                     </div>
-                    {% if section.settings.add_to_cart_text %}
-                      <div class="swiper-slide-image-info-cart-button preorder-add-to-cart">
+                    <a href="${firstlySelectedVariant.url}"
+                       class="swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? '': ' disp-none-imp'}"
+                       data-see-more-preordered>
+                      See more
+                    </a>
+                    <div class="swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? ' disp-none-imp': ''}"
+                         data-quick-add>
                         {{ section.settings.add_to_cart_text }}
+                    </div>
+                    <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
+                    <div class="swiper-slide-image-info-cart-loader">
+                      <div class="swiper-slide-image-info-cart-loader-circles-wrap">
+                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
+                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
                       </div>
-                      <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
-                      <div class="swiper-slide-image-info-cart-loader">
-                        <div class="swiper-slide-image-info-cart-loader-circles-wrap">
-                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                          <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        </div>
-                      </div>
-                    {% endif %}
+                    </div>
                   </div>
                   <div class="swiper-slide-image-info-button">
                     {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
@@ -112,7 +119,7 @@
                 </div>
                 <div class="swiper-slide-text-container">
                   <div class="swiper-slide-title">${product.title}</div>
-                  <div class="swiper-slide-title swiper-slide-title-price" data-current-price>{{ cart.currency.symbol }}${firstAvailableVariant.price}</div>
+                  <div class="swiper-slide-title swiper-slide-title-price" data-current-price>{{ cart.currency.symbol }}${firstlySelectedVariant.price}</div>
                   <button class="swiper-slide-preorder disp-none-imp">Preorder</button>
                 </div>
               </div>

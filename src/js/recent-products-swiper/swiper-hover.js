@@ -52,15 +52,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         function checkPreorder(item) {
-            const inventoryPolicyDivs = item.querySelector('.variant_inventory_policy div');
-            const variantId = item.getAttribute('data-active-variant');
-            const variantIdPolicy = inventoryPolicyDivs.getAttribute('data-variant-id-policy');
-            const inventoryPolicy = inventoryPolicyDivs.getAttribute('data-variant-inventory-policy');
+            const isPreordered = item.querySelector('[data-size-item].selected-size').dataset.isPreordered;
+            const buttonOrder = item.querySelector('.swiper-slide-preorder');
+            const seeMoreButton = item.querySelector('[data-see-more-preordered]');
+            const quickAddButton = item.querySelector('[data-quick-add]');
 
-            if (variantId === variantIdPolicy && inventoryPolicy === 'continue') {
-                item.querySelector('.swiper-slide-preorder').classList.remove('disp-none-imp')
+            if (isPreordered === 'true') {
+                buttonOrder.classList.remove('disp-none-imp');
+                seeMoreButton.classList.remove('disp-none-imp');
+                quickAddButton.classList.add('disp-none-imp');
             } else {
-                item.querySelector('.swiper-slide-preorder').classList.add('disp-none-imp')
+                buttonOrder.classList.add('disp-none-imp');
+                seeMoreButton.classList.add('disp-none-imp');
+                quickAddButton.classList.remove('disp-none-imp');
             }
         }
 
@@ -83,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         })
 
-        const cartButtonElement = item.querySelector('.swiper-slide-image-info-cart-button')
+        const cartButtonElement = item.querySelector('[data-quick-add]')
         if (cartButtonElement) {
             cartButtonElement.addEventListener('click', () => {
                 const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader')
