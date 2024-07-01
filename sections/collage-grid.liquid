@@ -133,22 +133,22 @@
                                             {% assign image_desk_class = "" %}
                                             {% if block.settings.image_mobile_1 != blank %}
                                                 {% assign image_desk_class = "only-desk" %}
-                                                <img
+                                            <!--    <img
                                                         class="collage__image only-mob"
                                                         src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
                                                         alt="{{ block.settings.image_mobile_1.alt }}"
                                                         style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
                                                         loading="lazy"
-                                                >
+                                                > -->
                                             {% endif %}
 
-                                            <img
+                                           <!-- <img
                                                     class="collage__image {{ image_desk_class }}"
                                                     src="{{ block.settings.image_1 | img_url: "master" }}"
                                                     alt="{{ block.settings.image_1.alt }}"
                                                     style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
                                                     loading="lazy"
-                                            >
+                                            > -->
                                         </div>
                                     {% endif %}
                                     {% assign video_class = "desktop-video" %}
