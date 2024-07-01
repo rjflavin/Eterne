@@ -275,6 +275,8 @@
                 }
 
                 .preorder-button {
+                    align-self: center;
+                    margin-top: 15px;
                     @include preorder-button;
                 }
             }
