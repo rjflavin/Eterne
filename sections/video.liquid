@@ -63,7 +63,7 @@
           <video-component class="{% if using_video_tag %}has-video{% else %}has-iframe{% endif %}"
             {%- unless using_video_tag %} data-video-url="{{ section.settings.video_external | escape }}"{% endunless %}
                           data-video-id="{{ section.id }}"
-                          data-autoplay="true"
+                          data-autoplay="false"
                           data-background="false"
                           data-description="{{ section.settings.video_description | escape }}">
             {%- if using_video_tag -%}
