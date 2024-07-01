@@ -237,9 +237,9 @@
                                     {% if block.settings.video_mobile_2 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>
@@ -320,9 +320,9 @@
                                     {% if block.settings.video_mobile_1 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>
@@ -397,9 +397,9 @@
                                     {% if block.settings.video_mobile_2 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>
@@ -474,9 +474,9 @@
                                     {% if block.settings.video_mobile_3 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_3 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_3 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_3 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_3 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>
