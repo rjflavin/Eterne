@@ -136,22 +136,22 @@
                                             {% assign image_desk_class = "" %}
                                             {% if block.settings.image_mobile_1 != blank %}
                                                 {% assign image_desk_class = "only-desk" %}
-                                                <img
+                                            <!--    <img
                                                         class="collage__image only-mob"
                                                         src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
                                                         alt="{{ block.settings.image_mobile_1.alt }}"
                                                         style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
                                                         loading="lazy"
-                                                >
+                                                > -->
                                             {% endif %}
 
-                                            <img
+                                           <!-- <img
                                                     class="collage__image {{ image_desk_class }}"
                                                     src="{{ block.settings.image_1 | img_url: "master" }}"
                                                     alt="{{ block.settings.image_1.alt }}"
                                                     style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
                                                     loading="lazy"
-                                            >
+                                            > -->
                                         </div>
                                     {% endif %}
                                     {% assign video_class = "desktop-video" %}
@@ -159,10 +159,10 @@
                                     {% if block.settings.video_mobile_1 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
 
-                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
 
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
@@ -241,9 +241,9 @@
                                     {% if block.settings.video_mobile_2 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>
@@ -303,22 +303,22 @@
                                             {% assign image_desk_class = "" %}
                                             {% if block.settings.image_mobile_1 != blank %}
                                                 {% assign image_desk_class = "only-desk" %}
-                                                <img
+                                               <!-- <img
                                                         class="collage__image only-mob"
                                                         src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
                                                         alt="{{ block.settings.image_mobile_1.alt }}"
                                                         style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
                                                         loading="lazy"
-                                                >
+                                                > -->
                                             {% endif %}
 
-                                            <img
+                                           <!-- <img
                                                     class="collage__image {{ image_desk_class }}"
                                                     src="{{ block.settings.image_1 | img_url: "master" }}"
                                                     alt="{{ block.settings.image_1.alt }}"
                                                     style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
                                                     loading="lazy"
-                                            >
+                                            > -->
                                         </div>
                                     {% endif %}
                                     {% assign video_class = "desktop-video" %}
@@ -326,9 +326,9 @@
                                     {% if block.settings.video_mobile_1 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_1 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_1 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>
@@ -382,22 +382,22 @@
                                             {% assign image_desk_class = "" %}
                                             {% if block.settings.image_mobile_2 != blank %}
                                                 {% assign image_desk_class = "only-desk" %}
-                                                <img
+                                             <!--   <img
                                                         class="collage__image only-mob"
                                                         src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
                                                         alt="{{ block.settings.image_mobile_2.alt }}"
                                                         style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
                                                         loading="lazy"
-                                                >
+                                                > -->
                                             {% endif %}
 
-                                            <img
+                                        <!--    <img
                                                     class="collage__image {{ image_desk_class }}"
                                                     src="{{ block.settings.image_2 | img_url: "master" }}"
                                                     alt="{{ block.settings.image_2.alt }}"
                                                     style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
                                                     loading="lazy"
-                                            >
+                                            > -->
                                         </div>
                                     {% endif %}
                                     {% assign video_class = "desktop-video" %}
@@ -405,9 +405,9 @@
                                     {% if block.settings.video_mobile_2 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_2 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_2 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>
@@ -461,22 +461,22 @@
                                             {% assign image_desk_class = "" %}
                                             {% if block.settings.image_mobile_3 != blank %}
                                                 {% assign image_desk_class = "only-desk" %}
-                                                <img
+                                            <!--    <img
                                                         class="collage__image only-mob"
                                                         src="{{ block.settings.image_mobile_3 | img_url: "master" }}"
                                                         alt="{{ block.settings.image_mobile_3.alt }}"
                                                         style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
                                                         loading="lazy"
-                                                >
+                                                > -->
                                             {% endif %}
 
-                                            <img
+                                     <!--       <img
                                                     class="collage__image {{ image_desk_class }}"
                                                     src="{{ block.settings.image_3 | img_url: "master" }}"
                                                     alt="{{ block.settings.image_3.alt }}"
                                                     style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
                                                     loading="lazy"
-                                            >
+                                            > -->
                                         </div>
                                     {% endif %}
                                     {% assign video_class = "desktop-video" %}
@@ -484,9 +484,9 @@
                                     {% if block.settings.video_mobile_3 != blank %}
                                         {% assign video_class = video_class | append: " only-desk" %}
                                         {% assign video_mobile_class = "mobile-video only-mob" %}
-                                        {{ block.settings.video_mobile_3 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                        {{ block.settings.video_mobile_3 | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     {% endif %}
-                                    {{ block.settings.video_3 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: false, controls: false, muted: false }}
+                                    {{ block.settings.video_3 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                     <div class="play-icon">
                                         {% render "icon-play-video" %}
                                     </div>

@@ -23,21 +23,6 @@
             endif
         endfor
     endunless
-
-    assign color_values = ''
-    for option in product.options_with_values
-        assign option_name = option.name | downcase
-        if option_name == 'color'
-            for option_value in option.values
-                if forloop.last
-                    assign color_values = color_values | append: option_value | downcase
-                else
-                    assign color_values = color_values | append: option_value | append: ',' | downcase
-                endif
-            endfor
-        endif
-    endfor
-    assign color_values = color_values | split: ','
 -%}
 
 {% if enable_size_chart %}
@@ -89,50 +74,37 @@
 <single-product section-id="shopify-section-{{ section.id }}">
     <product-form class="js-product product-info quickbuy-content spaced-row">
         <div class="media-gallery">
-            {% for color_value in color_values %}
-                <div class="product-media-collage product-slider__swiper
-                            {% if color_value == current_color %} product-media-collage--active{% endif %}"
-                     data-color-images-wrapper="{{ color_value }}">
-                    <div class="swiper-button-prev no-select product-slider__arrow-item product-slider__arrow-prev">
-                        {% render 'icon-tick' %}
-                    </div>
-                    <div class="swiper-button-next no-select product-slider__arrow-item product-slider__arrow-next">
-                        {% render 'icon-tick' %}
-                    </div>
-                    <div class="product-slider__swiper-wrapper swiper-wrapper">
-                        {% for image in product.media %}
-                            {% assign image_alt_color = image.alt | downcase %}
-                            {% if image_alt_color == color_value %}
-                                <div class="product-slider__slide swiper-slide">
-                                    {% render 'image',
-                                            image: image,
-                                            sizes: '100vw',
-                                            widths: '480, 640, 960, 1280'
-                                    %}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+            <div class="product-media-collage product-slider__swiper">
+                <div class="swiper-button-prev no-select product-slider__arrow-item product-slider__arrow-prev">
+                    {% render 'icon-tick' %}
                 </div>
-                <div class="product-media-collage
-                            {% if product.media.size <= 1 %} product-media-collage__single-image {% endif %}
-                            {% if color_value == current_color %} product-media-collage--active{% endif %}"
-                     data-color-images-wrapper="{{ color_value }}">
-                    {%- for image in product.media -%}
-                        {% assign image_alt_color = image.alt | downcase %}
-                        {% if image_alt_color == color_value %}
-                            <div class="product-media-collage__item">
-                                {% render 'image',
-                                        image: image,
-                                        sizes: '100vw',
-                                        widths: '480, 640, 960, 1280',
-                                        class: 'product-media-collage__item-img'
-                                %}
-                            </div>
-                        {% endif %}
-                    {%- endfor -%}
+                <div class="swiper-button-next no-select product-slider__arrow-item product-slider__arrow-next">
+                    {% render 'icon-tick' %}
                 </div>
-            {% endfor %}
+                <div class="product-slider__swiper-wrapper swiper-wrapper">
+                    {% for image in product.media %}
+                        <div class="product-slider__slide swiper-slide">
+                            {% render 'image',
+                                    image: image,
+                                    sizes: '100vw',
+                                    widths: '480, 640, 960, 1280'
+                            %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="product-media-collage{% if product.media.size <= 1 %} product-media-collage__single-image {% endif %}">
+                {%- for image in product.media -%}
+                    <div class="product-media-collage__item">
+                        {% render 'image',
+                                image: image,
+                                sizes: '100vw',
+                                widths: '480, 640, 960, 1280',
+                                class: 'product-media-collage__item-img'
+                        %}
+                    </div>
+                {%- endfor -%}
+            </div>
         </div>
 
         <div class="detail product-column-right" data-cc-animate data-cc-animate-delay="0.2s">

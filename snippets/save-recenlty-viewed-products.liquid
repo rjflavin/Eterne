@@ -18,23 +18,15 @@
         let variants = [],
             loopVariant,
             variantPrice,
-            variantPriceCleaned,
-            featuredImageCleaned,
-            hoverImage,
-            hoverImageCleaned;
+            variantPriceCleaned;
+
         {% for variant in product.variants %}
             variantPrice = '{{ variant.price }}';
             variantPriceCleaned = parseFloat(variantPrice * 0.01);
-            featuredImageCleaned = JSON.parse('{{ variant.featured_image | json }}');
-            hoverImage = JSON.parse('{{ variant.metafields.custom.hover_image.value | json }}')
-            if (hoverImage && hoverImage.src ) hoverImageCleaned = hoverImage.src;
-            else if (hoverImage) hoverImageCleaned = hoverImage;
 
             loopVariant = {
                 available: !!'{{ variant.available | escape }}',
                 compare_at_price: +'{{ variant.compare_at_price }}',
-                featured_image: (featuredImageCleaned) ? featuredImageCleaned : '',
-                hover_image: (hoverImageCleaned) ? hoverImageCleaned : '',
                 id: +'{{ variant.id | escape }}',
                 inventory_quantity: +'{{ variant.inventory_quantity | escape }}',
                 option1: '{{ variant.option1 | escape }}',
@@ -94,15 +86,17 @@
                 return variant.option1.toLowerCase() === currentVariant.option1.toLowerCase();
             });
 
+            let productMedia = [];
+
+            {% for media in product.media %}
+                productMedia.push('{{ media.src | img_url: "master" }}');
+            {% endfor %}
+
             productObject.productId = '{{ product.id }}';
             productObject.title = '{{ product.title | replace: "'", "&apos;" }}';
             productObject.color = currentVariant.option1;
             productObject.variantAvailableFrom = `{{ product.variants[0].metafields.custom.available_from | date: "%B %d, %Y" }}`;
-
-            let variantWithFeaturedImg = variantsOfColor.find((variant) => variant.featured_image),
-                variantWithHoverImg = variantsOfColor.find((variant) => variant.featured_image);
-            productObject.images[0] = (variantWithFeaturedImg) ? variantWithFeaturedImg.featured_image : '';
-            productObject.images[1] = (variantWithHoverImg) ? variantWithHoverImg.hover_image : '';
+            productObject.images = productMedia.slice(0,2);
 
             let firstAvailable = false;
             let firstAvailableFound = false;

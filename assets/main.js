@@ -2733,6 +2733,10 @@ const ProductForm = class extends HTMLElement {
           bubbles: true
         })
         document.dispatchEvent(event)
+        const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+        if (!emptyCartElement.classList.contains('disp-none-imp')) {
+          emptyCartElement.classList.add('disp-none-imp');
+        }
       } else if (theme.settings.afterAddToCart === 'page') {
         // Allow the tick animation to complete
         setTimeout(() => {

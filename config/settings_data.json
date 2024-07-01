@@ -1,12 +1,3 @@
-/*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
 {
   "presets": {
     "Chantilly": {
@@ -392,6 +383,7 @@
     }
   },
   "current": {
+    "empty_cart_button_link": "shop",
     "max_page_width": 1600,
     "use_fullwidth_layout": false,
     "font_col_base": "#5c5c5c",
@@ -538,12 +530,6 @@
       "3577669850698438243": {
         "type": "shopify:\/\/apps\/preorder-now-wod-preorder\/blocks\/app-embed\/fdf17d17-ef12-4a7b-8383-20cc1fc2a4b6",
         "disabled": false,
-        "settings": {
-        }
-      },
-      "18128612654622612671": {
-        "type": "shopify:\/\/apps\/selectors\/blocks\/app-embed\/a005a4a7-4aa2-4155-9c2b-0ab41acbf99c",
-        "disabled": true,
         "settings": {
         }
       }

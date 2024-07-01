@@ -17,8 +17,9 @@
               <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
                 {% if image %}
                   <div
-                    data-bgimage="{{ image | image_url }}"
                     class="cart-flyover-you-may-also-like-swiper-item__image lazyLoad"
+                    data-bgimage="{{ image | img_url: 'master' }}"
+                    style="background-image: url('{{ image | img_url: 'small' }}'); filter: blur(2px)"
                   ></div>
                 {% endif %}
               </div>

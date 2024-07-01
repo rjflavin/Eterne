@@ -110,9 +110,6 @@
     display: none;
   }
 }
-.product-media-collage:not(.product-media-collage--active) {
-  display: none !important;
-}
 .product-media-collage_single-image {
   display: flex;
   gap: 0;
@@ -315,6 +312,9 @@
 .product-form fieldset.option-selector.color-switcher.single-product-options .opt-label {
   border-radius: 50%;
 }
+.product-form .attr-title-hover-groups {
+  display: block;
+}
 
 .color-tooltip {
   position: absolute;
@@ -369,9 +369,6 @@
   .product-info .product-column-right .product-recommendations .recommendations-grid {
     flex-direction: column;
   }
-}
-.product-info .product-column-right .product-recommendations .recommendations-grid--active {
-  display: grid !important;
 }
 .product-info .product-column-right .product-recommendations .recommendations-list {
   display: grid;
