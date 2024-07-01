@@ -355,3 +355,18 @@ page-header {
     top: 90px;
   }
 }
+
+.snize-ac-results {
+  .snize-ac-results-content {
+    max-width: 1440px;
+    min-height: 300px;
+  }
+
+  .snize-ac-results .snize-label  {
+    font-weight: 400;
+  }
+
+  b {
+    font-weight: 500;
+  }
+}
