@@ -52,7 +52,7 @@
       for (let index = 0; index < products.length; index++) {
         const product = products[index];
 
-        if (+new Date(product.variantAvailableFrom) < +new Date() || product.variantAvailableFrom === '') {
+        if (+new Date(product.availableFrom) < +new Date() || product.availableFrom === '') {
           const firstAvailableVariant = product.variants.find((variant) => variant.firstAvailable);
           let imageUrl = product.images[0]
 
