@@ -120,3 +120,12 @@ export const updateCartItemQuantitySetup = (element, productId, quantity, loader
         })
     }
 }
+
+export const getCartInfo = () => {
+    const url = "/cart.js";
+    return fetch(url)
+        .then((res) => res.json())
+        .then((cart) => {
+            return cart;
+        });
+}
