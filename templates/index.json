@@ -1,12 +1,3 @@
-/*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
 {
   "sections": {
     "collage_grid_YqLqzV": {
@@ -15,13 +6,12 @@
         "one_image_row_BNxRBq": {
           "type": "one_image_row",
           "settings": {
-            "media_type": "video",
+            "media_type": "image",
             "orientation": "landscape",
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections",
             "product_link_text": "shop tees",
-            "image": "shopify:\/\/shop_images\/Frame_7_74de2eca-9d86-4d92-9d96-376c5f008b46.jpg",
-            "image_mobile": "shopify:\/\/shop_images\/test-90s-brief-black-intimates-eterne-548939_f423b581-9c41-4f74-b54b-fc9671350319.jpg"
+            "image": "shopify:\/\/shop_images\/Frame_7_74de2eca-9d86-4d92-9d96-376c5f008b46.jpg"
           }
         }
       },
