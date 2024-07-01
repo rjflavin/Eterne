@@ -372,6 +372,10 @@ export class EterneCollection extends HTMLElement {
                                 let secondImageUrl = response.media[1] ? response.media[1]?.src : firstImageUrl;
                                 secondImageElement.setAttribute('style', `background-image: url(${secondImageUrl})`);
 
+                                let linkUrl = variantCardElement.querySelector('.collection__item-link')
+
+                                linkUrl.href = response.url
+
                                 variantCardElement.dataset.productHandle = newProductHandle;
                                 variantCardElement.dataset.variantId = response.id;
                                 variantCardElement.dataset.selectedColor = response.variants[0].option1;
