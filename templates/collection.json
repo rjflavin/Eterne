@@ -12,8 +12,8 @@
     "collection": {
       "type": "collection",
       "settings": {
-        "products_per_page": 12,
-        "products_per_page_with_filter": 12,
+        "products_per_page": 1,
+        "products_per_page_with_filter": 1,
         "filters_value": "category,color,size"
       }
     }
