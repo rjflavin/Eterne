@@ -307,11 +307,9 @@ export class EterneCollection extends HTMLElement {
                                         const variantIdPolicy = div.getAttribute('data-variant-id-policy');
                                         const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
 
-                                        if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && !variant.available) {
+                                        if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && variant.available) {
                                             preorderWrapperElement.classList.add('disp-flx-imp');
                                             variantCardElement.dataset.isVariantInStock = 'false';
-
-                                            return;
                                         }
                                     });
                                 }
@@ -331,7 +329,6 @@ export class EterneCollection extends HTMLElement {
 
             let selectedSize = variantCardElement.dataset.selectedSize;
             const productHandle = variantCardElement.dataset.productHandle;
-            const productTitle = variantCardElement.dataset.productTitle;
             const preorderWrapperElement = variantCardElement.querySelector('.collection__preorder-wrap');
             const firstImageElement = variantCardElement.querySelector('.collection__item-bg-img');
             const secondImageElement = variantCardElement.querySelector('.collection__item-bg-img-hover');
@@ -375,6 +372,10 @@ export class EterneCollection extends HTMLElement {
                                 let secondImageUrl = response.media[1] ? response.media[1]?.src : firstImageUrl;
                                 secondImageElement.setAttribute('style', `background-image: url(${secondImageUrl})`);
 
+                                let linkUrl = variantCardElement.querySelector('.collection__item-link')
+
+                                linkUrl.href = response.url
+
                                 variantCardElement.dataset.productHandle = newProductHandle;
                                 variantCardElement.dataset.variantId = response.id;
                                 variantCardElement.dataset.selectedColor = response.variants[0].option1;
@@ -385,28 +386,6 @@ export class EterneCollection extends HTMLElement {
 
                                 productPriceElement.innerHTML = `${currencySymbol}${formatPrice(response.price)}`;
                                 productTitleElement.innerHTML = response.title;
-
-                                if (response.available) {
-                                    preorderWrapperElement.classList.remove('disp-flx-imp');
-                                    variantCardElement.dataset.isVariantInStock = 'true';
-
-                                    const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
-
-                                    if (inventoryPolicyDivs) {
-                                        inventoryPolicyDivs.forEach(div => {
-                                            const variantIdPolicy = div.getAttribute('data-variant-id-policy');
-                                            const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
-
-                                            if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
-                                                preorderWrapperElement.classList.add('disp-flx-imp');
-                                                variantCardElement.dataset.isVariantInStock = 'false';
-                                            }
-                                        });
-                                    }
-                                } else {
-                                    preorderWrapperElement.classList.add('disp-flx-imp');
-                                    variantCardElement.dataset.isVariantInStock = 'false';
-                                }
 
                                 response.variants.forEach((variant) => {
                                     const parts = variant.title.split('/').map(part => part.trim());
@@ -444,6 +423,29 @@ export class EterneCollection extends HTMLElement {
                                     });
                                 }
                             }
+                        }
+
+                        console.log(response.available)
+                        const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
+                        if (response.available) {
+                            preorderWrapperElement.classList.remove('disp-flx-imp');
+                            variantCardElement.dataset.isVariantInStock = 'true';
+
+                            if (inventoryPolicyDivs) {
+                                inventoryPolicyDivs.forEach(div => {
+                                    const variantIdPolicy = div.getAttribute('data-variant-id-policy');
+                                    const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
+
+                                    if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
+                                        preorderWrapperElement.classList.add('disp-flx-imp');
+                                        variantCardElement.dataset.isVariantInStock = 'false';
+                                    }
+                                });
+                            }
+                        } else {
+                            preorderWrapperElement.classList.remove('disp-flx-imp');
+                            variantCardElement.dataset.isVariantInStock = 'false';
                         }
                     }
 

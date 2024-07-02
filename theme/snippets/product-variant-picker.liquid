@@ -143,7 +143,7 @@
             %}
           </div>
         {%- else -%}
-          <fieldset class="option-selector single-product-options {% if option.name == 'Material' %}material-switcher{% endif %}{% if is_color_selector %}color-switcher{% endif %} {% if is_size_chart %}size-chart{% endif %}" data-selector-type="listed">
+          <fieldset class="option-selector single-product-options {{ option.name | downcase }} {% if option.name == 'Material' %}material-switcher{% endif %}{% if is_color_selector %}color-switcher{% endif %} {% if is_size_chart %}size-chart{% endif %}" data-selector-type="listed">
             <div class="option-selector__content">
                <div class="flex justify-between">
                   <legend class="label">{{- option.name -}}</legend>
