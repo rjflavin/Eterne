@@ -1,0 +1,88 @@
+{% assign BestSellingSortDefaultName = 'Best selling' %}
+{% assign DateNewToOldSortDefaultName = 'Date, new to old' %}
+{% assign PriceLowToHighSortDefaultName = 'Price, low to high' %}
+{% assign PriceHighToLowSortDefaultName = 'Price, high to low' %}
+{% assign RelevanceSortDefaultName = 'Relevance' %}
+
+{% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+
+<div class="filterWrapper collection__sort-category">
+  <fieldset class="filterWrapperFieldset collection__sort-category-fieldset">
+    <div class="collection__sort-category-title-wrap no-select">
+      <span class="collection__sort-category-title-text">Sort by</span>
+    </div>
+
+    <ul class="filterWrapperFieldsetList collection__sort-category-options" role="list">
+      {% for option in collection.sort_options %}
+        {% if option.name == BestSellingSortDefaultName
+          or option.name == DateNewToOldSortDefaultName
+          or option.name == PriceLowToHighSortDefaultName
+          or option.name == PriceHighToLowSortDefaultName
+          or option.name == RelevanceSortDefaultName
+        %}
+          <li
+            id="filter-{{ index }}--{{ forloop.index }}"
+            class="filterWrapperListItem collection__sort-category-option
+              {% if value.active %}activeFilterValue{% endif %}
+              {% if forloop.index > visibleFiltersQuantity %}collection__sort-category-option_hidden{% endif %}
+            "
+            {% if forloop.index > visibleFiltersQuantity %}data-option-to-hide="true"{% endif %}
+            style="order:
+              {% if option.name == BestSellingSortDefaultName %}
+                1
+              {% elsif option.name == DateNewToOldSortDefaultName %}
+                2
+              {% elsif option.name == RelevanceSortDefaultName %}
+                3
+              {% elsif option.name == PriceLowToHighSortDefaultName %}
+                4
+              {% elsif option.name == PriceHighToLowSortDefaultName %}
+                5
+              {% endif %}
+            "
+          >
+            <input
+              class="filterWrapperCheckboxDefault collection__sort-category-option-radio"
+              type="radio"
+              name="sort_by"
+              value="{{ option.value }}"
+              id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+              {% if option.value == sort_by %}
+                checked
+              {% endif %}
+            >
+            <label
+              for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+              class="filterWrapperItemLabel no-select
+                {% if forloop.index > visibleFiltersQuantity %}
+                  disp-none-imp
+                {% endif %}
+              "
+              {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
+            >
+              <span
+                class="filterWrapperListItemText collection__sort-category-option-text"
+                aria-hidden="true"
+              >
+                {% if option.name == DateNewToOldSortDefaultName %}
+                  New in
+                {% elsif option.name == BestSellingSortDefaultName %}
+                  Bestsellers
+                {% else %}
+                  {{ option.name }}
+                {% endif %}
+              </span>
+            </label>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    {% if collection.sort_options.size > visibleFiltersQuantity %}
+      <div class="collection__sort-category-see-more no-select" data-is-see-more-open="false">
+        <span class="collection__sort-category-see-more-text">see more</span>
+        <span class="collection__sort-category-see-less-text disp-none-imp">see less</span>
+      </div>
+    {% endif %}
+  </fieldset>
+</div>

@@ -1,0 +1,439 @@
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+
+<div class="page-header" data-cc-animate>
+  <div class="container">
+    <h1 class="visually-hidden">{{ 'general.search.title' | t }}</h1>
+
+    <div class="main-search">
+      <div class="main-search__container">
+        <form class="main-search__form" action="{{ routes.search_url }}" method="get" autocomplete="off">
+          <div class="main-search__input-container">
+            <input
+              class="main-search__input"
+              type="text"
+              name="q"
+              autocomplete="off"
+              placeholder="{{ 'general.search.placeholder' | t | escape }}"
+              aria-label="{{ 'general.search.input_label' | t | escape }}"
+              value="{{ search.terms | escape }}" />
+            <button class="main-search__button" type="submit" aria-label="{{ 'general.search.submit' | t }}">{% render 'icon-search' %}</button>
+          </div>
+          {%- if settings.show_search_suggestions -%}
+            <script src="{{ 'search-suggestions.js' | asset_url }}" defer></script>
+            <search-suggestions></search-suggestions>
+          {%- endif -%}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% assign visibleFiltersBeforeSeeMoreQuantity = 8 %}
+{% assign emptyImage = 'empty-image.svg' | asset_url %}
+
+{% liquid
+  assign total_active_values = 0
+  if routes.search_url
+    assign results_url = routes.search_url
+  else
+    assign terms = search.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by='
+  endif
+  assign filtersToDisplay = section.settings.filters_value | split: ',' | downcase
+%}
+
+{% assign activeFiltersQuantity = 0 %}
+{% for filter in search.filters %}
+  {% for value in filter.values %}
+    {% if value.active %}
+      {% assign activeFiltersQuantity = activeFiltersQuantity | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% assign productsPerPage = 12 %}
+
+{%- liquid
+  assign show_filters = section.settings.enable_filtering
+  if search.filters == empty
+    assign show_filters = false
+  endif
+-%}
+
+{% if search.performed %}
+  <eterne-collection class="collection" data-is-filter-open="true">
+    {% paginate search.results by section.settings.coll_num_per_page_int %}
+      <div class="collection__title-wrap">
+        <span class="collection__title">Search</span>
+      </div>
+      <div class="collection__filter-open-btn-wrap">
+        {% if section.settings.show_sort or show_filters %}
+          <span class="collection__filter-block-title no-select">Sort & filter</span>
+          <div data-filter-status="plus" class="collection__filter-closed-drpd-btn">
+            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="collection__content" data-id="{{ section.id }}">
+        {% if section.settings.show_sort or show_filters %}
+          <collection-filters-form class="collection__filters" data-id="{{ section.id }}">
+            <form id="CollectionFiltersForm" class="collection__filters-form">
+              <div class="collection__filters-content-wrap">
+                {% if search.terms %}
+                  <input type="hidden" name="q" value="{{ search.terms | escape }}">
+                  <input name="options[prefix]" type="hidden" value="last">
+                {% endif %}
+                <div id="FacetsWrapperDesktop" class="collection__filters-content">
+                  <div class="collection__radio-filters">
+                    {% render 'filter-category-sorting',
+                            visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
+                            collection: search
+                    %}
+                  </div>
+
+                  <div class="collection__checkbox-filters">
+                    {% assign activeFiltersQuantity = 0 %}
+
+                    {% for filter in search.filters %}
+                      {% assign filterLabel = filter.label %}
+                      {% assign filterName = filter.label | downcase %}
+
+                      {% assign visibleFiltresQuantity = 0 %}
+                      {% for value in filter.values %}
+                        {% if value.count > 0 %}
+                          {% assign visibleFiltresQuantity = visibleFiltresQuantity | plus: 1 %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {% render 'filter-category',
+                              filter: filter,
+                              filterLabel: filter.label,
+                              index: forloop.index,
+                              filtersType: 'checkbox',
+                              visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
+                              collection: item
+                      %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </form>
+          </collection-filters-form>
+        {% endif %}
+
+        {% if search.results == empty %}
+          <h5 class="align-centre fully-spaced-row" data-cc-animate style="margin: 56px auto;">{{ 'general.search.no_results' | t: terms: search.terms }}</h5>
+        {% else %}
+          {% assign now = "now" | date: "%s" %}
+          <div class="collection__products-wrap">
+            <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
+              {% for filter in search.filters %}
+                {% for value in filter.values %}
+                  {% if value.active %}
+                    {% assign activeFiltersQuantity = activeFiltersQuantity | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+              {% for item in search.results %}
+                {% if item.featured_image != blank %}
+                  {% assign first_image = item.featured_image | img_url: 'master' %}
+                  {% assign first_image_lazy = item.featured_image | img_url: 'small' %}
+                {% else %}
+                  {% assign first_image = emptyImage %}
+                {% endif %}
+
+                {% if item.media[1] != blank %}
+                  {% assign second_image = item.media[1] | img_url: 'master' %}
+                  {% assign second_image_lazy = item.media[1] | img_url: 'small' %}
+                  {% assign hoverImages = item.media[1] | img_url: 'master' %}
+                  {% assign hoverImages_lazy = item.media[1] | img_url: 'small' %}
+                {% elsif item.selected_or_first_available_variant.featured_image != blank %}
+                  {% assign second_image = item.selected_or_first_available_variant.featured_image | img_url: 'master' %}
+                  {% assign second_image_lazy = item.selected_or_first_available_variant.featured_image | img_url: 'small' %}
+                {% else %}
+                  {% assign second_image = emptyImage %}
+                  {% assign hoverImages = emptyImage %}
+                {% endif %}
+
+                {% assign variant_url = "/collections/shop/products/" | append: item.handle %}
+
+                {% assign shouldStop = false %}
+                {% assign currentVariant = "" %}
+                {% assign isVariantInStock = true %}
+                {% assign isAnyVariantInStock = false %}
+
+                {% for option in item.options_with_values %}
+                  {% if shouldStop %}
+                    {% break %}
+                  {% endif %}
+
+                  {% assign option_name = option.name | downcase %}
+
+                  {% if option_name == 'color' %}
+                    {% assign productColorOptions = option.values %}
+                    {% for variantOption in item.selected_or_first_available_variant.options %}
+                      {% for productColorOption in productColorOptions %}
+                        {% if variantOption == productColorOption %}
+                          {% assign colorOption = variantOption %}
+                          {% assign variantColorOptionDowncase = variantOption | downcase %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  {% elsif option_name == 'size' %}
+                    {% assign productSizeOptions = option.values %}
+                    {% for variant in item.variants %}
+                      {% if variant.inventory_quantity > 0 %}
+                        {% assign isAnyVariantInStock = true %}
+                      {% endif %}
+                      {% if variant.inventory_quantity == 0 and variant.inventory_policy != 'continue' %}
+                        {% assign isAnyVariantInStock = true %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% for productSizeOptionTemp in productSizeOptions %}
+                      {% if shouldStop == false %}
+                        {% assign productSizeOptionTempDowncase = productSizeOptionTemp | downcase %}
+                        {% assign sizeOption = "" %}
+                        {% assign fitstAvailableSize = "" %}
+                        {% for variant in item.variants %}
+                          {% assign optionsArr = variant.title | split: ' / ' %}
+                          {% assign option1 = optionsArr[0] | downcase %}
+                          {% assign option2 = optionsArr[1] | downcase %}
+
+                          {% if variant.inventory_policy == 'continue' and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
+                            {% assign sizeOption = optionsArr[1] %}
+                            {% assign currentVariant = variant %}
+                            {% assign isVariantInStock = false %}
+
+                            {% for disabledColor in item.metafields.custom.disabled_option.value %}
+                              {% assign disabledColorDowncase = disabledColor | downcase %}
+                              {% if disabledColorDowncase == variantColorOptionDowncase %}
+                                {% assign isColorVariantInDraft = true %}
+                              {% endif %}
+                            {% endfor %}
+
+                            {% assign shouldStop = true %}
+                            {% break %}
+                          {% endif %}
+
+                          {% if variant.inventory_quantity >= 0 and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
+                            {% assign sizeOption = optionsArr[1] %}
+                            {% assign currentVariant = variant %}
+                            {% assign isVariantInStock = true %}
+
+                            {% for disabledColor in item.metafields.custom.disabled_option.value %}
+                              {% assign disabledColorDowncase = disabledColor | downcase %}
+                              {% if disabledColorDowncase == variantColorOptionDowncase %}
+                                {% assign isColorVariantInDraft = true %}
+                              {% endif %}
+                            {% endfor %}
+
+                            {% assign shouldStop = true %}
+                            {% break %}
+                          {% endif %}
+                          {% if forloop.first %}
+                            {% assign fitstAvailableSize = optionsArr[1] %}
+                          {% endif %}
+                        {% endfor %}
+
+                        {% if sizeOption == "" %}
+                          {% assign sizeOption = fitstAvailableSize %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+
+                {% assign available_from = item.metafields.custom.available_from | date: "%s" %}
+
+                {% if available_from < now or available_from == blank %}
+                  <div
+                          class="collection__item"
+                          data-is-loaded-with-filters="true"
+                          data-collection-item
+                          data-is-variant-ready-to-fetch="true"
+                          data-is-variant-in-stock="{{ isVariantInStock }}"
+                          data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
+                          data-product-handle="{{ item.handle }}"
+                          data-variant-id="{{ item.selected_or_first_available_variant.id }}"
+                          data-selected-size="{{ sizeOption }}"
+                          data-selected-color="{{ colorOption }}"
+                          data-product-title="{{ item.title }}"
+                          data-default-color="{{ colorOption }}"
+                          data-first-image="{{ first_image }}"
+                          data-second-image="{{ second_image }}"
+                          data-empty-image="{{ emptyImage }}"
+                          data-hover-images="{{ hoverImages }}"
+                  >
+                    <div class="variant_inventory_policy disp-none-imp">
+                      {% for variant in item.variants %}
+                        <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
+                      {% endfor %}
+                    </div>
+                    <div class="collection__item-inner">
+
+                      <div class="collection__img-wrap">
+                        <div class="collection__quick-add-panel" data-quick-add-panel>
+                          <div class="collection__size-variants">
+                            {% assign selected_color = colorOption %}
+
+                            {% assign size_options = '' %}
+                            {% for variant in item.variants %}
+                              {% if variant.options contains selected_color %}
+                                {% assign size_options = size_options | append: variant.option2 | append: ',' %}
+                              {% endif %}
+                            {% endfor %}
+                            {% assign size_options = size_options | split: ',' | uniq %}
+
+                            {% assign selected_size = '' %}
+                            {% assign is_variant_found = false %}
+
+                            {% for size in size_options %}
+                              {% unless size == '' %}
+                                {% assign is_disabled = true %}
+                                {% for variant in item.variants %}
+                                  {% if variant.option2 == size and variant.options contains selected_color %}
+                                    {% if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' %}
+                                      {% assign is_disabled = false %}
+                                      {% if is_variant_found == false %}
+                                        {% assign selected_size = size %}
+                                        {% assign is_variant_found = true %}
+                                      {% endif %}
+                                    {% endif %}
+                                  {% endif %}
+                                {% endfor %}
+                                <div data-variant-size="{{ size }}"
+                                     class="collection__size-variant-text no-select
+                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
+                                       {% if is_disabled %} disabled{% endif %}"
+                                >
+                                  {{ size }}
+                                </div>
+                              {% endunless %}
+                            {% endfor %}
+                          </div>
+                          <div class="collection__add-to-cart no-select">Add to bag</div>
+                          <div class="collection__add-to-cart-loader">...</div>
+                        </div>
+                        <div data-quick-add-button class="collection__item-quick-add-btn-wrap">
+                          <div class="collection__item-quick-add-btn">
+                            {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                          </div>
+                        </div>
+                        <a href="{{ variant_url }}" class="collection__item-link"></a>
+                        <div class="collection__item-bg-imgs-wrap">
+                          <div class="collection__item-bg-img lazyLoad"
+                               data-bgimage="{{ first_image }}"
+                               style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
+                               id="productImage"
+                          ></div>
+                          {% if second_image != blank %}
+                            <div class="collection__item-bg-img-hover lazyLoad"
+                                 data-bgimage="{{ second_image }}"
+                                 style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
+                            ></div>
+                          {% endif %}
+                        </div>
+                      </div>
+
+                      <div class="collection__item-text-wrap">
+                        <div class="collection__item-title">{{ item.title }}</div>
+                        <div class="collection__item-price">{{ currentVariant.price | money_without_trailing_zeros }}</div>
+                      </div>
+                    </div>
+                    <div class="collection__preorder-wrap {% if isVariantInStock == false %}disp-flx-imp{% endif %}">
+                      <div class="collection__preorder">
+                        <div class="collection__preorder-text">Preorder</div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <div class="loading-spinner disp-none-imp"></div>
+
+            {% if paginate.pages > 1 %}
+              <div class="collection__see-more-btn-wrap">
+                <div data-see-more-button class="collection__see-more-btn" id="loadMoreButton">
+                  <span class="collection__see-more-text">
+                    See more
+                  </span>
+                </div>
+                <div data-see-more-loader class="collection__see-more-loader disp-none-imp"></div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endpaginate %}
+  </eterne-collection>
+{% else %}
+  <h5 class="align-centre fully-spaced-row" data-cc-animate style="margin: 56px auto;">Please enter a search query</h5>
+{% endif %}
+
+{{ 'collection-script.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Search results",
+  "class": "section-search-template page-section-spacing",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendors",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "coll_num_per_page_int",
+      "min": 6,
+      "max": 12,
+      "step": 2,
+      "label": "Number of products to show per page",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable filtering",
+      "info": "[Customize filters](/admin/menus)",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "collapse_filters_method",
+      "label": "Filter row collapse",
+      "default": "over-12",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "over-6",
+          "label": "Over 6 items"
+        },
+        {
+          "value": "over-12",
+          "label": "Over 12 items"
+        },
+        {
+          "value": "over-18",
+          "label": "Over 18 items"
+        },
+        {
+          "value": "all",
+          "label": "All rows"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
