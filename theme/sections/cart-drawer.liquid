@@ -1,6 +1,7 @@
 <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
 <script src="{{ 'cart-flyover-element.js' | asset_url }}" defer></script>
 {{ 'cart-flyover.css' | asset_url | stylesheet_tag }}
+{{ 'cart-empty-state.css' | asset_url | stylesheet_tag }}
 
 <cart-drawer
   class="drawer fixed top-0 right-0 flex flex-col w-full has-motion js-cart-drawer"
@@ -43,7 +44,8 @@
           {%- render 'cart-flyover-item', item: item, forloop: forloop, drawer: true -%}
         {% endfor %}
       </div>
-      {%- render 'cart-flyover-you-may-also-like', title_you_may_like: section.settings.title_you_may_like,  product_list_you_may_like: section.settings.product_list_you_may_like -%}
+      {% render 'cart-empty-state' %}
+      {% render 'cart-flyover-you-may-also-like', title_you_may_like: section.settings.title_you_may_like,  product_list_you_may_like: section.settings.product_list_you_may_like %}
     </div>
 
     <div class="cart-flyover-footer">

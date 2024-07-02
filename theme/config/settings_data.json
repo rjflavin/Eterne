@@ -383,6 +383,7 @@
     }
   },
   "current": {
+    "empty_cart_button_link": "shop",
     "max_page_width": 1600,
     "use_fullwidth_layout": false,
     "font_col_base": "#5c5c5c",

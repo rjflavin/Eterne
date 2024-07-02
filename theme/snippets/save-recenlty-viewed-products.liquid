@@ -10,6 +10,7 @@
 <script defer async>
     document.addEventListener('DOMContentLoaded', () => {
         const MAX_PRODUCT_AMOUNT = 7;
+        const isProductPreordered = '{{ product.tags | downcase }}'.includes('preorder');
 
         const isFloat = (n) =>{
             return Number(n) === n && n % 1 !== 0;
@@ -36,6 +37,7 @@
                 price: (isFloat(variantPriceCleaned)) ? variantPriceCleaned.toFixed(2) : parseInt(variantPriceCleaned, 10),
                 title: '{{ variant.title | escape }}',
                 url: '{{ variant.url | escape }}',
+                inventory_policy: '{{ variant.inventory_policy | escape }}',
             }
             variants.push(loopVariant);
         {% endfor %}
@@ -73,19 +75,17 @@
 
         const initializeProductObject = () => {
             const productObject = {
-                "productId": "",
-                "title": "",
-                "color": "",
-                "images": [],
-                "variantAvailableFrom": "",
-                "variants": [],
+                productId: "",
+                title: "",
+                color: "",
+                images: [],
+                availableFrom: "",
+                variants: [],
+                isPreordered: false,
+
             };
 
             const currentVariant = getCurrentVariant();
-            const variantsOfColor = variants.filter((variant) => {
-                return variant.option1.toLowerCase() === currentVariant.option1.toLowerCase();
-            });
-
             let productMedia = [];
 
             {% for media in product.media %}
@@ -95,18 +95,19 @@
             productObject.productId = '{{ product.id }}';
             productObject.title = '{{ product.title | replace: "'", "&apos;" }}';
             productObject.color = currentVariant.option1;
-            productObject.variantAvailableFrom = `{{ product.variants[0].metafields.custom.available_from | date: "%B %d, %Y" }}`;
+            productObject.availableFrom = `{{ product.metafields.custom.available_from | date: "%B %d, %Y" }}`;
             productObject.images = productMedia.slice(0,2);
+            productObject.isPreordered = isProductPreordered;
 
             let firstAvailable = false;
             let firstAvailableFound = false;
-            productObject.variants = variantsOfColor.map((variantData) => {
+            productObject.variants = variants.map((variantData) => {
                 if (variantData.available && !firstAvailable && !firstAvailableFound) {
                     firstAvailable = true;
                     firstAvailableFound = true;
                 } else firstAvailable = false;
 
-                const { id, available, price, url } = variantData;
+                const { id, available, price, url, inventory_policy, inventory_quantity } = variantData;
                 return {
                     id,
                     available,
@@ -114,6 +115,8 @@
                     price,
                     url,
                     firstAvailable,
+                    inventoryPolicy: inventory_policy,
+                    inventoryQuantity: inventory_quantity,
                 };
             })
 

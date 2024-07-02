@@ -51,20 +51,25 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        function checkPreorder(item) {
-            const inventoryPolicyDivs = item.querySelector('.variant_inventory_policy div');
-            const variantId = item.getAttribute('data-active-variant');
-            const variantIdPolicy = inventoryPolicyDivs.getAttribute('data-variant-id-policy');
-            const inventoryPolicy = inventoryPolicyDivs.getAttribute('data-variant-inventory-policy');
+        function checkPreorder(event = null) {
+            const selectesSize = (event) ? event.target : item.querySelector('[data-size-item].selected-size');
+            const isPreordered = selectesSize.dataset.isPreordered;
+            const buttonOrder = item.querySelector('.preorder-button');
+            const seeMoreButton = item.querySelector('[data-see-more-preordered]');
+            const quickAddButton = item.querySelector('[data-quick-add]');
 
-            if (variantId === variantIdPolicy && inventoryPolicy === 'continue') {
-                item.querySelector('.swiper-slide-preorder').classList.remove('disp-none-imp')
+            if (isPreordered === 'true') {
+                buttonOrder.classList.remove('disp-none-imp');
+                seeMoreButton.classList.remove('disp-none-imp');
+                quickAddButton.classList.add('disp-none-imp');
             } else {
-                item.querySelector('.swiper-slide-preorder').classList.add('disp-none-imp')
+                buttonOrder.classList.add('disp-none-imp');
+                seeMoreButton.classList.add('disp-none-imp');
+                quickAddButton.classList.remove('disp-none-imp');
             }
         }
 
-        checkPreorder(item);
+        checkPreorder();
 
         const currentPriceElem = item.querySelector('[data-current-price]');
 
@@ -74,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const siblingSizes = getSiblings(e.target)
                 item.setAttribute('data-active-variant', sizeElem.dataset.sizeItem)
                 e.target.classList.add(activeClass);
-                checkPreorder(item);
+                checkPreorder(e);
                 siblingSizes.forEach((siblingSize) => {
                     if (siblingSize.classList.contains(activeClass))
                         siblingSize.classList.remove(activeClass)
@@ -83,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         })
 
-        const cartButtonElement = item.querySelector('.swiper-slide-image-info-cart-button')
+        const cartButtonElement = item.querySelector('[data-quick-add]')
         if (cartButtonElement) {
             cartButtonElement.addEventListener('click', () => {
                 const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader')

@@ -57,3 +57,18 @@ $accurate-mobile-width: 767.98;
     transition: all 0.2s;
   }
 }
+
+@mixin preorder-button {
+  width: fit-content;
+  border: 1px solid var(--black1);
+  border-radius: 4px;
+  padding: 0 10px;
+  font-family: Helvetica Neue;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16.8px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--black1);
+  text-transform: uppercase;
+}

@@ -247,10 +247,10 @@
     display: none;
   }
 }
-.recent-products-swiper .swiper-wrapper .swiper-slide-preorder {
-  width: fit-content;
+.recent-products-swiper .swiper-wrapper .swiper-slide .preorder-button {
   align-self: center;
   margin-top: 15px;
+  width: fit-content;
   border: 1px solid var(--black1);
   border-radius: 4px;
   padding: 0 10px;

@@ -1,4 +1,4 @@
-import { addToCart, updateCartItemQuantity } from "../utils/cart-handler";
+import { updateCartItemQuantity, getCartInfo } from "../utils/cart-handler";
 
 class CartFlyover extends HTMLElement {
     constructor() {
@@ -201,12 +201,12 @@ class CartFlyover extends HTMLElement {
 
         const parentElement = event.target.parentElement
         if (parentElement) {
-            const variantId = parentElement.getAttribute('data-variant-id')
-            const quantityElement = parentElement.querySelector('[name="item-quantity"]')
-            if (variantId && quantityElement) {
-                const quantity = +quantityElement.getAttribute('item-quantity')
+            const variantId = parentElement.getAttribute('data-variant-id');
+            const quantityElement = parentElement.querySelector('[name="item-quantity"]');
 
-                const response = await updateCartItemQuantity(variantId, quantity - 1)
+            if (variantId && quantityElement) {
+                const quantity = +quantityElement.getAttribute('item-quantity');
+                const response = await updateCartItemQuantity(variantId, quantity - 1);
 
                 if (quantity > 1 && response && response.items) {
                     this.updateQuantity(variantId, response.items, quantityElement)
@@ -214,6 +214,16 @@ class CartFlyover extends HTMLElement {
                 } else if (response && response.items) {
                     this.deleteItemElement(variantId)
                     this.refreshCartHandler(false)
+                }
+
+                const cartResponse = await getCartInfo();
+                const hasResponseError = !cartResponse.items;
+
+                if (!hasResponseError && cartResponse.item_count <= 0) {
+                    const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+                    if (emptyCartElement.classList.contains('disp-none-imp')) {
+                        emptyCartElement.classList.remove('disp-none-imp');
+                    }
                 }
             }
         }
@@ -233,6 +243,16 @@ class CartFlyover extends HTMLElement {
                 if (!product) {
                     this.deleteItemElement(variantId)
                     this.refreshCartHandler(false)
+                }
+            }
+
+            const cartResponse = await getCartInfo();
+            const hasResponseError = !cartResponse.items;
+
+            if (!hasResponseError && cartResponse.item_count <= 0) {
+                const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+                if (emptyCartElement.classList.contains('disp-none-imp')) {
+                    emptyCartElement.classList.remove('disp-none-imp');
                 }
             }
         }
