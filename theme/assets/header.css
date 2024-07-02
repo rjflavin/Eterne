@@ -328,6 +328,9 @@ page-header {
     top: 90px;
   }
 }
+.snize-ac-results .snize-suggestion.snize-recent {
+  font-weight: 500;
+}
 .snize-ac-results .snize-ac-results-content {
   max-width: 1440px;
   min-height: 300px;
@@ -337,4 +340,28 @@ page-header {
 }
 .snize-ac-results b {
   font-weight: 500;
+}
+.snize-ac-results .snize-ac-results-multicolumn-list .snize-product {
+  max-width: 25%;
+  width: 25%;
+  flex: 0 0 25%;
+}
+.snize-ac-results .snize-ac-results-multicolumn-list .snize-product a {
+  text-align: center;
+}
+.snize-ac-results .snize-thumbnail {
+  height: 200px;
+  width: 100%;
+}
+.snize-ac-results .snize-item-image {
+  max-height: 200px;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+  object-position: top center;
+  height: 100%;
+}
+
+.snize-ac-results-column:nth-child(2) {
+  width: 100%;
 }

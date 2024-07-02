@@ -239,7 +239,6 @@
       &-status {
         display: flex;
         margin-left: 10px;
-        margin-bottom: 2px;
 
         @include for-tablet {
           margin-bottom: 1px;
@@ -742,7 +741,7 @@
     padding: 0 10px;
     font-size: 10px;
     font-weight: 500;
-    line-height: 15.8px;
+    line-height: 16px;
     letter-spacing: 0.4px;
     text-transform: uppercase;
     text-align: center;

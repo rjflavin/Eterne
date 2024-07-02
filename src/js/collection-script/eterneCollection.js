@@ -425,25 +425,26 @@ export class EterneCollection extends HTMLElement {
                             }
                         }
 
+                        console.log(response.available)
+                        const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
+
                         if (response.available) {
                             preorderWrapperElement.classList.remove('disp-flx-imp');
                             variantCardElement.dataset.isVariantInStock = 'true';
-
-                            const inventoryPolicyDivs = variantCardElement.querySelectorAll('.variant_inventory_policy div');
 
                             if (inventoryPolicyDivs) {
                                 inventoryPolicyDivs.forEach(div => {
                                     const variantIdPolicy = div.getAttribute('data-variant-id-policy');
                                     const inventoryPolicy = div.getAttribute('data-variant-inventory-policy');
 
-                                    if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue' && response.available) {
+                                    if (variantIdPolicy === variantCardElement.dataset.variantId && inventoryPolicy === 'continue') {
                                         preorderWrapperElement.classList.add('disp-flx-imp');
                                         variantCardElement.dataset.isVariantInStock = 'false';
                                     }
                                 });
                             }
                         } else {
-                            preorderWrapperElement.classList.add('disp-flx-imp');
+                            preorderWrapperElement.classList.remove('disp-flx-imp');
                             variantCardElement.dataset.isVariantInStock = 'false';
                         }
                     }

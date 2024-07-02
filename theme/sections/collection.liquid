@@ -193,7 +193,7 @@
                         {% break %}
                       {% endif %}
 
-                      {% if variant.inventory_quantity > 0 and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
+                      {% if variant.inventory_quantity >= 0 and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
                         {% assign sizeOption = optionsArr[1] %}
                         {% assign currentVariant = variant %}
                         {% assign isVariantInStock = true %}
@@ -208,6 +208,7 @@
                         {% assign shouldStop = true %}
                         {% break %}
                       {% endif %}
+
                       {% if forloop.first %}
                         {% assign fitstAvailableSize = optionsArr[1] %}
                       {% endif %}
