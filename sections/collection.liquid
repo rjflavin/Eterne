@@ -35,6 +35,7 @@
   {% assign productsPerPage = section.settings.products_per_page %}
 {% endif %}
 
+{{ productsPerPage }}
 <eterne-collection class="collection" data-is-filter-open="false">
 
   {% paginate collection.products by productsPerPage %}
