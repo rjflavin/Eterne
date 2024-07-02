@@ -63,7 +63,7 @@
         "one_image_row_w3pyj6": {
           "type": "one_image_row",
           "settings": {
-            "media_type": "video",
+            "media_type": "image",
             "orientation": "landscape",
             "caption": "<p>Elevated<br\/>Essentials<\/p>",
             "product_link": "shopify:\/\/products\/amina-top",
