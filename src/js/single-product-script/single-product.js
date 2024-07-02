@@ -42,33 +42,10 @@ export default class SingleProduct extends HTMLElement {
     document.addEventListener('DOMContentLoaded', () => {
       this.initializeOptionSelectors();
       this.watchScroll();
-      this.watchShowMore();
-      this.watchRecommendedQuickAdd();
       this.setTitleForColorSwatches();
       this.initializeProductDetailsToggle();
       this.initializeSizeInfoToggle();
     });
-
-    this.querySelectorAll('.product-recommendations [name="recommended-product-size"]').forEach((sizeElem) => {
-      sizeElem.addEventListener('change', (e) => {
-        e.preventDefault();
-        const activeLabelClass = 'product__size-label--checked';
-        const activeInputClass = 'product__size-item--checked';
-        const targetLabel = this.querySelector(`label[for="${sizeElem.id}"]`);
-        const targetInput = e.target;
-
-        const oldSelectedSize = sizeElem.closest('.product__size-variants').querySelector(`.${activeLabelClass}`);
-
-        const oldSelectedSizeInput = sizeElem.closest('.product__size-variants').querySelector(`.${activeInputClass}`);
-        if (!targetInput.classList.contains(activeInputClass)) {
-          targetLabel.classList.add(activeLabelClass);
-          targetInput.classList.add(activeInputClass);
-          oldSelectedSize.classList.remove(activeLabelClass);
-          oldSelectedSizeInput.classList.remove(activeInputClass);
-        }
-      })
-    })
-
     document.addEventListener('variant:change', this.handleVariantChange.bind(this));
   }
 
@@ -151,7 +128,6 @@ export default class SingleProduct extends HTMLElement {
     this.updateProductAvailability(variant.available);
     this.updateSelectedVariantLayout(selectedColor);
     this.updateRecommendedProducts(selectedColor);
-    this.resetShowMoreFunctionality();
   }
 
   updateProductPrice(price) {
@@ -219,81 +195,5 @@ export default class SingleProduct extends HTMLElement {
 
   initializeSizeInfoToggle() {
     this.productDetailsHandler('data-product-size-and-info');
-  }
-
-  watchShowMore() {
-    const recommendationsList = this.querySelectorAll('.recommendations-list');
-    recommendationsList.forEach((recommendationsWrapper) => {
-      const showMoreBtn = recommendationsWrapper.closest('[data-rec-products]').querySelector('.show-more-btn');
-      if (showMoreBtn) {
-        showMoreBtn.addEventListener('click', this.watchShowMoreHandler.bind(this, recommendationsWrapper));
-      }
-    })
-  }
-
-  watchShowMoreHandler(recommendationsWrapper) {
-    const hiddenProducts = recommendationsWrapper.querySelectorAll('.product.hidden');
-    const showMoreBtn = recommendationsWrapper.closest('[data-rec-products]').querySelector('.show-more-btn');
-    hiddenProducts.forEach((product, index) => {
-      if (index < 2) {
-        product.classList.remove('hidden');
-      }
-    });
-
-    if (hiddenProducts.length <= 2 ) {
-      showMoreBtn.style.display = 'none';
-    }
-  }
-
-  watchRecommendedQuickAdd() {
-    this.querySelectorAll('.product__add-to-cart').forEach((addRecommended) => {
-      addRecommended.addEventListener('click', () => {
-        const quickAddPanel = this.querySelector(`#${addRecommended.dataset.quickAddPanel}`);
-        const sizeVariants = quickAddPanel.querySelectorAll('input');
-        const selectedVariant = Array.from(sizeVariants).find((variantSize) =>  variantSize.classList.contains('product__size-item--checked'));
-        if (selectedVariant) {
-          const variantId = selectedVariant.dataset.variantId;
-          const addToCartHendler = async () => {
-            const response = await addToCart(variantId, 1);
-            if (response) {
-              const e = new CustomEvent("dispatch:cart-flyover:refresh", {
-                bubbles: true
-              })
-              document.dispatchEvent(e)
-
-              const event = new CustomEvent("dispatch:cart-drawer:open", {
-                bubbles: true
-              })
-              document.dispatchEvent(event)
-            }
-          }
-
-          if (variantId) {
-            addToCartHendler();
-          } else {
-            console.error("Variant ID not found. Ensure that the size variant has a valid ID.");
-          }
-        } else {
-          console.error("No size variant selected. Please select a size before adding to the cart.");
-        }
-      })
-    })
-  }
-
-  resetShowMoreFunctionality () {
-    const recommendationsList = this.querySelectorAll('.recommendations-list');
-    recommendationsList.forEach((recommendationsWrapper) => {
-      const products = recommendationsWrapper.querySelectorAll('.product');
-
-      if (products.length > 2) {
-        const showMoreBtn = recommendationsWrapper.closest('[data-rec-products]').querySelector('.show-more-btn');
-        products.forEach((product, index) => {
-          if (index >= 2) {
-            product.classList.add('hidden');
-          }
-        });
-        showMoreBtn.style.display = 'block';
-      }
-    })
   }
 }

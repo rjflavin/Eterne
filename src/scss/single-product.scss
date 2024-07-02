@@ -42,8 +42,6 @@
   }
 
   @include for-tablet {
-    //margin: 0 15px 0 0 !important;
-
     &:before, &:after {
       display: none;
     }
@@ -416,7 +414,6 @@
       }
 
       .recommendations-grid {
-        display: none;
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
@@ -604,6 +601,12 @@
               letter-spacing: 0.5px;
               text-decoration: underline;
               cursor: pointer;
+            }
+
+            .preorder-button {
+              align-self: start;
+              margin-top: 5px;
+              @include preorder-button
             }
 
             .product__size-variants {
