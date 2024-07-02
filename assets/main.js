@@ -1162,6 +1162,7 @@ window.customElements.define('cc-cart-cross-sell', CCCartCrossSell);
 
 const CCFetchedContent = class extends HTMLElement {
   connectedCallback() {
+    console.log('CCFetchedContent connectedCallback: ', this.dataset.url);
     fetch(this.dataset.url)
       .then((response) => {
         if (!response.ok) {

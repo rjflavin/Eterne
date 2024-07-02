@@ -56,13 +56,15 @@
           let firstlySelectedVariant = product.variants.find((variant) => variant.firstAvailable);
           if (!firstlySelectedVariant) firstlySelectedVariant = product.variants[0];
           const isFirstVariantPreordered = firstlySelectedVariant.inventoryPolicy === "continue" && firstlySelectedVariant.inventoryQuantity <= 0;
-          let imageUrl = product.images[0]
+          let imageUrl = product.images[0];
+          let imageUrlLazyLoad;
 
-          let parts = imageUrl.split('.');
-          let extension = parts.pop();
-          let baseUrl = parts.join('.');
-
-          let imageUrlLazyLoad = `${baseUrl}_small.${extension}`;
+          if (imageUrl) {
+            let parts = imageUrl.split('.');
+            let extension = parts.pop();
+            let baseUrl = parts.join('.');
+            imageUrlLazyLoad = `${baseUrl}_small.${extension}`;
+          }
 
           const newProductHtml = `
             <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
