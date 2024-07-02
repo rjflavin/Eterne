@@ -194,7 +194,7 @@
                         {% break %}
                       {% endif %}
 
-                      {% if variant.inventory_quantity > 0 and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
+                      {% if variant.inventory_quantity >= 0 and option1 == variantColorOptionDowncase and option2 == productSizeOptionTempDowncase %}
                         {% assign sizeOption = optionsArr[1] %}
                         {% assign currentVariant = variant %}
                         {% assign isVariantInStock = true %}
@@ -209,6 +209,7 @@
                         {% assign shouldStop = true %}
                         {% break %}
                       {% endif %}
+
                       {% if forloop.first %}
                         {% assign fitstAvailableSize = optionsArr[1] %}
                       {% endif %}
@@ -318,53 +319,6 @@
                     <div class="collection__item-title">{{ product.title }}</div>
                     <div class="collection__item-price">{{ currentVariant.price | money_without_trailing_zeros }}</div>
                   </div>
-                </div>
-                <div class="collection__item-colors-wrap">
-                  {% comment %}{% assign colorsQty = 0 %}{% endcomment %}
-                  {% comment %}{% assign colorsQtyToShowOnMobile = 3 %}{% endcomment %}
-                  {% comment %}{% endcomment %}
-                  {% comment %}{% for option in product.options_with_values %}{% endcomment %}
-                  {% comment %}{% assign option_name = option.name | downcase %}{% endcomment %}
-                  {% comment %}{% if option_name == 'color' %}{% endcomment %}
-                  {% comment %}{% assign colorsQty = option.values.size %}{% endcomment %}
-                  {% comment %}{% endcomment %}
-                  {% comment %}{% for colorOptionValue in option.values %}{% endcomment %}
-                  {% comment %}{% assign colorOptionValueDowncase = colorOptionValue | downcase | replace: ' ', '_' %}{% endcomment %}
-                  {% comment %}{% endcomment %}
-                  {% comment %}<div{% endcomment %}
-                  {% comment %}data-color-name="{{ colorOptionValue }}"{% endcomment %}
-                  {% comment %}class="collection__item-color-wrap{% endcomment %}
-                  {% comment %}{% if forloop.index > colorsQtyToShowOnMobile %}{% endcomment %}
-                  {% comment %}collection__item-color-wrap_hide-mobile{% endcomment %}
-                  {% comment %}{% endif %}{% endcomment %}
-                  {% comment %}"{% endcomment %}
-                  {% comment %}title="{{ colorOptionValue | upcase }}"{% endcomment %}
-                  {% comment %}>{% endcomment %}
-                  {% comment %}<div class="collection__item-color-cont">{% endcomment %}
-                  {% comment %}{% for colorEntry in shop.metaobjects['swatch_colors'].values %}{% endcomment %}
-                  {% comment %}{% assign colorEntryNameDowncase = colorEntry.system.handle | downcase | replace: ' ', '_' %}{% endcomment %}
-                  {% comment %}{% if colorEntryNameDowncase == colorOptionValueDowncase %}{% endcomment %}
-                  {% comment %}{% assign variantColor = colorEntry.color.value %}{% endcomment %}
-                  {% comment %}{% endif %}{% endcomment %}
-                  {% comment %}{% endfor %}{% endcomment %}
-                  {% comment %}<div{% endcomment %}
-                  {% comment %}class="collection__item-color"{% endcomment %}
-                  {% comment %}style="background-color: {{ variantColor }}"{% endcomment %}
-                  {% comment %}></div>{% endcomment %}
-                  {% comment %}</div>{% endcomment %}
-                  {% comment %}</div>{% endcomment %}
-                  {% comment %}{% endfor %}{% endcomment %}
-                  {% comment %}{% endif %}{% endcomment %}
-                  {% comment %}{% endfor %}{% endcomment %}
-                  {% comment %}{% endcomment %}
-                  {% comment %}{% if colorsQty > colorsQtyToShowOnMobile %}{% endcomment %}
-                  {% comment %}{% assign showMoreColorsQty = colorsQty | minus: colorsQtyToShowOnMobile %}{% endcomment %}
-                  {% comment %}<div class="collection__show-more-colors-btn">{% endcomment %}
-                  {% comment %}<span class="collection__show-more-colors-btn-text">{% endcomment %}
-                  {% comment %}+ {{ showMoreColorsQty }} more{% endcomment %}
-                  {% comment %}</span>{% endcomment %}
-                  {% comment %}</div>{% endcomment %}
-                  {% comment %}{% endif %}{% endcomment %}
                 </div>
                 <div class="collection__preorder-wrap {% if isVariantInStock == false %}disp-flx-imp{% endif %}">
                   <div class="collection__preorder">

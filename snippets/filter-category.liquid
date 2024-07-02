@@ -30,84 +30,92 @@
     >
       {% assign renderedFiltersQuantity = 0 %}
       {% for value in filter.values %}
-        {% if value.count > 0 %}
-          {% assign renderedFiltersQuantity = renderedFiltersQuantity | plus: 1 %}
-          {% assign filterQuantityValue = value.count %}
+          {% assign hideItem = false %}
 
-          {% if activeFiltersQuantity == 0 %}
-            {% assign filterQuantityValue = 0 %}
-            {% if filterName == "category" %}
-              {% assign valueLabelDowncase = value.label | downcase %}
-              {% for collectionProductForCategory in collection.products %}
-                {% for productCollectionName in collectionProductForCategory.metafields.custom.product_collections.value %}
-                  {% assign productCollectionNameDowncase = productCollectionName | downcase %}
-                  {% if productCollectionNameDowncase == valueLabelDowncase %}
-                    {% assign filterQuantityValue = filterQuantityValue | plus: 1 %}
-                  {% endif %}
-                {% endfor %}
-              {% endfor %}
-            {% endif %}
+          {% if value.label contains 'SEARCHANISE_IGNORE' %}
+              {% assign hideItem = true %}
           {% endif %}
 
-          <li
-            id="filter-{{ index }}--{{ forloop.index }}"
-            class="filterWrapperListItem collection__sort-category-option
+        {% if hideItem != true %}
+            {% if value.count > 0 %}
+                {% assign renderedFiltersQuantity = renderedFiltersQuantity | plus: 1 %}
+                {% assign filterQuantityValue = value.count %}
+
+                {% if activeFiltersQuantity == 0 %}
+                    {% assign filterQuantityValue = 0 %}
+                    {% if filterName == "category" %}
+                        {% assign valueLabelDowncase = value.label | downcase %}
+                        {% for collectionProductForCategory in collection.products %}
+                            {% for productCollectionName in collectionProductForCategory.metafields.custom.product_collections.value %}
+                                {% assign productCollectionNameDowncase = productCollectionName | downcase %}
+                                {% if productCollectionNameDowncase == valueLabelDowncase %}
+                                    {% assign filterQuantityValue = filterQuantityValue | plus: 1 %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+
+                <li
+                        id="filter-{{ index }}--{{ forloop.index }}"
+                        class="filterWrapperListItem collection__sort-category-option
               {% if value.active %}activeFilterValue{% endif %}
               {% if forloop.index > visibleFiltersQuantity %}collection__sort-category-option_hidden{% endif %}
             "
-            {% if forloop.index > visibleFiltersQuantity %}data-option-to-hide="true"{% endif %}
-          >
-            {% if filtersType == "checkbox" %}
-              <input
-                class="filterWrapperCheckboxDefault collection__sort-category-option-checkbox"
-                type="checkbox"
-                name="{{ value.param_name }}"
-                value="{{ value.value }}"
-                id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-                {% if value.active %}checked{% endif %}
-              >
-              <label
-                for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-                class="filterWrapperItemLabel no-select
+                        {% if forloop.index > visibleFiltersQuantity %}data-option-to-hide="true"{% endif %}
+                >
+                    {% if filtersType == "checkbox" %}
+                        <input
+                                class="filterWrapperCheckboxDefault collection__sort-category-option-checkbox"
+                                type="checkbox"
+                                name="{{ value.param_name }}"
+                                value="{{ value.value }}"
+                                id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+                                {% if value.active %}checked{% endif %}
+                        >
+                        <label
+                                for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+                                class="filterWrapperItemLabel no-select
                   {% if forloop.index > visibleFiltersQuantity %}
                     disp-none-imp
                   {% endif %}
                 "
-                {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
-              >
+                                {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
+                        >
                 <span
-                  class="filterWrapperListItemText collection__sort-category-option-text"
-                  aria-hidden="true"
+                        class="filterWrapperListItemText collection__sort-category-option-text"
+                        aria-hidden="true"
                 >
                   {{ value.label }} ({{ filterQuantityValue }})
                 </span>
-              </label>
-            {% else %}
-              <input
-                class="filterWrapperCheckboxDefault collection__sort-category-option-radio"
-                type="radio"
-                name="{{ value.param_name }}"
-                value="{{ value.value }}"
-                id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-              >
-              <label
-                for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
-                class="filterWrapperItemLabel no-select
+                        </label>
+                    {% else %}
+                        <input
+                                class="filterWrapperCheckboxDefault collection__sort-category-option-radio"
+                                type="radio"
+                                name="{{ value.param_name }}"
+                                value="{{ value.value }}"
+                                id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+                        >
+                        <label
+                                for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+                                class="filterWrapperItemLabel no-select
                   {% if forloop.index > visibleFiltersQuantity %}
                     disp-none-imp
                   {% endif %}
                 "
-                {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
-              >
+                                {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
+                        >
                 <span
-                  class="filterWrapperListItemText collection__sort-category-option-text"
-                  aria-hidden="true"
+                        class="filterWrapperListItemText collection__sort-category-option-text"
+                        aria-hidden="true"
                 >
                   {{ value.label }}
                 </span>
-              </label>
+                        </label>
+                    {% endif %}
+                </li>
             {% endif %}
-          </li>
         {% endif %}
       {% endfor %}
     </ul>
