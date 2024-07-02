@@ -30,14 +30,14 @@
 {% endfor %}
 
 {% if activeFiltersQuantity > 0 %}
-  {% assign productsPerPage = section.settings.products_per_page_with_filter %}
+  {% assign productsPerPage = section.settings.products_per_page_with_filter | plus: 4 %}
 {% else %}
-  {% assign productsPerPage = section.settings.products_per_page %}
+  {% assign productsPerPage = section.settings.products_per_page | plus: 4 %}
 {% endif %}
 
 <eterne-collection class="collection" data-is-filter-open="false">
 
-  {% paginate collection.products by 18 %}
+  {% paginate collection.products by productsPerPage %}
     <div class="collection__title-wrap">
       {% if collection.title == 'Products' or collection.title == 'all' %}
         <span class="collection__title">Shop all</span>
