@@ -30,9 +30,9 @@
 {% endfor %}
 
 {% if activeFiltersQuantity > 0 %}
-  {% assign productsPerPage = section.settings.products_per_page_with_filter | plus: 4 %}
+  {% assign productsPerPage = section.settings.products_per_page_with_filter %}
 {% else %}
-  {% assign productsPerPage = section.settings.products_per_page | plus: 4 %}
+  {% assign productsPerPage = section.settings.products_per_page %}
 {% endif %}
 
 <eterne-collection class="collection" data-is-filter-open="false">
@@ -362,7 +362,7 @@
       "type": "range",
       "id": "products_per_page",
       "min": 6,
-      "max": 12,
+      "max": 16,
       "step": 2,
       "default": 12,
       "label": "Products per page"
@@ -371,7 +371,7 @@
       "type": "range",
       "id": "products_per_page_with_filter",
       "min": 6,
-      "max": 12,
+      "max": 16,
       "step": 2,
       "default": 12,
       "label": "Products per page with any enabled filter"
