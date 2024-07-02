@@ -13,7 +13,7 @@
       "type": "main-search",
       "settings": {
         "show_vendor": false,
-        "coll_num_per_page_int": 16,
+        "coll_num_per_page_int": 10,
         "enable_filtering": true,
         "collapse_filters_method": "over-12"
       }
