@@ -10,7 +10,7 @@
         "logo_h1": true,
         "enable_sticky": true,
         "enable_search": true,
-        "header_menu": "header-menu"
+        "header_menu": "main-menu"
       }
     }
   },
