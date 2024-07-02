@@ -30,16 +30,16 @@
 {% endif %}
 
 {%- if product.media.size > 1 -%}
-    <script src="{{ 'slideshow.js' | asset_url }}" defer></script>
+  <script src="{{ 'slideshow.js' | asset_url }}" defer></script>
 {%- endif -%}
 <link rel="stylesheet" href="{{ 'modal.css' | asset_url }}">
 
 {% if section.settings.show_breadcrumbs %}
-    <div class="container desktop-only not-in-quickbuy" data-cc-animate data-cc-animate-delay="0.2s">
-        <div class="page-header">
-            {% render 'breadcrumbs', show_next_prev: true %}
-        </div>
+  <div class="container desktop-only not-in-quickbuy" data-cc-animate data-cc-animate-delay="0.2s">
+    <div class="page-header">
+      {% render 'breadcrumbs', show_next_prev: true %}
     </div>
+  </div>
 {% endif %}
 
 <script>
@@ -253,125 +253,116 @@
                     </div>
                 </div>
 
-                <recommendation-products class="product-recommendations" data-id="{{ block.id }}"
-                                         data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&intent=complementary"
-                                         contains-product-blocks>
-                    {% if recommendations.performed? and recommendations.products_count > 0 %}
-                        <h4>Style With:</h4>
-                        <div class="recommendations-grid" data-rec-products>
-                            <ul class="recommendations-list">
-                                {% assign scheduled_products_count = 0 %}
-                                {% assign products_loop = 0 %}
+                <div class="product-recommendations">
+                    <h4>Style With:</h4>
 
-                                {% for rec_product in recommendations.products %}
-                                    {% assign rec_product_quantity = forloop.length %}
-                                    {% assign available_from = rec_product.metafields.custom.available_from | date: "%s" %}
+                    {% for style_with_metaobjects in product.metafields.custom.style_with_products.value %}
+                        {% assign variant_color_to_refer = style_with_metaobjects['color'].value.name | downcase %}
 
-                                    {% if available_from < now or available_from == blank %}
-                                        <li class="product {% if products_loop >= 2 %}hidden{% endif %}"
+                            {% if variant_color_to_refer == current_color %}
+                                {% assign show_product = true %}
+                            {% else %}
+                                {% assign show_product = false %}
+                            {% endif %}
+                            <div class="recommendations-grid {% if show_product %}recommendations-grid--active{% endif %}"
+                                 data-rec-products
+                                 data-rec-products-color="{{ variant_color_to_refer }}">
+                                <ul class="recommendations-list">
+                                    {% for rec_variant in style_with_metaobjects['recommended_variants'].value %}
+                                      {% assign rec_variant_color = rec_variant.option1 | downcase %}
+                                      {% assign rec_product = rec_variant.product %}
+                                      {% assign rec_product_quantity = forloop.length %}
+                                      {% assign available_from = rec_product.metafields.custom.available_from | date: "%s" %}
+                                      {% if available_from < now or available_from == blank %}
+                                        <li class="product{% if forloop.index0 > 1 %} hidden{% endif %}"
                                             data-product-id="{{ rec_product.id }}">
-                                            <div class="product__link">
-                                                <div class="product__image-wrap">
-                                                    <div class="product__quick-add-panel"
-                                                         id="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}">
-                                                        <div class="product__size-variants">
-                                                            {% assign variant_loop = 0 %}
-                                                            {% assign first_variant = '' %}
-                                                            {% assign first_variant = rec_product.first_available_variant %}
-                                                            {% if first_variant == blank %}
-                                                                {% assign first_variant = rec_product.variants[0] %}
-                                                            {% endif %}
+                                          <div class="product__link">
+                                            <div class="product__image-wrap">
+                                              <div class="product__quick-add-panel" id="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}">
+                                                <div class="product__size-variants">
+                                                  {% assign first_variant = '' %}
+                                                  {% assign current_loop = 0 %}
+                                                  {% for loop_variant in rec_product.variants %}
+                                                    {% assign loop_variant_color = loop_variant.option1 | downcase %}
+                                                    {% if loop_variant_color == rec_variant_color  %}
 
-                                                            {% if first_variant.inventory_policy == 'continue' and first_variant.inventory_quantity <= 0 %}
-                                                                {% assign first_variant_preordered = true %}
-                                                            {% else %}
-                                                                {% assign first_variant_preordered = false %}
-                                                            {% endif %}
+                                                      {% if first_variant == '' and loop_variant.available %}
+                                                        {% assign first_variant = loop_variant %}
+                                                      {% elsif first_variant == '' and forloop.last %}
+                                                        {% assign first_variant = rec_product.variants[0] %}
+                                                      {% endif %}
+                                                      {% assign current_loop = current_loop | plus: 1 %}
 
-                                                            {% for rec_variant in rec_product.variants %}
-
-                                                                {% if rec_variant.inventory_policy == 'continue' and rec_variant.inventory_quantity <= 0 %}
-                                                                    {% assign rec_variant_preordered = true %}
-                                                                {% else %}
-                                                                    {% assign rec_variant_preordered = false %}
-                                                                {% endif %}
-                                                                <input type="radio"
-                                                                       id="size-{{ rec_variant.id }}--{{ variant_loop }}"
-                                                                       name="recommended-product-size"
-                                                                       value="{{ rec_variant.id }}"
-                                                                       class="product__size-item
-                                                                                {% if rec_variant.id == first_variant.id %}
+                                                      <input type="radio"
+                                                             id="size-{{ loop_variant.id }}--{{ current_loop }}"
+                                                             name="recommended-product-size"
+                                                             value="{{ loop_variant.id }}"
+                                                             class="product__size-item
+                                                                                {% if loop_variant.id == first_variant.id %}
                                                                                   product__size-item--checked
                                                                                 {% endif %}"
-                                                                       data-variant-id="{{ rec_variant.id }}"
-                                                                       data-variant-size="{{ rec_variant.option2 }}"
-                                                                        {% if rec_variant.inventory_quantity <= 0 and rec_variant_preordered %}
-                                                                            data-preorder-variant-link="{{ rec_variant.url }}"
-                                                                        {% endif %}
-                                                                        {% if rec_variant.id == first_variant.id %}
-                                                                            checked
-                                                                        {% endif %}
-                                                                {% if rec_variant.inventory_quantity <= 0 and rec_variant_preordered == false %}
-                                                                    disabled
-                                                                        {% endif %}>
-                                                                <label for="size-{{ rec_variant.id }}--{{ variant_loop }}"
-                                                                       class="product__size-label
-                                                                              {% if first_variant.id == rec_variant.id %}
+                                                             data-variant-id="{{ loop_variant.id }}"
+                                                             data-variant-size="{{ loop_variant.option2 }}"
+                                                        {% if loop_variant.id == first_variant.id %}
+                                                          checked
+                                                        {% endif %}
+                                                        {% unless loop_variant.available %}
+                                                          disabled
+                                                        {% endunless %} >
+                                                      <label for="size-{{ loop_variant.id }}--{{ current_loop }}"
+                                                             class="product__size-label
+                                                                              {% if first_variant.id == loop_variant.id %}
                                                                               product__size-label--checked
                                                                             {% endif %}
-                                                                            {% unless rec_variant.available %}
+                                                                            {% unless loop_variant.available %}
                                                                               product__size-label--disabled
                                                                             {% endunless %}">
-                                                                    {{ rec_variant.option2 }}
-                                                                </label>
-                                                                {% assign variant_loop = variant_loop | plus: 1 %}
-                                                            {% endfor %}
-                                                        </div>
-                                                        <div class="product__add-to-cart-wrapper">
-                                                            {% if first_variant.inventory_quantity > 0 and first_variant_preordered == false %}
-                                                                {% assign show_preorder_button = false %}
-                                                            {% elsif first_variant_preordered %}
-                                                                {% assign show_preorder_button = true %}
-                                                            {% endif %}
-                                                            <button class="product__add-to-cart{% if show_preorder_button %} hidden{% endif %}"
-                                                                    data-quick-add-panel="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}">
-                                                                Add to bag
-                                                            </button>
-                                                            <a href="{{ first_variant.url }}"
-                                                               class="preorder-button {% unless show_preorder_button %} hidden{% endunless %}">Preorder</a>
-                                                        </div>
-                                                    </div>
-                                                    {% render 'image',
-                                                            image: rec_product.images.first,
-                                                            widths: '480, 640, 960, 1280',
-                                                            class: 'product__img'
-                                                    %}
-                                                    <div data-quick-add-button class="product__item-quick-add-btn-wrap">
-                                                        <div class="product__item-quick-add-btn">
-                                                            {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
-                                                        </div>
-                                                    </div>
-                                                    <a href="{{ first_variant.url }}" class="product__item-link"></a>
+                                                        {{ loop_variant.option2 }}
+                                                      </label>
+                                                    {% endif %}
+                                                  {% endfor %}
                                                 </div>
-                                                <div class="product__text-wrap">
-                                                    <p class="product__title">{{ rec_product.title }}</p>
-                                                    <p class="product__price">{{ rec_product.price | money_without_trailing_zeros }}</p>
+                                                <div class="product__add-to-cart-wrapper">
+                                                  {% if first_variant.available %}
+                                                    <button class="product__add-to-cart"
+                                                            data-quick-add-panel="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}">
+                                                      Add to bag
+                                                    </button>
+                                                  {% else %}
+                                                    <button class="product__add-to-cart">
+                                                      Preorder
+                                                    </button>
+                                                  {% endif %}
                                                 </div>
+                                              </div>
+                                              {% render 'image',
+                                                image: first_variant.featured_image,
+                                                widths: '480, 640, 960, 1280',
+                                                class: 'product__img'
+                                              %}
+                                              <div data-quick-add-button class="product__item-quick-add-btn-wrap">
+                                                <div class="product__item-quick-add-btn">
+                                                  {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                                                </div>
+                                              </div>
+                                              <a href="{{ first_variant.url }}" class="product__item-link"></a>
                                             </div>
+                                            <div class="product__text-wrap">
+                                              <p class="product__title">{{ rec_product.title }} {{ product_color }}</p>
+                                              <p class="product__price">{{ rec_product.price | money_without_trailing_zeros }}</p>
+                                            </div>
+                                          </div>
                                         </li>
-                                        {% assign products_loop = products_loop | plus: 1 %}
-                                    {% elsif available_from > now %}
-                                        {% assign scheduled_products_count = scheduled_products_count | plus: 1 %}
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                            {% assign rec_product_quantity = rec_product_quantity | minus: scheduled_products_count %}
-                            {% if rec_product_quantity > 2 %}
-                                <button class="show-more-btn">See More</button>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                </recommendation-products>
+                                      {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                {% if rec_product_quantity > 2 %}
+                                    <button class="show-more-btn">See More</button>
+                                {% endif %}
+                            </div>
+
+                    {% endfor %}
+                </div>
 
                 <hr class="not-in-quickbuy recommendations-devider" {{ block.shopify_attributes }}>
                 {%- if product.description != blank -%}
@@ -390,20 +381,20 @@
                         </div>
                     </div>
                     {% if product.metafields.custom.size_fit_information.value.size > 0 %}
-                        <div class="product-details" data-product-size-and-info>
-                            <div class="product-details__header">
-                                <h4 class="product-details__title no-select">{{ settings.size_fit_information_title_text }}</h4>
-                                <div class="product-details__btn" data-plus-button>
-                                    {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-                                </div>
-                                <div class="product-details__btn disp-none-imp" data-minus-button>
-                                    {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
-                                </div>
-                            </div>
-                            <div class="product-details__content">
-                                {{ product.metafields.custom.size_fit_information.value }}
-                            </div>
+                      <div class="product-details" data-product-size-and-info>
+                        <div class="product-details__header">
+                          <h4 class="product-details__title no-select">{{ settings.size_fit_information_title_text }}</h4>
+                          <div class="product-details__btn" data-plus-button>
+                            {% render 'icon-plus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+                          </div>
+                          <div class="product-details__btn disp-none-imp" data-minus-button>
+                            {% render 'icon-minus', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+                          </div>
                         </div>
+                        <div class="product-details__content">
+                          {{ product.metafields.custom.size_fit_information.value }}
+                        </div>
+                      </div>
                     {% endif %}
                 {%- endif -%}
             </div>
