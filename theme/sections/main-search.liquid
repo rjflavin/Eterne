@@ -125,9 +125,9 @@
         {% if search.results == empty %}
           <h5 class="align-centre fully-spaced-row" data-cc-animate style="margin: 56px auto;">{{ 'general.search.no_results' | t: terms: search.terms }}</h5>
         {% else %}
+          {% assign now = "now" | date: "%s" %}
           <div class="collection__products-wrap">
-            <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}"
-                 data-next-url="{{ paginate.next.url }}">
+            <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}" data-next-url="{{ paginate.next.url }}">
               {% for filter in search.filters %}
                 {% for value in filter.values %}
                   {% if value.active %}
@@ -245,13 +245,9 @@
                   {% endif %}
                 {% endfor %}
 
-                {% assign hideItem = false %}
+                {% assign available_from = item.metafields.custom.available_from | date: "%s" %}
 
-                {% if item.tags contains 'SEARCHANISE_IGNORE' %}
-                  {% assign hideItem = true %}
-                {% endif %}
-
-                {% if hideItem != true %}
+                {% if available_from < now or available_from == blank %}
                   <div
                           class="collection__item"
                           data-is-loaded-with-filters="true"
@@ -309,8 +305,8 @@
                                 {% endfor %}
                                 <div data-variant-size="{{ size }}"
                                      class="collection__size-variant-text no-select
-                                     {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
-                                     {% if is_disabled %} disabled{% endif %}"
+                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
+                                       {% if is_disabled %} disabled{% endif %}"
                                 >
                                   {{ size }}
                                 </div>
