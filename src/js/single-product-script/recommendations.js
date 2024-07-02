@@ -89,9 +89,18 @@ export default class RecommendationProducts extends HTMLElement {
                 const selectedVariant = Array.from(sizeVariants).find((variantSize) => variantSize.classList.contains('product__size-item--checked'));
                 if (selectedVariant) {
                     const variantId = selectedVariant.value;
-                    const addToCartHendler = async () => {
+                    const addToCartHandler = async () => {
                         const response = await addToCart(variantId, 1);
                         if (response) {
+                            const hasResponseError = !response.items;
+
+                            if (!hasResponseError) {
+                                const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+                                if (!emptyCartElement.classList.contains('disp-none-imp')) {
+                                    emptyCartElement.classList.add('disp-none-imp');
+                                }
+                            }
+
                             const e = new CustomEvent("dispatch:cart-flyover:refresh", {
                                 bubbles: true
                             })
@@ -105,7 +114,7 @@ export default class RecommendationProducts extends HTMLElement {
                     }
 
                     if (variantId) {
-                        addToCartHendler();
+                        addToCartHandler();
                     } else {
                         console.error("Variant ID not found. Ensure that the size variant has a valid ID.");
                     }
