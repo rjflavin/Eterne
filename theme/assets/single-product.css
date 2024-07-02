@@ -362,7 +362,6 @@
   margin-bottom: 9px;
 }
 .product-info .product-column-right .product-recommendations .recommendations-grid {
-  display: none;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
@@ -535,6 +534,22 @@
   letter-spacing: 0.5px;
   text-decoration: underline;
   cursor: pointer;
+}
+.product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel .preorder-button {
+  align-self: start;
+  margin-top: 5px;
+  width: fit-content;
+  border: 1px solid var(--black1);
+  border-radius: 4px;
+  padding: 0 10px;
+  font-family: Helvetica Neue;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16.8px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--black1);
+  text-transform: uppercase;
 }
 .product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel .product__size-variants {
   display: flex;
