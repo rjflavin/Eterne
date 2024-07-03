@@ -21,6 +21,7 @@ export default class RecommendationProducts extends HTMLElement {
                     this.watchShowMore();
                     this.watchRecommendedQuickAdd();
                     this.changeSize();
+                    this.watchShowQuickAddButtons();
                 }
             });
     }
@@ -112,6 +113,16 @@ export default class RecommendationProducts extends HTMLElement {
                 } else {
                     console.error("No size variant selected. Please select a size before adding to the cart.");
                 }
+            })
+        })
+    }
+
+    watchShowQuickAddButtons() {
+        this.querySelectorAll('[data-show-quick-add-button]').forEach((showQuickAddButton) => {
+            showQuickAddButton.addEventListener('click', () => {
+                const quickAddPanel = document.getElementById(showQuickAddButton.dataset.showQuickAddButton);
+                quickAddPanel.style.visibility = 'visible';
+                quickAddPanel.style.opacity = 1;
             })
         })
     }
