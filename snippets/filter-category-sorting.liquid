@@ -18,7 +18,6 @@
           or option.name == DateNewToOldSortDefaultName
           or option.name == PriceLowToHighSortDefaultName
           or option.name == PriceHighToLowSortDefaultName
-          or option.name == RelevanceSortDefaultName
         %}
           <li
             id="filter-{{ index }}--{{ forloop.index }}"
@@ -32,12 +31,10 @@
                 1
               {% elsif option.name == DateNewToOldSortDefaultName %}
                 2
-              {% elsif option.name == RelevanceSortDefaultName %}
-                3
               {% elsif option.name == PriceLowToHighSortDefaultName %}
-                4
+                3
               {% elsif option.name == PriceHighToLowSortDefaultName %}
-                5
+                4
               {% endif %}
             "
           >
