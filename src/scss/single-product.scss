@@ -247,9 +247,16 @@
     }
   }
 
+  variant-picker {
+    display: block !important;
+  }
+
   fieldset {
     &.color {
       display: none !important;
+    }
+    &.size {
+      display: flex !important;
     }
 
     &.option-selector {
