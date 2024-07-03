@@ -73,9 +73,13 @@ export class EterneCollection extends HTMLElement {
                             });
 
                             this.isLoading = false;
+
                             if (loadingSpinner) {
                                 loadingSpinner.classList.add('disp-none-imp')
                             }
+
+                            if (typeof globoswatch !== 'undefined')
+                                globoswatch.init();
                         })
                         .catch((error) => {
                             console.error('Error fetching data:', error);
@@ -155,6 +159,9 @@ export class EterneCollection extends HTMLElement {
                     if (seeMoreLoaderElement && !seeMoreLoaderElement.classList.contains('disp-none-imp')) {
                         this.infiniteScrollProducts();
                     }
+
+                    if (typeof globoswatch !== 'undefined')
+                        globoswatch.init();
                 })
                 .catch((error) => {
                     console.error('Error fetching data:', error);
@@ -184,8 +191,6 @@ export class EterneCollection extends HTMLElement {
             this.seeMoreLoaderElement = this.querySelector('[data-see-more-loader]');
             this.addListeners();
         });
-
-
     }
 
     getProductInfo = async (productHandle) => {
@@ -271,7 +276,7 @@ export class EterneCollection extends HTMLElement {
                                 sizesByColor[color] = [];
                             }
 
-                            sizesByColor[color].push({ size, available: variant.available });
+                            sizesByColor[color].push({size, available: variant.available});
                         });
 
                         response.variants.forEach((variant) => {
@@ -363,7 +368,7 @@ export class EterneCollection extends HTMLElement {
                             const response = await this.getProductInfo(newProductHandle);
 
                             if (response) {
-                                const featuredImageUrl =  response.media[0] ? response.media[0]?.src : null;
+                                const featuredImageUrl = response.media[0] ? response.media[0]?.src : null;
                                 clickedColor = response.variants[0].option1;
 
                                 let firstImageUrl = featuredImageUrl || emptyImageUrl;
@@ -402,7 +407,7 @@ export class EterneCollection extends HTMLElement {
                                 const availableSizes = sizesByColor[clickedColor] || [];
                                 updateAvailableSizesUI(availableSizes);
 
-                                const firstAvailableSize = availableSizes.find(({ available }) => available)?.size;
+                                const firstAvailableSize = availableSizes.find(({available}) => available)?.size;
                                 if (firstAvailableSize) {
                                     selectedSize = firstAvailableSize;
                                     variantCardElement.dataset.selectedSize = selectedSize;
@@ -459,7 +464,7 @@ export class EterneCollection extends HTMLElement {
 
                     let firstAvailableSize = null;
 
-                    sizes.forEach(({ size, available }) => {
+                    sizes.forEach(({size, available}) => {
                         const sizeElement = document.createElement('div');
                         sizeElement.className = 'collection__size-variant-text no-select';
                         sizeElement.innerText = size;
