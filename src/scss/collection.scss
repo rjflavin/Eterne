@@ -392,6 +392,14 @@
 
   &__item {
     display: block;
+
+    .swatches-globo .swatch--gl .ul-swatches-list.g-variant-color, .swatches-globo .swatch--gl .ul-swatches-list.g-variant-color.glider .glider-track, .globo-product-groups-collection .gsw-item-pg-style-product-img .gsw-list-products-group {
+      gap: 15px !important;
+
+      @include for-tablet {
+        gap: 10px !important;
+      }
+    }
   }
 
   &__item-inner {
