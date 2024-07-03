@@ -346,7 +346,7 @@
                                                             widths: '480, 640, 960, 1280',
                                                             class: 'product__img'
                                                     %}
-                                                    <div data-quick-add-button class="product__item-quick-add-btn-wrap">
+                                                    <div data-show-quick-add-button="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}" class="product__item-quick-add-btn-wrap">
                                                         <div class="product__item-quick-add-btn">
                                                             {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
                                                         </div>
