@@ -3775,11 +3775,33 @@ const PageHeader = class extends HTMLElement {
   constructor() {
     super();
 
+    function getScrollbarWidth() {
+      const scrollDiv = document.createElement('div');
+      scrollDiv.style.width = '100px';
+      scrollDiv.style.height = '100px';
+      scrollDiv.style.overflow = 'scroll';
+      scrollDiv.style.position = 'absolute';
+      scrollDiv.style.top = '-9999px';
+      document.body.appendChild(scrollDiv);
+
+      const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+
+      document.body.removeChild(scrollDiv);
+
+      return scrollbarWidth;
+    }
+
+    this.openPopup = () => {
+      const scrollbarWidth = getScrollbarWidth();
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.body.classList.add('show-search');
+    }
+
     // Search (delegate event as contents may update with cart changes)
     if (this.querySelector('.main-search')) {
       theme.addDelegateEventListener(this, 'click', '.show-search-link', (evt) => {
         evt.preventDefault();
-        document.body.classList.add('show-search');
+        this.openPopup()
         setTimeout(() => {
           this.querySelector('.main-search__input').focus();
         }, 500);
@@ -4040,6 +4062,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shade.addEventListener('click', (evt) => {
       evt.preventDefault();
       document.body.classList.remove('reveal-mobile-nav', 'show-search');
+      document.body.style.paddingRight = '0';
       setTimeout(() => {
         document.body.classList.remove('enable-mobile-nav-transition');
       }, 750);
