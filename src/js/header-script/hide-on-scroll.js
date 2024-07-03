@@ -8,16 +8,13 @@ window.addEventListener('scroll', () => {
     newValue = window.pageYOffset;
 
     //Subtract the two and conclude
-    if(oldValue - newValue < 0
-        && newValue > headerElement.offsetHeight){
-
+    if(oldValue - newValue < 0 && newValue > headerElement.offsetHeight){
         headerElement.style.opacity = 0;
         headerElement.style.visibility = 'hidden';
         headerElement.style.zIndex = '-1';
         rootHeaderElement.style.zIndex = '0';
 
     } else if(oldValue - newValue > 0){
-
         headerElement.style.opacity = 1;
         headerElement.style.visibility = 'visible';
         headerElement.style.zIndex = '999';

@@ -43,10 +43,10 @@
 
   &[data-is-filter-open="false"] {
     .collection__filters {
-      min-width: 0;
-      max-width: 0;
-      margin: 10px 0;
       opacity: 0;
+      visibility: hidden;
+      transition: .25s ease-in-out;
+      margin-left: -420px;
 
       @include for-tablet {
         display: none;
@@ -127,20 +127,19 @@
   }
 
   &__filters {
-    min-width: 383px;
+    min-width: 380px;
     width: 100%;
-    max-width: 383px;
+    max-width: 420px;
     display: flex;
     flex-direction: column;
-    margin: 10px 20px;
+    padding: 10px 20px;
     opacity: 1;
-    -webkit-transition: min-width .3s cubic-bezier(.215,.61,.355,1), max-width .3s cubic-bezier(.215,.61,.355,1), margin .3s cubic-bezier(.215,.61,.355,1), opacity .15s cubic-bezier(.215,.61,.355,1);
-    -moz-transition: min-width .3s cubic-bezier(.215,.61,.355,1), max-width .3s cubic-bezier(.215,.61,.355,1), margin .3s cubic-bezier(.215,.61,.355,1), opacity .15s cubic-bezier(.215,.61,.355,1);
-    -o-transition: min-width .3s cubic-bezier(.215,.61,.355,1), max-width .3s cubic-bezier(.215,.61,.355,1), margin .3s cubic-bezier(.215,.61,.355,1), opacity .15s cubic-bezier(.215,.61,.355,1);
-    transition: min-width .3s cubic-bezier(.215,.61,.355,1), max-width .3s cubic-bezier(.215,.61,.355,1), margin .3s cubic-bezier(.215,.61,.355,1), opacity .15s cubic-bezier(.215,.61,.355,1);
+    margin: 0;
+    visibility: visible;
+    transition: .25s ease-in-out;
 
     @include for-tablet {
-      margin: 0 0 30px 0;
+      padding: 0 0 30px 0;
     }
 
     @media (max-width: 480px) {

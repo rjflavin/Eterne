@@ -7,6 +7,7 @@ const MainSearch = class extends HTMLElement {
       el.addEventListener('click', (evt) => {
         evt.preventDefault();
         document.body.classList.remove('show-search');
+        document.body.style.paddingRight = '0';
       });
     });
 
