@@ -183,6 +183,8 @@ export class EterneCollection extends HTMLElement {
             this.seeMoreButtonElement = this.querySelector('[data-see-more-button]');
             this.seeMoreLoaderElement = this.querySelector('[data-see-more-loader]');
             this.addListeners();
+            if (typeof globoswatch !== 'undefined')
+                globoswatch.init();
         });
 
 
