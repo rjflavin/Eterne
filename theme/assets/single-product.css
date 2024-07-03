@@ -221,8 +221,14 @@
     margin-top: 20px;
   }
 }
+.product-form variant-picker {
+  display: block !important;
+}
 .product-form fieldset.color {
   display: none !important;
+}
+.product-form fieldset.size {
+  display: block !important;
 }
 .product-form fieldset.option-selector {
   margin-top: 16px;
