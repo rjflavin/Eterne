@@ -471,7 +471,6 @@
 .product-info .product-column-right .product-recommendations .recommendations-list .product__image-wrap {
   position: relative;
   width: 100%;
-  height: 100%;
   display: flex;
 }
 .product-info .product-column-right .product-recommendations .recommendations-list .product__item-bg-img, .product-info .product-column-right .product-recommendations .recommendations-list .product__item-bg-img-hover {
