@@ -483,7 +483,7 @@
     "prod_sold_out_show": true,
     "enable_product_reviews_collection": false,
     "swatch_enabled": true,
-    "swatch_option_name": "Size",
+    "swatch_option_name": "Color",
     "swatch_method": "swatches",
     "swatch_crop_align": "bottom",
     "swatch_style": "icon_circle",
