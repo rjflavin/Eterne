@@ -222,7 +222,7 @@
   }
 }
 .product-form variant-picker {
-  display: block !important;
+  display: flex !important;
 }
 .product-form fieldset.color {
   display: none !important;
