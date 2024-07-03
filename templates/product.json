@@ -59,9 +59,6 @@
         "product_variant_picker_xXiYWj",
         "buy-buttons"
       ],
-      "custom_css": [
-        "variant-picker, .single-product-options.size {display: block !important;}"
-      ],
       "settings": {
         "enable_sticky_columns": true
       }
