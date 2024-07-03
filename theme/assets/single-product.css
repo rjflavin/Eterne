@@ -753,6 +753,9 @@
   align-items: center;
   flex-flow: nowrap;
 }
+.gsw-list-product-groups .gsw-item-product-group .gsw-prg-item--link {
+  display: flex;
+}
 .gsw-list-product-groups legend {
   width: auto;
   display: block;
