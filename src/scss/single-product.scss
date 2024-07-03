@@ -248,7 +248,7 @@
   }
 
   variant-picker {
-    display: flex !important;
+    display: block !important;
   }
 
   fieldset {
@@ -256,7 +256,7 @@
       display: none !important;
     }
     &.size {
-      display: block !important;
+      display: flex !important;
     }
 
     &.option-selector {

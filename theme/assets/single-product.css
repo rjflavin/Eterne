@@ -222,13 +222,13 @@
   }
 }
 .product-form variant-picker {
-  display: flex !important;
+  display: block !important;
 }
 .product-form fieldset.color {
   display: none !important;
 }
 .product-form fieldset.size {
-  display: block !important;
+  display: flex !important;
 }
 .product-form fieldset.option-selector {
   margin-top: 16px;
