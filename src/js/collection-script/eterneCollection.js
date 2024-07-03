@@ -100,7 +100,7 @@ export class EterneCollection extends HTMLElement {
             this._page2Content = "";
 
             this.seeMoreButtonElement.classList.add('disp-none-imp');
-            this.seeMoreLoaderElement.classList.remove('disp-none-imp');
+            this.seeMoreLoaderElement.classList.add('disp-none-imp');
 
             const items = document.querySelectorAll('.lazyLoad');
             items.forEach(item => {
@@ -163,6 +163,7 @@ export class EterneCollection extends HTMLElement {
 
         this.seeMoreButtonHandler = (event) => {
             event.preventDefault();
+            this.loadProductsPage2();
 
             if (this._page2Content) {
                 this.infiniteScrollProducts();
@@ -183,9 +184,8 @@ export class EterneCollection extends HTMLElement {
             this.seeMoreLoaderElement = this.querySelector('[data-see-more-loader]');
             this.addListeners();
         });
-    }
 
-    connectedCallback() {
+
     }
 
     getProductInfo = async (productHandle) => {
@@ -608,8 +608,6 @@ export class EterneCollection extends HTMLElement {
         if (this.seeMoreButtonElement) {
             this.seeMoreButtonElement.addEventListener('click', this.seeMoreButtonHandler);
         }
-
-        this.loadProductsPage2();
     }
 
     addListeners() {

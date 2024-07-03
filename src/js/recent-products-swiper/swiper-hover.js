@@ -55,48 +55,43 @@ document.addEventListener("DOMContentLoaded", () => {
             const selectesSize = (event) ? event.target : item.querySelector('[data-size-item].selected-size');
             const isPreordered = selectesSize.dataset.isPreordered;
             const buttonOrder = item.querySelector('.preorder-button');
-            const seeMoreButton = item.querySelector('[data-see-more-preordered]');
-            const quickAddButton = item.querySelector('[data-quick-add]');
 
             if (isPreordered === 'true') {
                 buttonOrder.classList.remove('disp-none-imp');
-                seeMoreButton.classList.remove('disp-none-imp');
-                quickAddButton.classList.add('disp-none-imp');
             } else {
                 buttonOrder.classList.add('disp-none-imp');
-                seeMoreButton.classList.add('disp-none-imp');
-                quickAddButton.classList.remove('disp-none-imp');
             }
         }
 
         checkPreorder();
 
         const currentPriceElem = item.querySelector('[data-current-price]');
+        const cartButtonElement = item.querySelector('[data-quick-add]')
 
         item.querySelectorAll('[data-size-item]').forEach((sizeElem) => {
             const activeClass = 'selected-size'
             sizeElem.addEventListener('click', (e) => {
-                const siblingSizes = getSiblings(e.target)
+                const siblingSizes = getSiblings(e.target);
+                const isPreordered = e.target.dataset.isPreordered;
                 item.setAttribute('data-active-variant', sizeElem.dataset.sizeItem)
                 e.target.classList.add(activeClass);
                 checkPreorder(e);
+
                 siblingSizes.forEach((siblingSize) => {
                     if (siblingSize.classList.contains(activeClass))
                         siblingSize.classList.remove(activeClass)
                 })
+
                 currentPriceElem.innerHTML = sizeElem.dataset.price
+
+                if (isPreordered === 'false') {
+                    const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader')
+                    const loaderFillTextElement = item.querySelector('.swiper-slide-image-info-cart-loader-fill-text')
+                    const activeVariant = document.getElementById(item.id)
+                    addToCartSetup(cartButtonElement, activeVariant.dataset.activeVariant, 1, loaderElement, loaderFillTextElement)
+                }
             })
         })
-
-        const cartButtonElement = item.querySelector('[data-quick-add]')
-        if (cartButtonElement) {
-            cartButtonElement.addEventListener('click', () => {
-                const loaderElement = item.querySelector('.swiper-slide-image-info-cart-loader')
-                const loaderFillTextElement = item.querySelector('.swiper-slide-image-info-cart-loader-fill-text')
-                const activeVariant = document.getElementById(item.id)
-                addToCartSetup(cartButtonElement, activeVariant.dataset.activeVariant, 1, loaderElement, loaderFillTextElement)
-            })
-        }
 
         const itemInfoButton = item.querySelector('.swiper-slide-image-info-button')
         if (itemInfoButton) {

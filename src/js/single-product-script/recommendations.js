@@ -35,18 +35,8 @@ export default class RecommendationProducts extends HTMLElement {
                 const targetLabel = this.querySelector(`label[for="${sizeElem.id}"]`);
                 const targetInput = e.target;
                 const oldSelectedSize = sizeElem.closest('.product__size-variants').querySelector(`.${activeLabelClass}`);
-                const preorderedLink = targetInput.dataset.preorderVariantLink;
                 const quickAddPannelElement = targetInput.closest('.product__quick-add-panel');
-                const preorderButton = quickAddPannelElement.querySelector('.preorder-button');
                 const addToCartButton = quickAddPannelElement.querySelector('.product__add-to-cart');
-                if (preorderedLink) {
-                    preorderButton.href = preorderedLink;
-                    preorderButton.classList.remove('hidden');
-                    addToCartButton.classList.add('hidden');
-                } else {
-                    preorderButton.classList.add('hidden');
-                    addToCartButton.classList.remove('hidden');
-                }
 
                 const oldSelectedSizeInput = sizeElem.closest('.product__size-variants').querySelector(`.${activeInputClass}`);
                 if (!targetInput.classList.contains(activeInputClass)) {
@@ -55,9 +45,10 @@ export default class RecommendationProducts extends HTMLElement {
                     oldSelectedSize.classList.remove(activeLabelClass);
                     oldSelectedSizeInput.classList.remove(activeInputClass);
                 }
+
+                addToCartButton.click()
             })
         })
-
     }
 
     watchShowMore() {
