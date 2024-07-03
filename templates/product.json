@@ -60,7 +60,7 @@
         "buy-buttons"
       ],
       "custom_css": [
-        "variant-picker {display: block;}"
+        "variant-picker, .single-product-options.size {display: block !important;}"
       ],
       "settings": {
         "enable_sticky_columns": true
