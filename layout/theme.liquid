@@ -46,8 +46,6 @@
     <noscript><link rel="stylesheet" href="{{ 'swatches.css' | asset_url }}"></noscript>
   {%- endif -%}
 
-  {{ 'base.scss' | asset_url | stylesheet_tag }}
-
   {%- unless base_font.system? -%}
     <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
   {%- endunless -%}
@@ -164,6 +162,8 @@
     {{ 'animate-on-scroll.css' | asset_url | stylesheet_tag: preload: true }}
   {% endif %}
 
+  <script src="{{ 'lazy-load-handlers.js' | asset_url }}" defer></script>
+
   {{ content_for_header }}
 
   {%- if settings.custom_html_head -%}
@@ -171,13 +171,21 @@
     {{- settings.custom_html_head -}}
     <!-- CC Custom Head End -->
   {%- endif -%}
+
+  {{ 'base.scss' | asset_url | stylesheet_tag }}
+  {{ 'policies.css' | asset_url | stylesheet_tag }}
+  <script src="//searchserverapi.com/widgets/shopify/init.js?a=1I0K7y6R3c"></script>
+  <script>SearchaniseCustomerTags = [{% if customer.tags %}'{{ customer.tags | join: "','" }}'{% endif %}];</script>
 </head>
 
-<body class="template-{{ template | split: '.' | first | handle }}
+<body
+  data-currency-symbol="{{ cart.currency.symbol }}"
+  class="template-{{ template | split: '.' | first | handle }}
     {%- if template.suffix %} template-suffix-{{ template.suffix }}{% endif -%}
     {%- if settings.swatch_enabled %} swatch-method-{{ settings.swatch_method }} swatch-style-{{ settings.swatch_style }}{% endif -%}
     {%- if settings.animations_enabled_desktop %} cc-animate-enabled{% endif -%}
-    ">
+  "
+>
 
   <a class="skip-link visually-hidden" href="#content">{{ 'accessibility.skip_to_content' | t }}</a>
 
@@ -192,9 +200,11 @@
   </main>
 
   {%- if request.path != '/challenge' -%}
-    <div id="pagefooter">
+    {% comment %}<div id="pagefooter">
       {%- sections 'footer-group' -%}
-    </div>
+    </div>{% endcomment %}
+
+    {% section 'footer' %}
 
     {%- sections 'overlay-group' -%}
   {%- endif -%}
@@ -219,5 +229,6 @@
       </added-notification>
     </template>
   {%- endif -%}
+  {% render 'globo.swatch.custom' %}
 </body>
 </html>

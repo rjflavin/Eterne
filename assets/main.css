@@ -923,6 +923,7 @@ svg.feather {
 
 img {
   max-width: 100%;
+  width: 100%;
   height: auto;
   object-fit: cover;
 }
@@ -1340,7 +1341,6 @@ h6,
   font-weight: var(--nav-font-weight);
 }
 
-strong,
 b {
   font-weight: bold;
 }
@@ -1443,7 +1443,6 @@ caption {
   text-align: center;
 }
 
-p,
 fieldset,
 table {
   margin-bottom: 1em;
@@ -1460,7 +1459,6 @@ hr {
 
 a,
 .link {
-  transition: color 100ms, border-color 100ms, opacity 100ms, text-decoration-color 100ms;
   color: rgb(var(--link-color));
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
@@ -2452,13 +2450,16 @@ main-navigation {
   min-width: 15px;
   padding: 3px;
   border-radius: 12px;
-  background: var(--header-text-col);
+  background: #dc0202;
   color: var(--header-bg-col);
   font-size: 9px;
   font-weight: 500;
   line-height: 1em;
   text-align: center;
   white-space: nowrap;
+}
+.m-r-10 {
+  right: -10px;
 }
 [dir=rtl] .cart-link__count {
   right: auto;
@@ -3519,10 +3520,6 @@ body:not(.reveal-mobile-nav) .mobile-navigation-drawer .mobile-navigation-drawer
   }
 }
 @media (min-width: 768px) {
-  .product-info {
-    display: flex;
-    justify-content: center;
-  }
   .product-info .product-column-left {
     flex: 0 0 auto;
     width: 50%;
@@ -5186,13 +5183,13 @@ input[type=text].main-search__input {
     padding-left: var(--gallery-gutter);
     padding-right: var(--gallery-gutter);
   }
-  .gallery--mobile-carousel .slider__item {
+  /*.gallery--mobile-carousel .slider__item {
     margin-left: 0;
   }
   .gallery--mobile-carousel .slider__item:last-child {
     width: calc(100% + var(--gallery-gutter));
     border-inline-end: var(--gallery-gutter) solid transparent;
-  }
+  }*/
   .gallery--mobile-carousel.gallery--grid-mobile-2 .slider__grid {
     grid-auto-columns: calc(50% - var(--gutter) * 2);
   }
@@ -7411,6 +7408,7 @@ hotspots-image .image-overlay {
 .media-gallery {
   display: block;
   position: relative;
+  overflow: hidden;
   /* always top-right */
 }
 .media-gallery .media-gallery__inner {
@@ -7419,7 +7417,6 @@ hotspots-image .image-overlay {
 .media-gallery .main-image {
   position: relative;
   width: 100%;
-  margin: 0 0 20px;
   text-align: center;
 }
 @media (max-width: 767.98px) {
@@ -7428,9 +7425,9 @@ hotspots-image .image-overlay {
     margin: 0 -16px 10px;
   }
 }
-.media-gallery .main-image .slider__item {
+/*.media-gallery .main-image .slider__item {
   flex: 0 0 100%;
-}
+}*/
 .media-gallery .slider-nav--floating .slider-nav__btn {
   --slider-nav-btn-x-offset: 0;
 }
@@ -7487,12 +7484,12 @@ hotspots-image .image-overlay {
 .thumbnails .slider__grid {
   margin: 0;
 }
-.thumbnails .slider__item {
+/*.thumbnails .slider__item {
   flex: 0 0 auto;
   width: 65px;
   padding-inline-end: 5px;
   list-style: none;
-}
+}*/
 .thumbnails .thumbnail {
   display: block;
   position: relative;
@@ -8350,9 +8347,9 @@ slide-show {
   display: none;
 }
 
-.slider__item {
+/*.slider__item {
   scroll-snap-align: start;
-}
+}*/
 
 @media (--sm-down) {
   .slider {
@@ -8386,10 +8383,10 @@ slide-show {
     scroll-padding-right: var(--gutter);
     scroll-padding-left: 0;
   }
-  .slider:not(.slider--no-container) .slider__item:last-child {
+  /*.slider:not(.slider--no-container) .slider__item:last-child {
     width: calc(100% + var(--gutter));
     border-inline-end: var(--gutter) solid transparent;
-  }
+  }*/
 }
 @media (--page-up) {
   .slider:not(.slider--no-container)::-webkit-scrollbar-track {
@@ -8624,12 +8621,17 @@ carousel-slider[inactive] .slider-nav__btn {
   --gutter-content: 20px;
   visibility: hidden;
   z-index: 8001;
-  width: min(88%, 540px);
+  width: 448px;
   height: var(--viewport-height, 100vh);
   transition: transform 0.34s ease, visibility 0.34s ease;
   transform: translate3d(100%, 0, 0);
   outline: 0;
   background-color: rgb(var(--body-bg-color));
+}
+@media (max-width: 767.98px) {
+  .drawer {
+    width: min(88.5%, 348px);
+  }
 }
 .drawer[open] {
   visibility: visible;
@@ -9980,8 +9982,7 @@ ul.inline li {
   margin-left: auto;
 }
 
-.container.container--reading-width,
-.container .shopify-policy__container {
+.container.container--reading-width {
   max-width: var(--reading-container-width);
   box-sizing: content-box;
 }

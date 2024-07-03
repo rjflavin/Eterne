@@ -42,7 +42,10 @@
         <div class="show-search-link top-bar__icon">{% render 'icon-search' %}</div>
         <a href="#" class="top-bar__icon">{% render 'icon-wish-list' %}</a>
         <a href="/account" class="top-bar__icon">{% render 'icon-account' %}</a>
-        <div class="cart-link top-bar__icon">{% render 'icon-cart' %}</div>
+        <span class="cart-link top-bar__icon">
+          {% render 'icon-cart' %}
+          <span style="{% if cart.item_count <= 0 %}visibility: hidden;{% endif %}" class="cart-link__count m-r-10">{{ cart.item_count }}</span>
+        </span>
       </div>
     </div>
 
@@ -108,7 +111,10 @@
           {% render 'icon-search', fill: '#2B2B2B' %}
         </div>
         <div class="cart-link mob-nav-btn__icon">
-          {% render 'icon-cart', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+          <span class="cart-link__icon">
+            {% render 'icon-cart', fill: '#2B2B2B', stroke: '#2B2B2B' %}
+            <span style="{% if cart.item_count <= 0 %}visibility: hidden;{% endif %}" class="cart-link__count">{{ cart.item_count }}</span>
+          </span>
         </div>
       </div>
 
@@ -118,9 +124,7 @@
           <a href="{{ routes.cart_url }}" {% comment %}class="cart-link"{% endcomment %}>
             <span class="cart-link__icon">
               {% render 'icon-cart' %}
-              {% if cart.item_count > 0 %}
-                <span class="cart-link__count">{{ cart.item_count }}</span>
-              {% endif %}
+              <span style="{% if cart.item_count <= 0 %}visibility: hidden;{% endif %}" class="cart-link__count">{{ cart.item_count }}</span>
             </span>
           </a>
         </div>
@@ -165,6 +169,7 @@
           %}
 
           <li
+            data-url="{{ link.url }}"
             class="desk-nav-list__item {% if has_dropdown %}hide-drpd{% endif %}"
             data-desktop-menu-item
           >

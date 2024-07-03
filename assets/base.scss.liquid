@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
   --white: #FFFFFF;
   --black1: #000000;
@@ -6,6 +7,50 @@ html {
   scroll-behavior: smooth;
   --app-width: 100%;
   --app-height: 100%;
+=======
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'HelveticaNeueLight.otf' | asset_url }}") format("otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'helvetica-neue-roman.woff2' | asset_url }}") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'helvetica-neue-medium.woff2' | asset_url }}") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("{{ 'helvetica-neue-bold.ttf' | asset_url }}") format("ttf");
+  font-weight: 700;
+}
+
+html {
+  --black1: #000000;
+  --black2: #2B2B2B;
+  --gray: #515151;
+  --gray1: #585858;
+  --gray2: #8B8B8B;
+  --gray3: #D9D9D9;
+  --gray4: #8F8F8F;
+  --gray5: #A8A8A8;
+  --gray6: #E9E7E4;
+  --white: #FFFFFF;
+  --transparent-white: #FFFFFFCC;
+  --red1: #dc0202;
+  --red2: #FF6F5B;
+  scroll-behavior: smooth;
+  --app-width: 100%;
+  --app-height: 100%;
+  padding-bottom: 0 !important;
+>>>>>>> origin/main
 }
 
 button {
@@ -17,7 +62,11 @@ div, span, button, input, label, li, p, a, u, h1, h2, h3, h4, h5, h6, blockquote
   font-family: "Helvetica Neue", sans-serif;
   font-weight: 400;
   color: var(--black2);
+<<<<<<< HEAD
   word-wrap: break-word;
+=======
+  word-break: break-word;
+>>>>>>> origin/main
   -webkit-font-smoothing: antialiased;
 }
 
@@ -48,7 +97,11 @@ input[type="number"]:focus {
   -moz-appearance: textfield;
 }
 
+<<<<<<< HEAD
 .no-slct {
+=======
+.no-select {
+>>>>>>> origin/main
   -ms-user-select: none;
   -webkit-touch-callout: none;
   -moz-user-select: none;
@@ -68,6 +121,17 @@ input[type="number"]:focus {
   display: none !important;
 }
 
+<<<<<<< HEAD
+=======
+.no-select {
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+>>>>>>> origin/main
 .curs-pntr {
   cursor: pointer;
 }
@@ -77,11 +141,19 @@ input[type="number"]:focus {
   touch-action: none;
 }
 
+<<<<<<< HEAD
 .vis-hid {
   visibility: hidden;
 }
 
 .vis-vis {
+=======
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.visibility-visible {
+>>>>>>> origin/main
   visibility: visible;
 }
 
@@ -98,3 +170,10 @@ input[type="number"]:focus {
     overflow: initial;
   }
 }
+<<<<<<< HEAD
+=======
+
+.otCookiesNotification #cookies-message {
+  margin-bottom: 10px;
+}
+>>>>>>> origin/main

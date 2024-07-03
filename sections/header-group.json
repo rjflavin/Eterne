@@ -9,8 +9,8 @@
         "logo": "shopify:\/\/shop_images\/eterne-logo.png",
         "logo_h1": true,
         "enable_sticky": true,
-        "header_menu": "header-menu",
-        "enable_search": true
+        "enable_search": true,
+        "header_menu": "main-menu"
       }
     }
   },

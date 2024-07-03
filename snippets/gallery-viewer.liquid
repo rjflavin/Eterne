@@ -19,7 +19,7 @@
           <div class="gallery-viewer__thumbs">
             {%- for media in image_media -%}
               <a class="gallery-viewer__thumb" href="#" data-zoom-url="{{ media.preview_image | image_url: width: zoom_size }}" data-media-id="{{ media.id }}">
-                {{- media.preview_image | image_url: width: 138 | image_tag: class: 'gallery-viewer__thumb-img' -}}
+                {{- media.preview_image | image_url: width: 138 | image_tag: class: 'gallery-viewer__thumb-img', loading: 'lazy' -}}
               </a>
             {%- endfor -%}
           </div>

@@ -131,13 +131,13 @@ theme.scrollToRevealElement = (el) => {
   const inViewTop = scrollTop + theme.stickyHeaderHeight();
   const inViewBot = scrollTop + scrollVisibleHeight - 50;
 
-  if (elTop < inViewTop || elBot > inViewBot) {
+  /*if (elTop < inViewTop || elBot > inViewBot) {
     scrollContainer.scrollTo({
       top: elTop - 100 - theme.stickyHeaderHeight(),
       left: 0,
       behavior: 'smooth'
     });
-  }
+  }*/
 };
 
 theme.getEmptyOptionSelectors = (formContainer) => {
@@ -1162,6 +1162,7 @@ window.customElements.define('cc-cart-cross-sell', CCCartCrossSell);
 
 const CCFetchedContent = class extends HTMLElement {
   connectedCallback() {
+    console.log('CCFetchedContent connectedCallback: ', this.dataset.url);
     fetch(this.dataset.url)
       .then((response) => {
         if (!response.ok) {
@@ -2723,6 +2724,19 @@ const ProductForm = class extends HTMLElement {
         const cartForm = document.querySelector('cart-form');
         if (cartForm && cartForm.enableAjaxUpdate) {
           cartForm.refresh();
+        }
+      } else if (document.querySelector('cart-flyover')) {
+        const e = new CustomEvent("dispatch:cart-flyover:refresh", {
+          bubbles: true
+        })
+        document.dispatchEvent(e)
+        const event = new CustomEvent("dispatch:cart-drawer:open", {
+          bubbles: true
+        })
+        document.dispatchEvent(event)
+        const emptyCartElement = document.getElementById('CartDrawerEmptyState');
+        if (!emptyCartElement.classList.contains('disp-none-imp')) {
+          emptyCartElement.classList.add('disp-none-imp');
         }
       } else if (theme.settings.afterAddToCart === 'page') {
         // Allow the tick animation to complete

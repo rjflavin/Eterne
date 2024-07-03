@@ -902,6 +902,8 @@
   {%- render 'structured-data-product', product: product, current_variant: product.selected_or_first_available_variant -%}
 </product-form>
 
+{% render 'save-recenlty-viewed-products', product: product %}
+
 {% if section.settings.show_location_underneath %}
   <div class="product-description rte container cf padded-row not-in-quickbuy">{{ product.description }}</div>
 {% endif %}

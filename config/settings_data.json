@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "presets": {
     "Chantilly": {
@@ -383,6 +392,7 @@
     }
   },
   "current": {
+    "empty_cart_button_link": "shop",
     "max_page_width": 1600,
     "use_fullwidth_layout": false,
     "font_col_base": "#5c5c5c",
@@ -449,11 +459,11 @@
     "foot_text_col": "#5c5c5c",
     "foot_heading_col": "#171717",
     "foot_divider_col": "#efdfc7",
-    "type_heading_font": "americana_n4",
+    "type_heading_font": "helvetica_n4",
     "capitalize_headings": false,
-    "type_base_font": "nunito_sans_n4",
-    "type_nav_font": "nunito_sans_n4",
-    "type_logo_font": "americana_n7",
+    "type_base_font": "helvetica_n4",
+    "type_nav_font": "helvetica_n4",
+    "type_logo_font": "helvetica_n4",
     "font_size_heading_int": 34,
     "font_size_base_int": 15,
     "font_size_nav_int": 14,
@@ -481,18 +491,132 @@
     "enable_filter_swatches": true,
     "filter_swatch_layout": "no-label",
     "prod_thumb_options_names": "",
-    "enable_quick_header_search": true,
+    "show_search_suggestions": false,
+    "enable_quick_header_search": false,
     "quick_search_show_vendor": false,
-    "quick_search_show_price": true,
+    "quick_search_show_price": false,
     "quick_search_search_meta": false,
     "coll_grid_image_shape": "portrait-45",
     "coll_grid_image_position": "center center",
-    "coll_grid_show_count": true,
+    "coll_thumb_mob_per_row": "1",
+    "coll_grid_show_count": false,
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
     "cart_type": "drawer",
     "after_add_to_cart": "drawer",
-    "free_shipping_bar_col_under": "#171717",
+    "free_shipping_amounts": "USD:10000",
+    "free_shipping_bar_col_under": "#41872F",
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "customer_menu": "footer-customer-menu",
+          "customer_column_text": "Customer",
+          "about_us_menu": "footer-about-us-menu",
+          "about_us_column_text": "About us",
+          "follow_menu": "footer-follow-menu",
+          "follow_column_text": "Follow",
+          "subscribe_text": "Sign up to get special offers and news",
+          "subscribe_placeholder_text": "Email Address",
+          "subscribe_btn_text": "Subscribe",
+          "subscribe_error_empty_email": "Please enter your email",
+          "subscribe_error_invalid_email": "Invalid email",
+          "subscribe_success": "Thank you for joining our mailing list!",
+          "terms_and_conditions_link_text": "Terms & conditions",
+          "footer_year_left_text": "© éterne",
+          "footer_year_right_text": ". All Rights Reserved",
+          "privacy_policy_link_text": "Privacy policy"
+        }
+      }
+    },
     "content_for_index": [
 
-    ]
+    ],
+    "blocks": {
+      "6858403126979251294": {
+        "type": "shopify:\/\/apps\/consentik-cookie\/blocks\/omega-cookies-notification\/13cba824-a338-452e-9b8e-c83046a79f21",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "3577669850698438243": {
+        "type": "shopify:\/\/apps\/preorder-now-wod-preorder\/blocks\/app-embed\/fdf17d17-ef12-4a7b-8383-20cc1fc2a4b6",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "4571859552318407796": {
+        "type": "shopify:\/\/apps\/glo-color-swatch\/blocks\/app-embed-block\/4394f710-096c-4021-bbde-8ebb26057c11",
+        "disabled": false,
+        "settings": {
+          "customCssGCW": ""
+        }
+      },
+      "16881471024131275657": {
+        "type": "shopify:\/\/apps\/searchanise-search-filter\/blocks\/app-embed\/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "17550530943902319648": {
+        "type": "shopify:\/\/apps\/appikon-back-in-stock\/blocks\/subscribe_it_helper\/eb949c69-b3e6-4216-a322-1cd63915d46d",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "855628211100114053": {
+        "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "6263565299450869220": {
+        "type": "shopify:\/\/apps\/loop-returns-exchanges\/blocks\/return-coverage\/e32ccd84-40d6-4b16-98bf-b6b9da010afd",
+        "disabled": false,
+        "settings": {
+          "api-key": "test-key",
+          "full-cart-selector": "#main-cart-items",
+          "full-cart-item-selector": ".cart-item",
+          "enable-cart-drawer-element": false,
+          "cart-drawer-selector": "#CartDrawer",
+          "cart-drawer-item-selector": ".cart-item",
+          "cart-drawer-adjacent-selector": ".totals",
+          "return-coverage-primary-color": "#ffffff",
+          "return-coverage-secondary-color": "#000000"
+        }
+      },
+      "5888675206956468567": {
+        "type": "shopify:\/\/apps\/loop-returns-exchanges\/blocks\/onstore\/e32ccd84-40d6-4b16-98bf-b6b9da010afd",
+        "disabled": false,
+        "settings": {
+          "show-onstore-bar": false,
+          "api-key": "test-key",
+          "checkout-selector": "#checkout",
+          "replace-checkout-button": false,
+          "script-discounts": false,
+          "preserve-cart": false,
+          "available-credit-bar-label": "in available credit",
+          "bar-value-font-size": "15",
+          "bar-label-font-size": "10",
+          "bar-button-font-size": "10",
+          "bottom-bar-alignment": "full",
+          "bar-color": "rgb(0,0,0)",
+          "bar-text-color": "rgb(255,255,255)",
+          "bump-side-cart": false,
+          "side-cart-selector": ".sidecart"
+        }
+      },
+      "7079518687644006178": {
+        "type": "shopify:\/\/apps\/checkout-blocks\/blocks\/app-embed\/b0024ca5-9de8-4bf0-a92f-cd0783877ae2",
+        "disabled": false,
+        "settings": {
+          "utm_id": true,
+          "utm_source": true,
+          "utm_medium": true,
+          "utm_campaign": true,
+          "utm_term": true,
+          "ref": true
+        }
+      }
+    }
   }
 }
