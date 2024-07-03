@@ -25,7 +25,7 @@ export class EterneCollection extends HTMLElement {
 
                 if (nextPageUrl) {
                     this.isLoading = true;
-                    const loadingSpinner = document.querySelector('.loading-spinner');
+                    const loadingSpinner = document.querySelector('[data-see-more-loader]');
 
                     if (loadingSpinner) {
                         loadingSpinner.classList.remove('disp-none-imp');
@@ -100,7 +100,7 @@ export class EterneCollection extends HTMLElement {
             this._page2Content = "";
 
             this.seeMoreButtonElement.classList.add('disp-none-imp');
-            this.seeMoreLoaderElement.classList.add('disp-none-imp');
+            this.seeMoreLoaderElement.classList.remove('disp-none-imp');
 
             const items = document.querySelectorAll('.lazyLoad');
             items.forEach(item => {
@@ -160,6 +160,8 @@ export class EterneCollection extends HTMLElement {
                     console.error('Error fetching data:', error);
                 });
         }
+
+        console.log(this._page2Content)
 
         this.seeMoreButtonHandler = (event) => {
             event.preventDefault();
