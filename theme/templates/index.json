@@ -9,7 +9,7 @@
             "media_type": "image",
             "orientation": "landscape",
             "caption": "<p>Casual<br\/>Elegance<\/p>",
-            "product_link": "shopify:\/\/collections",
+            "product_link": "shopify:\/\/collections\/t-shirts",
             "product_link_text": "shop tees",
             "image": "shopify:\/\/shop_images\/Frame_7_74de2eca-9d86-4d92-9d96-376c5f008b46.jpg"
           }
@@ -31,7 +31,7 @@
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/Frame_17_82ace3bb-2e22-4d79-af25-4f3fa5a0d96d.jpg",
             "caption_1": "<p>day to night<br\/>essentials<\/p>",
-            "product_link_1": "shopify:\/\/collections",
+            "product_link_1": "shopify:\/\/collections\/swim",
             "product_link_text_1": "shop soir",
             "media_type_2": "image",
             "image_2": "shopify:\/\/shop_images\/Frame_2.jpg",
@@ -56,7 +56,7 @@
             "media_type": "image",
             "orientation": "landscape",
             "caption": "<p>Elevated<br\/>Essentials<\/p>",
-            "product_link": "shopify:\/\/products\/amina-top",
+            "product_link": "shopify:\/\/collections\/underwear",
             "product_link_text": "shop Underwear",
             "image": "shopify:\/\/shop_images\/Frame_5.jpg"
           }
@@ -108,7 +108,7 @@
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/Frame_9.jpg",
             "caption_1": "<p>refined<br\/>relaxation<\/p>",
-            "product_link_1": "shopify:\/\/pages\/klarna-faq",
+            "product_link_1": "shopify:\/\/collections\/knitwear",
             "product_link_text_1": "shop cashmere",
             "media_type_2": "image",
             "image_2": "shopify:\/\/shop_images\/Frame_8.jpg",
