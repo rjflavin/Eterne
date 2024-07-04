@@ -53,6 +53,7 @@
   height: 100%;
   overflow: hidden;
   position: relative;
+  display: flex;
 }
 .collage .media__video-wrapper {
   display: flex;
