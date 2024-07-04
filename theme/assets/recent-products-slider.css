@@ -43,6 +43,11 @@
   position: relative;
   width: 25%;
 }
+@media (max-width: 767px) {
+  .recent-products-swiper .swiper-wrapper .swiper-slide {
+    width: auto;
+  }
+}
 .recent-products-swiper .swiper-wrapper .swiper-slide-container {
   margin-right: 15px;
   display: flex;

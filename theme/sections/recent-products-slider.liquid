@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <script>
+  <script defer>
   document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
       const productsString = localStorage.getItem('recently_viewed_products')
@@ -148,7 +148,7 @@
 
     const products = getProductsFromLocalStorage()
     setUpSlides(products)
-    if (products.length > 4) {
+    if (products.length > 1) {
       const startEvent = new Event('dispatch:recently-products:init-slider');
       document.dispatchEvent(startEvent);
     }
