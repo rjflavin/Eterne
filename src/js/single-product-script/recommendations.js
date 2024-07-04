@@ -121,6 +121,7 @@ export default class RecommendationProducts extends HTMLElement {
         this.querySelectorAll('[data-show-quick-add-button]').forEach((showQuickAddButton) => {
             showQuickAddButton.addEventListener('click', () => {
                 const quickAddPanel = document.getElementById(showQuickAddButton.dataset.showQuickAddButton);
+                showQuickAddButton.style.opacity = 0;
                 quickAddPanel.style.visibility = 'visible';
                 quickAddPanel.style.opacity = 1;
             })

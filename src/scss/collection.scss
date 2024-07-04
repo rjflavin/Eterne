@@ -393,6 +393,10 @@
   &__item {
     display: block;
 
+    .gsw-item-product-group {
+      margin-bottom: 0 !important;
+    }
+
     .swatches-globo .swatch--gl .ul-swatches-list.g-variant-color, .swatches-globo .swatch--gl .ul-swatches-list.g-variant-color.glider .glider-track, .globo-product-groups-collection .gsw-item-pg-style-product-img .gsw-list-products-group {
       gap: 15px !important;
 
@@ -444,6 +448,17 @@
 
     .attr-title-hover-groups {
       display: block;
+
+      background: transparent;
+      margin: 0;
+      color: #333333;
+      transform: translate(-50%, 44px);
+      padding: 0;
+      font-size: 12px;
+
+      &:after {
+        content: none;
+      }
     }
 
     .gsw-list-products-group {
@@ -616,6 +631,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @include for-tablet {
+      margin-bottom: 10px;
+    }
   }
 
   &__item-title {
@@ -631,6 +650,7 @@
 
     @include for-tablet {
       font-size: 11px;
+      font-weight: 500;
     }
   }
 
@@ -789,7 +809,7 @@
     margin: 96px 10px 47px;
 
     @include for-tablet {
-      margin: 68px 10px 15px;
+      margin: 56px 10px 15px;
     }
   }
 
