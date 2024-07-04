@@ -58,6 +58,7 @@
     height: 100%;
     overflow: hidden;
     position: relative;
+    display: flex;
 
     &__video-wrapper {
       display: flex;
