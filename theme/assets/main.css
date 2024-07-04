@@ -3225,7 +3225,7 @@ body:not(.reveal-mobile-nav) .mobile-navigation-drawer .mobile-navigation-drawer
     line-height: 1em;
   }
   .section-header {
-    z-index: 8000;
+    z-index: 8000 !important;
   }
   .enable-mobile-nav-transition .mobile-navigation-drawer {
     visibility: visible;
