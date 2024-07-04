@@ -7,7 +7,7 @@
 {% endif %}
 
 {% assign visibleFiltersBeforeSeeMoreQuantity = 8 %}
-{% assign emptyImage = 'empty-image.svg' | asset_url %}
+{% assign emptyImage = 'no-image.webp' | asset_url %}
 
 {% liquid
   assign total_active_values = 0
@@ -128,9 +128,6 @@
             {% elsif product.selected_or_first_available_variant.featured_image != blank %}
               {% assign second_image = product.selected_or_first_available_variant.featured_image | img_url: 'master' %}
               {% assign second_image_lazy = product.selected_or_first_available_variant.featured_image | img_url: 'small' %}
-            {% else %}
-              {% assign second_image = emptyImage %}
-              {% assign hoverImages = emptyImage %}
             {% endif %}
 
             {% assign variant_url = "/collections/" | append: collection.handle | append: "/products/" | append: product.handle %}
@@ -241,7 +238,6 @@
                 data-default-color="{{ colorOption }}"
                 data-first-image="{{ first_image }}"
                 data-second-image="{{ second_image }}"
-                data-empty-image="{{ emptyImage }}"
                 data-hover-images="{{ hoverImages }}"
               >
                 <div class="variant_inventory_policy disp-none-imp">
@@ -270,8 +266,12 @@
                         {% for size in size_options %}
                           {% unless size == '' %}
                             {% assign is_disabled = true %}
+                            {% assign is_preorder = false %}
                             {% for variant in product.variants %}
                               {% if variant.option2 == size and variant.options contains selected_color %}
+                                {% if variant.inventory_policy == 'continue' %}
+                                  {% assign is_preorder = true %}
+                                {% endif %}
                                 {% if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' %}
                                   {% assign is_disabled = false %}
                                   {% if is_variant_found == false %}
@@ -281,18 +281,26 @@
                                 {% endif %}
                               {% endif %}
                             {% endfor %}
-                            <div data-variant-size="{{ size }}"
-                                 class="collection__size-variant-text no-select
-                                     {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
-                                     {% if is_disabled %} disabled{% endif %}"
-                            >
-                              {{ size }}
-                            </div>
+                            {% if is_preorder %}
+                              <a href="{{ variant_url }}" data-variant-size="{{ size }}"
+                                   class="collection__size-variant-text no-select
+                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
+                                       {% if is_disabled %} disabled{% endif %}"
+                              >
+                                {{ size }}
+                              </a>
+                            {% else %}
+                              <div data-variant-size="{{ size }}"
+                                   class="collection__size-variant-text no-select
+                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
+                                       {% if is_disabled %} disabled{% endif %}"
+                              >
+                                {{ size }}
+                              </div>
+                            {% endif %}
                           {% endunless %}
                         {% endfor %}
                       </div>
-                      <div class="collection__add-to-cart no-select">Add to bag</div>
-                      <div class="collection__add-to-cart-loader">...</div>
                     </div>
                     <div data-quick-add-button class="collection__item-quick-add-btn-wrap">
                       <div class="collection__item-quick-add-btn">

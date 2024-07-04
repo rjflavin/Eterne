@@ -4896,7 +4896,7 @@ shopify-payment-terms {
 .section-header .main-search {
   visibility: hidden;
   position: fixed;
-  z-index: 300;
+  z-index: 8000;
   top: 0;
   left: 0;
   width: 100%;
@@ -4963,6 +4963,10 @@ shopify-payment-terms {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+}
+
+.main-search__button svg path {
+  fill: #2b2b2b !important;
 }
 [dir=rtl] .main-search__button {
   right: auto;
