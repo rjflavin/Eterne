@@ -124,7 +124,7 @@
                             {% when 'title' %}
                                 <div class="title-row" {{ block.shopify_attributes }}>
                                 <div class="title-container">
-                                <h5 class="product-title">{{ product.title | escape }}</h5>
+                                <h1 class="product-title">{{ product.title | escape }}</h1>
 
                             {% when 'price' %}
                                 <span class="price__current">{{ product.price | money_without_trailing_zeros }}</span>

@@ -40,9 +40,9 @@
   {% paginate collection.products by productsPerPage %}
     <div class="collection__title-wrap">
       {% if collection.title == 'Products' or collection.title == 'all' %}
-        <span class="collection__title">Shop all</span>
+        <h1 class="collection__title">Shop all</h1>
       {% else %}
-        <span class="collection__title">{{ collection.title }}</span>
+        <h1 class="collection__title">{{ collection.title }}</h1>
       {% endif %}
     </div>
     <div class="collection__filter-open-btn-wrap">

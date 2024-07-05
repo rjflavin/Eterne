@@ -29,6 +29,18 @@
   </div>
 {%- else -%}
 
+{% if request.page_type == 'index' %}
+  <h1 class="disp-none-imp">{{ shop.name }}</h1>
+{% elsif request.page_type == 'search' %}
+  <h1 class="disp-none-imp">Search in {{ shop.name }}</h1>
+{% elsif page.handle == 'about' %}
+  <h1 class="disp-none-imp">About {{ shop.name }}</h1>
+{% elsif page.handle == 'contact-us' or page.handle == 'contact' %}
+  <h1 class="disp-none-imp">Contact with {{ shop.name }}</h1>
+{% elsif page.handle == 'search' %}
+  <h1 class="disp-none-imp">Search in {{ shop.name }}</h1>
+{% endif %}
+
 <page-header data-section-id="{{ section.id }}" data-cc-animate>
   <div
     id="pageheader"
@@ -86,10 +98,6 @@
       </div>
 
       <div class="logo">
-        {% if request.page_type == 'index' and section.settings.logo_h1 %}
-          <h1 class="logo__h1">
-        {% endif %}
-
         <a class="logo__link" href="{{ routes.root_url }}" title="{{ shop.name }}">
           <img
             class="logo__img"
@@ -99,10 +107,6 @@
             loading="eager"
           />
         </a>
-
-        {% if request.page_type == 'index' and section.settings.logo_h1 %}
-          </h1>
-        {% endif %}
       </div>
 
       {% comment %}mobile right buttons{% endcomment %}
@@ -297,13 +301,6 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
-    },
-    {
-      "type": "checkbox",
-      "id": "logo_h1",
-      "label": "Enable logo <h1> on home page",
-      "info": "For SEO. Deselect only if another section on the home page contains a primary page heading. [Learn more](https://cleancanvas.co.uk/support/symmetry/section-h1-setting)",
-      "default": true
     },
     {
       "type": "checkbox",
