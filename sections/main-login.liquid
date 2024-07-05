@@ -3,7 +3,7 @@
     <div class="{% if shop.checkout.guest_login %}column column--half{% else %}small-form{% endif %}">
       <div id="customer">
         <div class="page-header{% if shop.checkout.guest_login %} align-start{% endif %}">
-          <h2 class="title">{{ 'customer.login.title' | t }}</h2>
+          <h1 class="title">{{ 'customer.login.title' | t }}</h1>
         </div>
 
         {% form 'customer_login' %}
