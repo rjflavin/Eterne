@@ -7,7 +7,7 @@
 {% endif %}
 
 {% assign visibleFiltersBeforeSeeMoreQuantity = 8 %}
-{% assign emptyImage = 'empty-image.svg' | asset_url %}
+{% assign emptyImage = 'no-image.webp' | asset_url %}
 
 {% liquid
   assign total_active_values = 0
@@ -128,9 +128,6 @@
             {% elsif product.selected_or_first_available_variant.featured_image != blank %}
               {% assign second_image = product.selected_or_first_available_variant.featured_image | img_url: 'master' %}
               {% assign second_image_lazy = product.selected_or_first_available_variant.featured_image | img_url: 'small' %}
-            {% else %}
-              {% assign second_image = emptyImage %}
-              {% assign hoverImages = emptyImage %}
             {% endif %}
 
             {% assign variant_url = "/collections/" | append: collection.handle | append: "/products/" | append: product.handle %}
@@ -241,7 +238,6 @@
                 data-default-color="{{ colorOption }}"
                 data-first-image="{{ first_image }}"
                 data-second-image="{{ second_image }}"
-                data-empty-image="{{ emptyImage }}"
                 data-hover-images="{{ hoverImages }}"
               >
                 <div class="variant_inventory_policy disp-none-imp">
@@ -287,7 +283,7 @@
                             {% endfor %}
                             {% if is_preorder %}
                               <a href="{{ variant_url }}" data-variant-size="{{ size }}"
-                                   class="collection__size-variant-text no-select
+                                   class="collection__size-variant-text no-select not-add-to-cart
                                        {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
                                        {% if is_disabled %} disabled{% endif %}"
                               >

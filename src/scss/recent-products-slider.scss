@@ -48,6 +48,10 @@
                 position: relative;
                 width: calc(100% / 4);
 
+                @include for-mobile {
+                    width: auto;
+                }
+
                 &-container {
                     margin-right: 15px;
                     display: flex;

@@ -237,10 +237,10 @@ export class EterneCollection extends HTMLElement {
         const variantCardElement = event.target.closest('[data-collection-item]');
         const currencySymbol = document.querySelector('body').dataset.currencySymbol.trim();
         const clickOnSize = checkParentsForClass(event.target, 'collection__size-variant-text');
+        const notAddToCart = checkParentsForClass(event.target, 'not-add-to-cart');
         const clickOnColor = checkParentsForClass(event.target, 'gsw-list-products-group');
         const clickOnMobileQuickAddShowButton = checkParentsForClass(event.target, 'collection__item-quick-add-btn-wrap');
         const clickOnShowMoreColorsButton = checkParentsForClass(event.target, 'collection__show-more-colors-btn');
-        const clickOnAddToCartButton = checkParentsForClass(event.target, 'collection__add-to-cart');
 
         if (clickOnSize) {
             const isAllVariantsSold = variantCardElement.dataset.isAnyVariantInStock === "false";
@@ -322,6 +322,7 @@ export class EterneCollection extends HTMLElement {
 
                     variantCardElement.dataset.isVariantReadyToFetch = 'true';
 
+                    if (notAddToCart) return
                     clickToSize();
                 };
 
