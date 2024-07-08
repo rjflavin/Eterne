@@ -85,7 +85,7 @@
 .collage__one-image-row .caption, .collage__two-images-row .caption {
   position: absolute;
   left: 40px;
-  bottom: 40px;
+  bottom: 41px;
   display: flex;
   flex-direction: column;
   width: 150px;
@@ -97,7 +97,7 @@
   }
 }
 .collage__one-image-row .caption__text, .collage__two-images-row .caption__text {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .collage__one-image-row .caption__text, .collage__one-image-row .caption__text p, .collage__two-images-row .caption__text, .collage__two-images-row .caption__text p {
   color: var(--white);
@@ -117,8 +117,8 @@
   color: var(--white);
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.02em;
+  line-height: 17px;
+  letter-spacing: 1.153px;
   text-transform: uppercase;
   text-align: center;
   border: 1px solid var(--white);
