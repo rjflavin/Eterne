@@ -364,10 +364,6 @@
       }
     }
   }
-
-  .attr-title-hover-groups {
-    display: block;
-  }
 }
 
 .color-tooltip {
@@ -840,11 +836,10 @@
 }
 
 .gsw-list-product-groups {
-
-
   .gsw-item-product-group {
     display: flex;
     align-items: center;
+    margin-bottom: 24px;
 
     .gsw-list-products-group {
       display: flex;
@@ -854,6 +849,20 @@
 
     .gsw-prg-item--link {
       display: flex;
+    }
+  }
+
+  .attr-title-hover-groups {
+    display: block;
+    background: transparent;
+    margin: 0;
+    color: #333333;
+    transform: translate(-50%, 42px);
+    padding: 0;
+    font-size: 12px;
+
+    &:after {
+      content: none;
     }
   }
 
