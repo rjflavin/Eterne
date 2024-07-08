@@ -95,7 +95,7 @@
     .caption {
       position: absolute;
       left: 40px;
-      bottom: 40px;
+      bottom: 41px;
       display: flex;
       flex-direction: column;
       width: 150px;
@@ -106,7 +106,7 @@
       }
 
       &__text {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
 
         &, p {
           color: var(--white);
@@ -127,8 +127,8 @@
         color: var(--white);
         font-weight: 500;
         font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0.02em;
+        line-height: 17px;
+        letter-spacing: 1.153px;
         text-transform: uppercase;
         text-align: center;
         border: 1px solid var(--white);
