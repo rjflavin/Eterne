@@ -342,11 +342,11 @@
                                                         </div>
                                                         <div class="product__add-to-cart-wrapper disp-none-imp">
                                                             {% if first_variant.inventory_quantity > 0 and first_variant_preordered == false %}
-                                                                {% assign show_preorder_button = false %}
+                                                                {% assign hide_preorder_button = false %}
                                                             {% elsif first_variant_preordered %}
-                                                                {% assign show_preorder_button = true %}
+                                                                {% assign hide_preorder_button = true %}
                                                             {% endif %}
-                                                            <button class="product__add-to-cart{% if show_preorder_button %} hidden{% endif %}"
+                                                            <button class="product__add-to-cart{% if hide_preorder_button %} hidden{% endif %}"
                                                                     data-quick-add-panel="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}">
                                                                 Add to bag
                                                             </button>
@@ -367,6 +367,15 @@
                                                 <div class="product__text-wrap">
                                                     <p class="product__title">{{ rec_product.title }}</p>
                                                     <p class="product__price">{{ rec_product.price | money_without_trailing_zeros }}</p>
+                                                </div>
+                                                {% assign shouldShowPreorderLabel = false %}
+                                                {% if first_variant_preordered %}
+                                                    {% assign shouldShowPreorderLabel = true %}
+                                                {% endif %}
+                                                <div class="product__preorder-wrap {% if shouldShowPreorderLabel %}disp-flx-imp{% endif %}">
+                                                    <div class="product__preorder">
+                                                        <div class="product__preorder-text">Preorder</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>

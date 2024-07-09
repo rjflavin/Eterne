@@ -641,6 +641,34 @@
               }
             }
           }
+
+          &__preorder-wrap {
+            width: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            margin-top: 11px;
+            margin-bottom: 15px;
+          }
+
+          &__preorder {
+            width: fit-content;
+            display: flex;
+            border: 1px solid var(--black1);
+            border-radius: 4px;
+          }
+
+          &__preorder-text {
+            display: flex;
+            padding: 0 10px;
+            font-size: 10px;
+            font-weight: 500;
+            line-height: 16px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            text-align: center;
+            color: var(--black1);
+          }
         }
       }
 
