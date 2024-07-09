@@ -578,6 +578,31 @@
 .product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel .product__size-variants .product__size-label--disabled {
   opacity: 0.5;
 }
+.product-info .product-column-right .product-recommendations .recommendations-list .product__preorder-wrap {
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 11px;
+  margin-bottom: 15px;
+}
+.product-info .product-column-right .product-recommendations .recommendations-list .product__preorder {
+  width: fit-content;
+  display: flex;
+  border: 1px solid var(--black1);
+  border-radius: 4px;
+}
+.product-info .product-column-right .product-recommendations .recommendations-list .product__preorder-text {
+  display: flex;
+  padding: 0 10px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--black1);
+}
 .product-info .product-column-right .product-recommendations .show-more-btn {
   padding: 9px 12px;
   margin: 20px auto 0 auto;
