@@ -120,6 +120,8 @@
               {% assign first_image = emptyImage %}
             {% endif %}
 
+            {% assign second_image = first_image %}
+            {% assign hoverImages = first_image %}
             {% if product.media[1] != blank %}
               {% assign second_image = product.media[1] | img_url: 'master' %}
               {% assign second_image_lazy = product.media[1] | img_url: 'small' %}
