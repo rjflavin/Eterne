@@ -466,10 +466,6 @@
 .collection__size-variant-text:first-child {
   margin-left: 0;
 }
-.collection__size-variant-text_selected {
-  font-weight: 500;
-  text-decoration: underline;
-}
 .collection__add-to-cart {
   display: flex;
   margin-top: 2px;
