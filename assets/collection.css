@@ -576,7 +576,7 @@
   display: flex;
   margin: 10px 10px 0 10px;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 140%;
   text-transform: uppercase;
   text-align: center;
@@ -586,7 +586,6 @@
 @media (max-width: 1024px) {
   .collection__item-title {
     font-size: 11px;
-    font-weight: 500;
   }
 }
 .collection__item-fabric-title {
