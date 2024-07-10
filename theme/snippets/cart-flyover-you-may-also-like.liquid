@@ -1,0 +1,43 @@
+{% if product_list_you_may_like %}
+  <div class="cart-flyover-you-may-also-like">
+    <div class="cart-flyover-you-may-also-like__title">
+      {% if title_you_may_like %}{{ title_you_may_like }}{% endif %}
+    </div>
+    <div class="cart-flyover-you-may-also-like-swiper">
+      <div class="swiper-wrapper">
+        {% for item in product_list_you_may_like %}
+          <a
+            {% if item.url %}
+              href="{{ item.url }}"
+            {% endif %}
+            class="swiper-slide cart-flyover-you-may-also-like-swiper-item"
+          >
+            <div class="cart-flyover-you-may-also-like-swiper-item-container">
+              {% assign image = item.images | first %}
+              <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
+                {% if image %}
+                  <div
+                    class="cart-flyover-you-may-also-like-swiper-item__image lazyLoad"
+                    data-bgimage="{{ image | img_url: 'master' }}"
+                    style="background-image: url('{{ image | img_url: 'small' }}'); filter: blur(2px)"
+                  ></div>
+                {% endif %}
+              </div>
+              {% assign color = item.first_available_variant.options | first %}
+              <div class="cart-flyover-you-may-also-like-swiper-item__text">
+                {% if item.title %}{{ item.title }}{% endif -%}
+                {%- if color %} {{ color }}{% endif %}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-prev">
+        <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}" loading="lazy">
+      </div>
+      <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-next">
+        <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}" loading="lazy">
+      </div>
+    </div>
+  </div>
+{% endif %}

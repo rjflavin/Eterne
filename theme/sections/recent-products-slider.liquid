@@ -1,0 +1,185 @@
+{{ 'recent-products-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="recent-products-slider">
+  {% if section.settings.title %}
+    <div class="recent-products-slider-title">
+      {{ section.settings.title }}
+    </div>
+  {% endif %}
+
+  <div class="recent-products-swiper">
+    <div class="recent-products__swiper-wrapper swiper-wrapper">
+
+    </div>
+    <div class="recent-products-swiper-button-prev">
+      <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}" loading="lazy">
+    </div>
+    <div class="recent-products-swiper-button-next">
+      <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}" loading="lazy">
+    </div>
+  </div>
+
+  <script defer>
+  document.addEventListener("DOMContentLoaded", () => {
+    const getProductsFromLocalStorage = () => {
+      const productsString = localStorage.getItem('recently_viewed_products')
+      if (productsString) {
+        return JSON.parse(productsString);
+      }
+      return [];
+    };
+
+    const setUpSlides = (products) => {
+      const MAX_PRODUCT_AMOUNT = 4
+      const slider = document.querySelector('.section-recent-products-slider')
+      if (slider && products.length <= MAX_PRODUCT_AMOUNT && products.length > 0) {
+        const leftArrow = document.querySelector('.recent-products-swiper-button-prev')
+        const rightArrow = document.querySelector('.recent-products-swiper-button-next')
+        if (leftArrow && rightArrow) {
+          leftArrow.classList.add('hide')
+          rightArrow.classList.add('hide')
+        }
+      }
+
+      if (products.length <= 0) {
+        slider.classList.add('hide')
+        return
+      }
+
+      const wrapper = document.querySelector('.recent-products__swiper-wrapper')
+      const noImage = `{{ 'no-image.webp' | asset_url }}`
+
+      for (let index = 0; index < products.length; index++) {
+        const product = products[index];
+
+        if (+new Date(product.availableFrom) < +new Date() || product.availableFrom === '') {
+          let firstlySelectedVariant = product.variants.find((variant) => variant.firstAvailable);
+          if (!firstlySelectedVariant) firstlySelectedVariant = product.variants[0];
+          const isFirstVariantPreordered = firstlySelectedVariant.inventoryPolicy === "continue" && firstlySelectedVariant.inventoryQuantity <= 0;
+          let imageUrl = product.images[0];
+          let imageUrlLazyLoad;
+
+          if (imageUrl) {
+            let parts = imageUrl.split('.');
+            let extension = parts.pop();
+            let baseUrl = parts.join('.');
+            imageUrlLazyLoad = `${baseUrl}_small.${extension}`;
+          }
+
+          const newProductHtml = `
+            <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
+                 class="recent-products__slider-slide swiper-slide"
+                 data-recent-product-item
+                 data-active-variant="${firstlySelectedVariant.id}">
+                 <div class="variant_inventory_policy disp-none-imp">
+                 {% for variant in product.variants %}
+                   <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
+                 {% endfor %}
+               </div>
+              <div class="swiper-slide-container">
+                <a href="${firstlySelectedVariant.url}" class="swiper-slide-link"></a>
+                <div class="swiper-slide-image-container lazyLoad">
+                  <div data-bgimage="${imageUrl ? imageUrl : noImage}" class="swiper-slide-image lazyLoad" style="background-image: url('${imageUrlLazyLoad ? imageUrlLazyLoad : noImage}'); filter: blur(2px)"></div>
+                  <div class="swiper-slide-image-info">
+                    <div class="swiper-slide-image-info-sizes">
+                      ${(product && product.variants &&
+                        product.variants.map((variant) => {
+                          if ((variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0) {
+                            return `<a href='${variant.url}' class="swiper-slide-image-info-sizes-item
+                                    ${((variant.firstAvailable) ? ' selected-size' : '') ||
+                            ((variant.available) ? '' : ' unavailable')}"
+                                    data-size-item="${variant.id}"
+                                    data-price="{{ cart.currency.symbol }}${variant.price}"
+                                    data-is-preordered="${(variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0}">
+                              ${variant.size}
+                             </a>`
+                          } else {
+                           return `<div class="swiper-slide-image-info-sizes-item
+                                    ${((variant.firstAvailable) ? ' selected-size' : '') ||
+                            ((variant.available) ? '' : ' unavailable')}"
+                                    data-size-item="${variant.id}"
+                                    data-price="{{ cart.currency.symbol }}${variant.price}"
+                                    data-is-preordered="${(variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0}">
+                              ${variant.size}
+                             </div>`
+                          }
+                        }).join(""))
+                      }
+                    </div>
+                    <a href="${firstlySelectedVariant.url}"
+                       class="disp-none-imp swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? '': ' disp-none-imp'}"
+                       data-see-more-preordered>
+                      See more
+                    </a>
+                    <div class="disp-none-imp swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? ' disp-none-imp': ''}"
+                         data-quick-add>
+                        {{ section.settings.add_to_cart_text }}
+                    </div>
+                  </div>
+                  <div class="swiper-slide-image-info-button">
+                    {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                  </div>
+                  <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]}" />
+                  <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]}" />
+                </div>
+                <div class="swiper-slide-text-container">
+                  <div class="swiper-slide-title">${product.title}</div>
+                  <div class="swiper-slide-title swiper-slide-title-price" data-current-price>{{ cart.currency.symbol }}${firstlySelectedVariant.price}</div>
+                  <button class="preorder-button disp-none-imp">Preorder</button>
+                </div>
+              </div>
+            </div>
+          `;
+
+          const newHtmlDocument = new DOMParser().parseFromString(newProductHtml, 'text/html')
+          const productElem = newHtmlDocument.querySelector('div')
+          wrapper.appendChild(productElem)
+        }
+      }
+
+      const preorderButtons = document.querySelectorAll('.preorder-button')
+      for (const button of preorderButtons) {
+        button.addEventListener("click", (event) => {
+          event.preventDefault()
+          event.stopPropagation()
+        })
+      }
+    }
+
+    const products = getProductsFromLocalStorage()
+    setUpSlides(products)
+    if (products.length > 1) {
+      const startEvent = new Event('dispatch:recently-products:init-slider');
+      document.dispatchEvent(startEvent);
+    }
+  })
+  </script>
+</div>
+
+{{ 'recent-products-swiper.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Recently viewed products",
+  "class": "section-recent-products-slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "RECENTLY VIEWED"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add item to cart text",
+      "default": "Add to bag"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent products"
+    }
+  ]
+}
+{% endschema %}

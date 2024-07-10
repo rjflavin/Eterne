@@ -1,0 +1,92 @@
+{{ 'new-in-slider.css' | asset_url | stylesheet_tag }}
+
+{% assign collection_handle = section.settings.selected_collection.handle %}
+{% assign now = "now" | date: "%s" %}
+
+<div class="new-in">
+  <div class="new-in__title-wrap">
+    <span class="new-in__title">{{ section.settings.section_title }}</span>
+  </div>
+  <div class="new-in__swiper">
+    <div class="new-in__swiper-wrapper swiper-wrapper">
+      {% for product in collections[collection_handle].products %}
+        {% assign available_from = product.metafields.custom.available_from | date: "%s" %}
+        {% if available_from < now or available_from == blank %}
+          <div class="new-in__item swiper-slide">
+            <div class="new-in__item-inner">
+              <a href="{{ product.selected_or_first_available_variant.url }}" class="new-in__item-link"></a>
+
+              <div class="new-in__img-wrap">
+                <div class="new-in__item-bg-imgs-wrap">
+                  <div
+                    class="new-in__item-bg-img lazyLoad"
+                    data-bgimage="{{ product.featured_image | img_url: 'master' }}"
+                    style="background-image: url('{{ product.featured_image | img_url: 'small' }}'); filter: blur(2px)"
+                  ></div>
+                  {% if product.images[1] != blank %}
+                    <div
+                      class="new-in__item-bg-img-hover lazyLoad"
+                      data-bgimage="{{ product.images[1] | img_url: 'master' }}"
+                      style="background-image: url('{{ product.images[1] | img_url: 'small' }}'); filter: blur(2px)"
+                    ></div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="new-in__item-text-wrap">
+                <div class="new-in__item-title">{{ product.title }} {{ color_value }}</div>
+                <div class="new-in__item-price">{{ product.price | money_without_trailing_zeros }}</div>
+              </div>
+              <div
+                class="new-in__preorder-wrap {% if product.selected_or_first_available_variant.inventory_policy == 'continue' and product.selected_or_first_available_variant.inventory_quantity <= 0 %}disp-flx-imp{% endif %}">
+                <div class="new-in__preorder">
+                  <div class="new-in__preorder-text">Preorder</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="swiper-button-prev no-select new-in__arrow-item new-in__arrow-prev">
+    {% render 'icon-tick' %}
+  </div>
+  <div class="swiper-button-next no-select new-in__arrow-item new-in__arrow-next">
+    {% render 'icon-tick' %}
+  </div>
+</div>
+
+{{ 'new-in-slider-script.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "New in slider",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "New in"
+    },
+    {
+      "type": "collection",
+      "id": "selected_collection",
+      "label": "EterneCollection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New in slider"
+    }
+  ]
+}
+{% endschema %}

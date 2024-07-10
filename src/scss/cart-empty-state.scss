@@ -1,0 +1,33 @@
+.cart-item-list__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart-empty {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin: 0 auto;
+
+  &__title {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 22.4px;
+    text-align: center;
+  }
+
+  &__button {
+    width: fit-content;
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--white);
+    background-color: var(--red1);
+  }
+}
