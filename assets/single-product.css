@@ -712,6 +712,17 @@
     line-height: 16.8px;
   }
 }
+.product-info .product-column-right .product-details__content li span {
+  font-size: 14px !important;
+  line-height: 19.6px !important;
+  color: var(--gray4) !important;
+}
+@media (max-width: 1024px) {
+  .product-info .product-column-right .product-details__content li span {
+    font-size: 12px !important;
+    line-height: 16.8px !important;
+  }
+}
 .product-info .product-column-right .product-details__content p:first-child, .product-info .product-column-right .product-details__content li:first-child {
   margin-top: 0;
 }
