@@ -522,6 +522,7 @@
   background-color: rgba(255, 255, 255, 0.8);
   opacity: 0;
   transition: opacity 0.15s linear;
+  cursor: default;
 }
 @media (max-width: 1024px) {
   .product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel_show-mobile {
@@ -571,12 +572,9 @@
   cursor: pointer;
   padding: 7px;
 }
-.product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel .product__size-variants .product__size-label--checked {
-  font-weight: 500;
-  text-decoration: underline;
-}
 .product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel .product__size-variants .product__size-label--disabled {
   opacity: 0.5;
+  cursor: default;
 }
 .product-info .product-column-right .product-recommendations .recommendations-list .product__preorder-wrap {
   width: 100%;

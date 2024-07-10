@@ -150,10 +150,6 @@
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info-sizes-item:last-child {
   margin-right: 0;
 }
-.recent-products-swiper .swiper-wrapper .swiper-slide-image-info-sizes-item.selected-size {
-  font-weight: 500;
-  text-decoration: underline;
-}
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info-sizes-item.unavailable {
   opacity: 0.5;
   cursor: unset;
