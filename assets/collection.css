@@ -607,7 +607,7 @@
 }
 .collection__item-price {
   display: flex;
-  margin: 4px 10px 0 10px;
+  margin: 4px 10px 3px;
   font-size: 12px;
   font-weight: 400;
   line-height: 183%;
