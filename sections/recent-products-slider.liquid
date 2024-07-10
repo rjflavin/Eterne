@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <script>
+  <script defer>
   document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
       const productsString = localStorage.getItem('recently_viewed_products')
@@ -84,33 +84,36 @@
                     <div class="swiper-slide-image-info-sizes">
                       ${(product && product.variants &&
                         product.variants.map((variant) => {
-                          return `<div class="swiper-slide-image-info-sizes-item
-                                                    ${((variant.firstAvailable) ? ' selected-size' : '') ||
-                                                    ((variant.available) ? '' : ' unavailable')}"
-                                                    data-size-item="${variant.id}"
-                                                    data-price="{{ cart.currency.symbol }}${variant.price}"
-                                                    data-is-preordered="${(variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0}">
-                                              ${variant.size}
-                                        </div>`
+                          if ((variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0) {
+                            return `<a href='${variant.url}' class="swiper-slide-image-info-sizes-item
+                                    ${((variant.firstAvailable) ? ' selected-size' : '') ||
+                            ((variant.available) ? '' : ' unavailable')}"
+                                    data-size-item="${variant.id}"
+                                    data-price="{{ cart.currency.symbol }}${variant.price}"
+                                    data-is-preordered="${(variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0}">
+                              ${variant.size}
+                             </a>`
+                          } else {
+                           return `<div class="swiper-slide-image-info-sizes-item
+                                    ${((variant.firstAvailable) ? ' selected-size' : '') ||
+                            ((variant.available) ? '' : ' unavailable')}"
+                                    data-size-item="${variant.id}"
+                                    data-price="{{ cart.currency.symbol }}${variant.price}"
+                                    data-is-preordered="${(variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0}">
+                              ${variant.size}
+                             </div>`
+                          }
                         }).join(""))
                       }
                     </div>
                     <a href="${firstlySelectedVariant.url}"
-                       class="swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? '': ' disp-none-imp'}"
+                       class="disp-none-imp swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? '': ' disp-none-imp'}"
                        data-see-more-preordered>
                       See more
                     </a>
-                    <div class="swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? ' disp-none-imp': ''}"
+                    <div class="disp-none-imp swiper-slide-image-info-cart-button${(isFirstVariantPreordered) ? ' disp-none-imp': ''}"
                          data-quick-add>
                         {{ section.settings.add_to_cart_text }}
-                    </div>
-                    <div class="swiper-slide-image-info-cart-loader-fill-text disp-none-imp">LOADING</div>
-                    <div class="swiper-slide-image-info-cart-loader">
-                      <div class="swiper-slide-image-info-cart-loader-circles-wrap">
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                        <div class="swiper-slide-image-info-cart-loader-circle"></div>
-                      </div>
                     </div>
                   </div>
                   <div class="swiper-slide-image-info-button">
@@ -145,7 +148,7 @@
 
     const products = getProductsFromLocalStorage()
     setUpSlides(products)
-    if (products.length > 4) {
+    if (products.length > 1) {
       const startEvent = new Event('dispatch:recently-products:init-slider');
       document.dispatchEvent(startEvent);
     }

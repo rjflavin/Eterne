@@ -124,7 +124,7 @@
                             {% when 'title' %}
                                 <div class="title-row" {{ block.shopify_attributes }}>
                                 <div class="title-container">
-                                <h5 class="product-title">{{ product.title | escape }}</h5>
+                                <h1 class="product-title">{{ product.title | escape }}</h1>
 
                             {% when 'price' %}
                                 <span class="price__current">{{ product.price | money_without_trailing_zeros }}</span>
@@ -314,31 +314,42 @@
                                                                 {% if rec_variant.inventory_quantity <= 0 and rec_variant_preordered == false %}
                                                                     disabled
                                                                         {% endif %}>
-                                                                <label for="size-{{ rec_variant.id }}--{{ variant_loop }}"
-                                                                       class="product__size-label
+                                                                {% if rec_variant.inventory_quantity <= 0 and rec_variant_preordered %}
+                                                                    <a href="{{ rec_variant.url }}"
+                                                                           class="product__size-label
                                                                               {% if first_variant.id == rec_variant.id %}
                                                                               product__size-label--checked
                                                                             {% endif %}
                                                                             {% unless rec_variant.available %}
                                                                               product__size-label--disabled
                                                                             {% endunless %}">
-                                                                    {{ rec_variant.option2 }}
-                                                                </label>
+                                                                        {{ rec_variant.option2 }}
+                                                                    </a>
+                                                                {% else %}
+                                                                    <label for="size-{{ rec_variant.id }}--{{ variant_loop }}"
+                                                                           class="product__size-label
+                                                                              {% if first_variant.id == rec_variant.id %}
+                                                                              product__size-label--checked
+                                                                            {% endif %}
+                                                                            {% unless rec_variant.available %}
+                                                                              product__size-label--disabled
+                                                                            {% endunless %}">
+                                                                        {{ rec_variant.option2 }}
+                                                                    </label>
+                                                                {% endif %}
                                                                 {% assign variant_loop = variant_loop | plus: 1 %}
                                                             {% endfor %}
                                                         </div>
-                                                        <div class="product__add-to-cart-wrapper">
+                                                        <div class="product__add-to-cart-wrapper disp-none-imp">
                                                             {% if first_variant.inventory_quantity > 0 and first_variant_preordered == false %}
-                                                                {% assign show_preorder_button = false %}
+                                                                {% assign hide_preorder_button = false %}
                                                             {% elsif first_variant_preordered %}
-                                                                {% assign show_preorder_button = true %}
+                                                                {% assign hide_preorder_button = true %}
                                                             {% endif %}
-                                                            <button class="product__add-to-cart{% if show_preorder_button %} hidden{% endif %}"
+                                                            <button class="product__add-to-cart{% if hide_preorder_button %} hidden{% endif %}"
                                                                     data-quick-add-panel="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}">
                                                                 Add to bag
                                                             </button>
-                                                            <a href="{{ first_variant.url }}"
-                                                               class="preorder-button {% unless show_preorder_button %} hidden{% endunless %}">Preorder</a>
                                                         </div>
                                                     </div>
                                                     {% render 'image',
@@ -356,6 +367,15 @@
                                                 <div class="product__text-wrap">
                                                     <p class="product__title">{{ rec_product.title }}</p>
                                                     <p class="product__price">{{ rec_product.price | money_without_trailing_zeros }}</p>
+                                                </div>
+                                                {% assign shouldShowPreorderLabel = false %}
+                                                {% if first_variant_preordered %}
+                                                    {% assign shouldShowPreorderLabel = true %}
+                                                {% endif %}
+                                                <div class="product__preorder-wrap {% if shouldShowPreorderLabel %}disp-flx-imp{% endif %}">
+                                                    <div class="product__preorder">
+                                                        <div class="product__preorder-text">Preorder</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
