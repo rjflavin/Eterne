@@ -535,13 +535,6 @@
         "settings": {
         }
       },
-      "4571859552318407796": {
-        "type": "shopify:\/\/apps\/glo-color-swatch\/blocks\/app-embed-block\/4394f710-096c-4021-bbde-8ebb26057c11",
-        "disabled": false,
-        "settings": {
-          "customCssGCW": ""
-        }
-      },
       "16881471024131275657": {
         "type": "shopify:\/\/apps\/searchanise-search-filter\/blocks\/app-embed\/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
         "disabled": false,
@@ -606,6 +599,13 @@
           "utm_campaign": true,
           "utm_term": true,
           "ref": true
+        }
+      },
+      "4571859552318407796": {
+        "type": "shopify:\/\/apps\/glo-color-swatch\/blocks\/app-embed-block\/4394f710-096c-4021-bbde-8ebb26057c11",
+        "disabled": false,
+        "settings": {
+          "customCssGCW": ""
         }
       }
     }
