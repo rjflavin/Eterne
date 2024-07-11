@@ -152,8 +152,9 @@
                   {% assign second_image = item.selected_or_first_available_variant.featured_image | img_url: 'master' %}
                   {% assign second_image_lazy = item.selected_or_first_available_variant.featured_image | img_url: 'small' %}
                 {% else %}
-                  {% assign second_image = emptyImage %}
-                  {% assign hoverImages = emptyImage %}
+                  {% assign second_image = first_image %}
+                  {% assign second_image_lazy = first_image %}
+                  {% assign hoverImages = first_image %}
                 {% endif %}
 
                 {% assign variant_url = "/collections/shop/products/" | append: item.handle %}
