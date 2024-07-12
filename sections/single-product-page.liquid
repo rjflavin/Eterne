@@ -127,7 +127,9 @@
                                 <h1 class="product-title">{{ product.title | escape }}</h1>
 
                             {% when 'price' %}
-                                <span class="price__current">{{ product.price | money_without_trailing_zeros }}</span>
+                                <span class="price__current">
+                                    {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
+                                </span>
                                 </div>
                                 </div>
 
