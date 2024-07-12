@@ -55,6 +55,7 @@
         if (+new Date(product.availableFrom) < +new Date() || product.availableFrom === '') {
           let firstlySelectedVariant = product.variants.find((variant) => variant.firstAvailable);
           if (!firstlySelectedVariant) firstlySelectedVariant = product.variants[0];
+          const productTitle = product.title;
           const isFirstVariantPreordered = firstlySelectedVariant.inventoryPolicy === "continue" && firstlySelectedVariant.inventoryQuantity <= 0;
           let imageUrl = product.images[0];
           let imageUrlLazyLoad;
@@ -124,7 +125,12 @@
                 </div>
                 <div class="swiper-slide-text-container">
                   <div class="swiper-slide-title">${product.title}</div>
-                  <div class="swiper-slide-title swiper-slide-title-price" data-current-price>{{ cart.currency.symbol }}${firstlySelectedVariant.price}</div>
+                  <div class="swiper-slide-title swiper-slide-title-price" data-current-price>
+                    ${productTitle.includes('Gift Card')
+                      ? `${product.color}`
+                      : `{{ cart.currency.symbol }}${firstlySelectedVariant.price}`
+                    }
+                  </div>
                   <button class="preorder-button disp-none-imp">Preorder</button>
                 </div>
               </div>
