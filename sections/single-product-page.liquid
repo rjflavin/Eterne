@@ -128,7 +128,7 @@
 
                             {% when 'price' %}
                                 <span class="price__current">
-                                    {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
+                                    {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros | replace: ',', '' }}
                                 </span>
                                 </div>
                                 </div>
