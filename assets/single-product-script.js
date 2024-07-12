@@ -620,6 +620,16 @@ eval("\n\nvar forEach = __webpack_require__(/*! for-each */ \"./node_modules/for
 
 /***/ }),
 
+/***/ "./src/js/single-product-script/gift-card-select.js":
+/*!**********************************************************!*\
+  !*** ./src/js/single-product-script/gift-card-select.js ***!
+  \**********************************************************/
+/***/ (() => {
+
+eval("const optionSelectorContentElement = document.querySelector('.option-selector__content');\nif (optionSelectorContentElement) {\n  document.addEventListener('click', event => {\n    const currentPriceElement = document.querySelector('.price__current');\n    if (event.target.classList.contains('gift-card-price')) {\n      currentPriceElement.innerHTML = event.target.innerHTML;\n    }\n  });\n}\n\n//# sourceURL=webpack://my-webpack-project/./src/js/single-product-script/gift-card-select.js?");
+
+/***/ }),
+
 /***/ "./src/js/single-product-script/index.js":
 /*!***********************************************!*\
   !*** ./src/js/single-product-script/index.js ***!
@@ -627,7 +637,7 @@ eval("\n\nvar forEach = __webpack_require__(/*! for-each */ \"./node_modules/for
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _single_product_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./single-product.js */ \"./src/js/single-product-script/single-product.js\");\n/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slider */ \"./src/js/single-product-script/slider.js\");\n/* harmony import */ var _recommendations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./recommendations */ \"./src/js/single-product-script/recommendations.js\");\n\n\n\ncustomElements.define('single-product', _single_product_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\ncustomElements.define('recommendation-products', _recommendations__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\n\n//# sourceURL=webpack://my-webpack-project/./src/js/single-product-script/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _single_product_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./single-product.js */ \"./src/js/single-product-script/single-product.js\");\n/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slider */ \"./src/js/single-product-script/slider.js\");\n/* harmony import */ var _recommendations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./recommendations */ \"./src/js/single-product-script/recommendations.js\");\n/* harmony import */ var _gift_card_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gift-card-select */ \"./src/js/single-product-script/gift-card-select.js\");\n/* harmony import */ var _gift_card_select__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_gift_card_select__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\ncustomElements.define('single-product', _single_product_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\ncustomElements.define('recommendation-products', _recommendations__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\n\n//# sourceURL=webpack://my-webpack-project/./src/js/single-product-script/index.js?");
 
 /***/ }),
 

@@ -208,7 +208,15 @@
                         {% endif %}
                         for="{{ option_id }}-opt-{{ value_index0 }}"
                       >
-                        <span class="{% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden {% endif %}js-value">{{ value }}</span>
+                        <span
+                          class="
+                            {% if is_swatch and settings.swatch_style != 'listed' %}visually-hidden{% endif %}
+                            {% if product.title contains "Gift Card" %}gift-card-price{% endif %}
+                            js-value
+                          "
+                        >
+                          {{ value }}
+                        </span>
                       </label>
                     {% endif %}
                   {%- endif -%}
