@@ -101,7 +101,7 @@
                                     data-size-item="${variant.id}"
                                     data-price="{{ cart.currency.symbol }}${variant.price}"
                                     data-is-preordered="${(variant.inventoryPolicy === "continue") && variant.inventoryQuantity <= 0}">
-                              ${variant.size}
+                              ${variant.size ? variant.size : variant.title}
                              </div>`
                           }
                         }).join(""))

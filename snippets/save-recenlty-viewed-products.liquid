@@ -107,7 +107,7 @@
                     firstAvailableFound = true;
                 } else firstAvailable = false;
 
-                const { id, available, price, url, inventory_policy, inventory_quantity } = variantData;
+                const { id, available, price, url, inventory_policy, inventory_quantity, title } = variantData;
                 return {
                     id,
                     available,
@@ -117,6 +117,7 @@
                     firstAvailable,
                     inventoryPolicy: inventory_policy,
                     inventoryQuantity: inventory_quantity,
+                    title,
                 };
             })
 

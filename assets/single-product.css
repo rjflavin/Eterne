@@ -180,6 +180,12 @@
   color: var(--white);
   cursor: pointer;
 }
+.product-form .quantity-submit-row .add-to-cart.rise-ai-hidden {
+  display: none !important;
+}
+.product-form .quantity-submit-row .add-to-cart.rise-ai-hidden.GiftWizard-gift-button {
+  display: flex !important;
+}
 .product-form .quantity-submit-row .add-to-cart:hover {
   background: var(--black2);
   color: var(--white);
@@ -212,6 +218,11 @@
 .product-form .quantity-submit-row .payment-info span a:first-child {
   font-weight: 600;
 }
+@media (max-width: 767px) {
+  .product-form .title-row {
+    margin-top: 12px;
+  }
+}
 .product-form .product-type {
   margin-bottom: 12px;
   font-size: 10px;
@@ -223,6 +234,7 @@
 @media (max-width: 767px) {
   .product-form .product-type {
     margin-top: 20px;
+    margin-bottom: 0;
   }
 }
 .product-form variant-picker {
@@ -892,6 +904,9 @@
   display: none;
   padding: 0.5555556vw;
   cursor: pointer;
+}
+.product-slider__arrow-item.swiper-button-lock {
+  display: none;
 }
 @media (max-width: 1024px) {
   .product-slider__arrow-item {
