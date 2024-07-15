@@ -14,7 +14,7 @@
       "settings": {
         "show_vendor": false,
         "coll_num_per_page_int": 12,
-        "enable_filtering": true,
+        "enable_filtering": false,
         "collapse_filters_method": "over-12"
       }
     }
