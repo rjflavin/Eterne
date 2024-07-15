@@ -431,6 +431,20 @@
   background-color: rgba(255, 255, 255, 0.8);
   transition: all 0.25s ease-in-out;
 }
+.collection__quick-add-panel:before {
+  content: "Quick Add";
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.collection__quick-add-panel:hover:before {
+  opacity: 0;
+  pointer-events: none;
+}
+.collection__quick-add-panel:hover .collection__size-variants {
+  pointer-events: all;
+  opacity: 1;
+}
 @media (max-width: 1024px) {
   .collection__quick-add-panel {
     padding: 10px;
@@ -446,6 +460,8 @@
 .collection__size-variants {
   display: flex;
   flex-wrap: wrap;
+  pointer-events: none;
+  opacity: 0;
 }
 .collection__size-variant-text, .collection__add-to-cart, .collection__add-to-cart-loader {
   text-transform: uppercase;
