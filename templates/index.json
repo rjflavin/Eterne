@@ -84,7 +84,6 @@
           "type": "three_images_row",
           "settings": {
             "media_type_1": "video",
-            "image_1": "shopify:\/\/shop_images\/Frame_28.jpg",
             "video_1": "shopify:\/\/files\/videos\/muted_video.mp4",
             "caption_1": "<p>Sloane Dress<\/p>",
             "product_link_1": "shopify:\/\/products\/90s-brief-black",
