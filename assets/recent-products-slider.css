@@ -103,6 +103,20 @@
   opacity: 0;
   transition: all 0.25s ease-in-out;
 }
+.recent-products-swiper .swiper-wrapper .swiper-slide-image-info:before {
+  content: "Quick Add";
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.recent-products-swiper .swiper-wrapper .swiper-slide-image-info:hover:before {
+  opacity: 0;
+  pointer-events: none;
+}
+.recent-products-swiper .swiper-wrapper .swiper-slide-image-info:hover .swiper-slide-image-info-sizes {
+  pointer-events: all;
+  opacity: 1;
+}
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info.show {
   opacity: 1;
   visibility: visible;
@@ -135,6 +149,8 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  pointer-events: none;
+  opacity: 0;
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info-sizes-item {
   margin-right: 15px;
