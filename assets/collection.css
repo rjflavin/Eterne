@@ -50,7 +50,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 19px -14px;
+  margin: 10px 19px 3px;
 }
 @media (max-width: 1024px) {
   .collection__title-wrap {
@@ -58,7 +58,7 @@
   }
 }
 .collection__title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 26px;
   letter-spacing: 0.4px;
@@ -101,7 +101,6 @@
 .collection__filter-closed-drpd-btn {
   display: flex;
   margin-left: 10px;
-  margin-bottom: 2px;
 }
 @media (max-width: 1024px) {
   .collection__filter-closed-drpd-btn {

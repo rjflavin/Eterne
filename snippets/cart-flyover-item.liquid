@@ -35,7 +35,7 @@
   <div class="cart-flyover-item-description">
     <div class="cart-flyover-item-description-info">
       {% if item.product.title %}
-        <div class="cart-flyover-item-description-info__title">{{ item.product.title | escape_once }}</div>
+        <a {% if item.url %}href="{{ item.url }}"{% endif %} class="cart-flyover-item-description-info__title">{{ item.product.title | escape_once }}</a>
       {% endif %}
       <div class="cart-flyover-item-description-info__options">{% if color %}{{ color }}{% endif %}{% if color and size %} / {% endif %}{% if size %}{{ size }}{% endif %}</div>
       {% assign properties_exclusive = item.properties.Exclusive | downcase | strip %}
