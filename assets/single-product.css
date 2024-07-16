@@ -108,15 +108,15 @@
   grid-template: 1fr/1fr 1fr;
   gap: 11px 10px;
   transition: all 3s ease-in-out;
+  /* &__single-image {
+     display: flex;
+     gap: 0;
+   }*/
 }
 @media (max-width: 767px) {
   .product-media-collage {
     display: none;
   }
-}
-.product-media-collage__single-image {
-  display: flex;
-  gap: 0;
 }
 .product-media-collage__item {
   display: block;
