@@ -62,12 +62,12 @@
         "one_image_row_w3pyj6": {
           "type": "one_image_row",
           "settings": {
-            "media_type": "image",
+            "media_type": "video",
             "orientation": "landscape",
             "caption": "<p>Elevated<br\/>Essentials<\/p>",
             "product_link": "shopify:\/\/collections\/underwear",
             "product_link_text": "shop Underwear",
-            "image": "shopify:\/\/shop_images\/Frame_5.jpg"
+            "video": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4"
           }
         }
       },
@@ -84,16 +84,17 @@
           "type": "three_images_row",
           "settings": {
             "media_type_1": "video",
-            "video_1": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO)_4623d9e8-0125-4bb4-9bb2-037d166e1ceb.mp4",
+            "image_1": "shopify:\/\/shop_images\/ROW_5_IMAGE_1.jpg",
             "caption_1": "<p>Sloane Dress<\/p>",
             "product_link_1": "shopify:\/\/products\/90s-brief-black",
             "product_link_text_1": "shop",
+            "image_mobile_1": "shopify:\/\/shop_images\/ROW_5_IMAGE_1.jpg",
             "media_type_2": "image",
-            "image_2": "shopify:\/\/shop_images\/Frame_27.jpg",
+            "image_2": "shopify:\/\/shop_images\/ROW_2_IMAGE_1.jpg",
             "caption_2": "<p>Charlie Shirt<\/p>",
             "product_link_2": "shopify:\/\/pages\/returns-exchanges",
             "product_link_text_2": "shop",
-            "media_type_3": "image",
+            "media_type_3": "video",
             "image_3": "shopify:\/\/shop_images\/Frame_26.jpg",
             "caption_3": "<p>Emma Skirt<\/p>",
             "product_link_3": "shopify:\/\/blogs\/news",
@@ -119,7 +120,7 @@
             "caption_1": "<p>refined<br\/>relaxation<\/p>",
             "product_link_1": "shopify:\/\/collections\/knitwear",
             "product_link_text_1": "shop cashmere",
-            "media_type_2": "image",
+            "media_type_2": "video",
             "image_2": "shopify:\/\/shop_images\/Frame_8_a1dc9afa-23ce-4939-9272-d5437517900c.jpg",
             "caption_2": "",
             "product_link_2": "",
