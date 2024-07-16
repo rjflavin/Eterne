@@ -66,19 +66,31 @@
     font-size: 33px;
   }
 }
-.size-guide .sg-modal__inner {
-  position: relative;
-  background: #fff;
-  padding: 48px 48px 57px;
-  margin: 20px auto;
+.size-guide .sg-modal__wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 940px;
   width: 100%;
+  padding: 65px 0;
 }
 @media (max-width: 767px) {
-  .size-guide .sg-modal__inner {
+  .size-guide .sg-modal__wrapper {
     min-height: 100%;
-    padding: 49px 27px 36px;
+    padding: 0;
     margin: 0;
+  }
+}
+.size-guide .sg-modal__wrapper-inener {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: 48px 48px 57px;
+}
+@media (max-width: 767px) {
+  .size-guide .sg-modal__wrapper-inener {
+    padding: 49px 27px 36px;
   }
 }
 .size-guide .sg-modal__product {
