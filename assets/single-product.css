@@ -114,7 +114,7 @@
     display: none;
   }
 }
-.product-media-collage_single-image {
+.product-media-collage__single-image {
   display: flex;
   gap: 0;
 }
@@ -231,10 +231,9 @@
   color: var(--gray5);
   text-transform: uppercase;
 }
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .product-form .product-type {
-    margin-top: 20px;
-    margin-bottom: 0;
+    margin: 20px 0 15px 0;
   }
 }
 .product-form variant-picker {

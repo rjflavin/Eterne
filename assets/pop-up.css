@@ -43,6 +43,7 @@
   width: 100%;
 }
 .popup-section .signup-form__button {
+  margin-top: 15px;
   width: 100%;
 }
 .popup-section .section__block:not(:last-child) {
