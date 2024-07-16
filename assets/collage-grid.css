@@ -240,7 +240,7 @@
 @media (max-width: 1024px) {
   .collage__three-images-row .media {
     display: flex;
-    width: auto;
+    width: 100%;
   }
 }
 .collage__three-images-row .image-item {
