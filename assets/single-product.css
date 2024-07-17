@@ -310,6 +310,9 @@
   letter-spacing: 0.6px;
   min-height: unset;
 }
+.product-form fieldset.option-selector.single-product-options .opt-label[title="Sold out"] {
+  opacity: 0.5;
+}
 .product-form fieldset.option-selector.single-product-options .opt-label:last-child {
   margin: 0 0 14px 0;
 }
