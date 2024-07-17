@@ -52,7 +52,7 @@
       {% endif %}
       <div class="top-bar__btns">
         <div class="show-search-link top-bar__icon">{% render 'icon-search' %}</div>
-        <a href="#" class="top-bar__icon">{% render 'icon-wish-list' %}</a>
+        <a href="/a/wishlist" class="top-bar__icon" id="desktop-header-wishlist-wrapper">{% render 'icon-wish-list' %}</a>
         <a href="/account" class="top-bar__icon">{% render 'icon-account' %}</a>
         <span class="cart-link top-bar__icon">
           {% render 'icon-cart' %}
@@ -90,8 +90,9 @@
           {% render 'icon-burger' %}
         </div>
         <a
-          href="#"
+          href="/a/wishlist"
           class="mob-nav-btn__icon"
+          id="mobile-header-wishlist"
         >
           {% render 'icon-wish-list', fill: '#2B2B2B', stroke: '#2B2B2B' %}
         </a>
