@@ -148,6 +148,8 @@
           <form class="main-search__form" action="{{ routes.search_url }}" method="get" autocomplete="off">
             <div class="main-search__input-container">
               <input class="main-search__input" type="text" name="q" autocomplete="off" placeholder="{{ 'general.search.placeholder' | t | escape }}" aria-label="{{ 'general.search.title' | t | escape }}" />
+              <input type="hidden" name="resources[type]" value="product">
+              <input type="hidden" name="resources[options][unavailable_products]" value="hide">
               <button class="main-search__button" type="submit" aria-label="{{ 'general.search.submit' | t }}">
                 {% render 'icon-search', fill: '#2b2b2b' %}
               </button>

@@ -16,6 +16,8 @@
               placeholder="{{ 'general.search.placeholder' | t | escape }}"
               aria-label="{{ 'general.search.input_label' | t | escape }}"
               value="{{ search.terms | escape }}" />
+            <input type="hidden" name="resources[type]" value="product">
+            <input type="hidden" name="resources[options][unavailable_products]" value="hide">
             <button class="main-search__button" type="submit" aria-label="{{ 'general.search.submit' | t }}">{% render 'icon-search' %}</button>
           </div>
           {%- if settings.show_search_suggestions -%}
@@ -136,6 +138,7 @@
                 {% endfor %}
               {% endfor %}
               {% for item in search.results %}
+                {{ item.object_type }}
                 {% if item.featured_image != blank %}
                   {% assign first_image = item.featured_image | img_url: 'master' %}
                   {% assign first_image_lazy = item.featured_image | img_url: 'small' %}
