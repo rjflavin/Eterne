@@ -224,12 +224,12 @@
                                                     {%- endif -%}
                                                   </button>
                                                 </div>
-
-                                                <div
-                                                  id="smartwishlist"
-                                                  data-product="{{ product.id }}"
-                                                  data-variant="{{ product.variants.first.id }}"></div>
-
+                                                <!-- Add to Wishlist Button -->
+                                                <button class="btn btn--large add-to-wishlist" type="button"
+                                                        name="add_to_wishlist">
+                                                    {% render 'icon-heart' %}
+                                                    Add to wishlist
+                                                </button>
                                                 {% if enable_dynamic_payment_button %}
                                                     <script class="dynamic-payment-button-template"
                                                             type="text/template">

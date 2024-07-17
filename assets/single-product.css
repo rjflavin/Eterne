@@ -797,6 +797,9 @@
 .product-info .product-column-right .shopify-payment-button {
   display: none;
 }
+.product-info .product-column-right #smartwishlist {
+  display: none;
+}
 
 .swatch-style-icon_circle .option-selector .opt-label--swatch:after {
   width: 25px;
@@ -961,15 +964,4 @@
 }
 .product-slider__arrow-next svg {
   transform: rotate(270deg);
-}
-
-div#bookmarkit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: auto !important;
-  padding: 0 14px !important;
-  line-height: 27.5px !important;
-  letter-spacing: 0.4px !important;
-  border: 1.5px solid rgb(var(--btn-border-color));
 }

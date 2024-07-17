@@ -28,28 +28,30 @@
 
                 {% if media_type == "image" or block.settings.video == blank %}
                     <div class="collage__one-image-row {{ block.settings.orientation }}">
+                      <div class="media item-1">
                         {% if block.settings.image_mobile != blank %}
-                            {% assign image_mobile = block.settings.image_mobile %}
+                          {% assign image_mobile = block.settings.image_mobile %}
                         {% else %}
-                            {% assign image_mobile = block.settings.image %}
+                          {% assign image_mobile = block.settings.image %}
                         {% endif %}
                         <a href="{{ block.settings.product_link }}">
-                            <img
-                                    class="collage__image only-desk"
-                                    src="{{ block.settings.image | img_url: "master" }}"
-                                    alt="{{ block.settings.image.alt }}"
-                                    style="object-position: {{ block.settings.image.presentation.focal_point }}"
-                                    loading="lazy"
-                            ></a>
+                          <img
+                            class="collage__image only-desk"
+                            src="{{ block.settings.image | img_url: "master" }}"
+                            alt="{{ block.settings.image.alt }}"
+                            style="object-position: {{ block.settings.image.presentation.focal_point }}"
+                            loading="lazy"
+                          ></a>
                         <a href="{{ block.settings.product_link }}">
-                            <img
-                                    class="collage__image only-mob"
-                                    src="{{ image_mobile | img_url: "master" }}"
-                                    alt="{{ image_mobile.alt }}"
-                                    style="object-position: {{ image_mobile.presentation.focal_point }}"
-                                    loading="lazy"
-                            ></a>
+                          <img
+                            class="collage__image only-mob"
+                            src="{{ image_mobile | img_url: "master" }}"
+                            alt="{{ image_mobile.alt }}"
+                            style="object-position: {{ image_mobile.presentation.focal_point }}"
+                            loading="lazy"
+                          ></a>
                         {{ caption }}
+                      </div>
                     </div>
                 {% elsif media_type == "video" %}
                     <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}">
