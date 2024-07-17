@@ -19,6 +19,11 @@
   text-transform: uppercase;
   text-align: center;
 }
+@media (max-width: 767px) {
+  .new-in__title {
+    font-size: 20px;
+  }
+}
 .new-in__swiper {
   width: 100%;
   overflow: hidden;
