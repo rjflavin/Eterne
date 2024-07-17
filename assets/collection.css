@@ -591,7 +591,7 @@
 }
 @media (max-width: 1024px) {
   .collection__item-text-wrap {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
   }
 }
 .collection__item-title {
@@ -628,7 +628,7 @@
 }
 .collection__item-price {
   display: flex;
-  margin: 4px 10px 3px;
+  margin: 4px 10px 4px;
   font-size: 12px;
   font-weight: 400;
   line-height: 183%;
@@ -639,7 +639,7 @@
 @media (max-width: 1024px) {
   .collection__item-price {
     font-size: 11px;
-    margin: 0 10px;
+    margin: 4px 11px 4px;
   }
 }
 .collection__item-colors-wrap {
