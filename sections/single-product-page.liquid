@@ -1,5 +1,19 @@
 {{ 'single-product.css' | asset_url | stylesheet_tag }}
 
+{% assign canCustomerSeeHiddenProducts = false %}
+
+{% for customerTag in customer.tags %}
+    {% if customerTag == 'see_hidden_products' %}
+        {% assign canCustomerSeeHiddenProducts = true %}
+    {% endif %}
+{% endfor %}
+
+{% for productTag in product.tags %}
+    {% if productTag == 'hidden' and canCustomerSeeHiddenProducts == false %}
+        <script>window.location.href = '/';</script>
+    {% endif %}
+{% endfor %}
+
 {%- liquid
     assign min_aspect_ratio = 0.6
     assign current_variant = product.selected_or_first_available_variant
