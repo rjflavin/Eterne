@@ -54,7 +54,7 @@
                       </div>
                     </div>
                 {% elsif media_type == "video" %}
-                    <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}">
+                    <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}" data-href="{{ block.settings.product_link }}">
                         {% if block.settings.image %}
                             <div class="collage__cover-video-image">
                                 {% assign image_desk_class = "" %}
@@ -140,8 +140,7 @@
                                 {{ caption }}
                             {% elsif media_type_1 == "video" %}
 
-                                <a href="{{ block.settings.product_link_1 }}"
-                                <custom-video-player class="media__video-wrapper">
+                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_1 }}">
                                     {% if block.settings.image_1 != blank %}
                                         <div class="collage__cover-video-image">
                                             {% assign image_desk_class = "" %}
@@ -180,7 +179,6 @@
                                     </div> -->
                                     {{ caption }}
                                 </custom-video-player>
-                                </a>
 
                             {% endif %}
                         </div>
@@ -226,7 +224,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
-                                <custom-video-player class="media__video-wrapper">
+                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_2 }}">
                                     {% if block.settings.image_2 != blank %}
                                         <div class="collage__cover-video-image">
                                             {% assign image_desk_class = "" %}
@@ -311,7 +309,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_1 == "video" %}
-                                <a href="{{ block.settings.product_link_1 }}">   <custom-video-player class="media__video-wrapper">
+                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_1 }}">
                                         {% if block.settings.image_1 != blank %}
                                             <div class="collage__cover-video-image">
                                                 {% assign image_desk_class = "" %}
@@ -347,7 +345,6 @@
                                         {% render "icon-play-video" %}
                                     </div> -->
                                         {{ caption }}
-                                </a>
                                 </custom-video-player>
                             {% endif %}
                         </li>
@@ -391,8 +388,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
-                                <a href="{{ block.settings.product_link_2 }}">
-                                    <custom-video-player class="media__video-wrapper">
+                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_2 }}">
                                         {% if block.settings.image_2 != blank %}
                                             <div class="collage__cover-video-image">
                                                 {% assign image_desk_class = "" %}
@@ -428,7 +424,6 @@
                                         {% render "icon-play-video" %}
                                     </div>-->
                                         {{ caption }}
-                                </a>
                                 </custom-video-player>
                             {% endif %}
                         </li>
@@ -472,8 +467,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_3 == "video" %}
-                                <a href="{{ block.settings.product_link_3 }}">
-                                    <custom-video-player class="media__video-wrapper">
+                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_3 }}">
                                         {% if block.settings.image_3 != blank %}
                                             <div class="collage__cover-video-image">
                                                 {% assign image_desk_class = "" %}
@@ -507,9 +501,8 @@
                                         {{ block.settings.video_3 | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
                                         <!-- <div class="play-icon">
                                         {% render "icon-play-video" %}
-                                    </div> -->
+                                        </div> -->
                                         {{ caption }}
-                                </a>
                                 </custom-video-player>
                             {% endif %}
                         </li>
@@ -518,59 +511,8 @@
         {% endcase %}
     {% endfor %}
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var videos = document.querySelectorAll('.desktop-video');
-        videos.forEach(function(video) {
-            console.log('Video element:', video);
-            video.addEventListener('click', function() {
 
-                if (video.paused) {
-                    video.play();
-
-                } else {
-                    video.pause();
-
-                }
-            });
-        });
-
-    });
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const button = document.querySelector('.js-close-modal');
-
-        button.addEventListener('click', function() {
-            const videos = document.querySelectorAll('.desktop-video');
-
-            videos.forEach(video => {
-                // Force load the video by resetting the source
-                video.load();
-
-                // Ensure the video is fully loaded before playing
-                video.addEventListener('canplaythrough', function() {
-                    video.play().then(() => {
-                        console.log('Video playing:', video);
-                    }).catch(error => {
-                        console.error('Error playing video:', video, error);
-                    });
-                });
-
-                // Alternatively, add a user interaction event to play the video
-                video.addEventListener('click', function() {
-                    video.play().then(() => {
-                        console.log('Video playing on click:', video);
-                    }).catch(error => {
-                        console.error('Error playing video on click:', video, error);
-                    });
-                });
-            });
-        });
-    });
-
-</script>
-<!--<script src="{{ 'custom-video-player.js' | asset_url }}" defer></script> -->
+<script src="{{ 'custom-video-player.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
