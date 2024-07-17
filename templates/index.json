@@ -15,12 +15,12 @@
         "one_image_row_BNxRBq": {
           "type": "one_image_row",
           "settings": {
-            "media_type": "image",
+            "media_type": "video",
             "orientation": "landscape",
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections\/t-shirts",
             "product_link_text": "shop tees",
-            "image": "shopify:\/\/shop_images\/Frame_7_74de2eca-9d86-4d92-9d96-376c5f008b46.jpg"
+            "video": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_16x9_META_COLOR.mp4"
           }
         }
       },
@@ -38,12 +38,12 @@
           "settings": {
             "orientation": "portrait",
             "media_type_1": "image",
-            "image_1": "shopify:\/\/shop_images\/Frame_17_82ace3bb-2e22-4d79-af25-4f3fa5a0d96d.jpg",
+            "image_1": "shopify:\/\/shop_images\/ROW_2_IMAGE_1.jpg",
             "caption_1": "<p>day to night<br\/>essentials<\/p>",
             "product_link_1": "shopify:\/\/collections\/swim",
             "product_link_text_1": "shop soir",
             "media_type_2": "image",
-            "image_2": "shopify:\/\/shop_images\/Frame_2.jpg",
+            "image_2": "shopify:\/\/shop_images\/ROW_2_IMAGE_2.jpg",
             "caption_2": "",
             "product_link_2": "",
             "product_link_text_2": "shop cashmere"
@@ -62,12 +62,12 @@
         "one_image_row_w3pyj6": {
           "type": "one_image_row",
           "settings": {
-            "media_type": "image",
+            "media_type": "video",
             "orientation": "landscape",
             "caption": "<p>Elevated<br\/>Essentials<\/p>",
             "product_link": "shopify:\/\/collections\/underwear",
             "product_link_text": "shop Underwear",
-            "image": "shopify:\/\/shop_images\/Frame_5.jpg"
+            "video": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4"
           }
         }
       },
@@ -88,14 +88,13 @@
             "caption_1": "<p>Sloane Dress<\/p>",
             "product_link_1": "shopify:\/\/products\/amelia-halter-one-piece-2",
             "product_link_text_1": "shop",
-            "video_mobile_1": "shopify:\/\/files\/videos\/muted_video.mp4",
             "media_type_2": "image",
-            "image_2": "shopify:\/\/shop_images\/Frame_27.jpg",
+            "image_2": "shopify:\/\/shop_images\/ROW_4_IMAGE_2.jpg",
             "caption_2": "<p>Charlie Shirt<\/p>",
             "product_link_2": "shopify:\/\/products\/classic-sweatpant-heather-grey",
             "product_link_text_2": "shop",
-            "media_type_3": "video",
-            "video_3": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4",
+            "media_type_3": "image",
+            "image_3": "shopify:\/\/shop_images\/ROW_4_IMAGE_3.jpg",
             "caption_3": "<p>Emma Skirt<\/p>",
             "product_link_3": "shopify:\/\/collections\/bottoms",
             "product_link_text_3": "shop",
@@ -117,12 +116,12 @@
           "settings": {
             "orientation": "landscape",
             "media_type_1": "image",
-            "image_1": "shopify:\/\/shop_images\/Frame_9_f369095e-4b51-45cc-a407-c7f1e14d4d11.jpg",
+            "image_1": "shopify:\/\/shop_images\/ROW_5_IMAGE_1.jpg",
             "caption_1": "<p>refined<br\/>relaxation<\/p>",
             "product_link_1": "shopify:\/\/collections\/knitwear",
             "product_link_text_1": "shop cashmere",
             "media_type_2": "image",
-            "image_2": "shopify:\/\/shop_images\/Frame_8_a1dc9afa-23ce-4939-9272-d5437517900c.jpg",
+            "image_2": "shopify:\/\/shop_images\/ROW_5_IMAGE_2.jpg",
             "caption_2": "",
             "product_link_2": "",
             "product_link_text_2": "shop cashmere"
