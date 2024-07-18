@@ -239,7 +239,7 @@
 
     const products = getProductsFromLocalStorage()
     setUpSlides(products)
-    if (products.length > 1) {
+    if (products.length > 5) {
       const startEvent = new Event('dispatch:recently-products:init-slider');
       document.dispatchEvent(startEvent);
     }
