@@ -83,8 +83,7 @@
         "three_images_row_rpKBnK": {
           "type": "three_images_row",
           "settings": {
-            "media_type_1": "image",
-            "image_1": "shopify:\/\/shop_images\/ROW_4_IMAGE_1.jpg",
+            "media_type_1": "video",
             "video_1": "shopify:\/\/files\/videos\/muted_video.mp4",
             "caption_1": "<p>Sloane Dress<\/p>",
             "product_link_1": "shopify:\/\/products\/amelia-halter-one-piece-2",
