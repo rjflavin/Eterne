@@ -36,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _cus
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   MOBILE_WIDTH: () => (/* binding */ MOBILE_WIDTH)\n/* harmony export */ });\nconst MOBILE_WIDTH = 768;\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/utils/constants.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   DESKTOP_WIDTH: () => (/* binding */ DESKTOP_WIDTH),\n/* harmony export */   MOBILE_WIDTH: () => (/* binding */ MOBILE_WIDTH)\n/* harmony export */ });\nconst MOBILE_WIDTH = 768;\nconst DESKTOP_WIDTH = 1024;\n\n\n//# sourceURL=webpack://my-webpack-project/./src/js/utils/constants.js?");
 
 /***/ })
 

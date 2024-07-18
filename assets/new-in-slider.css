@@ -32,14 +32,30 @@
 @media (max-width: 1024px) {
   .new-in__swiper {
     margin-bottom: 22px;
+    overflow-x: scroll;
   }
+}
+.new-in__swiper::-webkit-scrollbar {
+  display: none;
 }
 .new-in__swiper-wrapper {
   position: relative;
   margin: 0 auto;
 }
+@media (max-width: 1024px) {
+  .new-in__swiper-wrapper {
+    margin: 0;
+    width: 100%;
+    column-gap: 10px;
+  }
+}
 .new-in__item {
   display: block;
+}
+@media (max-width: 1024px) {
+  .new-in__item {
+    max-width: 346px;
+  }
 }
 .new-in__item-inner {
   position: relative;
