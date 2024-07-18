@@ -22,7 +22,7 @@
   <script defer>
   document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
-      const productsString = localStorage.getItem('recently_viewed_products')
+      const productsString = localStorage.getItem('recently_viewed_products');
 
       if (productsString) {
         const isProductPreordered = '{{ product.tags | downcase }}'.includes('preorder');
@@ -131,8 +131,9 @@
         return
       }
 
-      const wrapper = document.querySelector('.recent-products__swiper-wrapper')
-      const noImage = `{{ 'no-image.webp' | asset_url }}`
+      const wrapper = document.querySelector('.recent-products__swiper-wrapper');
+      const noImage = `{{ 'no-image.webp' | asset_url }}`;
+      const enableImageBlur = ('{{ settings.enable_img_blue_effect }}' === 'true');
 
       for (let index = 0; index < products.length; index++) {
         const product = products[index];
@@ -142,15 +143,15 @@
           if (!firstlySelectedVariant) firstlySelectedVariant = product.variants[0];
           const productTitle = product.title;
           const isFirstVariantPreordered = firstlySelectedVariant.inventoryPolicy === "continue" && firstlySelectedVariant.inventoryQuantity <= 0;
-          let imageUrl = product.images[0];
+          let imageUrl = (product.images[0]) ? product.images[0] : noImage;
           let imageUrlLazyLoad;
 
-          if (imageUrl) {
+          if (enableImageBlur) {
             let parts = imageUrl.split('.');
             let extension = parts.pop();
             let baseUrl = parts.join('.');
             imageUrlLazyLoad = `${baseUrl}_small.${extension}`;
-          }
+          } else imageUrlLazyLoad = imageUrl;
 
           const newProductHtml = `
             <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
@@ -165,7 +166,10 @@
               <div class="swiper-slide-container">
                 <a href="${firstlySelectedVariant.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container lazyLoad">
-                  <div data-bgimage="${imageUrl ? imageUrl : noImage}" class="swiper-slide-image lazyLoad" style="background-image: url('${imageUrlLazyLoad ? imageUrlLazyLoad : noImage}'); filter: blur(2px)"></div>
+                  <div class="swiper-slide-image ${(enableImageBlur) ? "lazyLoad" : ""}"
+                       data-bgimage="${imageUrl}"
+                       style="background-image: url('${imageUrlLazyLoad}'); ${enableImageBlur ?" filter: blur(2px)" : ""}"></div>
+
                   <div class="swiper-slide-image-info">
                     <div class="swiper-slide-image-info-sizes">
                       ${(product && product.variants &&

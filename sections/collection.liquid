@@ -6,10 +6,10 @@
   </script>
 {% endif %}
 
-{% assign visibleFiltersBeforeSeeMoreQuantity = 8 %}
-{% assign emptyImage = 'no-image.webp' | asset_url %}
-
 {% liquid
+  assign visibleFiltersBeforeSeeMoreQuantity = 8
+  assign emptyImage = 'no-image.webp' | asset_url
+  assign enable_image_blur = settings.enable_img_blue_effect
   assign total_active_values = 0
   if collection.url
     assign results_url = collection.url
@@ -122,7 +122,11 @@
           {% for product in collection.products %}
             {% if product.featured_image != blank %}
               {% assign first_image = product.featured_image | img_url: 'master' %}
-              {% assign first_image_lazy = product.featured_image | img_url: 'small' %}
+              {% if enable_image_blur %}
+                {% assign first_image_lazy = product.featured_image | img_url: 'small' %}
+                {% else %}
+                {% assign first_image_lazy = product.featured_image | img_url: 'large' %}
+              {% endif %}
             {% else %}
               {% assign first_image = emptyImage %}
             {% endif %}
@@ -131,12 +135,20 @@
             {% assign hoverImages = first_image %}
             {% if product.media[1] != blank %}
               {% assign second_image = product.media[1] | img_url: 'master' %}
-              {% assign second_image_lazy = product.media[1] | img_url: 'small' %}
+              {% if enable_image_blur %}
+                {% assign second_image_lazy = product.media[1] | img_url: 'small' %}
+              {% else %}
+                {% assign second_image_lazy = product.media[1] | img_url: 'large' %}
+              {% endif %}
               {% assign hoverImages = product.media[1] | img_url: 'master' %}
               {% assign hoverImages_lazy = product.media[1] | img_url: 'small' %}
             {% elsif product.selected_or_first_available_variant.featured_image != blank %}
               {% assign second_image = product.selected_or_first_available_variant.featured_image | img_url: 'master' %}
-              {% assign second_image_lazy = product.selected_or_first_available_variant.featured_image | img_url: 'small' %}
+              {% if enable_image_blur %}
+                {% assign second_image_lazy = product.selected_or_first_available_variant.featured_image | img_url: 'small' %}
+              {% else %}
+                {% assign second_image_lazy = product.selected_or_first_available_variant.featured_image | img_url: 'large' %}
+              {% endif %}
             {% endif %}
 
             {% assign variant_url = "/collections/" | append: collection.handle | append: "/products/" | append: product.handle %}
@@ -336,15 +348,23 @@
                       </div>
                       <a href="{{ variant_url }}" class="collection__item-link"></a>
                       <div class="collection__item-bg-imgs-wrap">
-                        <div class="collection__item-bg-img lazyLoad"
-                             data-bgimage="{{ first_image }}"
-                             style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
+                        <div class="collection__item-bg-img{% if enable_image_blur %} lazyLoad{% endif %}"
+                             {% if enable_image_blur %}
+                              data-bgimage="{{ first_image }}"
+                              style="background-image: url('{{ first_image_lazy }}');filter: blur(2px)"
+                               {% else %}
+                               style="background-image: url('{{ first_image }}');"
+                             {% endif %}
                              id="productImage"
                         ></div>
                         {% if second_image != blank %}
-                          <div class="collection__item-bg-img-hover lazyLoad"
-                               data-bgimage="{{ second_image }}"
-                               style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
+                          <div class="collection__item-bg-img-hover{% if enable_image_blur %} lazyLoad{% endif %}"
+                               {% if enable_image_blur %}
+                                 data-bgimage="{{ second_image }}"
+                                 style="background-image: url('{{ second_image_lazy }}');filter: blur(2px)"
+                               {% else %}
+                                 style="background-image: url('{{ second_image }}');"
+                               {% endif %}
                           ></div>
                         {% endif %}
                       </div>

@@ -1,4 +1,5 @@
 {% if product_list_you_may_like %}
+  {% assign enable_image_blur = settings.enable_img_blue_effect %}
   <div class="cart-flyover-you-may-also-like">
     <div class="cart-flyover-you-may-also-like__title">
       {% if title_you_may_like %}{{ title_you_may_like }}{% endif %}
@@ -17,9 +18,13 @@
               <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
                 {% if image %}
                   <div
-                    class="cart-flyover-you-may-also-like-swiper-item__image lazyLoad"
-                    data-bgimage="{{ image | img_url: 'master' }}"
-                    style="background-image: url('{{ image | img_url: 'small' }}'); filter: blur(2px)"
+                    class="cart-flyover-you-may-also-like-swiper-item__image {% if enable_image_blur %} lazyLoad{% endif %}"
+                    {% if enable_image_blur %}
+                        data-bgimage="{{ image | img_url: 'master' }}"
+                        style="background-image: url('{{ image | img_url: 'small' }}'); filter: blur(2px)"
+                    {% else %}
+                        style="background-image: url('{{ image | img_url: 'master' }}');"
+                    {% endif %}
                   ></div>
                 {% endif %}
               </div>
