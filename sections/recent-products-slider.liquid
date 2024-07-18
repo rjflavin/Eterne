@@ -23,8 +23,93 @@
   document.addEventListener("DOMContentLoaded", () => {
     const getProductsFromLocalStorage = () => {
       const productsString = localStorage.getItem('recently_viewed_products')
+
       if (productsString) {
-        return JSON.parse(productsString);
+        const isProductPreordered = '{{ product.tags | downcase }}'.includes('preorder');
+        const productsFromLS = JSON.parse(productsString);
+        const productsIds = productsFromLS.map((product) => product.productId);
+        const productsIdsString = productsIds.join(',');
+
+        /* Updating products with actual data */
+        let updatedProductsFromLS = [];
+
+        {% paginate collections.all.products by 1000 %}
+          {% for product in collections.all.products  %}
+            if (productsIdsString.includes('{{ product.id }}')) {
+              let productOrder;
+              const productFromLS = productsFromLS.find((product, index) => {
+                productOrder = index;
+                return product.productId === '{{ product.id }}'
+              });
+              const productObject = {
+                order: productOrder,
+                ...productFromLS,
+                availableFrom: "",
+                variants: [],
+
+              };
+                productObject.availableFrom = `{{ product.metafields.custom.available_from | date: "%B %d, %Y" }}`;
+                productObject.isPreordered = isProductPreordered;
+
+              const isFloat = (n) =>{
+                return Number(n) === n && n % 1 !== 0;
+              }
+
+              let variants = [],
+                      loopVariant,
+                      variantPrice,
+                      variantPriceCleaned;
+
+              {% for variant in product.variants %}
+                variantPrice = '{{ variant.price }}';
+                variantPriceCleaned = parseFloat(variantPrice * 0.01);
+
+                loopVariant = {
+                  available: (+'{{ variant.inventory_quantity }}' > 0),
+                  compare_at_price: +'{{ variant.compare_at_price }}',
+                  id: +'{{ variant.id | escape }}',
+                  inventory_quantity: +'{{ variant.inventory_quantity | escape }}',
+                  option1: '{{ variant.option1 | escape }}',
+                  option2: '{{ variant.option2 | escape }}',
+                  option3: '{{ variant.option3 | escape }}',
+                  options: JSON.parse('{{ variant.options | json }}'),
+                  price: (isFloat(variantPriceCleaned)) ? variantPriceCleaned.toFixed(2) : parseInt(variantPriceCleaned, 10),
+                  title: '{{ variant.title | escape }}',
+                  url: '{{ variant.url | escape }}',
+                  inventory_policy: '{{ variant.inventory_policy | escape }}',
+                }
+                variants.push(loopVariant);
+              {% endfor %}
+
+              let firstAvailable = false;
+              let firstAvailableFound = false;
+              productObject.variants = variants.map((variantData) => {
+                if (variantData.available && !firstAvailable && !firstAvailableFound) {
+                  firstAvailable = true;
+                  firstAvailableFound = true;
+                } else firstAvailable = false;
+
+                const { id, available, price, url, inventory_policy, inventory_quantity, title } = variantData;
+                return {
+                  id,
+                  available,
+                  size: variantData.option2,
+                  price,
+                  url,
+                  firstAvailable,
+                  inventoryPolicy: inventory_policy,
+                  inventoryQuantity: inventory_quantity,
+                  title,
+                };
+              })
+              updatedProductsFromLS.push(productObject);
+            }
+          {% endfor %}
+        {% endpaginate %}
+
+        updatedProductsFromLS.sort((a, b) => a.order - b.order);
+
+        return updatedProductsFromLS;
       }
       return [];
     };
