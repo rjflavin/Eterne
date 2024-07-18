@@ -39,6 +39,14 @@
 .recent-products-swiper {
   overflow: hidden;
 }
+@media (max-width: 1024px) {
+  .recent-products-swiper {
+    overflow-x: scroll;
+  }
+}
+.recent-products-swiper::-webkit-scrollbar {
+  display: none;
+}
 .recent-products-swiper .swiper-wrapper .swiper-slide {
   position: relative;
   width: 25%;
