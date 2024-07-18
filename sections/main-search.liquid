@@ -1,5 +1,35 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
+{% liquid
+  assign enable_image_blur = settings.enable_img_blue_effect
+  assign visibleFiltersBeforeSeeMoreQuantity = 8
+  assign emptyImage = 'no-image.webp' | asset_url
+  assign total_active_values = 0
+  if routes.search_url
+    assign results_url = routes.search_url
+  else
+    assign terms = search.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by='
+  endif
+  assign filtersToDisplay = section.settings.filters_value | split: ',' | downcase
+
+  assign activeFiltersQuantity = 0
+  for filter in search.filters
+    for value in filter.values
+      if value.active
+        assign activeFiltersQuantity = activeFiltersQuantity | plus: 1
+      endif
+    endfor
+  endfor
+
+  assign productsPerPage = 12
+  assign show_filters = section.settings.enable_filtering
+
+  if search.filters == empty
+    assign show_filters = false
+  endif
+%}
+
 <div class="page-header" data-cc-animate>
   <div class="container">
     <h1 class="visually-hidden">{{ 'general.search.title' | t }}</h1>
@@ -29,38 +59,6 @@
     </div>
   </div>
 </div>
-
-{% assign visibleFiltersBeforeSeeMoreQuantity = 8 %}
-{% assign emptyImage = 'no-image.webp' | asset_url %}
-
-{% liquid
-  assign total_active_values = 0
-  if routes.search_url
-    assign results_url = routes.search_url
-  else
-    assign terms = search.terms | escape
-    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by='
-  endif
-  assign filtersToDisplay = section.settings.filters_value | split: ',' | downcase
-%}
-
-{% assign activeFiltersQuantity = 0 %}
-{% for filter in search.filters %}
-  {% for value in filter.values %}
-    {% if value.active %}
-      {% assign activeFiltersQuantity = activeFiltersQuantity | plus: 1 %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-
-{% assign productsPerPage = 12 %}
-
-{%- liquid
-  assign show_filters = section.settings.enable_filtering
-  if search.filters == empty
-    assign show_filters = false
-  endif
--%}
 
 {% if search.performed %}
   <eterne-collection class="collection" data-is-filter-open="true">
@@ -338,15 +336,23 @@
                         </div>
                         <a href="{{ variant_url }}" class="collection__item-link"></a>
                         <div class="collection__item-bg-imgs-wrap">
-                          <div class="collection__item-bg-img lazyLoad"
-                               data-bgimage="{{ first_image }}"
-                               style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
+                          <div class="collection__item-bg-img {% if enable_image_blur %} lazyLoad{% endif %}"
+                               {% if enable_image_blur %}
+                                 data-bgimage="{{ first_image }}"
+                                 style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
+                               {% else %}
+                                 style="background-image: url('{{ first_image }}');"
+                               {% endif %}
                                id="productImage"
                           ></div>
                           {% if second_image != blank %}
-                            <div class="collection__item-bg-img-hover lazyLoad"
-                                 data-bgimage="{{ second_image }}"
-                                 style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
+                            <div class="collection__item-bg-img-hover {% if enable_image_blur %} lazyLoad{% endif %}"
+                                 {% if enable_image_blur %}
+                                   data-bgimage="{{ second_image }}"
+                                   style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
+                                 {% else %}
+                                   style="background-image: url('{{ second_image }}');"
+                                 {% endif %}
                             ></div>
                           {% endif %}
                         </div>

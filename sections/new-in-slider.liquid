@@ -1,6 +1,7 @@
 {{ 'new-in-slider.css' | asset_url | stylesheet_tag }}
 
 {% assign collection_handle = section.settings.selected_collection.handle %}
+{% assign enable_image_blur = settings.enable_img_blue_effect %}
 {% assign now = "now" | date: "%s" %}
 
 <div class="new-in">
@@ -19,15 +20,23 @@
               <div class="new-in__img-wrap">
                 <div class="new-in__item-bg-imgs-wrap">
                   <div
-                    class="new-in__item-bg-img lazyLoad"
-                    data-bgimage="{{ product.featured_image | img_url: 'master' }}"
-                    style="background-image: url('{{ product.featured_image | img_url: 'small' }}'); filter: blur(2px)"
+                    class="new-in__item-bg-img{% if enable_image_blur %} lazyLoad{% endif %}"
+                    {% if enable_image_blur %}
+                      data-bgimage="{{ product.featured_image | img_url: 'master' }}"
+                      style="background-image: url('{{ product.featured_image | img_url: 'small' }}'); filter: blur(2px)"
+                    {% else %}
+                      style="background-image: url('{{ product.featured_image | img_url: 'master' }}');"
+                    {% endif %}
                   ></div>
                   {% if product.images[1] != blank %}
                     <div
-                      class="new-in__item-bg-img-hover lazyLoad"
+                      class="new-in__item-bg-img-hover{% if enable_image_blur %} lazyLoad{% endif %}"
+                      {% if enable_image_blur %}
                       data-bgimage="{{ product.images[1] | img_url: 'master' }}"
                       style="background-image: url('{{ product.images[1] | img_url: 'small' }}'); filter: blur(2px)"
+                      {% else %}
+                      style="background-image: url('{{ product.images[1] | img_url: 'master' }}');"
+                      {% endif %}
                     ></div>
                   {% endif %}
                 </div>
