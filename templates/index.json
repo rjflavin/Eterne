@@ -118,7 +118,8 @@
           "type": "two_images_row",
           "settings": {
             "orientation": "landscape",
-            "media_type_1": "video",
+            "media_type_1": "image",
+            "image_1": "shopify:\/\/shop_images\/ROW_5_IMAGE_1.jpg",
             "video_1": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4",
             "caption_1": "<p>refined<br\/>relaxation<\/p>",
             "product_link_1": "shopify:\/\/collections\/knitwear",
