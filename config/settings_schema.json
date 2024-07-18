@@ -25,6 +25,17 @@
     ]
   },
   {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_img_blue_effect",
+        "label": "Enable image blur effect",
+        "default": false
+      }
+    ]
+  },
+  {
     "name": "Cart",
     "settings": [
       {
