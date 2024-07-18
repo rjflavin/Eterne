@@ -63,9 +63,9 @@
   align-items: center;
   margin-left: 0.3px;
 }
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .recent-products-swiper .swiper-wrapper .swiper-slide-container {
-    margin-right: 17px;
+    margin-right: 10px;
   }
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-link {
