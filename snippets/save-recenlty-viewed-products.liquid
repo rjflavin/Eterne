@@ -26,7 +26,7 @@
             variantPriceCleaned = parseFloat(variantPrice * 0.01);
 
             loopVariant = {
-                available: !!'{{ variant.available | escape }}',
+                available: (+'{{ variant.inventory_quantity }}' > 0),
                 compare_at_price: +'{{ variant.compare_at_price }}',
                 id: +'{{ variant.id | escape }}',
                 inventory_quantity: +'{{ variant.inventory_quantity | escape }}',
@@ -89,7 +89,7 @@
             let productMedia = [];
 
             {% for media in product.media %}
-                productMedia.push('{{ media.src | img_url: "master" }}');
+                productMedia.push('{{ media.src | img_url: "large" }}');
             {% endfor %}
 
             productObject.productId = '{{ product.id }}';
