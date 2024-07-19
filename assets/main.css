@@ -10967,3 +10967,7 @@ textarea {
     flex-direction: row-reverse;
   }
 }
+
+.globo-product-groups-collection .globo-border-style-double:before, .globo-product-groups-detail .globo-detail-border-style-double:before, .globo-swatch-product-detail .swatch--gl li label.globo-detail-border-style-double:before, .swatches-globo .swatch--gl li label.globo-border-style-double:before {
+box-shadow: none !important;
+}
