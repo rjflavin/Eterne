@@ -55,6 +55,9 @@
   position: relative;
   display: flex;
 }
+.collage .media > a {
+  font-size: 0;
+}
 .collage .media__video-wrapper {
   display: flex;
   position: relative;
