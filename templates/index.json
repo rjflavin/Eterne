@@ -64,9 +64,9 @@
           "settings": {
             "media_type": "video",
             "orientation": "landscape",
-            "caption": "<p>Elevated<br\/>Essentials<\/p>",
-            "product_link": "shopify:\/\/collections\/underwear",
-            "product_link_text": "shop Underwear",
+            "caption": "<p>cozy fall staples<\/p>",
+            "product_link": "shopify:\/\/collections\/knitwear",
+            "product_link_text": "shop knitwear",
             "video": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4"
           }
         }
