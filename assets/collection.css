@@ -485,6 +485,9 @@
   line-height: 16.8px;
   cursor: pointer;
 }
+.collection__size-variant-text:hover {
+  text-decoration: underline;
+}
 .collection__size-variant-text.disabled {
   pointer-events: none;
   opacity: 0.5;
@@ -591,7 +594,7 @@
 }
 @media (max-width: 1024px) {
   .collection__item-text-wrap {
-    /*margin-bottom: 10px;*/
+    margin-bottom: 10px;
   }
 }
 .collection__item-title {
@@ -628,7 +631,7 @@
 }
 .collection__item-price {
   display: flex;
-  margin: 4px 10px 4px;
+  margin: 4px 10px 3px;
   font-size: 12px;
   font-weight: 400;
   line-height: 183%;
@@ -639,7 +642,7 @@
 @media (max-width: 1024px) {
   .collection__item-price {
     font-size: 11px;
-    margin: 4px 11px 4px;
+    margin: 0 10px;
   }
 }
 .collection__item-colors-wrap {

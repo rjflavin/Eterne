@@ -617,6 +617,9 @@
   cursor: pointer;
   padding: 7px;
 }
+.product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel .product__size-variants .product__size-label:not(.product__size-label--disabled):hover {
+  text-decoration: underline;
+}
 .product-info .product-column-right .product-recommendations .recommendations-list .product__quick-add-panel .product__size-variants .product__size-label--disabled {
   opacity: 0.5;
   cursor: default;
