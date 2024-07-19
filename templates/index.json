@@ -19,7 +19,7 @@
             "orientation": "landscape",
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections\/t-shirts",
-            "product_link_text": "shop new in",
+            "product_link_text": "shop poplin",
             "video": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_16x9_META_COLOR.mp4"
           }
         }
@@ -39,9 +39,9 @@
             "orientation": "portrait",
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/ROW_2_IMAGE_1.jpg",
-            "caption_1": "<p>day to night<br\/>essentials<\/p>",
-            "product_link_1": "shopify:\/\/collections\/swim",
-            "product_link_text_1": "shop soir",
+            "caption_1": "<p>the poplin collection<\/p>",
+            "product_link_1": "shopify:\/\/collections\/new-in",
+            "product_link_text_1": "shop new in",
             "media_type_2": "image",
             "image_2": "shopify:\/\/shop_images\/ROW_2_IMAGE_2.jpg",
             "caption_2": "",
