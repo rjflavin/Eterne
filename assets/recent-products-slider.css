@@ -182,6 +182,9 @@
   color: var(--black2);
   cursor: pointer;
 }
+.recent-products-swiper .swiper-wrapper .swiper-slide-image-info-sizes-item:not(.unavailable):hover {
+  text-decoration: underline;
+}
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info-sizes-item:last-child {
   margin-right: 0;
 }
