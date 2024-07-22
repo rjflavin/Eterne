@@ -61,6 +61,13 @@
 </div>
 
 {% if search.performed %}
+  {% assign canCustomerSeeHiddenProducts = false %}
+  {% for customerTag in customer.tags %}
+    {% if customerTag == 'see_hidden_products' %}
+      {% assign canCustomerSeeHiddenProducts = true %}
+    {% endif %}
+  {% endfor %}
+
   <eterne-collection class="collection" data-is-filter-open="true">
     {% paginate search.results by section.settings.coll_num_per_page_int %}
       <div class="collection__title-wrap">
@@ -87,8 +94,8 @@
                 <div id="FacetsWrapperDesktop" class="collection__filters-content">
                   <div class="collection__radio-filters">
                     {% render 'filter-category-sorting',
-                            visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
-                            collection: search
+                      visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
+                      collection: search
                     %}
                   </div>
 
@@ -107,12 +114,12 @@
                       {% endfor %}
 
                       {% render 'filter-category',
-                              filter: filter,
-                              filterLabel: filter.label,
-                              index: forloop.index,
-                              filtersType: 'checkbox',
-                              visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
-                              collection: item
+                        filter: filter,
+                        filterLabel: filter.label,
+                        index: forloop.index,
+                        filtersType: 'checkbox',
+                        visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
+                        collection: item
                       %}
                     {% endfor %}
                   </div>
@@ -249,114 +256,124 @@
                 {% assign available_from = item.metafields.custom.available_from | date: "%s" %}
 
                 {% if available_from < now or available_from == blank %}
-                  <div
-                          class="collection__item"
-                          data-is-loaded-with-filters="true"
-                          data-collection-item
-                          data-is-variant-ready-to-fetch="true"
-                          data-is-variant-in-stock="{{ isVariantInStock }}"
-                          data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
-                          data-product-handle="{{ item.handle }}"
-                          data-variant-id="{{ item.selected_or_first_available_variant.id }}"
-                          data-selected-size="{{ sizeOption }}"
-                          data-selected-color="{{ colorOption }}"
-                          data-product-title="{{ item.title }}"
-                          data-default-color="{{ colorOption }}"
-                          data-first-image="{{ first_image }}"
-                          data-second-image="{{ second_image }}"
-                          data-empty-image="{{ emptyImage }}"
-                          data-hover-images="{{ hoverImages }}"
-                  >
-                    <div class="variant_inventory_policy disp-none-imp">
-                      {% for variant in item.variants %}
-                        <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
-                      {% endfor %}
-                    </div>
-                    <div class="collection__item-inner">
+                  {% assign isHiddenProduct = false %}
 
-                      <div class="collection__img-wrap">
-                        <div class="collection__quick-add-panel" data-quick-add-panel>
-                          <div class="collection__size-variants">
-                            {% assign selected_color = colorOption %}
+                  {% for productTag in product.tags %}
+                    {% if productTag == 'hidden' %}
+                      {% assign isHiddenProduct = true %}
+                    {% endif %}
+                  {% endfor %}
 
-                            {% assign size_options = '' %}
-                            {% for variant in item.variants %}
-                              {% if variant.options contains selected_color %}
-                                {% assign size_options = size_options | append: variant.option2 | append: ',' %}
-                              {% endif %}
-                            {% endfor %}
-                            {% assign size_options = size_options | split: ',' | uniq %}
+                  {% if isHiddenProduct == false or isHiddenProduct == true and canCustomerSeeHiddenProducts == true %}
+                    <div
+                      class="collection__item"
+                      data-index="{{ forloop.index }}"
+                      data-is-loaded-with-filters="true"
+                      data-collection-item
+                      data-is-variant-ready-to-fetch="true"
+                      data-is-variant-in-stock="{{ isVariantInStock }}"
+                      data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
+                      data-product-handle="{{ item.handle }}"
+                      data-variant-id="{{ item.selected_or_first_available_variant.id }}"
+                      data-selected-size="{{ sizeOption }}"
+                      data-selected-color="{{ colorOption }}"
+                      data-product-title="{{ item.title }}"
+                      data-default-color="{{ colorOption }}"
+                      data-first-image="{{ first_image }}"
+                      data-second-image="{{ second_image }}"
+                      data-empty-image="{{ emptyImage }}"
+                      data-hover-images="{{ hoverImages }}"
+                    >
+                      <div class="variant_inventory_policy disp-none-imp">
+                        {% for variant in item.variants %}
+                          <div data-variant-id-policy="{{ variant.id }}" data-variant-inventory-policy="{{ variant.inventory_policy }}"></div>
+                        {% endfor %}
+                      </div>
+                      <div class="collection__item-inner">
 
-                            {% assign selected_size = '' %}
-                            {% assign is_variant_found = false %}
+                        <div class="collection__img-wrap">
+                          <div class="collection__quick-add-panel" data-quick-add-panel>
+                            <div class="collection__size-variants">
+                              {% assign selected_color = colorOption %}
 
-                            {% for size in size_options %}
-                              {% unless size == '' %}
-                                {% assign is_disabled = true %}
-                                {% assign is_preorder = false %}
-                                {% for variant in item.variants %}
-                                  {% if variant.option2 == size and variant.options contains selected_color %}
-                                    {% if variant.inventory_policy == 'continue' %}
-                                      {% assign is_preorder = true %}
-                                    {% endif %}
-                                    {% if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' %}
-                                      {% assign is_disabled = false %}
-                                      {% if is_variant_found == false %}
-                                        {% assign selected_size = size %}
-                                        {% assign is_variant_found = true %}
+                              {% assign size_options = '' %}
+                              {% for variant in item.variants %}
+                                {% if variant.options contains selected_color %}
+                                  {% assign size_options = size_options | append: variant.option2 | append: ',' %}
+                                {% endif %}
+                              {% endfor %}
+                              {% assign size_options = size_options | split: ',' | uniq %}
+
+                              {% assign selected_size = '' %}
+                              {% assign is_variant_found = false %}
+
+                              {% for size in size_options %}
+                                {% unless size == '' %}
+                                  {% assign is_disabled = true %}
+                                  {% assign is_preorder = false %}
+                                  {% for variant in item.variants %}
+                                    {% if variant.option2 == size and variant.options contains selected_color %}
+                                      {% if variant.inventory_policy == 'continue' %}
+                                        {% assign is_preorder = true %}
+                                      {% endif %}
+                                      {% if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' %}
+                                        {% assign is_disabled = false %}
+                                        {% if is_variant_found == false %}
+                                          {% assign selected_size = size %}
+                                          {% assign is_variant_found = true %}
+                                        {% endif %}
                                       {% endif %}
                                     {% endif %}
+                                  {% endfor %}
+                                  {% if is_preorder %}
+                                    <a href="{{ variant_url }}" data-variant-size="{{ size }}"
+                                       class="collection__size-variant-text no-select not-add-to-cart
+                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
+                                       {% if is_disabled %} disabled{% endif %}"
+                                    >
+                                      {{ size }}
+                                    </a>
+                                  {% else %}
+                                    <div data-variant-size="{{ size }}"
+                                         class="collection__size-variant-text no-select
+                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
+                                       {% if is_disabled %} disabled{% endif %}"
+                                    >
+                                      {{ size }}
+                                    </div>
                                   {% endif %}
-                                {% endfor %}
-                                {% if is_preorder %}
-                                  <a href="{{ variant_url }}" data-variant-size="{{ size }}"
-                                     class="collection__size-variant-text no-select not-add-to-cart
-                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
-                                       {% if is_disabled %} disabled{% endif %}"
-                                  >
-                                    {{ size }}
-                                  </a>
-                                {% else %}
-                                  <div data-variant-size="{{ size }}"
-                                       class="collection__size-variant-text no-select
-                                       {% if selected_size == size %}collection__size-variant-text_selected{% endif %}
-                                       {% if is_disabled %} disabled{% endif %}"
-                                  >
-                                    {{ size }}
-                                  </div>
-                                {% endif %}
-                              {% endunless %}
-                            {% endfor %}
+                                {% endunless %}
+                              {% endfor %}
+                            </div>
                           </div>
-                        </div>
-                        <div data-quick-add-button class="collection__item-quick-add-btn-wrap">
-                          <div class="collection__item-quick-add-btn">
-                            {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                          <div data-quick-add-button class="collection__item-quick-add-btn-wrap">
+                            <div class="collection__item-quick-add-btn">
+                              {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
+                            </div>
                           </div>
-                        </div>
-                        <a href="{{ variant_url }}" class="collection__item-link"></a>
-                        <div class="collection__item-bg-imgs-wrap">
-                          <div class="collection__item-bg-img {% if enable_image_blur %} lazyLoad{% endif %}"
-                               {% if enable_image_blur %}
-                                 data-bgimage="{{ first_image }}"
-                                 style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
-                               {% else %}
-                                 style="background-image: url('{{ first_image }}');"
-                               {% endif %}
-                               id="productImage"
-                          ></div>
-                          {% if second_image != blank %}
-                            <div class="collection__item-bg-img-hover {% if enable_image_blur %} lazyLoad{% endif %}"
-                                 {% if enable_image_blur %}
-                                   data-bgimage="{{ second_image }}"
-                                   style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
-                                 {% else %}
-                                   style="background-image: url('{{ second_image }}');"
-                                 {% endif %}
+                          <a href="{{ variant_url }}" class="collection__item-link"></a>
+                          <div class="collection__item-bg-imgs-wrap">
+                            <div class="collection__item-bg-img {% if enable_image_blur %} lazyLoad{% endif %}"
+                              {% if enable_image_blur %}
+                                data-bgimage="{{ first_image }}"
+                                style="background-image: url('{{ first_image_lazy }}'); filter: blur(2px)"
+                              {% else %}
+                                style="background-image: url('{{ first_image }}');"
+                              {% endif %}
+                                 id="productImage"
                             ></div>
-                          {% endif %}
+                            {% if second_image != blank %}
+                              <div class="collection__item-bg-img-hover {% if enable_image_blur %} lazyLoad{% endif %}"
+                                {% if enable_image_blur %}
+                                  data-bgimage="{{ second_image }}"
+                                  style="background-image: url('{{ second_image_lazy }}'); filter: blur(2px)"
+                                {% else %}
+                                  style="background-image: url('{{ second_image }}');"
+                                {% endif %}
+                              ></div>
+                            {% endif %}
+                          </div>
                         </div>
-                      </div>
 
                       <div class="collection__item-text-wrap">
                         <a href="{{ variant_url }}" class="collection__item-title">{{ item.title }}</a>
