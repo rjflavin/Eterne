@@ -357,7 +357,6 @@
 .collection__item {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 @media (min-width: 1025px) {
   .collection__item:hover .collection__item-bg-img-hover {
@@ -597,6 +596,8 @@
 @media (max-width: 1024px) {
   .collection__item-text-wrap {
     margin-bottom: 10px;
+    max-height: 61px;
+    min-height: 61px;
   }
 }
 .collection__item-title {
@@ -613,6 +614,11 @@
 @media (max-width: 1024px) {
   .collection__item-title {
     font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }
 .collection__item-fabric-title {
