@@ -432,7 +432,7 @@
                             {{ product.description }}
                         </div>
                     </div>
-                    {% if product.metafields.custom.size_fit_information.value.size > 0 %}
+                    {% if product.metafields.custom.size_fit_information_new.value.size > 0 %}
                         <div class="product-details" data-product-size-and-info>
                             <div class="product-details__header">
                                 <h4 class="product-details__title no-select">{{ settings.size_fit_information_title_text }}</h4>
@@ -444,7 +444,7 @@
                                 </div>
                             </div>
                             <div class="product-details__content">
-                                {{ product.metafields.custom.size_fit_information.value }}
+                                {{ product.metafields.custom.size_fit_information_new | metafield_tag }}
                             </div>
                         </div>
                     {% endif %}
