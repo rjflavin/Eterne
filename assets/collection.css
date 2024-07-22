@@ -359,6 +359,9 @@
   flex-direction: column;
 }
 @media (min-width: 1025px) {
+  .collection__item {
+    justify-content: space-between;
+  }
   .collection__item:hover .collection__item-bg-img-hover {
     visibility: visible !important;
     opacity: 1 !important;
