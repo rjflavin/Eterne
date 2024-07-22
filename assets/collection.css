@@ -355,7 +355,9 @@
   }
 }
 .collection__item {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 @media (min-width: 1025px) {
   .collection__item:hover .collection__item-bg-img-hover {
