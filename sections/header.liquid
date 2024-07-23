@@ -166,7 +166,7 @@
     {%- endif -%}
 
     <div id="DesktopMenu" class="desk-nav">
-      <ul class="desk-nav__list">
+      <ul class="desk-nav__list {% if request.page_type == 'product' %}desk-nav__list_product-page{% endif %}">
         {% for link in linklists[section.settings.header_menu].links %}
           {% liquid
             assign has_dropdown = false
