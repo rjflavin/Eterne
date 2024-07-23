@@ -900,7 +900,7 @@
 }
 
 .product-form .input-row, .buy-buttons-row {
-  margin: 6px 0 25px 0;
+  margin: 14px 0 25px 0;
 }
 @media (max-width: 1024px) {
   .product-form .input-row, .buy-buttons-row {

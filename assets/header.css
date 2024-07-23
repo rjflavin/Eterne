@@ -120,6 +120,9 @@ page-header {
   flex-wrap: wrap;
   padding-bottom: 19.5px;
 }
+.desk-nav__list_product-page {
+  padding-bottom: 37.5px;
+}
 
 .desk-nav-list__item {
   position: relative;
