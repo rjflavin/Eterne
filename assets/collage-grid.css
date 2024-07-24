@@ -1,6 +1,7 @@
 .collage {
   width: 100%;
   margin: -1px auto 0;
+  transform: scale(1.003);
 }
 .collage .only-desk {
   display: flex;
