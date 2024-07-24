@@ -24,7 +24,7 @@
     {% for image in item.product.images %}
       {% assign imageAlt = image.alt | upcase %}
       {% if imageLimit > 0 and variantColor %}
-        {% assign imageURL = image | image_url %}
+        {% assign imageURL = image | image_url: width: 160 %}
         {% assign imageURL_lazy = image | img_url: 'small' %}
         {% assign imageLimit = imageLimit | minus: 1 %}
       {% endif %}
