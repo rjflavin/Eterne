@@ -1,7 +1,6 @@
 .collage {
   width: 100%;
   margin: -1px auto 0;
-  transform: scale(1.003);
 }
 .collage .only-desk {
   display: flex;
@@ -60,6 +59,7 @@
   position: relative;
   display: flex;
   width: 100%;
+  transform: scale(1.003);
 }
 .collage .media > a {
   font-size: 0;
