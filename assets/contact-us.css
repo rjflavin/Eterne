@@ -16,15 +16,15 @@
 }
 .contact-us__title {
   margin-bottom: 21px;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 500;
-  line-height: 39.1px;
+  line-height: 26px;
   text-transform: uppercase;
 }
 @media (max-width: 767px) {
   .contact-us__title {
     margin-bottom: 16.5px;
-    font-size: 22px;
+    font-size: 16px;
   }
 }
 .contact-us__contact {
@@ -35,8 +35,8 @@
   margin-bottom: 0;
 }
 .contact-us__desc, .contact-us__link {
-  font-size: 14px;
-  line-height: 22.4px;
+  font-size: 12px;
+  line-height: 16.2px;
   text-transform: uppercase;
 }
 .contact-us__link {
