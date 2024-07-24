@@ -23,7 +23,7 @@
                         data-bgimage="{{ image | img_url: 'master' }}"
                         style="background-image: url('{{ image | img_url: 'small' }}'); filter: blur(2px)"
                     {% else %}
-                        style="background-image: url('{{ image | img_url: 'master' }}');"
+                        style="background-image: url('{{ image | image_url: width: 201 }}');"
                     {% endif %}
                   ></div>
                 {% endif %}
