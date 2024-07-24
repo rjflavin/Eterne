@@ -16,7 +16,11 @@
                     {% if block.settings.caption or block.settings.product_link %}
                         <div class="caption">
                             {% if block.settings.caption != blank %}
-                                <div class="caption__text">{{ block.settings.caption }}</div>
+                                {% if block.settings.product_link != blank %}
+                                    <a href="{{ block.settings.product_link }}" class="caption__text">{{ block.settings.caption }}</a>
+                                    {% else %}
+                                    <div class="caption__text">{{ block.settings.caption }}</div>
+                                {% endif %}
                             {% endif %}
                             {% if block.settings.product_link and block.settings.product_link_text %}
                                 <a href="{{ block.settings.product_link }}"
@@ -54,7 +58,7 @@
                       </div>
                     </div>
                 {% elsif media_type == "video" %}
-                    <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}" data-href="{{ block.settings.product_link }}">
+                    <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}" {% if block.settings.product_link != blank %}data-href="{{ block.settings.product_link }}"{% endif %}>
                         {% if block.settings.image %}
                             <div class="collage__cover-video-image">
                                 {% assign image_desk_class = "" %}
@@ -103,7 +107,11 @@
                                 {% if block.settings.caption_1 or block.settings.product_link_1 %}
                                     <div class="caption">
                                         {% if block.settings.caption_1 != blank %}
-                                            <div class="caption__text">{{ block.settings.caption_1 }}</div>
+                                            {% if block.settings.product_link_1 != blank %}
+                                                <a href="{{ block.settings.product_link_1 }}" class="caption__text">{{ block.settings.caption_1 }}</a>
+                                            {% else %}
+                                                <div class="caption__text">{{ block.settings.caption_1 }}</div>
+                                            {% endif %}
                                         {% endif %}
                                         {% if block.settings.product_link_1 and block.settings.product_link_text_1 %}
                                             <a href="{{ block.settings.product_link_1 }}"
@@ -140,7 +148,7 @@
                                 {{ caption }}
                             {% elsif media_type_1 == "video" %}
 
-                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_1 }}">
+                                <custom-video-player class="media__video-wrapper" {% if block.settings.product_link_1 != blank %}data-href="{{ block.settings.product_link_1 }}"{% endif %}>
                                     {% if block.settings.image_1 != blank %}
                                         <div class="collage__cover-video-image">
                                             {% assign image_desk_class = "" %}
@@ -189,7 +197,11 @@
                                 {% if block.settings.caption_2 or block.settings.product_link_2 %}
                                     <div class="caption">
                                         {% if block.settings.caption_2 != blank %}
-                                            <div class="caption__text">{{ block.settings.caption_2 }}</div>
+                                            {% if block.settings.product_link_2 != blank %}
+                                                <a href="{{ block.settings.product_link_2 }}" class="caption__text">{{ block.settings.caption_2 }}</a>
+                                            {% else %}
+                                                <div class="caption__text">{{ block.settings.caption_2 }}</div>
+                                            {% endif %}
                                         {% endif %}
                                         {% if block.settings.product_link_2 and block.settings.product_link_text_2 %}
                                             <a href="{{ block.settings.product_link_2 }}"
@@ -224,7 +236,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
-                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_2 }}">
+                                <custom-video-player class="media__video-wrapper"  {% if block.settings.product_link_2 != blank %}data-href="{{ block.settings.product_link_2 }}"{% endif %}>
                                     {% if block.settings.image_2 != blank %}
                                         <div class="collage__cover-video-image">
                                             {% assign image_desk_class = "" %}
@@ -278,6 +290,11 @@
                                     <div class="caption">
                                         {% if block.settings.caption_1 != blank %}
                                             <div class="caption__text">{{ block.settings.caption_1 }}</div>
+                                            {% if block.settings.product_link_1 != blank %}
+                                                <a href="{{ block.settings.product_link_1 }}" class="caption__text">{{ block.settings.caption_1 }}</a>
+                                            {% else %}
+                                                <div class="caption__text">{{ block.settings.caption_1 }}</div>
+                                            {% endif %}
                                         {% endif %}
                                         {% if block.settings.product_link_1 != blank and block.settings.product_link_text_1 != blank %}
                                             <a href="{{ block.settings.product_link_1 }}"
@@ -309,7 +326,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_1 == "video" %}
-                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_1 }}">
+                                <custom-video-player class="media__video-wrapper"  {% if block.settings.product_link_1 != blank %}data-href="{{ block.settings.product_link_1 }}"{% endif %}>
                                         {% if block.settings.image_1 != blank %}
                                             <div class="collage__cover-video-image">
                                                 {% assign image_desk_class = "" %}
@@ -356,7 +373,11 @@
                                 {% if block.settings.caption_2 != blank or block.settings.product_link_2 != blank %}
                                     <div class="caption">
                                         {% if block.settings.caption_2 != blank %}
-                                            <div class="caption__text">{{ block.settings.caption_2 }}</div>
+                                            {% if block.settings.product_link_2 != blank %}
+                                                <a href="{{ block.settings.product_link_2 }}" class="caption__text">{{ block.settings.caption_2 }}</a>
+                                            {% else %}
+                                                <div class="caption__text">{{ block.settings.caption_2 }}</div>
+                                            {% endif %}
                                         {% endif %}
                                         {% if block.settings.product_link_2 != blank and block.settings.product_link_text_2 != blank %}
                                             <a href="{{ block.settings.product_link_2 }}"
@@ -388,7 +409,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
-                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_2 }}">
+                                <custom-video-player class="media__video-wrapper"  {% if block.settings.product_link_2 != blank %}data-href="{{ block.settings.product_link_2 }}"{% endif %}>
                                         {% if block.settings.image_2 != blank %}
                                             <div class="collage__cover-video-image">
                                                 {% assign image_desk_class = "" %}
@@ -435,7 +456,11 @@
                                 {% if block.settings.caption_3 != blank or block.settings.product_link_3 != blank %}
                                     <div class="caption">
                                         {% if block.settings.caption_3 != blank %}
-                                            <div class="caption__text">{{ block.settings.caption_3 }}</div>
+                                            {% if block.settings.product_link_3 != blank %}
+                                                <a href="{{ block.settings.product_link_3 }}" class="caption__text">{{ block.settings.caption_3 }}</a>
+                                            {% else %}
+                                                <div class="caption__text">{{ block.settings.caption_3 }}</div>
+                                            {% endif %}
                                         {% endif %}
                                         {% if block.settings.product_link_3 != blank and block.settings.product_link_text_3 != blank %}
                                             <a href="{{ block.settings.product_link_3 }}"
@@ -467,7 +492,7 @@
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_3 == "video" %}
-                                <custom-video-player class="media__video-wrapper" data-href="{{ block.settings.product_link_3 }}">
+                                <custom-video-player class="media__video-wrapper"  {% if block.settings.product_link_3 != blank %}data-href="{{ block.settings.product_link_3 }}"{% endif %}>
                                         {% if block.settings.image_3 != blank %}
                                             <div class="collage__cover-video-image">
                                                 {% assign image_desk_class = "" %}
