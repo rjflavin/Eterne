@@ -8,7 +8,18 @@
         <span class="desk-col__title">{{ section.settings.customer_column_text }}</span>
         <ul class="desk-col__list">
           {% for link in linklists[section.settings.customer_menu].links %}
-            <li><a href="{{ link.url }}" class="desc-col__text">{{ link.title }}</a></li>
+            <li>
+              <a
+                href="{{ link.url }}"
+                class="desc-col__text
+                  {% if link.title contains 'FAQ' %}
+                    desc-col__text_default-case
+                  {% endif %}
+                "
+              >
+                {{ link.title }}
+              </a>
+            </li>
           {% endfor %}
         </ul>
       </div>

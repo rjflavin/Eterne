@@ -9,84 +9,77 @@
 }
 
 .shopify-policy__container {
-  max-width: 416px;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+}
+@media (max-width: 767px) {
+  .shopify-policy__container {
+    padding: 0 16px;
+  }
 }
 .shopify-policy__container h1, .shopify-policy__container h2, .shopify-policy__container h3, .shopify-policy__container h4, .shopify-policy__container h5, .shopify-policy__container h6, .shopify-policy__container h1 span, .shopify-policy__container h2 span, .shopify-policy__container h3 span, .shopify-policy__container h4 span, .shopify-policy__container h5 span, .shopify-policy__container h6 span {
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
 .shopify-policy__title h1 {
-  font-size: 36px;
-  line-height: 50.4px;
-  text-align: center;
+  margin-top: 52px;
   margin-bottom: 27px;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: 0.4px;
+  text-align: center;
 }
 @media (max-width: 767px) {
   .shopify-policy__title h1 {
-    margin-bottom: 21px;
-    font-size: 28px;
-    line-height: 39.2px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 26px;
   }
 }
 
-.shopify-policy__body h2 {
-  margin-bottom: 27px;
-}
-@media (max-width: 767px) {
-  .shopify-policy__body h2 {
-    margin-bottom: 21px;
-  }
-}
-.shopify-policy__body h2 span {
-  font-size: 36px;
-  line-height: 50.4px;
-  text-align: center;
-}
-@media (max-width: 767px) {
-  .shopify-policy__body h2 span {
-    margin-bottom: 21px;
-    font-size: 28px;
-    line-height: 39.2px;
-  }
-}
-.shopify-policy__body h3, .shopify-policy__body h4, .shopify-policy__body h5, .shopify-policy__body h6 {
-  font-size: 22px;
-  line-height: 30.8px;
-  margin-top: 33px;
+.shopify-policy__body h2, .shopify-policy__body h3, .shopify-policy__body h4, .shopify-policy__body h5, .shopify-policy__body h6 {
+  margin-top: 28px;
   margin-bottom: 16.5px;
+  font-size: 16px;
+  line-height: 22.4px;
+  letter-spacing: 0.4px;
+}
+.shopify-policy__body h2 span, .shopify-policy__body h3 span, .shopify-policy__body h4 span, .shopify-policy__body h5 span, .shopify-policy__body h6 span {
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0.4px;
 }
 @media (max-width: 767px) {
-  .shopify-policy__body h3, .shopify-policy__body h4, .shopify-policy__body h5, .shopify-policy__body h6 {
-    font-size: 20px;
-    line-height: 28px;
-    margin-top: 30px;
-    margin-bottom: 15px;
+  .shopify-policy__body h2, .shopify-policy__body h3, .shopify-policy__body h4, .shopify-policy__body h5, .shopify-policy__body h6 {
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .shopify-policy__body h2 span, .shopify-policy__body h3 span, .shopify-policy__body h4 span, .shopify-policy__body h5 span, .shopify-policy__body h6 span {
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 18px;
   }
 }
-.shopify-policy__body h3 span, .shopify-policy__body h4 span, .shopify-policy__body h5 span, .shopify-policy__body h6 span {
-  font-size: 22px;
-  line-height: 30.8px;
-}
-@media (max-width: 767px) {
-  .shopify-policy__body h3 span, .shopify-policy__body h4 span, .shopify-policy__body h5 span, .shopify-policy__body h6 span {
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-.shopify-policy__body div, .shopify-policy__body div a {
-  font-size: 12px;
-  line-height: 19.2px;
-  letter-spacing: 0.14px;
-}
-.shopify-policy__body p, .shopify-policy__body p span, .shopify-policy__body p a {
+.shopify-policy__body p, .shopify-policy__body p span, .shopify-policy__body p a, .shopify-policy__body div, .shopify-policy__body div a {
   font-size: 14px;
   line-height: 22.4px;
   letter-spacing: 0.14px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+}
+@media (max-width: 767px) {
+  .shopify-policy__body p, .shopify-policy__body p span, .shopify-policy__body p a, .shopify-policy__body div, .shopify-policy__body div a {
+    margin-bottom: 18px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 .shopify-policy__body a {
   text-decoration: underline;

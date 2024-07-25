@@ -1,67 +1,79 @@
 .returns {
-  max-width: 723.31px;
-  width: 66.666%;
+  max-width: 680px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
   margin: 0 auto;
 }
 @media (max-width: 767px) {
   .returns {
-    width: 100%;
+    padding: 0 16px;
   }
 }
 .returns h1, .returns h2, .returns h3, .returns h4, .returns h5, .returns h6, .returns h1 span, .returns h2 span, .returns h3 span, .returns h4 span, .returns h5 span, .returns h6 span {
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
 }
 .returns h1 {
-  margin-top: 54px;
-  margin-bottom: 27px;
-  font-size: 36px;
-  line-height: 50.4px;
-  letter-spacing: 0.16px;
+  margin-top: 72px;
+  margin-bottom: 30px;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: 0.4px;
   text-align: center;
 }
 @media (max-width: 767px) {
   .returns h1 {
-    margin-top: 42px;
-    margin-bottom: 21px;
-    font-size: 28px;
-    line-height: 39.2px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 26px;
   }
 }
 .returns h2, .returns h3, .returns h4, .returns h5, .returns h6 {
-  margin-top: 20px;
-  margin-bottom: 15px;
-  font-size: 20px;
-  line-height: 28px;
-  letter-spacing: 0.16px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  line-height: 22.4px;
+  letter-spacing: 0.4px;
   text-align: center;
 }
 @media (max-width: 767px) {
   .returns h2, .returns h3, .returns h4, .returns h5, .returns h6 {
-    margin-top: 27px;
-    margin-bottom: 3.5px;
-    font-size: 18px;
-    line-height: 25.2px;
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 18px;
   }
 }
 .returns p, .returns p span, .returns p a {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   font-size: 14px;
   line-height: 22.4px;
   letter-spacing: 0.16px;
   text-align: center;
 }
+@media (max-width: 767px) {
+  .returns p, .returns p span, .returns p a {
+    margin-bottom: 18px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
 .returns div, .returns div a {
-  margin-bottom: 10px;
-  font-size: 12px;
-  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 14px;
+  line-height: 22.4px;
   letter-spacing: 0.16px;
   text-align: center;
+}
+@media (max-width: 767px) {
+  .returns div, .returns div a {
+    margin-bottom: 18px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 .returns a {
   text-decoration: underline;
