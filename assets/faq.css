@@ -23,6 +23,11 @@ body {
 .faq__header {
   margin-top: 23px;
 }
+@media (max-width: 767px) {
+  .faq__header {
+    margin-top: 0;
+  }
+}
 .faq__header-title {
   margin-top: 52px;
   font-size: 22px;
@@ -30,6 +35,14 @@ body {
   letter-spacing: 0.4px;
   text-align: center;
   text-transform: uppercase;
+}
+@media (max-width: 767px) {
+  .faq__header-title {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 26px;
+  }
 }
 .faq__header-desc {
   margin-top: 30px;
@@ -48,6 +61,17 @@ body {
 .faq__header-desc_small-top-margin {
   margin-top: 28px;
 }
+@media (max-width: 767px) {
+  .faq__header-desc {
+    margin-top: 16px;
+    margin-bottom: 18px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .faq__header-desc_small-top-margin {
+    margin-top: 18px;
+  }
+}
 .faq__questions {
   width: 100%;
   display: flex;
@@ -62,12 +86,29 @@ body {
 .faq__question-category-title:first-child {
   margin-top: 48px;
 }
+@media (max-width: 767px) {
+  .faq__question-category-title:first-child {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 767px) {
+  .faq__question-category-title {
+    margin-top: 50px;
+    margin-bottom: 14px;
+  }
+}
 .faq__question-category-title-text {
   font-size: 20px;
   line-height: 20px;
   letter-spacing: 0.4px;
   text-align: center;
   text-transform: uppercase;
+}
+@media (max-width: 767px) {
+  .faq__question-category-title-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
 }
 .faq__item {
   display: flex;
@@ -89,10 +130,15 @@ body {
 .faq__question-text, .faq__question-btn {
   display: flex;
   font-size: 16px;
-  font-weight: 500;
   line-height: 19.6px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
+}
+@media (max-width: 767px) {
+  .faq__question-text, .faq__question-btn {
+    font-size: 14px;
+    line-height: 18px;
+  }
 }
 .faq__question-btns {
   display: flex;
@@ -113,4 +159,11 @@ body {
 }
 .faq__answer_small-top-margin {
   margin-top: 10px;
+}
+@media (max-width: 767px) {
+  .faq__answer {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
