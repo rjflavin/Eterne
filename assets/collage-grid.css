@@ -151,11 +151,6 @@
   position: relative;
   overflow: hidden;
 }
-@media (max-width: 1024px) {
-  .collage__one-image-row {
-    aspect-ratio: 4/3;
-  }
-}
 .collage__one-image-row img, .collage__one-image-row video {
   object-fit: cover;
   max-width: 100%;
