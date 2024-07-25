@@ -8,7 +8,7 @@
   padding: 20px;
   margin: 0 auto;
 }
-@media (max-width: 767px) {
+@media (max-width: 1120px) {
   .returns {
     width: 100%;
   }
@@ -18,36 +18,19 @@
   text-transform: uppercase;
 }
 .returns h1 {
-  margin-top: 54px;
   margin-bottom: 27px;
-  font-size: 36px;
-  line-height: 50.4px;
-  letter-spacing: 0.16px;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0.4px;
   text-align: center;
-}
-@media (max-width: 767px) {
-  .returns h1 {
-    margin-top: 42px;
-    margin-bottom: 21px;
-    font-size: 28px;
-    line-height: 39.2px;
-  }
 }
 .returns h2, .returns h3, .returns h4, .returns h5, .returns h6 {
   margin-top: 20px;
   margin-bottom: 15px;
-  font-size: 20px;
-  line-height: 28px;
-  letter-spacing: 0.16px;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0.4px;
   text-align: center;
-}
-@media (max-width: 767px) {
-  .returns h2, .returns h3, .returns h4, .returns h5, .returns h6 {
-    margin-top: 27px;
-    margin-bottom: 3.5px;
-    font-size: 18px;
-    line-height: 25.2px;
-  }
 }
 .returns p, .returns p span, .returns p a {
   margin-bottom: 10px;
@@ -58,8 +41,8 @@
 }
 .returns div, .returns div a {
   margin-bottom: 10px;
-  font-size: 12px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 22.4px;
   letter-spacing: 0.16px;
   text-align: center;
 }

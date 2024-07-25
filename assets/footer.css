@@ -53,6 +53,9 @@
 .desc-col__text:hover {
   color: var(--red1);
 }
+.desc-col__text_default-case {
+  text-transform: none;
+}
 
 .footer-mobile {
   display: none;
