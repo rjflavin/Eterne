@@ -1,6 +1,16 @@
-.section-header,
-page-header {
-  transition: all 0.5s ease-in-out !important;
+.section-header {
+  transition: all 0.5s ease-in-out;
+  position: sticky;
+  z-index: 400;
+}
+
+.section-header.under-modal {
+  -webkit-transition-property: none;
+  -moz-transition-property: none;
+  -o-transition-property: none;
+  transition-property: none;
+  position: relative;
+  z-index: -1;
 }
 
 .h-logo-area {
