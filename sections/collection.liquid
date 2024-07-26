@@ -42,7 +42,7 @@
   {% endif %}
 {% endfor %}
 
-<eterne-collection class="collection" data-is-filter-open="false">
+<eterne-collection class="collection" data-is-filter-open="false" data-more-swatches-btn="{{ section.settings.more_swatches_btn }}">
   {% paginate collection.products by productsPerPage %}
     <div class="collection__title-wrap">
       {% if collection.title == 'Products' or collection.title == 'all' %}
@@ -437,6 +437,12 @@
       "label": "Filters labels from Search & Discovery",
       "default": "category,color,size",
       "info": "Divide every new filter label with comma (e.g. category,color,size)"
+    },
+    {
+      "type": "checkbox",
+      "id": "more_swatches_btn",
+      "label": "Show More Swatches button",
+      "default": true
     }
   ],
   "presets": [
