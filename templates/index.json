@@ -20,7 +20,8 @@
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections\/t-shirts",
             "product_link_text": "shop poplin",
-            "video": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_16x9_META_COLOR.mp4"
+            "video": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_16x9_META_COLOR.mp4",
+            "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_4x5_META_COLOR.mp4"
           }
         }
       },
@@ -67,7 +68,8 @@
             "caption": "<p>cozy fall staples<\/p>",
             "product_link": "shopify:\/\/collections\/knitwear",
             "product_link_text": "shop knitwear",
-            "video": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4"
+            "video": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4",
+            "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-04_4x5_META_COLOR.mp4"
           }
         }
       },
