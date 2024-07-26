@@ -616,6 +616,12 @@
           "utm_term": true,
           "ref": true
         }
+      },
+      "2234522998043061298": {
+        "type": "shopify:\/\/apps\/uet-bing-conversion-tracking\/blocks\/star_rating\/3ce77892-57b6-48bc-ad3c-3c8e367c1e0f",
+        "disabled": false,
+        "settings": {
+        }
       }
     }
   }
