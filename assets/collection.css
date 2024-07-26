@@ -420,6 +420,22 @@
 .collection .gsw-list-product-groups .gsw-list-products-group {
   justify-content: center;
 }
+.collection .gsw-list-product-groups .gsw-list-products-group .more-swatches-btn__text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--gray2);
+  padding: 5px 0;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .collection .gsw-list-product-groups .gsw-list-products-group .more-swatches-btn__text {
+    font-size: 9px;
+  }
+}
 .collection__quick-add-panel {
   position: absolute;
   bottom: -1px;
