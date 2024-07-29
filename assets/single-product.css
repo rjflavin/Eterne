@@ -827,7 +827,7 @@
 .gsw-list-product-groups .gsw-item-product-group .gsw-list-products-group {
   display: flex;
   align-items: center;
-  flex-flow: nowrap;
+  flex-flow: wrap;
 }
 .gsw-list-product-groups .gsw-item-product-group .gsw-prg-item--link {
   display: flex;
