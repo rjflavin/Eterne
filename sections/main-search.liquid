@@ -68,7 +68,7 @@
     {% endif %}
   {% endfor %}
 
-  <eterne-collection class="collection" data-is-filter-open="true">
+  <eterne-collection class="collection" data-is-filter-open="true" data-more-swatches-btn="{{ section.settings.more_swatches_btn }}">
     {% paginate search.results by section.settings.coll_num_per_page_int %}
       <div class="collection__title-wrap">
         <span class="collection__title">Search</span>
@@ -472,6 +472,12 @@
           "label": "All rows"
         }
       ]
+    },
+    {
+      "type": "checkbox",
+      "id": "more_swatches_btn",
+      "label": "Show More Swatches button",
+      "default": true
     }
   ]
 }
