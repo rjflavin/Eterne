@@ -839,6 +839,7 @@
   color: #333333;
   transform: translate(-50%, 42px);
   padding: 0;
+  z-index: 10;
   font-size: 12px;
 }
 .gsw-list-product-groups .attr-title-hover-groups:after {
