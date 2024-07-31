@@ -375,9 +375,9 @@
                                                             </button>
                                                         </div>
                                                     </div>
+                                                    {% assign styleWithProductFirstImage = rec_product.images.first | image_url: width: 380 %}
                                                     {% render 'image',
-                                                            image: rec_product.images.first,
-                                                            widths: '480, 640, 960, 1280',
+                                                            image: styleWithProductFirstImage,
                                                             class: 'product__img'
                                                     %}
                                                     <div data-show-quick-add-button="quick-add-{{ rec_product.id }}--{{ forloop.index0 }}" class="product__item-quick-add-btn-wrap">
