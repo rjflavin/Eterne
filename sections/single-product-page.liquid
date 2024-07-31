@@ -99,11 +99,8 @@
                 <div class="product-slider__swiper-wrapper swiper-wrapper">
                     {% for image in product.media %}
                         <div class="product-slider__slide swiper-slide">
-                            {% render 'image',
-                                    image: image,
-                                    sizes: '100vw',
-                                    widths: '480, 640, 960, 1280'
-                            %}
+                            {% assign productImageForSlider = image | image_url: width: 400 %}
+                            {% render 'image', image: productImageForSlider %}
                         </div>
                     {% endfor %}
                 </div>
@@ -111,12 +108,8 @@
             <div class="product-media-collage{% if product.media.size <= 1 %} product-media-collage__single-image {% endif %}">
                 {%- for image in product.media -%}
                     <div class="product-media-collage__item">
-                        {% render 'image',
-                                image: image,
-                                sizes: '100vw',
-                                widths: '480, 640, 960, 1280',
-                                class: 'product-media-collage__item-img'
-                        %}
+                        {% assign productImage = image | image_url: width: 500 %}
+                        {% render 'image', image: productImage, class: 'product-media-collage__item-img' %}
                     </div>
                 {%- endfor -%}
             </div>
@@ -276,9 +269,12 @@
                     </div>
                 </div>
 
-                <recommendation-products class="product-recommendations" data-id="{{ block.id }}"
-                                         data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&intent=complementary"
-                                         contains-product-blocks>
+                <recommendation-products
+                  class="product-recommendations"
+                  data-id="{{ block.id }}"
+                  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&intent=complementary"
+                  contains-product-blocks
+                >
                     {% if recommendations.performed? and recommendations.products_count > 0 %}
                         <h4>Style With:</h4>
                         <div class="recommendations-grid" data-rec-products>
@@ -312,7 +308,6 @@
                                                             {% endif %}
 
                                                             {% for rec_variant in rec_product.variants %}
-
                                                                 {% if rec_variant.inventory_policy == 'continue' and rec_variant.inventory_quantity <= 0 %}
                                                                     {% assign rec_variant_preordered = true %}
                                                                 {% else %}
