@@ -24,7 +24,7 @@
           {% if extra_img_size == 1 %}
             {% for image in extra_img.value %}
               {% if forloop.index == 1 %}
-                {% assign product_image = image | img_url: "master" %}
+                {% assign product_image = image | image_url: width: 590 %}
                 {% assign product_image_lazyload = image | img_url: "small" %}
               {% endif %}
             {% endfor %}
@@ -34,21 +34,21 @@
           {% for image in extra_img.value %}
 
             {% if forloop.index == 1 %}
-              {% assign product_image = image | img_url: "master" %}
+              {% assign product_image = image | image_url: width: 590 %}
               {% assign product_image_lazyload = image | img_url: "small" %}
             {% endif %}
 
             {% if forloop.index == 2 %}
-              {% assign product_image_hover = image | img_url: "master" %}
+              {% assign product_image_hover = image | image_url: width: 590 %}
               {% assign product_image_hover_lazyload = image | img_url: "small" %}
             {% endif %}
           {% endfor %}
 
           {% else %}
-            {% assign product_image = product.featured_image | img_url: "master" %}
+            {% assign product_image = product.featured_image | image_url: width: 590 %}
             {% assign product_image_lazyload = product.featured_image | img_url: "small" %}
             {% if product.images[1] != blank %}
-              {% assign product_image_hover = product.images[1] | img_url: "master" %}
+              {% assign product_image_hover = product.images[1] | image_url: width: 590 %}
               {% assign product_image_hover_lazyload = product.images[1] | img_url: "small" %}
             {% endif %}
           {% endif %}
