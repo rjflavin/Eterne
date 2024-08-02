@@ -159,6 +159,9 @@
   min-height: 28px;
   padding: 0;
 }
+.product-form .quantity-submit-row.has-spb .btn:hover {
+  background-color: var(--black3);
+}
 .product-form .quantity-submit-row .add-to-cart, .product-form .quantity-submit-row .add-to-wishlist {
   min-height: unset !important;
   display: flex;

@@ -25,6 +25,7 @@
 html {
   --black1: #000000;
   --black2: #2B2B2B;
+  --black3: #121212;
   --gray: #515151;
   --gray1: #585858;
   --gray2: #8B8B8B;
@@ -184,4 +185,17 @@ img.sw_preloader {
 
 #SI_trigger {
   margin-bottom: 10px;
+}
+
+.removebutton, .addbutton {
+  &:hover {
+    background-color: var(--black3) !important;
+    border-color: var(--black3) !important;
+  }
+}
+
+h1.titletext {
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 }
