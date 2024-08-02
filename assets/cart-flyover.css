@@ -411,7 +411,7 @@
   padding: 14px;
   width: 100%;
   background-color: var(--black2);
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 12px;
@@ -419,4 +419,7 @@
   text-align: center;
   color: var(--white);
   text-transform: uppercase;
+}
+.cart-flyover-footer__checkout-button:hover {
+  background-color: var(--black3);
 }

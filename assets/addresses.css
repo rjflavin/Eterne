@@ -54,6 +54,9 @@
 .addresses__button:last-child {
   margin-right: 0;
 }
+.addresses__button:hover {
+  background-color: var(--black3);
+}
 .addresses__address-head-text {
   margin-bottom: 14px;
 }

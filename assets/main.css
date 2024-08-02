@@ -706,20 +706,6 @@ button svg {
 .btn .icon + span {
   vertical-align: middle;
 }
-@media (hover: none) {
-  .btn:active {
-    border-color: rgb(var(--btn-border-hover-color));
-    background: rgb(var(--btn-bg-hover-color));
-    color: rgb(var(--btn-text-hover-color));
-  }
-}
-@media (hover: hover) {
-  .btn:hover {
-    border-color: rgb(var(--btn-border-hover-color));
-    background: rgb(var(--btn-bg-hover-color));
-    color: rgb(var(--btn-text-hover-color));
-  }
-}
 .btn[disabled] {
   pointer-events: none;
 }
@@ -1625,7 +1611,6 @@ h6,
   font-weight: 500;
   letter-spacing: var(--btn-letter-spacing);
   text-decoration: underline;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-transform: var(--btn-text-transform);
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
@@ -1638,7 +1623,6 @@ h6,
 .underline-child a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-decoration-thickness: 1px;
 }
 .underline:hover, .product-policies a:hover,
@@ -1673,7 +1657,6 @@ h6,
 .rte a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-decoration-thickness: 1px;
 }
 .rte a:hover {
@@ -8602,7 +8585,6 @@ carousel-slider[inactive] .slider-nav__btn {
 .pickup-status .link {
   color: rgb(var(--link-color));
   text-decoration: underline;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-transform: none;
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
