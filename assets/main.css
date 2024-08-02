@@ -10127,8 +10127,8 @@ ul.inline li {
 }
 
 .small-form {
-  width: 420px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 420px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -10234,7 +10234,7 @@ label.checkbox-label input {
   background: rgba(0, 0, 0, 0.05);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
   .address-tables {
     display: flex;
     flex-wrap: wrap;
@@ -10813,13 +10813,6 @@ model-viewer .container {
     width: auto;
     margin-bottom: 20px;
     margin-left: 0;
-    float: none;
-  }
-  #customer_sidebar,
-#customer_orders {
-    display: block;
-    width: auto;
-    margin: 20px 0;
     float: none;
   }
 }
