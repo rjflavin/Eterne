@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "presets": {
     "Chantilly": {
@@ -606,6 +615,18 @@
           "utm_campaign": true,
           "utm_term": true,
           "ref": true
+        }
+      },
+      "2234522998043061298": {
+        "type": "shopify:\/\/apps\/uet-bing-conversion-tracking\/blocks\/star_rating\/3ce77892-57b6-48bc-ad3c-3c8e367c1e0f",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "10553572162545005813": {
+        "type": "shopify:\/\/apps\/upsell-app-by-essentialwolf\/blocks\/app-embed\/ae950cb1-1eb5-4b22-b308-ab5141c9f88c",
+        "disabled": false,
+        "settings": {
         }
       }
     }
