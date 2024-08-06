@@ -90,7 +90,7 @@
   line-height: 18.2px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  color: var(--black2);
+  color: var(--black);
 }
 @media (max-width: 1024px) {
   .collection__filter-block-title {
@@ -264,7 +264,7 @@
   height: 14px;
   flex-shrink: 0;
   flex-grow: 0;
-  border: 1px solid var(--black2);
+  border: 1px solid var(--black);
   border-radius: 0;
   margin-right: 10px;
   background-repeat: no-repeat;
@@ -499,7 +499,7 @@
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
-  color: var(--black1);
+  color: var(--black);
 }
 .collection__size-variant-text {
   margin-left: 15px;
@@ -630,7 +630,7 @@
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
-  color: var(--black1);
+  color: var(--black);
 }
 @media (max-width: 1024px) {
   .collection__item-title {
@@ -651,7 +651,7 @@
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
-  color: var(--black1);
+  color: var(--black);
 }
 @media (max-width: 1024px) {
   .collection__item-fabric-title {
@@ -666,7 +666,7 @@
   line-height: 183%;
   text-align: center;
   letter-spacing: 0.4px;
-  color: var(--black1);
+  color: var(--black);
 }
 @media (max-width: 1024px) {
   .collection__item-price {
@@ -714,7 +714,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border: 1px solid var(--black2);
+  border: 1px solid var(--black);
 }
 @media (max-width: 1024px) {
   .collection__item-color-cont {
@@ -745,7 +745,7 @@
 }
 .collection__preorder {
   display: flex;
-  border: 1px solid var(--black1);
+  border: 1px solid var(--black);
   border-radius: 4px;
 }
 .collection__preorder-text {
@@ -757,7 +757,7 @@
   letter-spacing: 0.4px;
   text-transform: uppercase;
   text-align: center;
-  color: var(--black1);
+  color: var(--black);
 }
 .collection__show-more-colors-btn {
   display: none;
@@ -793,13 +793,13 @@
 }
 .collection__see-more-btn {
   display: flex;
-  border: 1px solid var(--black2);
+  border: 1px solid var(--black);
   border-radius: 0;
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   cursor: pointer;
 }
 .collection__see-more-btn:hover {
-  background: var(--black2);
+  background: var(--black);
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .collection__see-more-btn:hover span {
@@ -814,7 +814,7 @@
   letter-spacing: 0.4px;
   text-transform: uppercase;
   text-align: center;
-  color: var(--black2);
+  color: var(--black);
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 @media (max-width: 1024px) {
@@ -837,7 +837,7 @@
   width: 30px;
   height: 30px;
   border: 3px solid #dfdfdf;
-  border-top: 3px solid var(--black1);
+  border-top: 3px solid var(--black);
   border-radius: 50px;
   animation: spin 2s linear infinite;
   margin: 0 auto;

@@ -83,7 +83,7 @@
 }
 .shopify-policy__body a {
   text-decoration: underline;
-  text-decoration-color: var(--black2);
+  text-decoration-color: var(--black);
 }
 .shopify-policy__body a:hover {
   color: var(--gray);

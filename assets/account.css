@@ -75,16 +75,16 @@
   text-transform: uppercase;
   text-align: center;
   color: var(--white);
-  background-color: var(--black2);
+  background-color: var(--black);
 }
 .account__button:hover {
-  background-color: var(--black3);
+  background-color: var(--black-hover);
 }
 .account__sidebar-separator {
   height: auto;
   width: 1px;
   margin: 0 20px;
-  background-color: var(--black2);
+  background-color: var(--black);
 }
 @media (max-width: 1024px) {
   .account__sidebar-separator {

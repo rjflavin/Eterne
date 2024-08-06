@@ -87,7 +87,7 @@
   padding: 8px 12px;
   background: var(--white);
   border-radius: 0;
-  color: var(--black1);
+  color: var(--black);
   max-width: 114px;
   width: 100%;
   height: 35px;
@@ -96,12 +96,12 @@
   text-align: center;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
-  border: 1px solid var(--black1);
+  border: 1px solid var(--black);
   cursor: pointer;
 }
 .newsletter__btn:hover {
   color: var(--white);
-  background: var(--black1);
+  background: var(--black);
   transition: all 0.3s ease-in-out;
 }
 
@@ -119,10 +119,10 @@
   height: 35px;
   margin-right: 13px !important;
   border-radius: 0 !important;
-  border: 1px solid var(--black2) !important;
+  border: 1px solid var(--black) !important;
   font-size: 12px !important;
   line-height: 18px !important;
-  color: var(--black1) !important;
+  color: var(--black) !important;
   box-shadow: unset !important;
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
@@ -262,7 +262,7 @@
   .mobile-drpd-text {
     font-size: 12px;
     line-height: 18px;
-    color: var(--black1);
+    color: var(--black);
     text-transform: uppercase;
   }
   .ftr-mobile-state {
@@ -290,7 +290,7 @@
   .ftr-mobile-drpd-item__text {
     font-size: 12px;
     line-height: 18px;
-    color: var(--black1);
+    color: var(--black);
     text-transform: uppercase;
   }
   .ftr-mobile-drpd-item__text:hover {
@@ -331,7 +331,7 @@
     margin: 0 20px;
     font-size: 12px;
     line-height: 18px;
-    color: var(--black1);
+    color: var(--black);
     text-transform: uppercase;
   }
   .ftr-mobile__link:hover {
