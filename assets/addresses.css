@@ -1,0 +1,76 @@
+.addresses__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addresses {
+  width: 100%;
+  margin: 0 54px 0 40px;
+}
+@media (max-width: 767px) {
+  .addresses {
+    margin: 0 20px;
+  }
+}
+.addresses__top-wrapper {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.addresses__title {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.addresses__top-buttons {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.addresses__button {
+  width: fit-content;
+  padding: 8px 16px;
+  margin-top: 16px;
+  margin-right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  line-height: 22px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--black);
+}
+.addresses__button:last-child {
+  margin-right: 0;
+}
+.addresses__button:hover {
+  background-color: var(--black-hover);
+}
+.addresses__address-head-text {
+  margin-bottom: 14px;
+}
+.addresses__addresses-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+@media (max-width: 1024px) {
+  .addresses__addresses-wrapper {
+    display: block;
+  }
+}
+.addresses__address-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}

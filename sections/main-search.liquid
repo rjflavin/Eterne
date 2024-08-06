@@ -144,19 +144,19 @@
               {% endfor %}
               {% for item in search.results %}
                 {% if item.featured_image != blank %}
-                  {% assign first_image = item.featured_image | image_url: width: 800 %}
+                  {% assign first_image = item.featured_image | image_url: width: 500 %}
                   {% assign first_image_lazy = item.featured_image | img_url: 'small' %}
                 {% else %}
                   {% assign first_image = emptyImage %}
                 {% endif %}
 
                 {% if item.media[1] != blank %}
-                  {% assign second_image = item.media[1] | image_url: width: 800 %}
+                  {% assign second_image = item.media[1] | image_url: width: 500 %}
                   {% assign second_image_lazy = item.media[1] | img_url: 'small' %}
-                  {% assign hoverImages = item.media[1] | image_url: width: 800 %}
+                  {% assign hoverImages = item.media[1] | image_url: width: 500 %}
                   {% assign hoverImages_lazy = item.media[1] | img_url: 'small' %}
                 {% elsif item.selected_or_first_available_variant.featured_image != blank %}
-                  {% assign second_image = item.selected_or_first_available_variant.featured_image | image_url: width: 800 %}
+                  {% assign second_image = item.selected_or_first_available_variant.featured_image | image_url: width: 500 %}
                   {% assign second_image_lazy = item.selected_or_first_available_variant.featured_image | img_url: 'small' %}
                 {% else %}
                   {% assign second_image = first_image %}

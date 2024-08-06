@@ -178,7 +178,7 @@ customEvents.forEach((event) => {
       // eslint-disable-next-line
       console.info(
         '%cTheme event triggered',
-        'background: #000; color: #bada55',
+        'background: #2B2B2B; color: #bada55',
         event,
         evt.detail
       );

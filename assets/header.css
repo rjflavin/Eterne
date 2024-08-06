@@ -60,7 +60,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--black2);
+  background-color: var(--black);
 }
 
 .top-bar__text {

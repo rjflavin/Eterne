@@ -14,3 +14,7 @@
     max-height: 300px;
   }
 }
+
+button[type=submit]:hover {
+  background-color: var(--black-hover);
+}

@@ -146,7 +146,7 @@
         "type": "color",
         "id": "btn_color_hover",
         "label": "Background hover",
-        "default": "#000000"
+        "default": "#2B2B2B"
       },
       {
         "type": "color",
@@ -273,7 +273,7 @@
         "type": "color",
         "id": "image_overlay_bg",
         "label": "Image tint",
-        "default": "#000000"
+        "default": "#2B2B2B"
       },
       {
         "type": "range",
@@ -376,7 +376,7 @@
         "type": "color",
         "id": "color_scheme_1_btn_color_hover",
         "label": "Background on hover",
-        "default": "#000000"
+        "default": "#2B2B2B"
       },
       {
         "type": "color",
@@ -454,7 +454,7 @@
         "type": "color",
         "id": "color_scheme_2_btn_color_hover",
         "label": "Background on hover",
-        "default": "#000000"
+        "default": "#2B2B2B"
       },
       {
         "type": "color",
@@ -612,7 +612,7 @@
         "type": "color",
         "id": "foot_heading_col",
         "label": "Headings",
-        "default": "#000000"
+        "default": "#2B2B2B"
       },
       {
         "type": "color",

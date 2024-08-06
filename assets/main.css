@@ -706,20 +706,6 @@ button svg {
 .btn .icon + span {
   vertical-align: middle;
 }
-@media (hover: none) {
-  .btn:active {
-    border-color: rgb(var(--btn-border-hover-color));
-    background: rgb(var(--btn-bg-hover-color));
-    color: rgb(var(--btn-text-hover-color));
-  }
-}
-@media (hover: hover) {
-  .btn:hover {
-    border-color: rgb(var(--btn-border-hover-color));
-    background: rgb(var(--btn-bg-hover-color));
-    color: rgb(var(--btn-text-hover-color));
-  }
-}
 .btn[disabled] {
   pointer-events: none;
 }
@@ -1625,7 +1611,6 @@ h6,
   font-weight: 500;
   letter-spacing: var(--btn-letter-spacing);
   text-decoration: underline;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-transform: var(--btn-text-transform);
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
@@ -1638,7 +1623,6 @@ h6,
 .underline-child a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-decoration-thickness: 1px;
 }
 .underline:hover, .product-policies a:hover,
@@ -1673,7 +1657,6 @@ h6,
 .rte a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-decoration-thickness: 1px;
 }
 .rte a:hover {
@@ -3963,7 +3946,7 @@ shopify-payment-terms {
   bottom: 4px;
   left: 4px;
   height: 3px;
-  background: #000;
+  background: #2B2B2B;
 }
 
 .gallery-viewer__controls {
@@ -3977,7 +3960,7 @@ shopify-payment-terms {
   position: absolute;
   padding: 10px;
   background: rgba(255, 255, 255, 0.7);
-  color: #000;
+  color: #2B2B2B;
   pointer-events: auto;
 }
 .gallery-viewer__button svg {
@@ -3986,7 +3969,7 @@ shopify-payment-terms {
   stroke-width: 1;
 }
 .gallery-viewer__button .feather {
-  stroke: #000;
+  stroke: #2B2B2B;
 }
 @media (max-width: 600px) {
   .gallery-viewer__button svg {
@@ -5943,7 +5926,7 @@ hotspots-image .image-overlay {
     height: 100%;
     transition: opacity 0.34s ease, visibility 0.34s;
     opacity: 0;
-    background: #000;
+    background: #2B2B2B;
     pointer-events: none;
   }
   .filter-container .sticky-content-container {
@@ -7508,7 +7491,7 @@ hotspots-image .image-overlay {
   height: 3px;
   transition: opacity 0.2s;
   opacity: 0;
-  background: #000;
+  background: #2B2B2B;
 }
 .thumbnails .is-active .thumbnail::after {
   opacity: 1;
@@ -8602,7 +8585,6 @@ carousel-slider[inactive] .slider-nav__btn {
 .pickup-status .link {
   color: rgb(var(--link-color));
   text-decoration: underline;
-  text-decoration-color: rgb(var(--link-color)/0.4);
   text-transform: none;
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
@@ -10127,8 +10109,8 @@ ul.inline li {
 }
 
 .small-form {
-  width: 420px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 420px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -10234,7 +10216,7 @@ label.checkbox-label input {
   background: rgba(0, 0, 0, 0.05);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
   .address-tables {
     display: flex;
     flex-wrap: wrap;
@@ -10813,13 +10795,6 @@ model-viewer .container {
     width: auto;
     margin-bottom: 20px;
     margin-left: 0;
-    float: none;
-  }
-  #customer_sidebar,
-#customer_orders {
-    display: block;
-    width: auto;
-    margin: 20px 0;
     float: none;
   }
 }
