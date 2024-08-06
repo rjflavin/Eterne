@@ -16,5 +16,5 @@
 }
 
 button[type=submit]:hover {
-  background-color: var(--black3);
+  background-color: var(--black-hover);
 }

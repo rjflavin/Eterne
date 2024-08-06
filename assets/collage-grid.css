@@ -92,7 +92,7 @@
 }
 .collage__one-image-row:hover .caption__link, .collage__two-images-row:hover .caption__link {
   background-color: var(--white);
-  color: var(--black2);
+  color: var(--black);
   transition: all 0.2s;
 }
 .collage__one-image-row .caption, .collage__two-images-row .caption {

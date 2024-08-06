@@ -23,9 +23,8 @@
 }
 
 html {
-  --black1: #000000;
-  --black2: #2B2B2B;
-  --black3: #121212;
+  --black: #2B2B2B;
+  --black-hover: #121212;
   --gray: #515151;
   --gray1: #585858;
   --gray2: #8B8B8B;
@@ -51,7 +50,7 @@ button {
 div, span, button, input, label, li, p, a, u, h1, h2, h3, h4, h5, h6, blockquote {
   font-family: "Helvetica Neue", sans-serif;
   font-weight: 400;
-  color: var(--black2);
+  color: var(--black);
   word-break: break-word;
   -webkit-font-smoothing: antialiased;
 }
@@ -189,8 +188,8 @@ img.sw_preloader {
 
 .removebutton, .addbutton, .btn {
   &:hover {
-    background-color: var(--black3) !important;
-    border-color: var(--black3) !important;
+    background-color: var(--black-hover) !important;
+    border-color: var(--black-hover) !important;
   }
 }
 

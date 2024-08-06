@@ -8,7 +8,7 @@
   align-self: start;
   margin-top: 5px;
   width: fit-content;
-  border: 1px solid var(--black1);
+  border: 1px solid var(--black);
   border-radius: 4px;
   padding: 0 10px;
   font-family: Helvetica Neue;
@@ -17,7 +17,7 @@
   line-height: 16.8px;
   letter-spacing: 0.02em;
   text-align: center;
-  color: var(--black1);
+  color: var(--black);
   text-transform: uppercase;
 }
 .cart-flyover-you-may-also-like {
@@ -86,7 +86,7 @@
   line-height: 18px;
   letter-spacing: 0.02em;
   text-align: center;
-  color: var(--black1);
+  color: var(--black);
   text-transform: uppercase;
 }
 .cart-flyover-header {
@@ -121,7 +121,7 @@
   line-height: 18.2px;
   letter-spacing: 0.02em;
   text-align: left;
-  color: var(--black2);
+  color: var(--black);
 }
 .cart-flyover-shipping-bar {
   margin: 0 0 23px;
@@ -137,7 +137,7 @@
   margin: 0;
 }
 .cart-flyover-shipping-bar__border {
-  border: 0.5px solid var(--black2);
+  border: 0.5px solid var(--black);
   height: 10px;
   background-color: transparent;
 }
@@ -233,7 +233,7 @@
   line-height: 15.6px;
   letter-spacing: 0.02em;
   text-align: left;
-  color: var(--black2);
+  color: var(--black);
 }
 @media (max-width: 767.98px) {
   .cart-flyover-item-description-info__title {
@@ -280,7 +280,7 @@
   line-height: 12px;
   letter-spacing: 0.02em;
   text-align: left;
-  color: var(--black2);
+  color: var(--black);
 }
 @media (max-width: 767.98px) {
   .cart-flyover-item-description-info-cart-buttons__quantity {
@@ -367,7 +367,7 @@
   line-height: 15.4px;
   letter-spacing: 0.02em;
   text-align: right;
-  color: var(--black2);
+  color: var(--black);
   text-decoration: underline;
   text-transform: uppercase;
 }
@@ -384,7 +384,7 @@
   line-height: 19.2px;
   letter-spacing: 0.02em;
   text-align: right;
-  color: var(--black2);
+  color: var(--black);
 }
 .cart-flyover-footer-info__text {
   font-family: Helvetica Neue;
@@ -410,7 +410,7 @@
   display: block;
   padding: 14px;
   width: 100%;
-  background-color: var(--black2);
+  background-color: var(--black);
   font-family: "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -421,5 +421,5 @@
   text-transform: uppercase;
 }
 .cart-flyover-footer__checkout-button:hover {
-  background-color: var(--black3);
+  background-color: var(--black-hover);
 }

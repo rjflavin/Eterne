@@ -1,3 +1,12 @@
+const getScrollbarWidth = function () {
+  const $scrollDiv = document.createElement('div');
+  $scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
+  document.body.appendChild($scrollDiv);
+  const scrollBarWidth = $scrollDiv.offsetWidth - $scrollDiv.clientWidth;
+  document.body.removeChild($scrollDiv);
+  return scrollBarWidth;
+};
+
 /**
  * Checks if a lazy load image has alternate <source> elements and copies the
  * 'data-src' and 'data-srcset' attributes to 'src' and 'srcset' accordingly.
@@ -874,11 +883,11 @@ class SideDrawer extends HTMLElement {
       bubbles: true
     }));
 
-    // Prevent page behind from scrolling when side drawer is open.
+    /*// Prevent page behind from scrolling when side drawer is open.
     this.scrollY = window.scrollY;
     document.body.classList.add('fixed');
     document.body.style.top = `-${this.scrollY}px`;
-    document.documentElement.style.height = '100vh';
+    document.documentElement.style.height = '100vh';*/
 
     this.overlay.classList.add('is-visible');
     this.setAttribute('open', '');
@@ -924,11 +933,11 @@ class SideDrawer extends HTMLElement {
 
     removeTrapFocus(this.opener);
 
-    // Restore page position and scroll behaviour.
+    /*// Restore page position and scroll behaviour.
     document.documentElement.style.height = '';
     document.body.style.top = '';
     document.body.classList.remove('fixed');
-    window.scrollTo(0, this.scrollY);
+    window.scrollTo(0, this.scrollY);*/
 
     // Remove event listeners added on drawer opening.
     this.removeEventListener('click', this.clickHandler);

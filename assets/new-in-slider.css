@@ -117,7 +117,7 @@
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.4px;
-  color: var(--black1);
+  color: var(--black);
 }
 @media (max-width: 1024px) {
   .new-in__item-title {
@@ -147,7 +147,7 @@
 }
 .new-in__preorder {
   display: flex;
-  border: 1px solid var(--black1);
+  border: 1px solid var(--black);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -160,7 +160,7 @@
   letter-spacing: 0.4px;
   text-transform: uppercase;
   text-align: center;
-  color: var(--black1);
+  color: var(--black);
 }
 .new-in__arrow-item {
   position: absolute;

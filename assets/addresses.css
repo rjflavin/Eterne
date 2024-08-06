@@ -49,13 +49,13 @@
   text-transform: uppercase;
   text-align: center;
   color: var(--white);
-  background-color: var(--black2);
+  background-color: var(--black);
 }
 .addresses__button:last-child {
   margin-right: 0;
 }
 .addresses__button:hover {
-  background-color: var(--black3);
+  background-color: var(--black-hover);
 }
 .addresses__address-head-text {
   margin-bottom: 14px;

@@ -5,6 +5,7 @@
     <h1 class="faq__header-title">{{ section.settings.section_title_text }}</h1>
     <div class="faq__header-desc">{{ section.settings.section_description_text }}</div>
   </div>
+
   <div class="faq__questions">
     {% assign isFirstGroupItem = true %}
     {% for block in section.blocks %}
@@ -23,25 +24,16 @@
               {% assign isFirstGroupItem = false %}
             {% endif %}
           "
-          data-faq-item
         >
           <div class="faq__question">
             <span class="faq__question-text no-select">{{ block.settings.question_text }}</span>
-            <div class="faq__question-btns">
-              <div class="faq__question-btn" data-plus-button>+</div>
-              <div class="faq__question-btn disp-none-imp" data-minus-button>−</div>
-            </div>
           </div>
-          <div class="faq__answer disp-none-imp">
-            {{ block.settings.answer_text }}
-          </div>
+          <div class="faq__answer">{{ block.settings.answer_text }}</div>
         </div>
       {% endif %}
     {% endfor %}
   </div>
 </div>
-
-{{ 'faq-script.js' | asset_url | script_tag }}
 
 {% schema %}
 {

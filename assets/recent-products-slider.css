@@ -27,7 +27,7 @@
   letter-spacing: 0.02em;
   text-align: left;
   margin-bottom: 12px;
-  color: var(--black2);
+  color: var(--black);
 }
 @media (max-width: 767px) {
   .recent-products-slider-title {
@@ -179,7 +179,7 @@
   line-height: 16.8px;
   letter-spacing: 0.02em;
   text-align: left;
-  color: var(--black2);
+  color: var(--black);
   cursor: pointer;
 }
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info-sizes-item:not(.unavailable):hover {
@@ -199,7 +199,7 @@
   line-height: 15.4px;
   letter-spacing: 0.02em;
   text-align: center;
-  color: var(--black2);
+  color: var(--black);
   text-transform: uppercase;
   text-decoration: underline;
   cursor: pointer;
@@ -232,7 +232,7 @@
   line-height: 15.4px;
   letter-spacing: 0.02em;
   text-align: center;
-  color: var(--black2);
+  color: var(--black);
   text-transform: uppercase;
   text-decoration: underline;
   margin-top: 7px;
@@ -246,7 +246,7 @@
 .recent-products-swiper .swiper-wrapper .swiper-slide-image-info-cart-loader-circle {
   width: 7px;
   height: 7px;
-  background-color: var(--black2);
+  background-color: var(--black);
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -278,7 +278,7 @@
   .recent-products-swiper .swiper-wrapper .swiper-slide-title {
     font-size: 10px;
     line-height: 18px;
-    color: var(--black1);
+    color: var(--black);
   }
 }
 @media (max-width: 767px) {
@@ -290,7 +290,7 @@
   align-self: center;
   margin-top: 15px;
   width: fit-content;
-  border: 1px solid var(--black1);
+  border: 1px solid var(--black);
   border-radius: 4px;
   padding: 0 10px;
   font-family: Helvetica Neue;
@@ -299,7 +299,7 @@
   line-height: 16.8px;
   letter-spacing: 0.02em;
   text-align: center;
-  color: var(--black1);
+  color: var(--black);
   text-transform: uppercase;
 }
 .recent-products-swiper-button-prev {
