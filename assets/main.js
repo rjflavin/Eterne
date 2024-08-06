@@ -883,6 +883,10 @@ class SideDrawer extends HTMLElement {
       bubbles: true
     }));
 
+    const scrollbarWidth = getScrollbarWidth();
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.classList.add('scr-dis');
+
     /*// Prevent page behind from scrolling when side drawer is open.
     this.scrollY = window.scrollY;
     document.body.classList.add('fixed');
@@ -932,6 +936,9 @@ class SideDrawer extends HTMLElement {
     this.overlay.classList.remove('is-visible');
 
     removeTrapFocus(this.opener);
+
+    document.body.classList.remove('scr-dis');
+    document.body.style.paddingRight = '0';
 
     /*// Restore page position and scroll behaviour.
     document.documentElement.style.height = '';
