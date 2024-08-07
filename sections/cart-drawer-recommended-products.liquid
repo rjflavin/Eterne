@@ -1,0 +1,9 @@
+{% if recommendations.performed and recommendations.products_count > 0 %}
+  <div class="recommended-products">
+    {% liquid
+      for product in recommendations.products
+        render 'cart-recommended-product-block', item: product
+      endfor
+    %}
+  </div>
+{% endif %}

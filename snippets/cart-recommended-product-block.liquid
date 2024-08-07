@@ -1,0 +1,27 @@
+<a
+  {% if item.url %}
+    href="{{ item.url }}"
+  {% endif %}
+  class="swiper-slide cart-flyover-you-may-also-like-swiper-item"
+>
+  <div class="cart-flyover-you-may-also-like-swiper-item-container">
+    {% assign image = item.images | first %}
+    <div class="cart-flyover-you-may-also-like-swiper-item__image-container">
+      {% if image %}
+        <div
+          class="cart-flyover-you-may-also-like-swiper-item__image {% if enable_image_blur %} lazyLoad{% endif %}"
+          {% if enable_image_blur %}
+            data-bgimage="{{ image | img_url: 'master' }}"
+            style="background-image: url('{{ image | img_url: 'small' }}'); filter: blur(2px)"
+          {% else %}
+            style="background-image: url('{{ image | image_url: width: 201 }}');"
+          {% endif %}
+        ></div>
+      {% endif %}
+    </div>
+    {% assign color = item.first_available_variant.options | first %}
+    <div class="cart-flyover-you-may-also-like-swiper-item__text">
+      {% if item.title %}{{ item.title }}{% endif -%}
+    </div>
+  </div>
+</a>

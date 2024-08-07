@@ -29,7 +29,7 @@
   margin-top: 43px;
 }
 .cart-flyover-you-may-also-like__title {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 18.2px;
@@ -54,11 +54,11 @@
   }
 }
 .cart-flyover-you-may-also-like-swiper__button-prev {
-  top: 28px;
+  top: 26px;
   right: 42.5px;
 }
 .cart-flyover-you-may-also-like-swiper__button-next {
-  top: 28px;
+  top: 26px;
   right: 14px;
 }
 .cart-flyover-you-may-also-like-swiper-item-container {
@@ -80,7 +80,7 @@
 }
 .cart-flyover-you-may-also-like-swiper-item__text {
   width: 131px;
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 10px;
   font-weight: 400;
   line-height: 18px;
@@ -112,10 +112,11 @@
   }
 }
 .cart-flyover-list__full-height {
-  max-height: 100vh;
+  justify-content: center !important;
+  max-height: 100%;
 }
 .cart-flyover__title {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 18.2px;
@@ -162,7 +163,7 @@
   background-color: transparent;
 }
 .cart-flyover-shipping-bar__text {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
@@ -227,7 +228,7 @@
   }
 }
 .cart-flyover-item-description-info__title {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 15.6px;
@@ -243,7 +244,7 @@
   }
 }
 .cart-flyover-item-description-info__options {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
@@ -274,7 +275,7 @@
   }
 }
 .cart-flyover-item-description-info-cart-buttons__quantity {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 12px;
@@ -292,7 +293,7 @@
   width: 9px;
   height: 12px;
   cursor: pointer;
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 12px;
@@ -312,7 +313,7 @@
   }
 }
 .cart-flyover-item-description-info-extra__text {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
@@ -322,7 +323,7 @@
   color: var(--gray5);
 }
 .cart-flyover-item-description__price {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 12px;
   font-weight: 300;
   line-height: 12px;
@@ -361,7 +362,7 @@
   }
 }
 .cart-flyover-footer-info__note {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 11px;
   font-weight: 400;
   line-height: 15.4px;
@@ -378,7 +379,7 @@
   gap: 10px;
 }
 .cart-flyover-footer-info-price__text {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 19.2px;
@@ -387,7 +388,7 @@
   color: var(--black);
 }
 .cart-flyover-footer-info__text {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 12px;

@@ -7,6 +7,37 @@ const getScrollbarWidth = function () {
   return scrollBarWidth;
 };
 
+const setCartDrawerElementsVisibility = (action) => {
+  const cartDrawerYouMayAlsoLikeElement = document.querySelector('.cart-flyover-you-may-also-like');
+  const cartDrawerShippingBarElement = document.querySelector('.cart-flyover-shipping-bar');
+  const cartDrawerFooterElement = document.querySelector('.cart-flyover-footer');
+
+  if (cartDrawerYouMayAlsoLikeElement) {
+    if (action === 'hide') {
+      cartDrawerYouMayAlsoLikeElement.classList.add('disp-none-imp');
+    }
+    if (action === 'show') {
+      cartDrawerYouMayAlsoLikeElement.classList.remove('disp-none-imp');
+    }
+  }
+  if (cartDrawerShippingBarElement) {
+    if (action === 'hide') {
+      cartDrawerShippingBarElement.classList.add('disp-none-imp');
+    }
+    if (action === 'show') {
+      cartDrawerShippingBarElement.classList.remove('disp-none-imp');
+    }
+  }
+  if (cartDrawerFooterElement) {
+    if (action === 'hide') {
+      cartDrawerFooterElement.classList.add('disp-none-imp');
+    }
+    if (action === 'show') {
+      cartDrawerFooterElement.classList.remove('disp-none-imp');
+    }
+  }
+}
+
 /**
  * Checks if a lazy load image has alternate <source> elements and copies the
  * 'data-src' and 'data-srcset' attributes to 'src' and 'srcset' accordingly.
@@ -2776,6 +2807,9 @@ const ProductForm = class extends HTMLElement {
           document.querySelector('.js-cart-drawer').open();
         }
       }
+
+      document.dispatchEvent(new CustomEvent('updateCartDrawerRecommendedProducts'));
+      setCartDrawerElementsVisibility('show');
 
       this.dispatchEvent(new CustomEvent('on:cart:add', {
         bubbles: true,
