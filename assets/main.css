@@ -3207,9 +3207,7 @@ body:not(.reveal-mobile-nav) .mobile-navigation-drawer .mobile-navigation-drawer
     font-size: 20px;
     line-height: 1em;
   }
-  .section-header {
-    z-index: 8000 !important;
-  }
+  
   .enable-mobile-nav-transition .mobile-navigation-drawer {
     visibility: visible;
     transition: transform 0.34s ease, visible 0.34s;
