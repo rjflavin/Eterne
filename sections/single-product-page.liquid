@@ -86,6 +86,19 @@
 </script>
 
 {% assign now = "now" | date: "%s" %}
+
+{% comment %}Media Zoom Modal{% endcomment %}
+{% if product.media.size >= 1 %}
+    <div id="mediaZoomModal" class="zoom-modal">
+        <div class="zoom-modal__inner">
+            <button title="Close (Esc)" type="button" class="zoom-modal__close-btn">×</button>
+            <div class="zoom-modal__image-container">
+                <img id="zoomImage" class="zoom-modal__img" src="" alt="{{ product.title }}" loading="lazy">
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 <single-product section-id="shopify-section-{{ section.id }}">
     <product-form class="js-product product-info quickbuy-content spaced-row">
         <div class="media-gallery">
@@ -98,16 +111,16 @@
                 </div>
                 <div class="product-slider__swiper-wrapper swiper-wrapper">
                     {% for image in product.media %}
-                        <div class="product-slider__slide swiper-slide">
+                        <div class="product-slider__slide swiper-slide" data-zoom-image="{{ image | img_url: 'master' }}">
                             {% assign productImageForSlider = image | image_url: width: 400 %}
-                            {% render 'image', image: productImageForSlider %}
+                            {% render 'image', image: productImageForSlider, is_zoomed: true %}
                         </div>
                     {% endfor %}
                 </div>
             </div>
             <div class="product-media-collage{% if product.media.size == 1 %} single-image{% endif %}">
                 {%- for image in product.media -%}
-                    <div class="product-media-collage__item">
+                    <div class="product-media-collage__item" data-zoom-image="{{ image | img_url: 'master' }}">
                         {% assign productImage = image | image_url: width: 500 %}
                         {% render 'image', image: productImage, class: 'product-media-collage__item-img' %}
                     </div>
