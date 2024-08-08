@@ -105,7 +105,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="product-media-collage{% if product.media.size <= 1 %} product-media-collage__single-image {% endif %}">
+            <div class="product-media-collage{% if product.media.size == 1 %} single-image{% endif %}">
                 {%- for image in product.media -%}
                     <div class="product-media-collage__item">
                         {% assign productImage = image | image_url: width: 500 %}
