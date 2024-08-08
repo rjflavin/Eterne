@@ -3,18 +3,13 @@
     {% if title_you_may_like %}{{ title_you_may_like }}{% endif %}
   </div>
 
+  {% assign enable_image_blur = settings.enable_img_blue_effect %}
   <div class="cart-flyover-you-may-also-like-swiper">
-    <div class="swiper-wrapper">
-      {% assign enable_image_blur = settings.enable_img_blue_effect %}
-
-      {% comment %}{% for product in recommendations.products %}
-        {% render 'cart-recommended-product-block', item: product %}
-      {% endfor %}{% endcomment %}
-    </div>
-    <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-prev">
+    <div class="swiper-wrapper"></div>
+    <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-prev no-select">
       <img src="{{ 'recent-products-arrow-left.png' | asset_img_url }}" alt="arrow left" loading="lazy">
     </div>
-    <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-next">
+    <div class="cart-flyover-you-may-also-like-swiper__button cart-flyover-you-may-also-like-swiper__button-next no-select">
       <img src="{{ 'recent-products-arrow-right.png' | asset_img_url }}" alt="arrow fight" loading="lazy">
     </div>
   </div>
