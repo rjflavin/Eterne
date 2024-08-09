@@ -229,9 +229,8 @@
   }
 }
 .collection__sort-category-options-grid {
-  display: grid;
-  grid-template: 1fr/1fr 1fr;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
   margin-top: 15px;
 }
 @media (max-width: 1024px) {
