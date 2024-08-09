@@ -143,15 +143,27 @@
           if (!firstlySelectedVariant) firstlySelectedVariant = product.variants[0];
           const productTitle = product.title;
           const isFirstVariantPreordered = firstlySelectedVariant.inventoryPolicy === "continue" && firstlySelectedVariant.inventoryQuantity <= 0;
-          let imageUrl = (product.images[0]) ? product.images[0] : noImage;
+          let imagePrimaryUrl = (product.images[0]) ? product.images[0] : noImage;
+          let imageHoverUrl = (product.images[1]) ? product.images[1] : noImage;
+          const getImageUrlWithWidth = (originalUrl, width) => {
+            const cleanedUrl = originalUrl.replace(/_(large|medium|small|grande|compact|thumbnail)\./, '.');
+            const [urlPart, queryPart] = cleanedUrl.split('?');
+            return `${urlPart}?width=${width}${queryPart ? '&' + queryPart : ''}`;
+          }
+          const imageWidth = 700;
+
+          if (product.images[0]) {
+            imagePrimaryUrl = getImageUrlWithWidth(imagePrimaryUrl, imageWidth);
+          }
+          if (product.images[1]) {
+            imageHoverUrl = getImageUrlWithWidth(imageHoverUrl, imageWidth);
+          }
+
           let imageUrlLazyLoad;
 
           if (enableImageBlur) {
-            let parts = imageUrl.split('.');
-            let extension = parts.pop();
-            let baseUrl = parts.join('.');
-            imageUrlLazyLoad = `${baseUrl}_small.${extension}`;
-          } else imageUrlLazyLoad = imageUrl;
+            imageUrlLazyLoad = product.images[0].replace('_large', '_small');
+          } else imageUrlLazyLoad = imagePrimaryUrl;
 
           const newProductHtml = `
             <div data-index=${index} data-swiper-slide-index="${index}" id="${product.productId}--${product.color}"
@@ -167,7 +179,7 @@
                 <a href="${firstlySelectedVariant.url}" class="swiper-slide-link"></a>
                 <div class="swiper-slide-image-container lazyLoad">
                   <div class="swiper-slide-image ${(enableImageBlur) ? "lazyLoad" : ""}"
-                       data-bgimage="${imageUrl}"
+                       data-bgimage="${imagePrimaryUrl}"
                        style="background-image: url('${imageUrlLazyLoad}'); ${enableImageBlur ?" filter: blur(2px)" : ""}"></div>
 
                   <div class="swiper-slide-image-info">
@@ -209,8 +221,8 @@
                   <div class="swiper-slide-image-info-button">
                     {% render 'icon-plus', fill: '#8B8B8B', stroke: '#8B8B8B' %}
                   </div>
-                  <input type="hidden" class="recent-products-swiper-first-image" value="${product.images[0]}" />
-                  <input type="hidden" class="recent-products-swiper-second-image" value="${product.images[1]}" />
+                  <input type="hidden" class="recent-products-swiper-first-image" value="${imagePrimaryUrl}" />
+                  <input type="hidden" class="recent-products-swiper-second-image" value="${imageHoverUrl}" />
                 </div>
                 <div class="swiper-slide-text-container">
                   <div class="swiper-slide-title">${product.title}</div>
@@ -269,7 +281,8 @@
       "id": "add_to_cart_text",
       "label": "Add item to cart text",
       "default": "Add to bag"
-    }
+    },
+
   ],
   "presets": [
     {

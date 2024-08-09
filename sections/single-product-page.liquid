@@ -121,7 +121,7 @@
             <div class="product-media-collage{% if product.media.size == 1 %} single-image{% endif %}">
                 {%- for image in product.media -%}
                     <div class="product-media-collage__item" data-zoom-image="{{ image | img_url: 'master' }}">
-                        {% assign productImage = image | image_url: width: 500 %}
+                        {% assign productImage = image | image_url: width: 1200 %}
                         {% render 'image', image: productImage, class: 'product-media-collage__item-img' %}
                     </div>
                 {%- endfor -%}
