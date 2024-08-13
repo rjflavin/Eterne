@@ -1,13 +1,13 @@
 {{ 'collage-grid.css' | asset_url | stylesheet_tag }}
+
 <style>
     video.desktop-video {
         cursor: auto;
     }
 </style>
 
-<div class="collage">
+<div class="collage" id="CollageGrid-{{ section.id }}">
     {% for block in section.blocks %}
-
         {% case block.type %}
             {% when 'one_image_row' %}
                 {% assign media_type = block.settings.media_type %}
@@ -65,20 +65,20 @@
                                 {% if block.settings.image_mobile != blank %}
                                     {% assign image_desk_class = "only-desk" %}
                                     <img
-                                            class="collage__image only-mob"
-                                            src="{{ block.settings.image_mobile | img_url: "master" }}"
-                                            alt="{{ block.settings.image_mobile.alt }}"
-                                            style="object-position: {{ block.settings.image_mobile.presentation.focal_point }}"
-                                            loading="lazy"
+                                      class="collage__image only-mob"
+                                      src="{{ block.settings.image_mobile | img_url: "master" }}"
+                                      alt="{{ block.settings.image_mobile.alt }}"
+                                      style="object-position: {{ block.settings.image_mobile.presentation.focal_point }}"
+                                      loading="lazy"
                                     >
                                 {% endif %}
 
                                 <img
-                                        class="collage__image {{ image_desk_class }}"
-                                        src="{{ block.settings.image | img_url: "master" }}"
-                                        alt="{{ block.settings.image.alt }}"
-                                        style="object-position: {{ block.settings.image.presentation.focal_point }}"
-                                        loading="lazy"
+                                  class="collage__image {{ image_desk_class }}"
+                                  src="{{ block.settings.image | img_url: "master" }}"
+                                  alt="{{ block.settings.image.alt }}"
+                                  style="object-position: {{ block.settings.image.presentation.focal_point }}"
+                                  loading="lazy"
                                 >
                             </div>
                         {% endif %}
@@ -88,9 +88,34 @@
                         {% if block.settings.video_mobile != blank %}
                             {% assign video_class = video_class | append: " only-desk" %}
                             {% assign video_mobile_class = "mobile-video only-mob" %}
-                            {{ block.settings.video_mobile | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+
+                            {% comment %}{{ block.settings.video_mobile | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}{% endcomment %}
+                            <video
+                              class="lazy {{ video_mobile_class }}"
+                              width="390"
+                              height="720"
+                              poster="{{ block.settings.video_mobile.preview_image | img_url: "master" }}"
+                              loop playsinline muted
+                              preload="none"
+                            >
+                              <source type="video/mp4" data-src="{{ block.settings.video_mobile.sources[1].url }}" />
+                              Your browser does not support the video tag
+                            </video>
                         {% endif %}
-                        {{ block.settings.video | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}
+
+                        {% comment %}{{ block.settings.video | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}{% endcomment %}
+                        <video
+                          class="lazy {{ video_class }}"
+                          width="620"
+                          height="720"
+                          poster="{{ block.settings.video.preview_image | img_url: "master" }}"
+                          loop playsinline muted
+                          preload="none"
+                        >
+                          <source type="video/mp4" data-src="{{ block.settings.video.sources[1].url }}" />
+                          Your browser does not support the video tag
+                        </video>
+
                         <!--  <div class="play-icon">
                             {% render "icon-play-video" %}
                         </div> -->
@@ -537,6 +562,34 @@
 </div>
 
 <script src="{{ 'custom-video-player.js' | asset_url }}" defer></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const isCurrentWidthMobile = window.innerWidth <= 768;
+
+    document.getElementById('CollageGrid-{{ section.id }}').querySelectorAll('video').forEach((video) => {
+      if (isCurrentWidthMobile) {
+        if (video.classList.contains('mobile-video')) {
+          const sources = video.querySelectorAll('source');
+          for(let index = 0; index < sources.length; index++) {
+            sources[index].setAttribute('src', sources[index].getAttribute('data-src'));
+          }
+          video.addEventListener("canplaythrough", () => video.play());
+          video.load();
+        }
+      } else {
+        if (video.classList.contains('desktop-video')) {
+          const sources = video.querySelectorAll('source');
+          for(let index = 0; index < sources.length; index++) {
+            sources[index].setAttribute('src', sources[index].getAttribute('data-src'));
+          }
+          video.addEventListener("canplaythrough", () => video.play());
+          video.load();
+        }
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {
