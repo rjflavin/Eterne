@@ -252,22 +252,23 @@
               {% endfor %}
 
               {% if isHiddenProduct == false or isHiddenProduct == true and canCustomerSeeHiddenProducts == true %}
-                <div
-                  class="collection__item"
-                  data-is-loaded-with-filters="true"
-                  data-collection-item
-                  data-is-variant-ready-to-fetch="true"
-                  data-is-variant-in-stock="{{ isVariantInStock }}"
-                  data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
-                  data-product-handle="{{ product.handle }}"
-                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                  data-selected-size="{{ sizeOption }}"
-                  data-selected-color="{{ colorOption }}"
-                  data-product-title="{{ product.title }}"
-                  data-default-color="{{ colorOption }}"
-                  data-first-image="{{ first_image }}"
-                  data-second-image="{{ second_image }}"
-                  data-hover-images="{{ hoverImages }}"
+                <div id="product--{{ product.id }}"
+                    data-id="{{ product.id }}"
+                    class="collection__item"
+                    data-is-loaded-with-filters="true"
+                    data-collection-item
+                    data-is-variant-ready-to-fetch="true"
+                    data-is-variant-in-stock="{{ isVariantInStock }}"
+                    data-is-any-variant-in-stock="{{ isAnyVariantInStock }}"
+                    data-product-handle="{{ product.handle }}"
+                    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                    data-selected-size="{{ sizeOption }}"
+                    data-selected-color="{{ colorOption }}"
+                    data-product-title="{{ product.title }}"
+                    data-default-color="{{ colorOption }}"
+                    data-first-image="{{ first_image }}"
+                    data-second-image="{{ second_image }}"
+                    data-hover-images="{{ hoverImages }}"
                 >
                   <div class="variant_inventory_policy disp-none-imp">
                     {% for variant in product.variants %}
