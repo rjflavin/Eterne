@@ -41,7 +41,6 @@
 .new-in__swiper-wrapper {
   position: relative;
   margin: 0 auto;
-  column-gap: 1.3227513vw;
 }
 @media (max-width: 1024px) {
   .new-in__swiper-wrapper {

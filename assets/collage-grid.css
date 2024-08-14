@@ -59,7 +59,6 @@
   position: relative;
   display: flex;
   width: 100%;
-  /* transform: scale(1.003);*/
 }
 .collage .media > a {
   font-size: 0;
