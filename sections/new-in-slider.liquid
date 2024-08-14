@@ -13,11 +13,10 @@
       {% for product in collections[collection_handle].products %}
         {% assign available_from = product.metafields.custom.available_from | date: "%s" %}
         {% if available_from < now or available_from == blank %}
-
           {% if product.metafields.new_in_slider.pdp_img_list.value != blank %}
             {% assign extra_img = product.metafields.new_in_slider.pdp_img_list %}
             {% assign extra_img_size = extra_img | split: "," | size %}
-            {% else %}
+          {% else %}
             {% assign extra_img_size = 0 %}
           {% endif %}
 
@@ -30,25 +29,21 @@
             {% endfor %}
 
             {% if product.images[1] != blank %}
-              {% assign product_image_hover = product.images[1] | img_url: "master" %}
+              {% assign product_image_hover = product.images[1] | image_url: width: 590 %}
               {% assign product_image_hover_lazyload = product.images[1] | img_url: "small" %}
             {% endif %}
-
-
           {% elsif extra_img_size > 1 %}
-          {% for image in extra_img.value %}
+            {% for image in extra_img.value %}
+              {% if forloop.index == 1 %}
+                {% assign product_image = image | image_url: width: 590 %}
+                {% assign product_image_lazyload = image | img_url: "small" %}
+              {% endif %}
 
-            {% if forloop.index == 1 %}
-              {% assign product_image = image | image_url: width: 590 %}
-              {% assign product_image_lazyload = image | img_url: "small" %}
-            {% endif %}
-
-            {% if forloop.index == 2 %}
-              {% assign product_image_hover = image | image_url: width: 590 %}
-              {% assign product_image_hover_lazyload = image | img_url: "small" %}
-            {% endif %}
-          {% endfor %}
-
+              {% if forloop.index == 2 %}
+                {% assign product_image_hover = image | image_url: width: 590 %}
+                {% assign product_image_hover_lazyload = image | img_url: "small" %}
+              {% endif %}
+            {% endfor %}
           {% else %}
             {% assign product_image = product.featured_image | image_url: width: 590 %}
             {% assign product_image_lazyload = product.featured_image | img_url: "small" %}
@@ -75,13 +70,13 @@
                   ></div>
                   {% if product_image_hover != blank %}
                     <div
-                        class="new-in__item-bg-img-hover{% if enable_image_blur %} lazyLoad{% endif %}"
-                        {% if enable_image_blur %}
-                          data-bgimage="{{ product_image_hover }}"
-                          style="background-image: url('{{ product_image_hover_lazyload }}'); filter: blur(2px)"
-                        {% else %}
-                          style="background-image: url('{{ product_image_hover }}');"
-                        {% endif %}
+                      class="new-in__item-bg-img-hover{% if enable_image_blur %} lazyLoad{% endif %}"
+                      {% if enable_image_blur %}
+                        data-bgimage="{{ product_image_hover }}"
+                        style="background-image: url('{{ product_image_hover_lazyload }}'); filter: blur(2px)"
+                      {% else %}
+                        style="background-image: url('{{ product_image_hover }}');"
+                      {% endif %}
                     ></div>
                   {% endif %}
                 </div>

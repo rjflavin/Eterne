@@ -1,12 +1,3 @@
-/*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
 {
   "sections": {
     "collage_grid_YqLqzV": {
@@ -20,8 +11,8 @@
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections\/t-shirts",
             "product_link_text": "shop poplin",
-            "video": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_16x9_META_COLOR.mp4",
-            "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_4x5_META_COLOR.mp4"
+            "video": "shopify:\/\/files\/videos\/d1bea4f367e44bbaa9b7dafda4d46ff9_compressed.mp4",
+            "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_4x5_META_COLOR_compressed.mp4"
           }
         }
       },
@@ -68,8 +59,8 @@
             "caption": "<p>cozy fall staples<\/p>",
             "product_link": "shopify:\/\/collections\/knitwear",
             "product_link_text": "shop knitwear",
-            "video": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4",
-            "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-04_4x5_META_COLOR.mp4"
+            "video": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO)_compressed.mp4",
+            "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-04_4x5_META_COLOR__compressed.mp4"
           }
         }
       },
@@ -86,17 +77,17 @@
           "type": "three_images_row",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify:\/\/shop_images\/ROW_4_IMAGE_1.jpg",
+            "image_1": "shopify:\/\/shop_images\/ROW_4_IMAGE_1_1.jpg",
             "caption_1": "<p>sawyer Top<\/p>",
             "product_link_1": "shopify:\/\/products\/sawyer-1",
             "product_link_text_1": "shop",
             "media_type_2": "image",
-            "image_2": "shopify:\/\/shop_images\/ROW_4_IMAGE_2.jpg",
+            "image_2": "shopify:\/\/shop_images\/ROW_4_IMAGE_2_1.jpg",
             "caption_2": "<p>journey top<\/p>",
             "product_link_2": "shopify:\/\/products\/journey-1",
             "product_link_text_2": "shop",
             "media_type_3": "image",
-            "image_3": "shopify:\/\/shop_images\/ROW_4_IMAGE_3.jpg",
+            "image_3": "shopify:\/\/shop_images\/ROW_4_IMAGE_3_1.jpg",
             "caption_3": "<p>Elton Vest<\/p>",
             "product_link_3": "shopify:\/\/collections\/knitwear",
             "product_link_text_3": "shop",
