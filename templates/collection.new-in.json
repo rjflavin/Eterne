@@ -12,7 +12,6 @@
     "flickity_slider_eJegiP": {
       "type": "flickity-slider",
       "settings": {
-        "image": "shopify:\/\/shop_images\/7..jpg",
         "bg_color": "#1c413c"
       }
     },
