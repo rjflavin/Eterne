@@ -1,5 +1,21 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
+    "flickity_slider_eJegiP": {
+      "type": "flickity-slider",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/D-takara_2000x_f8c4469c-3357-4d0b-9531-ceb7301ff5d2.webp",
+        "bg_color": "#1c413c"
+      }
+    },
     "collection": {
       "type": "collection",
       "settings": {
@@ -11,6 +27,7 @@
     }
   },
   "order": [
+    "flickity_slider_eJegiP",
     "collection"
   ]
 }
