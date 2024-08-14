@@ -9,6 +9,13 @@
 */
 {
   "sections": {
+    "flickity_slider_YPGGCV": {
+      "type": "flickity-slider",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/D-Landing_2000x_a0aac4f2-6fe3-4378-8a7b-e8e6ae0333c4.webp",
+        "bg_color": "#000000"
+      }
+    },
     "collection": {
       "type": "collection",
       "settings": {
@@ -20,6 +27,7 @@
     }
   },
   "order": [
+    "flickity_slider_YPGGCV",
     "collection"
   ]
 }
