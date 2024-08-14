@@ -575,7 +575,9 @@
             sources[index].setAttribute('src', sources[index].getAttribute('data-src'));
           }
           video.addEventListener("canplaythrough", () => video.play());
-          video.load();
+          setTimeout(() => {
+            video.load();
+          }, 2000);
         }
       } else {
         if (video.classList.contains('desktop-video')) {
@@ -584,7 +586,9 @@
             sources[index].setAttribute('src', sources[index].getAttribute('data-src'));
           }
           video.addEventListener("canplaythrough", () => video.play());
-          video.load();
+          setTimeout(() => {
+            video.load();
+          }, 2000);
         }
       }
     });
