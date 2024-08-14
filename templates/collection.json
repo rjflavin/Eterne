@@ -1,11 +1,25 @@
 {
   "sections": {
+    "flickity_slider_eJegiP": {
+      "type": "flickity-slider",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/D-takara_2000x_f8c4469c-3357-4d0b-9531-ceb7301ff5d2.webp",
+        "image_mobile": "shopify:\/\/shop_images\/M-takara_x800_6dda4323-4889-40bf-9063-7cb55c5e6b37.webp",
+        "bg_color": "#1c413c"
+      }
+    },
     "collection": {
       "type": "collection",
-      "settings": {}
+      "settings": {
+        "products_per_page": 12,
+        "products_per_page_with_filter": 12,
+        "filters_value": "category,color,size",
+        "more_swatches_btn": true
+      }
     }
   },
   "order": [
+    "flickity_slider_eJegiP",
     "collection"
   ]
 }
