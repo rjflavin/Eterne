@@ -174,7 +174,7 @@
 
   {{ 'base.scss' | asset_url | stylesheet_tag }}
   {{ 'policies.css' | asset_url | stylesheet_tag }}
-  <script src="//searchserverapi.com/widgets/shopify/init.js?a=1I0K7y6R3c"></script>
+  <script src="//searchserverapi.com/widgets/shopify/init.js?a=3m5v7J0j2E" async></script>
   <script>SearchaniseCustomerTags = [{% if customer.tags %}'{{ customer.tags | join: "','" }}'{% endif %}];</script>
 
   <script>
@@ -223,29 +223,20 @@
     {%- if settings.animations_enabled_desktop %} cc-animate-enabled{% endif -%}
   "
 >
-
   <a class="skip-link visually-hidden" href="#content">{{ 'accessibility.skip_to_content' | t }}</a>
 
-  {%- sections 'header-group' -%}
+  {% sections 'header-group' %}
 
   <main id="content" role="main">
     <div class="container cf">
-
       {{ content_for_layout }}
-
     </div>
   </main>
 
-  {%- if request.path != '/challenge' -%}
-    {% comment %}<div id="pagefooter">
-      {%- sections 'footer-group' -%}
-    </div>{% endcomment %}
-
+  {% if request.path != '/challenge' %}
     {% section 'footer' %}
-
-    {%- sections 'overlay-group' -%}
-  {%- endif -%}
-
+    {% sections 'overlay-group' %}
+  {% endif %}
 
   <a href="#" class="page-shade" aria-label="{{ 'general.navigation.close' | t }}"></a>
   <div class="overlay fixed top-0 right-0 bottom-0 left-0 js-overlay"></div>
