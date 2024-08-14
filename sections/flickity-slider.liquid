@@ -1,0 +1,62 @@
+{{ 'flickity-banner.css' | asset_url | stylesheet_tag }}
+
+<flickity-banner id ="FlickityBanner-{{ section.id }}" class="flickity-banner" style="background-color: {{ section.settings.bg_color }};">
+  {% if section.settings.image_mobile != blank %}
+      {% render 'image',
+              image: section.settings.image,
+              sizes: '100%',
+              widths: '1280, 1920',
+              class: 'flickity-banner__img flickity-banner_hidden desktop'
+      %}
+      {% render 'image',
+              image: section.settings.image_mobile,
+              sizes: '100%',
+              widths: '480, 640, 960',
+              class: 'flickity-banner__img flickity-banner_hidden mobile'
+      %}
+
+    {% else %}
+      {% render 'image',
+              image: section.settings.image,
+              sizes: '100%',
+              widths: '480, 640, 960, 1280, 1920',
+              class: 'flickity-banner__img flickity-banner_hidden'
+      %}
+  {% endif %}
+</flickity-banner>
+
+<script src="{{ 'flck-banner.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Flickity banner",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "id": "image",
+      "type": "image_picker",
+      "label": "Image"
+    },
+    {
+      "id": "image_mobile",
+      "type": "image_picker",
+      "label": "Image mobile"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flickity banner"
+    }
+  ]
+}
+{% endschema %}
