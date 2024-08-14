@@ -154,20 +154,20 @@
                                 {% endif %}
                                 <a href="{{ block.settings.product_link_1 }}">
                                     <img
-                                            class="media__image only-desk"
-                                            src="{{ block.settings.image_1 | img_url: "master" }}"
-                                            alt="{{ block.settings.image_1.alt }}"
-                                            style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
-                                            loading="lazy"
+                                        class="media__image only-desk"
+                                        src="{{ block.settings.image_1 | image_url: width: 1000 }}"
+                                        alt="{{ block.settings.image_1.alt }}"
+                                        style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                        loading="lazy"
                                     >
                                 </a>
                                 <a href="{{ block.settings.product_link_1 }}">
                                     <img
-                                            class="media__image only-mob"
-                                            src="{{ image_mobile_1 | img_url: "master" }}"
-                                            alt="{{ image_mobile_1.alt }}"
-                                            style="object-position: {{ image_mobile_1.presentation.focal_point }}"
-                                            loading="lazy"
+                                        class="media__image only-mob"
+                                        src="{{ image_mobile_1 | image_url: width: 1000 }}"
+                                        alt="{{ image_mobile_1.alt }}"
+                                        style="object-position: {{ image_mobile_1.presentation.focal_point }}"
+                                        loading="lazy"
                                     >
                                 </a>
                                 {{ caption }}
@@ -244,20 +244,20 @@
                                 {% endif %}
                                 <a href="{{ block.settings.product_link_2 }}">
                                     <img
-                                            class="media__image only-desk"
-                                            src="{{ block.settings.image_2 | img_url: "master" }}"
-                                            alt="{{ block.settings.image_2.alt }}"
-                                            style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
-                                            loading="lazy"
+                                        class="media__image only-desk"
+                                        src="{{ block.settings.image_2 | image_url: width: 1000 }}"
+                                        alt="{{ block.settings.image_2.alt }}"
+                                        style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                                        loading="lazy"
                                     >
                                 </a>
                                 <a href="{{ block.settings.product_link_2 }}">
                                     <img
-                                            class="media__image only-mob"
-                                            src="{{ image_mobile_2 | img_url: "master" }}"
-                                            alt="{{ image_mobile_2.alt }}"
-                                            style="object-position: {{ image_mobile_2.presentation.focal_point }}"
-                                            loading="lazy"
+                                        class="media__image only-mob"
+                                        src="{{ image_mobile_2 | image_url: width: 1000 }}"
+                                        alt="{{ image_mobile_2.alt }}"
+                                        style="object-position: {{ image_mobile_2.presentation.focal_point }}"
+                                        loading="lazy"
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
@@ -333,20 +333,20 @@
                                     {% assign image_class = "only-desk" %}
                                     <a href="{{ block.settings.product_link_1 }}">
                                         <img
-                                                class="media__image only-mob"
-                                                src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
-                                                alt="{{ block.settings.image_mobile_1.alt }}"
-                                                style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
-                                                loading="lazy"
+                                            class="media__image only-mob"
+                                            src="{{ block.settings.image_mobile_1 | image_url: width: 1000 }}"
+                                            alt="{{ block.settings.image_mobile_1.alt }}"
+                                            style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                                            loading="lazy"
                                         ></a>
                                 {% endif %}
                                 <a href="{{ block.settings.product_link_1 }}">
                                     <img
-                                            class="media__image {{ image_class }}"
-                                            src="{{ block.settings.image_1 | img_url: "master" }}"
-                                            alt="{{ block.settings.image_1.alt }}"
-                                            style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
-                                            loading="lazy"
+                                        class="media__image {{ image_class }}"
+                                        src="{{ block.settings.image_1 | image_url: width: 1000 }}"
+                                        alt="{{ block.settings.image_1.alt }}"
+                                        style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                        loading="lazy"
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_1 == "video" %}
@@ -357,20 +357,20 @@
                                                 {% if block.settings.image_mobile_1 != blank %}
                                                     {% assign image_desk_class = "only-desk" %}
                                                     <img
-                                                            class="collage__image only-mob"
-                                                            src="{{ block.settings.image_mobile_1 | img_url: "master" }}"
-                                                            alt="{{ block.settings.image_mobile_1.alt }}"
-                                                            style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
-                                                            loading="lazy"
+                                                        class="collage__image only-mob"
+                                                        src="{{ block.settings.image_mobile_1 | image_url: width: 1000 }}"
+                                                        alt="{{ block.settings.image_mobile_1.alt }}"
+                                                        style="object-position: {{ block.settings.image_mobile_1.presentation.focal_point }}"
+                                                        loading="lazy"
                                                     >
                                                 {% endif %}
 
                                                 <img
-                                                        class="collage__image {{ image_desk_class }}"
-                                                        src="{{ block.settings.image_1 | img_url: "master" }}"
-                                                        alt="{{ block.settings.image_1.alt }}"
-                                                        style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
-                                                        loading="lazy"
+                                                    class="collage__image {{ image_desk_class }}"
+                                                    src="{{ block.settings.image_1 | image_url: width: 1000 }}"
+                                                    alt="{{ block.settings.image_1.alt }}"
+                                                    style="object-position: {{ block.settings.image_1.presentation.focal_point }}"
+                                                    loading="lazy"
                                                 >
                                             </div>
                                         {% endif %}
@@ -416,20 +416,20 @@
                                     {% assign image_class = "only-desk" %}
                                     <a href="{{ block.settings.product_link_2 }}">
                                         <img
-                                                class="media__image only-mob"
-                                                src="{{ block.settings.image_mobile_2 | img_url: "master" }}"
-                                                alt="{{ block.settings.image_mobile_2.alt }}"
-                                                style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
-                                                loading="lazy"
+                                            class="media__image only-mob"
+                                            src="{{ block.settings.image_mobile_2 | image_url: width: 1000 }}"
+                                            alt="{{ block.settings.image_mobile_2.alt }}"
+                                            style="object-position: {{ block.settings.image_mobile_2.presentation.focal_point }}"
+                                            loading="lazy"
                                         ></a>
                                 {% endif %}
                                 <a href="{{ block.settings.product_link_2 }}">
                                     <img
-                                            class="media__image {{ image_class }}"
-                                            src="{{ block.settings.image_2 | img_url: "master" }}"
-                                            alt="{{ block.settings.image_2.alt }}"
-                                            style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
-                                            loading="lazy"
+                                        class="media__image {{ image_class }}"
+                                        src="{{ block.settings.image_2 | image_url: width: 1000 }}"
+                                        alt="{{ block.settings.image_2.alt }}"
+                                        style="object-position: {{ block.settings.image_2.presentation.focal_point }}"
+                                        loading="lazy"
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_2 == "video" %}
@@ -499,20 +499,20 @@
                                     {% assign image_class = "only-desk" %}
                                     <a href="{{ block.settings.product_link_3 }}">
                                         <img
-                                                class="media__image only-mob"
-                                                src="{{ block.settings.image_mobile_3 | img_url: "master" }}"
-                                                alt="{{ block.settings.image_mobile_3.alt }}"
-                                                style="object-position: {{ block.settings.image_mobile_3.presentation.focal_point }}"
-                                                loading="lazy"
+                                            class="media__image only-mob"
+                                            src="{{ block.settings.image_mobile_3 | image_url: width: 1000 }}"
+                                            alt="{{ block.settings.image_mobile_3.alt }}"
+                                            style="object-position: {{ block.settings.image_mobile_3.presentation.focal_point }}"
+                                            loading="lazy"
                                         ></a>
                                 {% endif %}
                                 <a href="{{ block.settings.product_link_3 }}">
                                     <img
-                                            class="media__image {{ image_class }}"
-                                            src="{{ block.settings.image_3 | img_url: "master" }}"
-                                            alt="{{ block.settings.image_3.alt }}"
-                                            style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
-                                            loading="lazy"
+                                        class="media__image {{ image_class }}"
+                                        src="{{ block.settings.image_3 | image_url: width: 1000 }}"
+                                        alt="{{ block.settings.image_3.alt }}"
+                                        style="object-position: {{ block.settings.image_3.presentation.focal_point }}"
+                                        loading="lazy"
                                     ></a>
                                 {{ caption }}
                             {% elsif media_type_3 == "video" %}
