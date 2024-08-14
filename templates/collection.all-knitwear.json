@@ -17,9 +17,17 @@
         "filters_value": "category,color,size",
         "more_swatches_btn": true
       }
+    },
+    "flickity_slider_X8AQ7m": {
+      "type": "flickity-slider",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/D-Landing_2000x_a0aac4f2-6fe3-4378-8a7b-e8e6ae0333c4.webp",
+        "bg_color": "#000000"
+      }
     }
   },
   "order": [
-    "collection"
+    "collection",
+    "flickity_slider_X8AQ7m"
   ]
 }
