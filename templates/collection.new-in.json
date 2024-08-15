@@ -11,6 +11,19 @@
   "sections": {
     "collection": {
       "type": "collection",
+      "blocks": {
+        "static_item_73T6jA": {
+          "type": "static-item",
+          "settings": {
+            "product": "journey-1",
+            "static_image": "shopify:\/\/shop_images\/Row_4_Image_1_4x5_fd975022-63d6-498b-893c-73970f3adaeb.jpg",
+            "static_image_position": "after"
+          }
+        }
+      },
+      "block_order": [
+        "static_item_73T6jA"
+      ],
       "settings": {
         "products_per_page": 12,
         "products_per_page_with_filter": 12,
