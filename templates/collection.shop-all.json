@@ -43,13 +43,30 @@
             "static_image": "shopify:\/\/shop_images\/hands-slice-red-pepper-on-wooden-cutting-board.jpg",
             "static_image_position": "before"
           }
+        },
+        "static_item_P8DYM4": {
+          "type": "static-item",
+          "settings": {
+            "product": "",
+            "static_image_position": "after"
+          }
+        },
+        "static_item_TzPTby": {
+          "type": "static-item",
+          "settings": {
+            "product": "short-sleeve-baby-ivory",
+            "static_image": "shopify:\/\/shop_images\/model-laughs-barefoot.jpg",
+            "static_image_position": "before"
+          }
         }
       },
       "block_order": [
         "static_item_Q33GNT",
         "static_item_PdBRQG",
         "static_item_KD4kEp",
-        "static_item_6mfbrY"
+        "static_item_6mfbrY",
+        "static_item_P8DYM4",
+        "static_item_TzPTby"
       ],
       "settings": {
         "products_per_page": 12,
