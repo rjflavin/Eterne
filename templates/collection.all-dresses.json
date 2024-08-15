@@ -11,19 +11,6 @@
   "sections": {
     "collection": {
       "type": "collection",
-      "blocks": {
-        "static_item_gz7Fcf": {
-          "type": "static-item",
-          "settings": {
-            "product": "long-sleeve-turtleneck-dress-mini-black-black",
-            "static_image": "shopify:\/\/shop_images\/c13e3f11-27aa-a487-8f7a-b906de37faca.jpg",
-            "static_image_position": "before"
-          }
-        }
-      },
-      "block_order": [
-        "static_item_gz7Fcf"
-      ],
       "settings": {
         "products_per_page": 12,
         "products_per_page_with_filter": 12,
