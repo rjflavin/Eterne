@@ -43,13 +43,22 @@
             "static_image": "shopify:\/\/shop_images\/hands-slice-red-pepper-on-wooden-cutting-board.jpg",
             "static_image_position": "before"
           }
+        },
+        "static_item_6mfbrY": {
+          "type": "static-item",
+          "settings": {
+            "product": "short-sleeve-baby-tee-black",
+            "static_image": "shopify:\/\/shop_images\/hands-slice-red-pepper-on-wooden-cutting-board.jpg",
+            "static_image_position": "before"
+          }
         }
       },
       "block_order": [
         "static_item_9eCPAK",
         "static_item_Q33GNT",
         "static_item_PdBRQG",
-        "static_item_KD4kEp"
+        "static_item_KD4kEp",
+        "static_item_6mfbrY"
       ],
       "settings": {
         "products_per_page": 12,
