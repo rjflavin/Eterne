@@ -15,9 +15,9 @@
         "static_item_WgNGRH": {
           "type": "static-item",
           "settings": {
-            "product": "long-sleeve-crewneck-dress-maxi-black",
+            "product": "long-sleeve-crewneck-dress-mini-cream",
             "static_image": "shopify:\/\/shop_images\/c13e3f11-27aa-a487-8f7a-b906de37faca.jpg",
-            "static_image_position": "after"
+            "static_image_position": "before"
           }
         }
       },
