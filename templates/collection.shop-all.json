@@ -12,14 +12,6 @@
     "collection": {
       "type": "collection",
       "blocks": {
-        "static_item_9eCPAK": {
-          "type": "static-item",
-          "settings": {
-            "product": "short-sleeve-baby-ivory",
-            "static_image": "shopify:\/\/shop_images\/model-laughs-barefoot.jpg",
-            "static_image_position": "after"
-          }
-        },
         "static_item_Q33GNT": {
           "type": "static-item",
           "settings": {
@@ -51,23 +43,13 @@
             "static_image": "shopify:\/\/shop_images\/hands-slice-red-pepper-on-wooden-cutting-board.jpg",
             "static_image_position": "before"
           }
-        },
-        "static_item_ne3wmg": {
-          "type": "static-item",
-          "settings": {
-            "product": "classic-sweatpant-black",
-            "static_image": "shopify:\/\/shop_images\/JOURNEYBLACK.jpg",
-            "static_image_position": "after"
-          }
         }
       },
       "block_order": [
-        "static_item_9eCPAK",
         "static_item_Q33GNT",
         "static_item_PdBRQG",
         "static_item_KD4kEp",
-        "static_item_6mfbrY",
-        "static_item_ne3wmg"
+        "static_item_6mfbrY"
       ],
       "settings": {
         "products_per_page": 12,
