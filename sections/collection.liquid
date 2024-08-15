@@ -403,6 +403,23 @@
   {% endpaginate %}
 </eterne-collection>
 
+<script defer>
+  const staticItems = [
+    {% for block in section.blocks %}
+    {% if block.type == 'static-item'
+    and block.settings.static_image != blank
+    and block.settings.product != blank %}
+    {
+      imageSrc: "{{ block.settings.static_image | img_url: 'master' }}",
+      productId: "{{ block.settings.product.id }}",
+      position: "{{ block.settings.static_image_position }}",
+    }{% if forloop.last == false %},{% endif %}
+    {% endif %}
+    {% endfor %}
+  ];
+  sessionStorage.setItem('staticItems', JSON.stringify(staticItems));
+</script>
+
 {{ 'collection-script.js' | asset_url | script_tag }}
 
 {% schema %}
@@ -444,6 +461,44 @@
       "id": "more_swatches_btn",
       "label": "Show More Swatches button",
       "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "static-item",
+      "name": "Static item",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Before or after that product a static image will be displayed"
+        },
+        {
+          "type": "image_picker",
+          "id": "static_image",
+          "label": "Static image"
+        },
+        {
+          "type": "select",
+          "id": "static_image_position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "before",
+              "label": "Before"
+            },
+            {
+              "value": "after",
+              "label": "After"
+            }
+          ],
+          "default": "after"
+        }
+      ]
     }
   ],
   "presets": [

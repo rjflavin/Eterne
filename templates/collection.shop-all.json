@@ -1,15 +1,45 @@
 {
   "sections": {
-    "flickity_slider_E6NMnx": {
-      "type": "flickity-slider",
-      "settings": {
-        "image": "shopify:\/\/shop_images\/D-takara_2000x_f8c4469c-3357-4d0b-9531-ceb7301ff5d2.webp",
-        "image_mobile": "shopify:\/\/shop_images\/M-takara_x800_6dda4323-4889-40bf-9063-7cb55c5e6b37.webp",
-        "bg_color": "#395650"
-      }
-    },
     "collection": {
       "type": "collection",
+      "blocks": {
+        "static_item_9eCPAK": {
+          "type": "static-item",
+          "settings": {
+            "product": "short-sleeve-baby-ivory",
+            "static_image": "shopify:\/\/shop_images\/Row_4_Image_1_4x5_fd975022-63d6-498b-893c-73970f3adaeb.jpg"
+          }
+        },
+        "static_item_Q33GNT": {
+          "type": "static-item",
+          "settings": {
+            "product": "lounge-pant-black",
+            "static_image": "shopify:\/\/shop_images\/model-laughs-barefoot.jpg"
+          }
+        },
+        "static_item_PdBRQG": {
+          "type": "static-item",
+          "settings": {
+            "product": "thermal-lounge-pant-black",
+            "static_image": "shopify:\/\/shop_images\/7..jpg",
+            "static_image_position": "before"
+          }
+        },
+        "static_item_KD4kEp": {
+          "type": "static-item",
+          "settings": {
+            "product": "long-sleeve-crewneck-dress-maxi-chocolate",
+            "static_image": "shopify:\/\/shop_images\/hands-slice-red-pepper-on-wooden-cutting-board.jpg",
+            "static_image_position": "after"
+          }
+        }
+      },
+      "block_order": [
+        "static_item_9eCPAK",
+        "static_item_Q33GNT",
+        "static_item_PdBRQG",
+        "static_item_KD4kEp"
+      ],
       "settings": {
         "products_per_page": 12,
         "products_per_page_with_filter": 12,
@@ -19,7 +49,6 @@
     }
   },
   "order": [
-    "flickity_slider_E6NMnx",
     "collection"
   ]
 }
