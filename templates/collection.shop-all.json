@@ -51,6 +51,14 @@
             "static_image": "shopify:\/\/shop_images\/hands-slice-red-pepper-on-wooden-cutting-board.jpg",
             "static_image_position": "before"
           }
+        },
+        "static_item_ne3wmg": {
+          "type": "static-item",
+          "settings": {
+            "product": "classic-sweatpant-black",
+            "static_image": "shopify:\/\/shop_images\/JOURNEYBLACK.jpg",
+            "static_image_position": "after"
+          }
         }
       },
       "block_order": [
@@ -58,7 +66,8 @@
         "static_item_Q33GNT",
         "static_item_PdBRQG",
         "static_item_KD4kEp",
-        "static_item_6mfbrY"
+        "static_item_6mfbrY",
+        "static_item_ne3wmg"
       ],
       "settings": {
         "products_per_page": 12,
