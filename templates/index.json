@@ -123,7 +123,7 @@
         "two_images_row_gTBGDq": {
           "type": "two_images_row",
           "settings": {
-            "enable_carousel_mobile": false,
+            "enable_carousel_mobile": true,
             "orientation": "landscape",
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/ROW_5_IMAGE_1.jpg",
