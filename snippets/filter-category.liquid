@@ -46,8 +46,8 @@
             {% if activeFiltersQuantity == 0 %}
               {% if isShopCollectionFilters and filterLabel == 'Category' %}
                 {% if value.label == 'Tops' or value.label == 'Bottoms' or value.label == 'Dresses' or
-                  value.label == 'Knitwear' or value.label == 'Intimates' or value.label == 'Swim' or
-                  value.label == 'Accessories'
+                  value.label == 'Knitwear' or value.label == 'Intimates' or value.label == 'Lounge' or
+                  value.label == 'Swim' or value.label == 'Accessories'
                 %}
                   {% render 'filter-item-shop-all', index: shopAllCollectionFilterIndexWithoutActiveFilters,
                     forloop: forloop, value: value, filtersType: filtersType, visibleFiltersQuantity: visibleFiltersQuantity,
