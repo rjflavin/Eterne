@@ -1,0 +1,51 @@
+<li
+  id="filter-{{ index }}--{{ forloop.index }}"
+  class="filterWrapperListItem collection__sort-category-option
+    {% if value.active %}activeFilterValue{% endif %}
+    {% if index > visibleFiltersQuantity %}collection__sort-category-option_hidden{% endif %}
+  "
+  {% if index > visibleFiltersQuantity %}data-option-to-hide="true"{% endif %}
+>
+  {% if filtersType == "checkbox" %}
+    <input
+      class="filterWrapperCheckboxDefault collection__sort-category-option-checkbox"
+      type="checkbox"
+      name="{{ value.param_name }}"
+      value="{{ value.value }}"
+      id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ index }}"
+      {% if value.active %}checked{% endif %}
+    >
+    <label
+      for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ index }}"
+      class="filterWrapperItemLabel no-select {% if index > visibleFiltersQuantity %}disp-none-imp{% endif %}"
+      {% if index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
+    >
+      <span
+        class="filterWrapperListItemText collection__sort-category-option-text"
+        aria-hidden="true"
+      >
+        {{ value.label }} ({{ filterQuantityValue }})
+      </span>
+    </label>
+  {% else %}
+    <input
+      class="filterWrapperCheckboxDefault collection__sort-category-option-radio"
+      type="radio"
+      name="{{ value.param_name }}"
+      value="{{ value.value }}"
+      id="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+    >
+    <label
+      for="Filter-{{ filter.param_name | escape }}-{{ index }}-{{ forloop.index }}"
+      class="filterWrapperItemLabel no-select {% if forloop.index > visibleFiltersQuantity %}disp-none-imp{% endif %}"
+      {% if forloop.index > visibleFiltersQuantity %}data-label-to-hide{% endif %}
+    >
+      <span
+        class="filterWrapperListItemText collection__sort-category-option-text"
+        aria-hidden="true"
+      >
+        {{ value.label }}
+      </span>
+    </label>
+  {% endif %}
+</li>

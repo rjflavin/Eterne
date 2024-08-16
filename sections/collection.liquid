@@ -73,13 +73,11 @@
             <div id="FacetsWrapperDesktop" class="collection__filters-content">
               <div class="collection__radio-filters">
                 {% render 'filter-category-sorting',
-                        visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
+                    visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity
                 %}
               </div>
 
               <div class="collection__checkbox-filters">
-                {% assign activeFiltersQuantity = 0 %}
-
                 {% for filter in collection.filters %}
                   {% assign filterLabel = filter.label %}
                   {% assign filterName = filter.label | downcase %}
@@ -93,15 +91,20 @@
 
                   {% if filter.type == 'list' and filtersToDisplay contains filterName %}
                     {% if visibleFiltresQuantity > 0 %}
-                        {% render 'filter-category',
-                                filter: filter,
-                                filterLabel: filter.label,
-                                index: forloop.index,
-                                filtersType: 'checkbox',
-                                visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
-                                isFirst: isFirst,
-                                isFirst2: isFirst2
-                        %}
+                      {% assign isShopCollectionFilters = false %}
+                      {% if collection.handle == 'shop' %}
+                        {% assign isShopCollectionFilters = true %}
+                      {% endif %}
+
+                      {% render 'filter-category',
+                        filter: filter,
+                        filterLabel: filter.label,
+                        index: forloop.index,
+                        filtersType: 'checkbox',
+                        visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
+                        activeFiltersQuantity: activeFiltersQuantity,
+                        isShopCollectionFilters: isShopCollectionFilters
+                      %}
                     {% endif %}
                   {% endif %}
                 {% endfor %}
@@ -115,13 +118,6 @@
       <div class="collection__products-wrap">
         <div class="collection__products collection" id="CollectionProductGrid" data-id="{{ section.id }}"
              data-next-url="{{ paginate.next.url }}">
-          {% for filter in collection.filters %}
-            {% for value in filter.values %}
-              {% if value.active %}
-                {% assign activeFiltersQuantity = activeFiltersQuantity | plus: 1 %}
-              {% endif %}
-            {% endfor %}
-          {% endfor %}
           {% for product in collection.products %}
             {% if product.featured_image != blank %}
               {% assign first_image = product.featured_image | image_url: width: 500 %}
