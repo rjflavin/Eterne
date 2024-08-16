@@ -39,7 +39,7 @@
         "two_images_row_jCkJRF": {
           "type": "two_images_row",
           "settings": {
-            "enable_carousel_mobile": false,
+            "enable_carousel_mobile": true,
             "orientation": "portrait",
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/ROW_2_IMAGE_1.jpg",
