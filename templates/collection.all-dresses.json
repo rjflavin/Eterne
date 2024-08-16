@@ -9,12 +9,6 @@
 */
 {
   "sections": {
-    "flickity_slider_FcaUyj": {
-      "type": "flickity-slider",
-      "settings": {
-        "bg_color": "#5c5c5c"
-      }
-    },
     "collection": {
       "type": "collection",
       "settings": {
@@ -26,7 +20,6 @@
     }
   },
   "order": [
-    "flickity_slider_FcaUyj",
     "collection"
   ]
 }
