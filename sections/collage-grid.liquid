@@ -9,6 +9,7 @@
 <div class="collage" id="CollageGrid-{{ section.id }}">
     {% for block in section.blocks %}
         {% case block.type %}
+
             {% when 'one_image_row' %}
                 {% assign media_type = block.settings.media_type %}
 
@@ -59,7 +60,7 @@
                     </div>
                 {% elsif media_type == "video" %}
                     <custom-video-player class="collage__one-image-row {{ block.settings.orientation }}" {% if block.settings.product_link != blank %}data-href="{{ block.settings.product_link }}"{% endif %}>
-                        {% if block.settings.image %}
+                        {% comment %}{% if block.settings.image %}
                             <div class="collage__cover-video-image">
                                 {% assign image_desk_class = "" %}
                                 {% if block.settings.image_mobile != blank %}
@@ -81,20 +82,25 @@
                                   loading="lazy"
                                 >
                             </div>
-                        {% endif %}
+                        {% endif %}{% endcomment %}
 
                         {% assign video_class = "desktop-video" %}
                         {% assign video_mobile_class = "mobile-video" %}
+                        {% assign desktopPosterImage = block.settings.image | image_url: width: 1200 %}
+                        {% assign mobilePosterImage = block.settings.image_mobile | image_url: width: 1200 %}
                         {% if block.settings.video_mobile != blank %}
                             {% assign video_class = video_class | append: " only-desk" %}
                             {% assign video_mobile_class = "mobile-video only-mob" %}
+                            {% if mobilePosterImage.size == blank %}
+                              {% assign mobilePosterImage = block.settings.video_mobile.preview_image | image_url: width: 1000 %}
+                            {% endif %}
 
                             {% comment %}{{ block.settings.video_mobile | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}{% endcomment %}
                             <video
                               class="lazy {{ video_mobile_class }}"
                               width="390"
                               height="720"
-                              poster="{{ block.settings.video_mobile.preview_image | image_url: width: 390 }}"
+                              poster="{{ mobilePosterImage }}"
                               loop playsinline muted
                               preload="none"
                             >
@@ -104,11 +110,15 @@
                         {% endif %}
 
                         {% comment %}{{ block.settings.video | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}{% endcomment %}
+
+                        {% if desktopPosterImage == blank %}
+                          {% assign desktopPosterImage = block.settings.video.preview_image | image_url: width: 1200 %}
+                        {% endif %}
                         <video
                           class="lazy {{ video_class }}"
                           width="620"
                           height="720"
-                          poster="{{ block.settings.video.preview_image | image_url: width: 1200 }}"
+                          poster="{{ desktopPosterImage }}"
                           loop playsinline muted
                           preload="none"
                         >
@@ -122,6 +132,7 @@
                         {{ caption }}
                     </custom-video-player>
                 {% endif %}
+
             {% when 'two_images_row' %}
                 <div class="collage__two-images-row {{ block.settings.orientation }}{% if block.settings.enable_carousel_mobile %} carousel-mobile{% endif %}">
                     <div class="collage__two-images-row-inner">
