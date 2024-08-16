@@ -32,7 +32,7 @@
 
                 {% if media_type == "image" or block.settings.video == blank %}
                     <div class="collage__one-image-row {{ block.settings.orientation }}">
-                      <div class="media item-1">
+                      <div class="media">
                         {% if block.settings.image_mobile != blank %}
                           {% assign image_mobile = block.settings.image_mobile %}
                         {% else %}
@@ -123,9 +123,9 @@
                     </custom-video-player>
                 {% endif %}
             {% when 'two_images_row' %}
-                <div class="collage__two-images-row {{ block.settings.orientation }}">
+                <div class="collage__two-images-row {{ block.settings.orientation }}{% if block.settings.enable_carousel_mobile %} carousel-mobile{% endif %}">
                     <div class="collage__two-images-row-inner">
-                        <div class="media item-1">
+                        <div class="media">
                             {% assign media_type_1 = block.settings.media_type_1 %}
 
                             {% capture caption %}
@@ -215,7 +215,7 @@
 
                             {% endif %}
                         </div>
-                        <div class="media item-2">
+                        <div class="media">
                             {% assign media_type_2 = block.settings.media_type_2 %}
 
                             {% capture caption %}
@@ -304,7 +304,7 @@
                 </div>
 
             {% when 'three_images_row' %}
-                <div class="collage__three-images-row">
+                <div class="collage__three-images-row {% if block.settings.enable_carousel_mobile %} carousel-mobile{% endif %}">
                     <ul class="collage__three-images-row-inner">
                         <li class="media">
                             {% assign media_type_1 = block.settings.media_type_1 %}
@@ -688,6 +688,16 @@
       "name": "Two images row",
       "settings": [
         {
+          "type": "header",
+          "content": "Carousel settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_carousel_mobile",
+          "label": "Enable carousel on mobile",
+          "default": false
+        },
+        {
           "type": "radio",
           "id": "orientation",
           "label": "Media orientation",
@@ -837,6 +847,16 @@
       "type": "three_images_row",
       "name": "Three images row",
       "settings": [
+        {
+          "type": "header",
+          "content": "Carousel settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_carousel_mobile",
+          "label": "Enable carousel on mobile",
+          "default": false
+        },
         {
           "type": "header",
           "content": "The 1st block"
