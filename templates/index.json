@@ -20,7 +20,9 @@
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections\/t-shirts",
             "product_link_text": "shop poplin",
+            "image": "shopify:\/\/shop_images\/ROW_1_8a89895e-bdc8-4eec-8c17-52a7d13dc6dc.jpg",
             "video": "shopify:\/\/files\/videos\/d1bea4f367e44bbaa9b7dafda4d46ff9_compressed.mp4",
+            "image_mobile": "shopify:\/\/shop_images\/ROW_3_b17f3486-c18f-43d6-9dba-dac94b86b78f.jpg",
             "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_4x5_META_COLOR_compressed.mp4"
           }
         }
@@ -37,6 +39,7 @@
         "two_images_row_jCkJRF": {
           "type": "two_images_row",
           "settings": {
+            "enable_carousel_mobile": false,
             "orientation": "portrait",
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/ROW_2_IMAGE_1.jpg",
@@ -85,6 +88,7 @@
         "three_images_row_rpKBnK": {
           "type": "three_images_row",
           "settings": {
+            "enable_carousel_mobile": false,
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/ROW_4_IMAGE_1_1.jpg",
             "caption_1": "<p>sawyer Top<\/p>",
@@ -119,6 +123,7 @@
         "two_images_row_gTBGDq": {
           "type": "two_images_row",
           "settings": {
+            "enable_carousel_mobile": false,
             "orientation": "landscape",
             "media_type_1": "image",
             "image_1": "shopify:\/\/shop_images\/ROW_5_IMAGE_1.jpg",
