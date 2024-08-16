@@ -20,7 +20,11 @@
             "caption": "<p>Casual<br\/>Elegance<\/p>",
             "product_link": "shopify:\/\/collections\/t-shirts",
             "product_link_text": "shop poplin",
+<<<<<<< HEAD
+            "image": "shopify:\/\/shop_images\/ROW_1_8a89895e-bdc8-4eec-8c17-52a7d13dc6dc.jpg",
+=======
             "image": "shopify:\/\/shop_images\/ROW_3_b17f3486-c18f-43d6-9dba-dac94b86b78f.jpg",
+>>>>>>> main
             "video": "shopify:\/\/files\/videos\/d1bea4f367e44bbaa9b7dafda4d46ff9_compressed.mp4",
             "image_mobile": "shopify:\/\/shop_images\/ROW_3_b17f3486-c18f-43d6-9dba-dac94b86b78f.jpg",
             "video_mobile": "shopify:\/\/files\/videos\/20240403_ETERNE_FALL-24_STUDIO_LOOK-01_4x5_META_COLOR_compressed.mp4"
