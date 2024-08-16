@@ -11,6 +11,19 @@
   "sections": {
     "collection": {
       "type": "collection",
+      "blocks": {
+        "static_item_tzd7TA": {
+          "type": "static-item",
+          "settings": {
+            "product": "short-sleeve-baby-ivory",
+            "static_image": "shopify:\/\/shop_images\/MOBILE_BANNER_knitwear.jpg",
+            "static_image_position": "after"
+          }
+        }
+      },
+      "block_order": [
+        "static_item_tzd7TA"
+      ],
       "settings": {
         "products_per_page": 12,
         "products_per_page_with_filter": 12,
