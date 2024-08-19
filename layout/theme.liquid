@@ -9,9 +9,68 @@
 -%}
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ lang_dir }}">
+<script src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
 <head>
   {%- render 'doc-head-core' -%}
   {%- render 'doc-head-social' -%}
+
+  <!-- Google Tag Manager - Installed 4/22/2022 by Fat Earth -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5NH4RCV');</script>
+  <!-- End Google Tag Manager -->
+  <!-- End of Google Tag Manager - Installed 4/22/2022 by Fat Earth -->
+
+  <!-- Global site tag (gtag.js) - Google Ads: 780794742 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-780794742"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-780794742'); </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Klarna on-site messaging JavaScript Library -->
+  <script
+    async
+    src="https://na-library.klarnaservices.com/lib.js"
+    data-client-id="d12f09c7-8f42-545e-8006-e2775fd6c541"
+  ></script>
+
+  <script>
+    window.KlarnaOnsiteService.push({ eventName: 'refresh-placements' });
+  </script>
+  <!-- END Klarna on-site messaging JavaScript Library -->
+
+  <script>
+    (function(w,d,t,r,u)
+    {
+      var f,n,i;
+      w[u]=w[u]||[],f=function()
+      {
+        var o={ti:"97126788", enableAutoSpaTracking: true};
+        o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
+      },
+              n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function()
+      {
+        var s=this.readyState;
+        s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
+      },
+              i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)
+    })
+    (window,document,"script","//bat.bing.com/bat.js","uetq");
+  </script>
+
+  <script>
+    {% if customer and customer.email and customer.phone %}
+    window.uetq=window.uetq||[];
+    window.uetq.push('set', { 'pid': {
+        'em': '{{ customer.email }}',
+        'ph': '{{ customer.phone }}'
+      }});
+    {% endif %}
+  </script>
+
+  <meta name="facebook-domain-verification" content="mo4rbu71wtgu9f4cigw5403jbogfic" />
+  <meta name="google-site-verification" content="jXHP3v15J17cFUFugBHG98a5Ab80RCUtCEXPYDMVgGw" />
 
   {%- liquid
     assign base_font = settings.type_base_font
@@ -223,6 +282,12 @@
     {%- if settings.animations_enabled_desktop %} cc-animate-enabled{% endif -%}
   "
 >
+<script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} {% if product.first_available_variant.price %}window.KlarnaThemeGlobals.data_purchase_amount = {{ product.first_available_variant.price }};{% endif %}window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NH4RCV" height="0" width="0"
+                    style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <a class="skip-link visually-hidden" href="#content">{{ 'accessibility.skip_to_content' | t }}</a>
 
   {% sections 'header-group' %}
@@ -258,5 +323,7 @@
     </template>
   {%- endif -%}
   {% render 'globo.swatch.custom' %}
+
+
 </body>
 </html>
