@@ -11,7 +11,7 @@
     assign terms = search.terms | escape
     assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by='
   endif
-  assign filtersToDisplay = section.settings.filters_value | split: ',' | downcase
+  assign filtersToDisplay = 'category,color,size'
 
   assign activeFiltersQuantity = 0
   for filter in search.filters
@@ -100,7 +100,7 @@
                   </div>
 
                   <div class="collection__checkbox-filters">
-                    {% assign activeFiltersQuantity = 0 %}
+                    {% comment %}{% assign activeFiltersQuantity = 0 %}
 
                     {% for filter in search.filters %}
                       {% assign filterLabel = filter.label %}
@@ -121,6 +121,31 @@
                         visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
                         collection: item
                       %}
+                    {% endfor %}{% endcomment %}
+                    {% for filter in search.filters %}
+                      {% assign filterLabel = filter.label %}
+                      {% assign filterName = filter.label | downcase %}
+
+                      {% assign visibleFiltresQuantity = 0 %}
+                      {% for value in filter.values %}
+                        {% if value.count > 0 %}
+                          {% assign visibleFiltresQuantity = visibleFiltresQuantity | plus: 1 %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {% if filter.type == 'list' and filtersToDisplay contains filterName %}
+                        {% if visibleFiltresQuantity > 0 %}
+                          {% render 'filter-category',
+                            filter: filter,
+                            filterLabel: filter.label,
+                            index: forloop.index,
+                            filtersType: 'checkbox',
+                            visibleFiltersQuantity: visibleFiltersBeforeSeeMoreQuantity,
+                            activeFiltersQuantity: activeFiltersQuantity,
+                            isShopCollectionFilters: false
+                          %}
+                        {% endif %}
+                      {% endif %}
                     {% endfor %}
                   </div>
                 </div>
