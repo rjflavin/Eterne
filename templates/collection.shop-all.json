@@ -16,6 +16,7 @@
           "type": "static-item",
           "settings": {
             "product": "short-sleeve-baby-ivory",
+            "static_image": "shopify:\/\/shop_images\/retail-shopping-package.jpg",
             "static_image_position": "after"
           }
         }
