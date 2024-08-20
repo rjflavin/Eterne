@@ -53,6 +53,18 @@
             {% endif %}
           {% endif %}
 
+          {% if product_image != blank %}
+            <link rel="preload" href="{{ product_image }}" as="image">
+          {% endif %}
+
+          {% if product_image_lazyload != blank %}
+            <link rel="preload" href="{{ product_image_lazyload }}" as="image">
+          {% endif %}
+
+          {%  if enable_image_blur %}
+            <link rel="preload" href="{{ product_image_lazyload }}" as="image">
+          {% endif %}
+
           <div class="new-in__item swiper-slide">
             <div class="new-in__item-inner">
               <a href="{{ product.selected_or_first_available_variant.url }}" class="new-in__item-link"></a>
