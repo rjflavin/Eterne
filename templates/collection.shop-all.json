@@ -28,14 +28,6 @@
             "static_image_position": "before"
           }
         },
-        "static_item_JrwwXR": {
-          "type": "static-item",
-          "settings": {
-            "product": "short-sleeve-baby-tee-black",
-            "static_image": "shopify:\/\/shop_images\/mobile_banner_dresses_1.jpg",
-            "static_image_position": "after"
-          }
-        },
         "static_item_ine4LT": {
           "type": "static-item",
           "settings": {
@@ -48,7 +40,6 @@
       "block_order": [
         "static_item_tzd7TA",
         "static_item_tpmmtH",
-        "static_item_JrwwXR",
         "static_item_ine4LT"
       ],
       "settings": {
