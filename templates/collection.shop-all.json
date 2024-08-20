@@ -35,12 +35,21 @@
             "static_image": "shopify:\/\/shop_images\/mobile_banner_dresses_1.jpg",
             "static_image_position": "after"
           }
+        },
+        "static_item_ine4LT": {
+          "type": "static-item",
+          "settings": {
+            "product": "rib-tank-ivory",
+            "static_image": "shopify:\/\/shop_images\/retail-shopping-package.jpg",
+            "static_image_position": "after"
+          }
         }
       },
       "block_order": [
         "static_item_tzd7TA",
         "static_item_tpmmtH",
-        "static_item_JrwwXR"
+        "static_item_JrwwXR",
+        "static_item_ine4LT"
       ],
       "settings": {
         "products_per_page": 12,
