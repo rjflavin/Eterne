@@ -16,7 +16,6 @@
           "type": "static-item",
           "settings": {
             "product": "short-sleeve-baby-ivory",
-            "static_image": "shopify:\/\/shop_images\/MOBILE_BANNER_knitwear.jpg",
             "static_image_position": "after"
           }
         }
