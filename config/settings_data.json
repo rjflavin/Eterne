@@ -619,7 +619,7 @@
         "type": "shopify:\/\/apps\/glo-color-swatch\/blocks\/app-embed-block\/4394f710-096c-4021-bbde-8ebb26057c11",
         "disabled": false,
         "settings": {
-          "customCssGCW": ".collection__preorder-wrap .globo-product-groups-collection {\n  visibility: hidden;\n}"
+          "customCssGCW": ".collection__item .globo-product-groups-collection {\n  visibility: hidden;\n}"
         }
       }
     }
