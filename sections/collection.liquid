@@ -120,7 +120,7 @@
              data-next-url="{{ paginate.next.url }}">
           {% for product in collection.products %}
             {% if product.featured_image != blank %}
-              {% assign first_image = product.featured_image | image_url: width: 500 %}
+              {% assign first_image = product.featured_image | image_url: width: 1200 %}
               {% if enable_image_blur %}
                 {% assign first_image_lazy = product.featured_image | img_url: 'small' %}
                 {% else %}
@@ -133,16 +133,16 @@
             {% assign second_image = first_image %}
             {% assign hoverImages = first_image %}
             {% if product.media[1] != blank %}
-              {% assign second_image = product.media[1] | image_url: width: 500 %}
+              {% assign second_image = product.media[1] | image_url: width: 1200 %}
               {% if enable_image_blur %}
                 {% assign second_image_lazy = product.media[1] | img_url: 'small' %}
               {% else %}
                 {% assign second_image_lazy = product.media[1] | img_url: 'large' %}
               {% endif %}
-              {% assign hoverImages = product.media[1] | image_url: width: 500 %}
+              {% assign hoverImages = product.media[1] | image_url: width: 1200 %}
               {% assign hoverImages_lazy = product.media[1] | img_url: 'small' %}
             {% elsif product.selected_or_first_available_variant.featured_image != blank %}
-              {% assign second_image = product.selected_or_first_available_variant.featured_image | image_url: width: 500 %}
+              {% assign second_image = product.selected_or_first_available_variant.featured_image | image_url: width: 1200 %}
               {% if enable_image_blur %}
                 {% assign second_image_lazy = product.selected_or_first_available_variant.featured_image | img_url: 'small' %}
               {% else %}
