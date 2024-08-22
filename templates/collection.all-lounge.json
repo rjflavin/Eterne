@@ -9,6 +9,14 @@
 */
 {
   "sections": {
+    "collection_banner_rXdPtX": {
+      "type": "collection-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/banner_-_lounge.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/MOBILE_BANNER_lounge.jpg",
+        "bg_color": "#ffffff"
+      }
+    },
     "collection": {
       "type": "collection",
       "settings": {
@@ -20,6 +28,7 @@
     }
   },
   "order": [
+    "collection_banner_rXdPtX",
     "collection"
   ]
 }
