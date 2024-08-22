@@ -383,7 +383,7 @@
     }
   },
   "current": {
-    "enable_img_blue_effect": true,
+    "enable_img_blue_effect": false,
     "empty_cart_button_link": "shop",
     "max_page_width": 1600,
     "use_fullwidth_layout": false,
