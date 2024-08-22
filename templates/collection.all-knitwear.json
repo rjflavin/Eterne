@@ -9,6 +9,13 @@
 */
 {
   "sections": {
+    "collection_banner_xmBiw7": {
+      "type": "collection-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/banner_-_knits_548f7d2d-580c-4a78-853a-14580372fb6c.jpg",
+        "bg_color": "#2b2b2b"
+      }
+    },
     "collection": {
       "type": "collection",
       "settings": {
@@ -20,6 +27,7 @@
     }
   },
   "order": [
+    "collection_banner_xmBiw7",
     "collection"
   ]
 }
