@@ -84,41 +84,6 @@
       "settings": {
       }
     },
-    "collage_grid_XT7g8Y": {
-      "type": "collage-grid",
-      "blocks": {
-        "three_images_row_rpKBnK": {
-          "type": "three_images_row",
-          "settings": {
-            "enable_carousel_mobile": false,
-            "media_type_1": "image",
-            "image_1": "shopify:\/\/shop_images\/ROW_4_IMAGE_1_1.jpg",
-            "caption_1": "<p>sawyer Top<\/p>",
-            "product_link_1": "shopify:\/\/products\/sawyer-1",
-            "product_link_text_1": "shop",
-            "image_mobile_1": "shopify:\/\/shop_images\/Row_4_Image_1_4x5_fd975022-63d6-498b-893c-73970f3adaeb.jpg",
-            "media_type_2": "image",
-            "image_2": "shopify:\/\/shop_images\/ROW_4_IMAGE_2_1.jpg",
-            "caption_2": "<p>journey top<\/p>",
-            "product_link_2": "shopify:\/\/products\/journey-1",
-            "product_link_text_2": "shop",
-            "image_mobile_2": "shopify:\/\/shop_images\/Row_4_Image2_4x5_013cc33d-9931-43ac-a524-772af538692b.jpg",
-            "media_type_3": "image",
-            "image_3": "shopify:\/\/shop_images\/ROW_4_IMAGE_3_1.jpg",
-            "caption_3": "<p>Elton Vest<\/p>",
-            "product_link_3": "shopify:\/\/collections\/knitwear",
-            "product_link_text_3": "shop",
-            "image_mobile_3": "shopify:\/\/shop_images\/Row_4_Image_3_4x5_aa573ac2-b2cc-4c59-8f5d-bea17108ec4f.jpg",
-            "video_mobile_3": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO)-2.mp4"
-          }
-        }
-      },
-      "block_order": [
-        "three_images_row_rpKBnK"
-      ],
-      "settings": {
-      }
-    },
     "collage_grid_xVzGkC": {
       "type": "collage-grid",
       "blocks": {
@@ -128,17 +93,17 @@
             "enable_carousel_mobile": false,
             "orientation": "landscape",
             "media_type_1": "image",
-            "image_1": "shopify:\/\/shop_images\/ROW_5_IMAGE_1.jpg",
-            "video_1": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4",
+            "image_1": "shopify:\/\/shop_images\/row_5_desktop_1_1.jpg",
             "caption_1": "<p>refined<br\/>relaxation<\/p>",
             "product_link_1": "shopify:\/\/collections\/lounge",
             "product_link_text_1": "shop lounge",
+            "image_mobile_1": "shopify:\/\/shop_images\/row_5_mobile.jpg",
             "media_type_2": "image",
-            "image_2": "shopify:\/\/shop_images\/ROW_5_IMAGE_2.jpg",
-            "video_2": "shopify:\/\/files\/videos\/ROW 3 JOURNEY POLO (NO AUDIO).mp4",
+            "image_2": "shopify:\/\/shop_images\/row_5_scenery_1.jpg",
             "caption_2": "",
             "product_link_2": "",
-            "product_link_text_2": "shop cashmere"
+            "product_link_text_2": "shop cashmere",
+            "image_mobile_2": "shopify:\/\/shop_images\/row_5_scenery_e6505424-2186-43b0-97f6-a9f814009efa.jpg"
           }
         }
       },
@@ -160,7 +125,6 @@
     "collage_grid_YqLqzV",
     "collage_grid_pjjhzD",
     "collage_grid_hLgbwf",
-    "collage_grid_XT7g8Y",
     "collage_grid_xVzGkC",
     "new_in_slider_QYPKPp"
   ]
