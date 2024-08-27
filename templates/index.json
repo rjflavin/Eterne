@@ -46,11 +46,13 @@
             "caption_1": "",
             "product_link_1": "shopify:\/\/collections\/new-in",
             "product_link_text_1": "",
+            "image_mobile_1": "shopify:\/\/shop_images\/row_2_bw_097ece23-54c8-4018-8db8-0048a61c9e88.jpg",
             "media_type_2": "image",
             "image_2": "shopify:\/\/shop_images\/Row_2_Right_1.jpg",
             "caption_2": "<p>New In Navy<\/p>",
             "product_link_2": "shopify:\/\/collections\/new-in",
-            "product_link_text_2": "shop New"
+            "product_link_text_2": "shop New",
+            "image_mobile_2": "shopify:\/\/shop_images\/row_2_mobile_b0423fae-d7dd-47da-b782-431d8da1c00e.jpg"
           }
         }
       },
