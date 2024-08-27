@@ -17,9 +17,9 @@
           "settings": {
             "media_type": "video",
             "orientation": "landscape",
-            "caption": "<p>Casual<br\/>Elegance<\/p>",
-            "product_link": "shopify:\/\/collections\/t-shirts",
-            "product_link_text": "shop poplin",
+            "caption": "<p>The new neutral<\/p>",
+            "product_link": "shopify:\/\/collections\/new-in",
+            "product_link_text": "shop navy",
             "image": "shopify:\/\/shop_images\/desktop_video_banner_1.jpg",
             "video": "shopify:\/\/files\/videos\/LIFESTYLE 14 169 COLOR_bfe820d8-2117-4fe4-8ff8-815e49b102fd.mov",
             "image_mobile": "shopify:\/\/shop_images\/mobile_video_banner_1.jpg",
