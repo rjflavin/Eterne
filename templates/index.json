@@ -82,9 +82,9 @@
           "settings": {
             "media_type": "image",
             "orientation": "landscape",
-            "caption": "",
-            "product_link": "",
-            "product_link_text": "shop cashmere",
+            "caption": "<p>Relaxed Classics<\/p>",
+            "product_link": "shopify:\/\/collections\/tanks",
+            "product_link_text": "Shop Tanks",
             "image": "shopify:\/\/shop_images\/row_4_desktop_1.jpg",
             "image_mobile": "shopify:\/\/shop_images\/tank_row_2_2.jpg"
           }
