@@ -76,10 +76,23 @@
             "video": "shopify:\/\/files\/videos\/LIFESTYLE 18 169 COLOR_3e17e298-6237-4c7a-b779-c35365c5f387.mov",
             "video_mobile": "shopify:\/\/files\/videos\/LIFESTYLE 18 45 COLOR (1).mov"
           }
+        },
+        "one_image_row_rdTjtN": {
+          "type": "one_image_row",
+          "settings": {
+            "media_type": "image",
+            "orientation": "landscape",
+            "caption": "",
+            "product_link": "",
+            "product_link_text": "shop cashmere",
+            "image": "shopify:\/\/shop_images\/row_4_desktop_1.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/tank_row_2_2.jpg"
+          }
         }
       },
       "block_order": [
-        "one_image_row_w3pyj6"
+        "one_image_row_w3pyj6",
+        "one_image_row_rdTjtN"
       ],
       "settings": {
       }
