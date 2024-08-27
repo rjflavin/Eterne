@@ -11,37 +11,6 @@
   "sections": {
     "collection": {
       "type": "collection",
-      "blocks": {
-        "static_item_tzd7TA": {
-          "type": "static-item",
-          "settings": {
-            "product": "short-sleeve-baby-ivory",
-            "static_image": "shopify:\/\/shop_images\/retail-shopping-package.jpg",
-            "static_image_position": "after"
-          }
-        },
-        "static_item_tpmmtH": {
-          "type": "static-item",
-          "settings": {
-            "product": "lounge-pant-heather-grey",
-            "static_image": "shopify:\/\/shop_images\/ROW_2_IMAGE_1_1.png",
-            "static_image_position": "before"
-          }
-        },
-        "static_item_ine4LT": {
-          "type": "static-item",
-          "settings": {
-            "product": "rib-tank-ivory",
-            "static_image": "shopify:\/\/shop_images\/retail-shopping-package.jpg",
-            "static_image_position": "after"
-          }
-        }
-      },
-      "block_order": [
-        "static_item_tzd7TA",
-        "static_item_tpmmtH",
-        "static_item_ine4LT"
-      ],
       "settings": {
         "products_per_page": 12,
         "products_per_page_with_filter": 12,
