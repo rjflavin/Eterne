@@ -1,3 +1,39 @@
+<style>
+  .smartwishlist.cart-flyover-item-description-info-extra__text .fa {
+    display: none;
+  }
+
+  .cart-flyover-item-description-info-extra__text {
+    font-size: 9px;
+  }
+
+  .smartwishlist.cart-flyover-item-description-info-extra__text {
+    margin: 0;
+  }
+
+  .smartwishlist.cart-flyover-item-description-info-extra__text.bookmarked:after{
+    content:'Remove from Wish List';
+    font-size: 9px;
+    line-height: 12px;
+    color: var(--gray5);
+  }
+
+  .smartwishlist.cart-flyover-item-description-info-extra__text:after{
+    content:'Add to Wish List';
+    font-size: 9px;
+    line-height: 12px;
+    color: var(--gray5);
+  }
+
+  @media screen and (max-width: 768px){
+    .cart-flyover-item-description-info-extra__text,
+    .smartwishlist.cart-flyover-item-description-info-extra__text.bookmarked:after,
+    .smartwishlist.cart-flyover-item-description-info-extra__text:after {
+      font-size: 8px;
+    }
+  }
+</style>
+
 <div class="product-{{ item.product.handle }} cart-flyover-item" variant-id="{{ item.variant.id }}">
   <div>
     {% assign imageURL = 'no-image.webp' | asset_url %}
@@ -50,7 +86,7 @@
       <div data-variant-id="{{ item.variant.id }}" class="cart-flyover-item-description-info-extra">
         <button name="delete-button" class="cart-flyover-item-description-info-extra__text">Remove</button>
         <div class="cart-flyover-item-description-info-extra__text"> | </div>
-        <button name="wishlist-button" class="cart-flyover-item-description-info-extra__text">Add to Wish List</button>
+        <span class="smartwishlist cartwishlist cart-flyover-item-description-info-extra__text" data-product="{{ item.product_id }}" data-variant="{{ item.variant_id }}"></span>
       </div>
     </div>
     {% if item.variant.price %}
