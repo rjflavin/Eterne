@@ -1299,6 +1299,22 @@ body {
   font-family: var(--base-font-family);
   font-style: var(--base-font-style);
   font-weight: var(--base-font-weight);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+header {
+  min-height: 50px;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  min-height: 50px;
 }
 
 h1,
@@ -5221,10 +5237,6 @@ input[type=text].main-search__input {
   .gallery--grid-desktop-4 .gallery__item.gallery__item--enlarged {
     flex-grow: 5;
   }
-}
-.section-footer .social a {
-  margin: 0 0 5px;
-  margin-inline-end: 10px;
 }
 
 .section-footer__row {
@@ -9793,27 +9805,6 @@ html:not(.js) .js-only {
   transform: scaleX(-1);
 }
 
-/* Main footer */
-.section-footer {
-  --link-color: var(--footer-text-col);
-  background: var(--footer-bg);
-  color: rgb(var(--footer-text-col));
-}
-.section-footer .section-footer__title {
-  color: rgb(var(--footer-heading-col));
-}
-.section-footer a:hover {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: rgb(var(--link-color));
-  text-decoration-thickness: 1px;
-}
-@media (max-width: 767.98px) {
-  .section-footer .copyright .copy {
-    white-space: normal;
-  }
-}
-
 .cross-page-promos {
   --heading-color: var(--text-color);
   --link-color: var(--text-color);
@@ -10174,6 +10165,34 @@ ul.inline li {
 .account-form .note {
   display: block;
   margin: 10px 0;
+}
+
+.activation-banner {
+  margin-bottom: 20px;
+  transition: all .3s ease-in 0s;
+}
+
+.activation-banner .activation-banner__content {
+/*  display: flex;*/
+  position: relative;
+  padding: 7px 15px;
+  border: 1px var(--input-border-color) solid;
+  border-radius: var(--btn-border-radius);
+}
+
+button.activation-banner__close-btn {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+.activation-banner__text a {
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 label.checkbox-label {

@@ -394,7 +394,7 @@
       "success": "We've sent you an email with a link to update your password."
     },
     "register": {
-      "title": "Create account",
+      "title": "Create / Activate Account",
       "first_name": "First name",
       "last_name": "Last name",
       "email": "Email",

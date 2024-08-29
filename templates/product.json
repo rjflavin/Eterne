@@ -1,12 +1,3 @@
-/*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
 {
   "sections": {
     "main": {
@@ -50,11 +41,6 @@
             "show_pickup_availability": true,
             "show_gift_card_recipient": false
           }
-        },
-        "upsell_app_by_essentialwolf_app_block_xFnyYw": {
-          "type": "shopify:\/\/apps\/upsell-app-by-essentialwolf\/blocks\/app-block\/ae950cb1-1eb5-4b22-b308-ab5141c9f88c",
-          "settings": {
-          }
         }
       },
       "block_order": [
@@ -62,8 +48,7 @@
         "price",
         "divider",
         "product_variant_picker_xXiYWj",
-        "buy-buttons",
-        "upsell_app_by_essentialwolf_app_block_xFnyYw"
+        "buy-buttons"
       ],
       "settings": {
         "enable_sticky_columns": true
@@ -78,16 +63,6 @@
     },
     "17223505903037d9e2": {
       "type": "apps",
-      "blocks": {
-        "upsell_app_by_essentialwolf_app_block_Hwq8Qt": {
-          "type": "shopify:\/\/apps\/upsell-app-by-essentialwolf\/blocks\/app-block\/ae950cb1-1eb5-4b22-b308-ab5141c9f88c",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "upsell_app_by_essentialwolf_app_block_Hwq8Qt"
-      ],
       "settings": {
         "full_width": false
       }
