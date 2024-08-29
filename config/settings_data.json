@@ -571,9 +571,7 @@
           "full-cart-item-selector": ".cart-item",
           "enable-cart-drawer-element": false,
           "cart-drawer-selector": "#CartDrawer",
-          "cart-drawer-item-selector": ".cart-item",
-          "return-coverage-primary-color": "#ffffff",
-          "return-coverage-secondary-color": "#2B2B2B"
+          "cart-drawer-item-selector": ".cart-item"
         }
       },
       "5888675206956468567": {
