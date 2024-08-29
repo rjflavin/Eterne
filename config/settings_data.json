@@ -1,12 +1,3 @@
-/*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
 {
   "presets": {
     "Chantilly": {
@@ -571,9 +562,7 @@
           "full-cart-item-selector": ".cart-item",
           "enable-cart-drawer-element": false,
           "cart-drawer-selector": "#CartDrawer",
-          "cart-drawer-item-selector": ".cart-item",
-          "return-coverage-primary-color": "#ffffff",
-          "return-coverage-secondary-color": "#2B2B2B"
+          "cart-drawer-item-selector": ".cart-item"
         }
       },
       "5888675206956468567": {

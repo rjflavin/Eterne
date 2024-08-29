@@ -6,6 +6,17 @@
           <h1 class="title">{{ 'customer.login.title' | t }}</h1>
         </div>
 
+        {% if section.settings.show_activation_banner %}
+          <div id="activation-banner-{{ section.id }}" class="activation-banner">
+            <div class="activation-banner__content">
+              <button type="button" class="activation-banner__close-btn" id="activation-banner-close-btn-{{ section.id }}">×</button>
+              <div class="activation-banner__text">
+                {{ section.settings.activation_banner_text }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
         {% form 'customer_login' %}
         {{ form.errors | default_errors }}
 
@@ -58,7 +69,6 @@
           {% endunless %}
         </div>
 
-
         {{ form.errors | default_errors }}
 
         {% if reset_success %}
@@ -108,7 +118,7 @@
 <script type="text/javascript">
   function showRecoverPasswordForm() {
     document.getElementById('recover-password').style.display = 'block';
-    document.getElementById('customer').style.display='none';
+    document.getElementById('customer').style.display = 'none';
   }
 
   function hideRecoverPasswordForm() {
@@ -116,12 +126,55 @@
     document.getElementById('customer').style.display = 'block';
   }
 
-  {% if reset_success %}showRecoverPasswordForm();{% endif %}
-  if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+  document.addEventListener('DOMContentLoaded', () => {
+    {% if reset_success %}showRecoverPasswordForm();{% endif %}
+    if (window.location.hash == '#recover') {
+      showRecoverPasswordForm()
+    }
+    {% if section.settings.show_activation_banner %}
+    document.getElementById('activation-banner-close-btn-{{ section.id }}').addEventListener('click', () => {
+        const activationBanner = document.getElementById('activation-banner-{{ section.id }}');
+        activationBanner.style.maxHeight = activationBanner.clientHeight + 'px';
+        activationBanner.style.opacity = 0;
+
+        setTimeout(() => {
+          activationBanner.style.maxHeight = 0;
+        }, 10);
+      });
+    {% endif %}
+  });
 </script>
 
 {% schema %}
 {
-  "name": "Customer login"
+  "name": "Customer login",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Activation banner "
+    },
+    {
+      "type": "paragraph",
+      "content": "Show a banner to inform customers about the activation process on login page."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_activation_banner",
+      "label": "Show activation banner",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "activation_banner_text",
+      "label": "Message text",
+      "default": "<p>You may need to activate your account on our new site before you log in!</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "activation_banner_button_text",
+      "label": "Button text",
+      "default": "Activate your account"
+    }
+  ]
 }
 {% endschema %}
