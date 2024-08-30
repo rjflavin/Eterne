@@ -7,7 +7,6 @@
       "settings": {
         "announcement_bar_text": "Free Domestic Shipping on orders over $100",
         "logo": "shopify:\/\/shop_images\/eterne-logo.png",
-        "logo_h1": true,
         "enable_sticky": true,
         "enable_search": true,
         "header_menu": "main-menu"

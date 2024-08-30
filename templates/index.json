@@ -1,34 +1,14 @@
-/*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
 {
   "sections": {
-    "collage_grid_YqLqzV": {
-      "type": "collage-grid",
-      "blocks": {
-        "one_image_row_BNxRBq": {
-          "type": "one_image_row",
-          "settings": {
-            "media_type": "video",
-            "orientation": "landscape",
-            "caption": "<p>The New Neutral<\/p>",
-            "product_link": "shopify:\/\/collections\/new-in",
-            "product_link_text": "shop navy",
-            "video": "shopify:\/\/files\/videos\/LIFESTYLE 14 169 COLOR_bfe820d8-2117-4fe4-8ff8-815e49b102fd.mov",
-            "video_mobile": "shopify:\/\/files\/videos\/LIFESTYLE 14 45 COLOR_12b5b5fd-3784-4515-9aec-3cbcc6bc9ed0.mov"
-          }
-        }
-      },
-      "block_order": [
-        "one_image_row_BNxRBq"
-      ],
+    "one_media_banner_H4dnU9": {
+      "type": "one-media-banner",
       "settings": {
+        "caption": "<p>The New Neutral<\/p>",
+        "product_link": "shopify:\/\/collections\/new-in",
+        "product_link_text": "shop navy",
+        "main_media_type": "video",
+        "video": "shopify:\/\/files\/videos\/LIFESTYLE 14 169 COLOR_bfe820d8-2117-4fe4-8ff8-815e49b102fd.mov",
+        "video_mob": "shopify:\/\/files\/videos\/LIFESTYLE 14 45 COLOR_12b5b5fd-3784-4515-9aec-3cbcc6bc9ed0.mov"
       }
     },
     "collage_grid_pjjhzD": {
@@ -142,7 +122,7 @@
     }
   },
   "order": [
-    "collage_grid_YqLqzV",
+    "one_media_banner_H4dnU9",
     "collage_grid_pjjhzD",
     "collage_grid_hLgbwf",
     "collage_grid_wgjJe6",
