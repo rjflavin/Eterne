@@ -1,4 +1,14 @@
 {{ 'collage-grid.css' | asset_url | stylesheet_tag }}
+{% for block in section.blocks %}
+    {% if block.type == 'one_image_row' %}
+        {% if block.settings.video != blank %}
+            <link rel="prefetch" href="https:{{ block.settings.video.sources[1].url }}" as="video" crossorigin>
+        {% endif %}
+        {% if block.settings.video_mobile != blank %}
+            <link rel="prefetch" href="https:{{ block.settings.video_mobile.sources[1].url }}" as="video" crossorigin>
+        {% endif %}
+    {% endif %}
+{% endfor %}
 
 <style>
     video.desktop-video {
@@ -96,6 +106,7 @@
                             {% endif %}
 
                             {% comment %}{{ block.settings.video_mobile | video_tag: class: video_mobile_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}{% endcomment %}
+
                             <video
                               class="lazy {{ video_mobile_class }}"
                               width="390"
@@ -107,7 +118,6 @@
                               <source type="video/mp4" data-src="{{ block.settings.video_mobile.sources[1].url }}" />
                               Your browser does not support the video tag
                             </video>
-                          <link rel="preload" as="video" href="{{ block.settings.video_mobile.sources[1].url }}">
                         {% endif %}
 
                         {% comment %}{{ block.settings.video | video_tag: class: video_class, loop: true, image_size: "master", autoplay: true, controls: false, muted: true }}{% endcomment %}
@@ -126,7 +136,6 @@
                           <source type="video/mp4" data-src="{{ block.settings.video.sources[1].url }}" />
                           Your browser does not support the video tag
                         </video>
-                        <link rel="preload" as="video" href="{{ block.settings.video.sources[1].url }}">
 
                         <!--  <div class="play-icon">
                             {% render "icon-play-video" %}
@@ -587,10 +596,13 @@
           for(let index = 0; index < sources.length; index++) {
             sources[index].setAttribute('src', sources[index].getAttribute('data-src'));
           }
-          video.addEventListener("canplaythrough", () => video.play());
-          setTimeout(() => {
-            video.load();
-          }, 2000);
+          video.addEventListener("canplaythrough", () => {
+              console.log('canplaythrough: ', video.buffered.length);
+              setTimeout(() => {
+                  video.play();
+              }, 500);
+          });
+          video.load();
         }
       } else {
         if (video.classList.contains('desktop-video')) {
@@ -598,10 +610,13 @@
           for(let index = 0; index < sources.length; index++) {
             sources[index].setAttribute('src', sources[index].getAttribute('data-src'));
           }
-          video.addEventListener("canplaythrough", () => video.play());
-          setTimeout(() => {
-            video.load();
-          }, 2000);
+          video.addEventListener("canplaythrough", () => {
+              console.log('canplaythrough: ', video.buffered.length);
+              setTimeout(() => {
+                  video.play();
+              }, 500);
+          });
+          video.load();
         }
       }
     });

@@ -1,0 +1,181 @@
+{{ "one-media-banner.css" | asset_url | stylesheet_tag }}
+
+{% if section.settings.main_image != blank %}
+  <link rel="preload" href="{{ section.settings.main_image | image_url: width: 1920  }}" as="image">
+{% endif %}
+
+{% if section.settings.main_image_mobile != blank %}
+  <link rel="preload" href="{{ section.settings.main_image_mobile | image_url: width: 1024  }}" as="image">
+{% endif %}
+
+{% assign main_image = section.settings.main_image %}
+{% assign image_has_mob = false %}
+
+{% if section.settings.main_image_mobile != blank %}
+  {% assign main_image_mobile = section.settings.main_image_mobile %}
+  {% assign image_has_mob = true %}
+{% else %}
+  {% assign main_image_mobile = main_image %}
+{% endif %}
+
+{% if section.settings.main_media_type == "video" %}
+  {% assign video_has_mob = false %}
+  {% assign video = section.settings.video %}
+
+  {% if section.settings.video_mob != blank %}
+    {% assign video_mob = section.settings.video_mob %}
+    {% assign video_has_mob = true %}
+  {% else %}
+    {% assign video_mob = section.settings.video %}
+  {% endif %}
+
+  {% assign desktop_video_class = "one-media__main-video" %}
+{% endif %}
+
+<div class="one-media">
+    <div class="one-media__main-image-wrapper">
+      {% if section.settings.main_media_type == "image" %}
+            <img
+                    class="one-media__main-image{% if image_has_mob %} show-desk{% endif %}"
+                    src="{{ main_image | img_url: "master" }}"
+                    alt="{{ section.settings.image.alt }}"
+            >
+          {% if image_has_mob %}
+            <img
+                    class="one-media__main-image show-mob"
+                    src="{{ main_image_mobile | img_url: "master" }}"
+                    alt="{{ main_image_mobile.alt }}"
+            >
+          {% endif %}
+
+        {% elsif section.settings.main_media_type == "video" %}
+
+          {% if video_has_mob %}
+            {% assign desktop_video_class = desktop_video_class | append: " show-desk" %}
+            {% if main_image_mobile != blank %}
+            {% assign video_poster_mobile = main_image_mobile | image_url: width: 1024 %}
+              {% else %}
+              {% assign video_poster_mobile = video_mob.preview_image | image_url: width: 1024 %}
+            {% endif %}
+
+            {{ video_mob | video_tag:
+              class: "one-media__main-video show-mob",
+              loop: true,
+              image_size: "master",
+              autoplay: true,
+              controls: false,
+              muted: true,
+              poster: video_poster_mobile
+            }}
+          {% endif %}
+
+          {% if main_image != blank %}
+            {% assign video_poster = main_image | image_url: width: 1920 %}
+          {% else %}
+            {% assign video_poster = video.preview_image | image_urls: width: 1920 %}
+          {% endif %}
+
+          {{ video | video_tag:
+            class: desktop_video_class,
+            loop: true, image_size: "master",
+            autoplay: true,
+            controls: false,
+            muted: true,
+            poster: video_poster
+          }}
+
+        {% endif %}
+    </div>
+  {% if section.settings.product_link != blank %}
+    <a class="full-width-link" href="{{ section.settings.product_link }}"></a>
+  {% endif %}
+  <div class="caption">
+    {% if section.settings.caption != blank %}
+      {% if section.settings.product_link != blank %}
+        <a href="{{ section.settings.product_link }}" class="caption__text">{{ section.settings.caption }}</a>
+      {% else %}
+        <div class="caption__text">{{ section.settings.caption }}</div>
+      {% endif %}
+    {% endif %}
+    {% if section.settings.product_link != blank and section.settings.product_link_text %}
+      <a href="{{ section.settings.product_link }}"
+           class="caption__link">{{ section.settings.product_link_text }}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "One Media Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "caption",
+      "label": "Image or video caption"
+    },
+    {
+      "type": "url",
+      "id": "product_link",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "product_link_text",
+      "label": "Button text",
+      "default": "shop cashmere"
+    },
+    {
+      "type": "radio",
+      "id": "main_media_type",
+      "label": "Main media type",
+      "options": [
+        {
+          "value": "image",
+          "label": "image"
+        },
+        {
+          "value": "video",
+          "label": "video"
+        }
+      ],
+      "default": "image",
+      "info": "Allows you to select the type of content to display for main section: an image or a video. It is used for desktop and mobile."
+    },
+    {
+      "type": "header",
+      "content": "DESKTOP settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Image"
+    },
+    {
+      "id": "video",
+      "type": "video",
+      "label": "Or video"
+    },
+    {
+      "type": "header",
+      "content": "MOBILE settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image_mobile",
+      "label": "Image"
+    },
+    {
+      "id": "video_mob",
+      "type": "video",
+      "label": "Or video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "One Media Banner"
+    }
+  ]
+}
+{% endschema %}

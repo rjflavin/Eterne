@@ -4,7 +4,7 @@
       "type": "main-login",
       "settings": {
         "show_activation_banner": true,
-        "activation_banner_text": "<p>You may need to <a href=\"\/account\/register\" title=\"\/account\/register\">activate your account<\/a> on our new site before you log in!<\/p>",
+        "activation_banner_text": "<p>You may need to <a href=\"\/account\/register\" title=\"activation\">activate your account<\/a> on our new site before you log in!<\/p>",
         "activation_banner_button_text": "Activate your account"
       }
     }
