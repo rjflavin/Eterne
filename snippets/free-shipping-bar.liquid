@@ -3,10 +3,10 @@
   assign current_amount = false
   for amount in all_amounts
     assign split_amount = amount | split: ':'
-    if split_amount.size == 2 and split_amount[0] == localization.country.currency.iso_code
+    if split_amount.size == 2
       assign current_amount = split_amount
       break
-    elsif split_amount.size == 3 and split_amount[0] == localization.country.iso_code and split_amount[1] == localization.country.currency.iso_code
+    elsif split_amount.size == 3
       assign current_amount = split_amount
       break
     endif
@@ -23,14 +23,22 @@
   endif
 -%}
 {%- if current_amount -%}
-  <div class="free-shipping-bar cart-flyover-shipping-bar-container{% if cart.items == empty %} free-shipping-bar--no-cart{% endif %}"
-      style="--free-shipping-progress: {{ free_shipping_progress }}; --free-shipping-bar-color: {{ bar_col }}"
-      data-free-shipping-progress="{{ free_shipping_progress | replace: '1.0', '1' }}"
-      data-free-shipping-current-cart="{{ cart.total_price }}"
-      data-free-shipping-amount="{{ current_amount.last }}"
-      data-merge-attributes="free-shipping">
-    <div class="free-shipping-bar__message free-shipping-bar__message--no cart-flyover-shipping-bar__text" data-merge="free-shipping-not-met-text">{{ 'cart.general.free_shipping_deficit_html' | t }}</div>
-    <div class="free-shipping-bar__message free-shipping-bar__message--yes cart-flyover-shipping-bar__text">{{ 'cart.general.free_shipping' | t }}</div>
+  <div
+    class="free-shipping-bar cart-flyover-shipping-bar-container{% if cart.items == empty %} free-shipping-bar--no-cart{% endif %}"
+    style="--free-shipping-progress: {{ free_shipping_progress }}; --free-shipping-bar-color: {{ bar_col }}"
+    data-free-shipping-progress="{{ free_shipping_progress | replace: '1.0', '1' }}"
+    data-free-shipping-current-cart="{{ cart.total_price }}"
+    data-free-shipping-amount="{{ current_amount.last }}"
+    data-merge-attributes="free-shipping"
+  >
+    <div
+      class="free-shipping-bar__message free-shipping-bar__message--no cart-flyover-shipping-bar__text"
+      data-merge="free-shipping-not-met-text">
+      {{ 'cart.general.free_shipping_deficit_html' | t }}
+    </div>
+    <div class="free-shipping-bar__message free-shipping-bar__message--yes cart-flyover-shipping-bar__text">
+      {{ 'cart.general.free_shipping' | t }}
+    </div>
     <div class="free-shipping-bar__bar cart-flyover-shipping-bar__border">
       <div class="cart-flyover-shipping-bar__border-background"></div>
     </div>
