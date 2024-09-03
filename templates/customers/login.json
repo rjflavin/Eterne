@@ -13,7 +13,7 @@
       "type": "main-login",
       "settings": {
         "show_activation_banner": true,
-        "activation_banner_text": "<p>Please <a href=\"\/account\/register\" title=\"activation\">activate your account<\/a> on our new site.  After you activate your account, you will only  need to sign in.<\/p>",
+        "activation_banner_text": "<p>Please <a href=\"\/account\/register\" title=\"activation\">activate your account<\/a> on our new site!   After you activate your account, you will only  need to sign in.<\/p>",
         "activation_banner_button_text": "Activate your account"
       }
     }
