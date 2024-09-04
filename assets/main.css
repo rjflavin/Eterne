@@ -10028,7 +10028,9 @@ ul.inline li {
 }
 @media (max-width: 767.98px) {
   #cartform .checkout-col .btn {
-    width: 100%;
+    width: auto;
+    min-width: auto;
+    margin-top: 14px;
   }
 }
 
@@ -10564,7 +10566,6 @@ model-viewer .container {
   flex-wrap: wrap;
   align-items: stretch;
   margin-bottom: -30px;
-  margin-left: -30px;
 }
 .flexible-layout.valign-middle > .column,
 .fixed-layout.valign-middle > .column {
