@@ -10180,6 +10180,18 @@ ul.inline li {
   border-radius: var(--btn-border-radius);
 }
 
+.continue-as-guest-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.login-btn:hover {
+  background-color: var(--black-hover);
+}
+
 button.activation-banner__close-btn {
   display: flex;
   position: absolute;

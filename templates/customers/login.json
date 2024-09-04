@@ -1,19 +1,10 @@
-/*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
 {
   "sections": {
     "main": {
       "type": "main-login",
       "settings": {
         "show_activation_banner": true,
-        "activation_banner_text": "<p>Please <a href=\"\/account\/register\" title=\"activation\">ACTIVATE YOUR ACCOUNT <\/a>on our new site! <br\/>After you activate your account, you will only  need to sign in.<\/p>",
+        "activation_banner_text": "<p>Having trouble logging in? </br>Please <a href=\"\/account\/register\" title=\"activation\">ACTIVATE YOUR ACCOUNT <\/a>on our new site! <br\/>After you activate your account, you will only  need to sign in.<\/p>",
         "activation_banner_button_text": "Activate your account"
       }
     }

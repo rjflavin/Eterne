@@ -1,15 +1,15 @@
 <div class="fully-spaced-row container">
-  <div class="account-form{% if shop.checkout.guest_login %} flexible-layout{% endif %}" data-cc-animate>
-    <div class="{% if shop.checkout.guest_login %}column column--half{% else %}small-form{% endif %}">
+  <div class="account-form{% comment %}{% if shop.checkout.guest_login %} flexible-layout{% endif %}{% endcomment %}" data-cc-animate>
+    <div class="{% comment %}{% if shop.checkout.guest_login %}column column--half{% else %}{% endcomment %}small-form{% comment %}{% endif %}{% endcomment %}">
       <div id="customer">
-        <div class="page-header{% if shop.checkout.guest_login %} align-start{% endif %}">
+        <div class="page-header{% comment %}{% if shop.checkout.guest_login %} align-start{% endif %}{% endcomment %}">
           <h1 class="title">{{ 'customer.login.title' | t }}</h1>
         </div>
 
         {% if section.settings.show_activation_banner %}
-          <div id="activation-banner-{{ section.id }}" class="activation-banner">
+          <div id="activation-banner-login-{{ section.id }}" class="activation-banner">
             <div class="activation-banner__content">
-              <button type="button" class="activation-banner__close-btn" id="activation-banner-close-btn-{{ section.id }}">×</button>
+              <button type="button" class="activation-banner__close-btn" id="activation-banner-login-close-btn-{{ section.id }}">×</button>
               <div class="activation-banner__text">
                 {{ section.settings.activation_banner_text }}
               </div>
@@ -45,10 +45,23 @@
 
         <div class="lightly-spaced-row-above">
           <div class="opposing-items">
-            <button class="btn" type="submit">{{ 'customer.login.sign_in' | t }}</button>
-
+            <button class="btn login-btn" type="submit">{{ 'customer.login.sign_in' | t }}</button>
             <a href="{{ routes.account_register_url }}" class="underline">{{ 'customer.register.title' | t }}</a>
           </div>
+
+          {% comment %}
+            Guest Login form for shops with optional customer accounts. This form is displayed only when users click on the checkout link
+            on the cart page.
+          {% endcomment %}
+          {% if shop.checkout.guest_login %}
+            <div id="guest" class="column column--half">
+              {% form 'guest_login' %}
+                <div class="continue-as-guest-container">
+                  <button class="btn login-btn" type="submit">Continue as a guest</button>
+                </div>
+              {% endform %}
+            </div>
+          {% endif %}
         </div>
         {% endform %}
       </div>
@@ -71,6 +84,17 @@
 
         {{ form.errors | default_errors }}
 
+        {% if section.settings.show_activation_banner %}
+          <div id="activation-banner-reset-password-{{ section.id }}" class="activation-banner">
+            <div class="activation-banner__content">
+              <button type="button" class="activation-banner__close-btn" id="activation-banner-reset-password-close-btn-{{ section.id }}">×</button>
+              <div class="activation-banner__text">
+                {{ section.settings.activation_banner_text }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
         {% if reset_success %}
 
         <div class="lightly-spaced-row-above">
@@ -86,7 +110,7 @@
         </div>
         <div class="lightly-spaced-row-above">
           <div class="opposing-items">
-            <button class="btn" type="submit">{{ 'customer.recover_password.submit' | t }}</button>
+            <button class="btn login-btn" type="submit">{{ 'customer.recover_password.submit' | t }}</button>
             <a class="underline" href="#" onclick="hideRecoverPasswordForm();return false;">{{ 'customer.recover_password.cancel' | t }}</a>
           </div>
         </div>
@@ -102,16 +126,16 @@
     on the cart page.
     {% endcomment %}
 
-    {% if shop.checkout.guest_login %}
-    <div id="guest" class="column column--half">
-      <div class="page-header align-start">
-        <h3 class="title">{{ 'customer.login.guest_title' | t }}</h3>
+    {% comment %}{% if shop.checkout.guest_login %}
+      <div id="guest" class="column column--half">
+        <div class="page-header align-start">
+          <h3 class="title">{{ 'customer.login.guest_title' | t }}</h3>
+        </div>
+        {% form 'guest_login' %}
+          <button class="btn" type="submit">{{ 'customer.login.guest_continue' | t }}</button>
+        {% endform %}
       </div>
-      {% form 'guest_login' %}
-        <button class="btn" type="submit">{{ 'customer.login.guest_continue' | t }}</button>
-      {% endform %}
-    </div>
-    {% endif %}
+    {% endif %}{% endcomment %}
   </div>
 </div>
 
@@ -129,16 +153,27 @@
   document.addEventListener('DOMContentLoaded', () => {
     {% if reset_success %}showRecoverPasswordForm();{% endif %}
     if (window.location.hash == '#recover') {
-      showRecoverPasswordForm()
+      showRecoverPasswordForm();
     }
+
     {% if section.settings.show_activation_banner %}
-    document.getElementById('activation-banner-close-btn-{{ section.id }}').addEventListener('click', () => {
-        const activationBanner = document.getElementById('activation-banner-{{ section.id }}');
-        activationBanner.style.maxHeight = activationBanner.clientHeight + 'px';
-        activationBanner.style.opacity = 0;
+      document.getElementById('activation-banner-login-close-btn-{{ section.id }}').addEventListener('click', () => {
+        const activationBannerLogin = document.getElementById('activation-banner-login-{{ section.id }}');
+        activationBannerLogin.style.maxHeight = activationBannerLogin.clientHeight + 'px';
+        activationBannerLogin.style.opacity = '0';
 
         setTimeout(() => {
-          activationBanner.style.maxHeight = 0;
+          activationBannerLogin.style.maxHeight = '0';
+        }, 10);
+      });
+
+      document.getElementById('activation-banner-reset-password-close-btn-{{ section.id }}').addEventListener('click', () => {
+        const activationBannerResetPassword = document.getElementById('activation-banner-reset-password-{{ section.id }}');
+        activationBannerResetPassword.style.maxHeight = activationBannerResetPassword.clientHeight + 'px';
+        activationBannerResetPassword.style.opacity = '0';
+
+        setTimeout(() => {
+          activationBannerResetPassword.style.maxHeight = '0';
         }, 10);
       });
     {% endif %}
