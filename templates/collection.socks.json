@@ -9,6 +9,14 @@
 */
 {
   "sections": {
+    "collection_banner_dj3LzQ": {
+      "type": "collection-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/LP_DESKTOP_socks.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/LP_MOBILE_socks.jpg",
+        "bg_color": "#000000"
+      }
+    },
     "collection": {
       "type": "collection",
       "settings": {
@@ -20,6 +28,7 @@
     }
   },
   "order": [
+    "collection_banner_dj3LzQ",
     "collection"
   ]
 }
