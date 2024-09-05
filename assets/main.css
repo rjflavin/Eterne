@@ -2404,9 +2404,8 @@ main-navigation {
   pointer-events: none;
 }
 @media (max-width: 767.98px) {
-  .page-shade,
-.header-shade {
-    z-index: 7000;
+  .page-shade, .header-shade {
+    display: none;
   }
 }
 

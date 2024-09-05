@@ -8,6 +8,7 @@
 {% endstyle %}
 
 {{ 'header.css' | asset_url | stylesheet_tag }}
+{{ 'searchanise.css' | asset_url | stylesheet_tag }}
 
 {%- if template == 'gift_card' -%}
   {% comment %} Gift card template logo {% endcomment %}
@@ -208,7 +209,7 @@
     </div>
   </div>
 
-  <a href="#" class="header-shade mobile-nav-toggle" aria-label="{{ 'general.navigation.close' | t }}"></a>
+  {% comment %}<a href="#" class="header-shade mobile-nav-toggle" aria-label="{{ 'general.navigation.close' | t }}"></a>{% endcomment %}
 </page-header>
 
 <div class="brgr-menu" id="BurgerMenu">
