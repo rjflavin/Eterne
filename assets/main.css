@@ -4903,6 +4903,10 @@ shopify-payment-terms {
   background: rgb(var(--body-bg-color));
   color: rgb(var(--body-text-color));
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    max-height: none;
+  }
 }
 
 .main-search--loading .main-search__suggestions,
