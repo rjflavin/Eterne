@@ -61,7 +61,7 @@ endif
   {%- capture next_icon -%}<span class="icon">{% render 'icon-chevron-right' %}</span>{%- endcapture -%}
 {%- endunless -%}
 
-{%- capture crumbs_structured_data -%}
+{% comment %}{%- capture crumbs_structured_data -%}
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -162,7 +162,7 @@ endif
     ]
   }
 </script>
-{%- endcapture -%}
+{%- endcapture -%}{% endcomment %}
 
 {%- capture crumbs_html -%}
 <nav class="breadcrumbs" aria-label="{{ breadcrumbs_title }}">
