@@ -1,10 +1,19 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "one_media_banner_H4dnU9": {
       "type": "one-media-banner",
       "settings": {
         "caption": "<p>The New Neutral<\/p>",
-        "product_link": "shopify:\/\/collections\/new-in",
+        "product_link": "shopify:\/\/collections\/navy-collection",
         "product_link_text": "shop navy",
         "main_media_type": "video",
         "video": "shopify:\/\/files\/videos\/LIFESTYLE 14 169 COLOR_bfe820d8-2117-4fe4-8ff8-815e49b102fd.mov",
