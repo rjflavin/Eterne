@@ -2,6 +2,19 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "visible": false,
+        "message_text": "EXCLUSIVE: SUMMER SALE | UP TO 50% OFF",
+        "announcement_link_1": "shopify:\/\/collections\/navy-collection",
+        "announcement_two": "",
+        "announcement_link_2": "",
+        "color_bg": "#b86637",
+        "color_text": "#ffffff",
+        "font_size": 10
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -14,6 +27,7 @@
     }
   },
   "order": [
+    "announcement-bar",
     "header"
   ]
 }
